@@ -1,0 +1,87 @@
+---
+dashboard: true
+banner:
+  quote: "The mind is everything. What you think you become."
+  author: "Buddha"
+columns:
+  - name: Memo
+    color: "#f59e0b"
+    type: memo
+  - name: Todo
+    color: "#6366f1"
+    type: todo
+  - name: 导航栏
+    color: "#10b981"
+    type: projects
+  - name: Science & Technology
+    color: "#6366f1"
+    type: folder
+    library:
+      viewMode: grid
+      sortBy: "modified"
+      sortDesc: true
+      folders:
+        - "Science & Technology/00 半导体"
+        - "Science & Technology/01 算力与服务器"
+        - "Science & Technology/02 物理AI"
+        - "Science & Technology/03 创新药"
+        - "Science & Technology/04 低空经济"
+        - "Science & Technology/05 商业航天"
+        - "Science & Technology/06 军工"
+        - "Science & Technology/08 电力与储能"
+      propertyLimit: 6
+      filters:
+        - property: "tags"
+          values: ["A股投资", "AI", "HBM", "专题研究", "产业链", "产业链分析", "人形机器人", "光芯片", "光刻胶", "军工", "创新药", "十五五规划", "商业航天", "半导体", "无人机", "新能源"]
+  - name: 催化事件日历
+    color: "#6366f1"
+    type: calendar
+    library:
+      viewMode: grid
+      sortBy: "modified"
+      sortDesc: true
+      excludeFolders:
+        - "TaskNotes"
+---
+
+## Memo
+
+### 2026-07-29 备忘
+id: demo-memo-1
+7*24 盘后复查涨跌幅不匹配、明暗盘资金流入分歧、龙虎榜买入状况等。
+
+### 提示：Dashboard 文件路径
+id: demo-memo-path
+你可以在 设置 > Apex Dashboard 中修改 dashboard 文件路径。
+
+### 提示：删除分区
+id: demo-memo-delete
+如需删除某个分区，请直接编辑 dashboard.md 文件，删除对应的分区内容块即可。
+
+## Todo
+
+### 快速上手
+id: demo-todo-1
+type: task
+- [ ] 分析阅读[盘后信息报告](Daily Notes/7月29日收盘快讯研究报告.html)
+- [ ] 编辑 Banner 区的名言
+- [ ] 添加一个快捷链接
+- [ ] 尝试添加一张新卡片
+
+### 界面操作指南
+id: demo-todo-2
+type: task
+- [ ] 点击左侧隐藏条拉出左侧栏
+- [ ] 点击图钉按钮固定左侧栏
+- [ ] 点击 Banner 区的书签按钮收起 Banner
+- [ ] 在设置中开启更多小组件
+
+## 导航栏
+
+### 我的第一个项目
+id: demo-project-1
+type: project
+
+## Science & Technology
+
+## 催化事件日历
