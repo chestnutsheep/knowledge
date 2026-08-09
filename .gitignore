@@ -19,3 +19,11 @@ desktop.ini
 
 # credentials (never push)
 .git-credentials
+
+# agent working dir (automations, memory, skills config - never push)
+.codebuddy/
+
+# obsidian runtime caches (binary, regenerable)
+.vault-intelligence/
+.dashboard-backup/
+TaskNotes/
