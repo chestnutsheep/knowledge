@@ -13,6 +13,9 @@ Impact-Direction:
     benefit_side: "铟矿资源商"
 Data-Timestamp: "2026-06-26"
 Confidence: "待验证"
+Component:
+  - 光芯片
+  - 算力
 ---
 
 # AI 算力需求：XPU 集群的爆发的需求

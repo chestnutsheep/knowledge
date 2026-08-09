@@ -24,6 +24,8 @@ Impact-Direction:
     benefit_side: "硅料/硅片供应商"
 Data-Timestamp: "2026-06-26"
 Confidence: "待验证"
+Component:
+  - 机器人
 ---
 
 # AI全产业链全景

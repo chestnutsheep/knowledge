@@ -23,6 +23,8 @@ Stock-Confidence:
     timestamp: "2026-06-26"
 Data-Timestamp: "2026-06-26"
 Confidence: "待验证"
+Component:
+  - 第三代半导体
 ---
 # 碳化硅(SiC)产业链全景
 

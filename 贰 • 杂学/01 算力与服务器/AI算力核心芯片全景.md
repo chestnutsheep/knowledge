@@ -22,6 +22,8 @@ Impact-Direction:
     benefit_side: "磷化铟供应商"
 Data-Timestamp: "2026-06-26"
 Confidence: "待验证"
+Component:
+  - 算力
 ---
 
 # AI 算力核心芯片全景

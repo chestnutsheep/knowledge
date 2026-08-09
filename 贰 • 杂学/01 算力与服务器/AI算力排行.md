@@ -6,6 +6,8 @@ tags:
   - IDC
   - Rank
 date: 2026-07-01
+Component:
+  - 算力
 ---
 
 # AI算力10大细分领域"四巨头"

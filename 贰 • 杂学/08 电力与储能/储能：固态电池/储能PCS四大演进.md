@@ -17,6 +17,9 @@ Impact-Direction:
     benefit_side: "硅料供应商"
 Data-Timestamp: "2026-06-26"
 Confidence: "待验证"
+Component:
+  - 电池
+  - 储能
 ---
 
 # 储能PCS四大演进

@@ -34,6 +34,8 @@ created: 2026-07-06
 source: 专利/学术/公告一手数据整合
 type: 专利调研
 reliability: ⭐一手数据为主（PatSnap/FDA/NMPA/公司公告/临床数据/学术论文）
+Component:
+  - 医药
 ---
 
 # CXO创新药专利研发调研：CGT/ADC/GLP-1三大赛道深度报告

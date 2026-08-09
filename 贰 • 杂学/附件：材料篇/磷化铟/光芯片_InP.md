@@ -17,6 +17,8 @@ Impact-Direction:
     benefit_side: "高纯磷供应商"
 Data-Timestamp: "2026-06-26"
 Confidence: "待验证"
+Component:
+  - 光芯片
 ---
 # 磷化铟（InP）光芯片：800G/1.6T 的核心
 

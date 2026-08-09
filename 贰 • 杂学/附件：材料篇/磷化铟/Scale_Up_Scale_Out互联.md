@@ -13,6 +13,8 @@ Impact-Direction:
     benefit_side: "铟矿资源商"
 Data-Timestamp: "2026-06-26"
 Confidence: "待验证"
+Component:
+  - 光芯片
 ---
 # Scale‑Up / Scale‑Out：AI 互联的分水岭
 

@@ -18,6 +18,8 @@ Impact-Direction:
     benefit_side: "硅中介层/基板供应商"
 Data-Timestamp: "2026-06-26"
 Confidence: "待验证"
+Component:
+  - 封装
 ---
 # 先进封装与Chiplet
 

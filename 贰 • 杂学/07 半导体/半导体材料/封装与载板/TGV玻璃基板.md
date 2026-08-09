@@ -24,6 +24,8 @@ Stock-Confidence:
     note: "国内TGV全制程量产龙头"
 Data-Timestamp: "2026-06-28"
 Confidence: "待验证"
+Component:
+  - 封装
 ---
 
 # TGV玻璃基板：AI封装的新基座

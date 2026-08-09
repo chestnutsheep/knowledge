@@ -20,6 +20,8 @@ Impact-Direction:
     benefit_side: "磷化铟供应商"
 Data-Timestamp: "2026-06-26"
 Confidence: "待验证"
+Component:
+  - 封装
 ---
 # CPO光电共封装
 

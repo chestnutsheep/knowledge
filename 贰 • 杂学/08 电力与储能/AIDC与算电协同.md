@@ -16,6 +16,8 @@ Impact-Direction:
     benefit_side: "硅料供应商"
 Data-Timestamp: "2026-06-26"
 Confidence: "待验证"
+Component:
+  - 液冷
 ---
 
 # AIDC 液冷与算电协同

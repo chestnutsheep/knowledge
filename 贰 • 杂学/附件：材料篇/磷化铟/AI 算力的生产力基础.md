@@ -16,6 +16,9 @@ Impact-Direction:
     benefit_side: "高纯磷供应商"
 Data-Timestamp: "2026-06-26"
 Confidence: "待验证"
+Component:
+  - 光芯片
+  - 算力
 ---
 
 # Token：AI 算力的生产力基础
