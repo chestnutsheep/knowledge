@@ -1,5 +1,6 @@
 ---
-tags: [chip, interconnect, scaleup, scaleout]
+tags:
+  - 战略金属
 up: ""
 prev: ""
 next: "[[光模块演化]]"

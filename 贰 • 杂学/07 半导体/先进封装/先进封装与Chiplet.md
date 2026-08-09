@@ -1,10 +1,6 @@
 ---
 tags:
-  - 先进封装
-  - Chiplet
-  - CoWoS
-  - HBM
-  - 3D堆叠
+  - 半导体
 up: "[[半导体结构总览]]"
 Raw-Material:
   - 硅

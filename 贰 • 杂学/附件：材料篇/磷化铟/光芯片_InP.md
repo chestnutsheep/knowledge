@@ -1,5 +1,6 @@
 ---
-tags: [chip, InP, EML, 光芯片]
+tags:
+  - 战略金属
 up: ""
 prev: "[[光模块演化]]"
 next: ""

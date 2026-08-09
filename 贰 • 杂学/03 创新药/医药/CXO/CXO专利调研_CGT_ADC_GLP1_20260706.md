@@ -4,38 +4,14 @@ aliases:
   - CGT ADC GLP1专利调研
   - CXO三大赛道专利分析
 tags:
-  - CXO
-  - 专利
-  - CGT
-  - ADC
-  - GLP-1
-  - 细胞基因治疗
-  - 抗体药物偶联物
-  - 减重代谢
-  - CDMO
-  - 多肽
-  - 定点偶联
-  - 病毒载体
-  - 口服GLP-1
-  - 专利悬崖
-  - 专利到期
-  - patent
-  - CAR-T
-  - CRISPR
-  - AAV
-  - linker
-  - DAR
-  - 司美格鲁肽
-  - 药明康德
-  - 凯莱英
-  - 科济药业
-  - 药明合联
+  - 创新药
 created: 2026-07-06
 source: 专利/学术/公告一手数据整合
 type: 专利调研
 reliability: ⭐一手数据为主（PatSnap/FDA/NMPA/公司公告/临床数据/学术论文）
 Component:
   - 医药
+Related-Companies: [药明康德, 凯莱英, 科济药业, 药明合联]
 ---
 
 # CXO创新药专利研发调研：CGT/ADC/GLP-1三大赛道深度报告

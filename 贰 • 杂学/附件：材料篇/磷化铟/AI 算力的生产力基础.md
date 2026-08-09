@@ -1,5 +1,6 @@
 ---
-tags: [chip, AI, Token, 产业链起点]
+tags:
+  - 战略金属
 up: ""
 next: ""
 Raw-Material:

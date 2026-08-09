@@ -1,10 +1,6 @@
 ---
 tags:
-  - AI芯片
-  - 光芯片
-  - 存储芯片
-  - 算力硬件
-  - 产业链
+  - AI算力
 Raw-Material:
   - 硅
 Functional-Material:

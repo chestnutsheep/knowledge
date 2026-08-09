@@ -1,11 +1,6 @@
 ---
 tags:
-  - TGV
-  - 玻璃基板
-  - 先进封装
-  - AI算力
-  - CPO
-  - 康宁
+  - 半导体
 up: "[[先进封装与Chiplet]]"
 Raw-Material:
   - 硅
@@ -26,6 +21,7 @@ Data-Timestamp: "2026-06-28"
 Confidence: "待验证"
 Component:
   - 封装
+Related-Companies: [康宁]
 ---
 
 # TGV玻璃基板：AI封装的新基座

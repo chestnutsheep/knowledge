@@ -1,10 +1,6 @@
 ---
 tags:
   - AI算力
-  - 龙头梳理
-  - 算力租赁
-  - IDC
-  - Rank
 date: 2026-07-01
 Component:
   - 算力

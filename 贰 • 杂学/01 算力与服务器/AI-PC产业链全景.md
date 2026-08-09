@@ -1,9 +1,6 @@
 ---
 tags:
-  - 产业链
-  - NPU
-  - 端侧AI
-  - AIPC
+  - AI算力
 Raw-Material:
   - 硅
 Functional-Material:

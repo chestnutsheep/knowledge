@@ -1,9 +1,6 @@
 ---
 tags:
-  - AIDC
-  - 液冷
-  - 数据中心
-  - AI基础设施
+  - 电力
 Raw-Material:
   - 铜
   - 铝

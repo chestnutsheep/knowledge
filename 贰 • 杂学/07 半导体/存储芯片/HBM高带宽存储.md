@@ -1,9 +1,6 @@
 ---
 tags:
-  - HBM
-  - 高带宽存储
-  - DRAM
-  - AI算力
+  - 半导体
 up: "[[存储芯片产业链全景]]"
 Raw-Material:
   - 硅

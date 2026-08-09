@@ -1,13 +1,6 @@
 ---
 tags:
- - 医药
- - CXO
- - 创新药
- - CRO
- - CDMO
- - 产业链
- - BD出海
- - ADC
+  - 创新药
 aliases:
  - 创新药产业链全景
  - CXO行业研究

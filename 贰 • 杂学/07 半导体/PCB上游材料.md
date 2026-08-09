@@ -1,12 +1,6 @@
 ---
 tags:
-  - PCB
-  - 覆铜板
-  - 铜箔
-  - 电子布
-  - 树脂
-  - 半导体材料
-  - AI算力
+  - 半导体
 Raw-Material:
   - 铜
 Functional-Material:

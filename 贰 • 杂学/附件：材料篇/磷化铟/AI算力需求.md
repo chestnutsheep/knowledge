@@ -1,5 +1,6 @@
 ---
-tags: [chip, AI, XPU, 数据中心]
+tags:
+  - 战略金属
 up: ""
 prev: ""
 next: ""
