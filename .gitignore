@@ -1,0 +1,21 @@
+# local sync script (contains repo path, do not push)
+sync.sh
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# logs / temp
+*.log
+*.tmp
+*.bak
+.cache/
+
+# credentials (never push)
+.git-credentials
