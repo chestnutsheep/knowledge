@@ -1,4 +1,11 @@
 ---
+concept: "医药/CXO"
+object: "药明康德(603259)"
+industry: "医疗服务"
+rating: "买入"
+object: "药明康德(603259)"
+industry: "医疗服务"
+rating: "买入"
 tags:
   - 机构观点
   - 研报

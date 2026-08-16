@@ -1,0 +1,1418 @@
+{
+  "核电": {
+    "kb_id": "TOyZc2C-7G76EHajjZZW2_FVxnKdQcLsJTlhydn3kQs=",
+    "count": 4,
+    "items": [
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_c207496e7973d067be31724772bec5fc7464224678748948",
+        "title": "电网设备，5个核心受益的领域梳理（附名单）",
+        "parent_folder_id": "7464224678748948",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "核电"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_4f11c1bb7854572f98534e95ec7cfd927464224678748948",
+        "title": "可控核聚变+超导磁体材料，强关联的10+公司",
+        "parent_folder_id": "7464224678748948",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "核电"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_0ed1c1b0971ca8c85a95316d7e0a0bdb7464224678748948",
+        "title": "我国可控核聚变迎来重大突破",
+        "parent_folder_id": "7464224678748948",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "核电"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_421c5e127edbe8ef03c2a7bf16f8edcd7464224678748948",
+        "title": "一文看懂氟化工产业链",
+        "parent_folder_id": "7464224678748948",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "核电"
+      }
+    ]
+  },
+  "天灾": {
+    "kb_id": "0br8saIRDPvNRMaNnBgWa5uucMmlvjmhlnQ_-xlcQWU=",
+    "count": 8,
+    "items": [
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_7e9311bc141c1be077a10eab1c57a13b7465014885613945",
+        "title": "专题报告 | 厄尔尼诺研究系列一：气候逻辑启动，循迹推演先行",
+        "parent_folder_id": "7465014885613945",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "天灾"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_dfdf8ed7e5b82793cdb74bb7ed3e7d6c7465014885613945",
+        "title": "150年一遇超级厄尔尼诺对粮食产业链影响",
+        "parent_folder_id": "7465014885613945",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "天灾"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_013f14e5fa7543005d844b836f100d297465014885613945",
+        "title": "华创证券：康波44年铁律—2025年萧条触底，AI+新能源启动第六轮回升，中国两步走与繁荣周期精准重合",
+        "parent_folder_id": "7465014885613945",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "天灾"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_90c053622591ffedd90fa20454d067037465014885613945",
+        "title": "工业有色金属：多重因素共振下的结构性配置逻辑解析",
+        "parent_folder_id": "7465014885613945",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "天灾"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_d3402418388d3c097664a81aaa29a8097465014885613945",
+        "title": "全球化工【关停潮】蔓延，2026年明显还在加速",
+        "parent_folder_id": "7465014885613945",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "天灾"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_416e9fd737cf12379154d39649f0db567465014885613945",
+        "title": "PPI转正了，化工行业就全面复苏了吗？",
+        "parent_folder_id": "7465014885613945",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "天灾"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_d3cbd8d3aa2384031ede6ca10420a1377465014885613945",
+        "title": "国盛量化 | “以史为鉴”系列二：厄尔尼诺现象下，哪些资产将受益？",
+        "parent_folder_id": "7465014885613945",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "天灾"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_57000e5489442be824ace474753f60127465014885613945",
+        "title": "“超级厄尔尼诺”来袭，铜、铝、糖、油，哪个最受影响？",
+        "parent_folder_id": "7465014885613945",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "天灾"
+      }
+    ]
+  },
+  "芯片": {
+    "kb_id": "un1kSP0wK-jbk7XczlcuCVDLLRmGTImeAtJJRlXXcvs=",
+    "count": 70,
+    "items": [
+      {
+        "media_id": "folder_7475142707918695",
+        "title": "原材料",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 99,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "folder_7475142506605908",
+        "title": "铟",
+        "parent_folder_id": "folder_7475142707918695",
+        "tags": [],
+        "media_type": 99,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_036466f48d041a2eb33c0378d0d9d75c7460281424828946",
+        "title": "AI刚需磷化铟、订单排满2028，AXT回撤：泡沫终结还是洗盘吸筹？",
+        "parent_folder_id": "folder_7475142506605908",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_cbd9bc21efd1c6f1ac9a0eea877cf1d47460281424828946",
+        "title": "磷化铟（InP）衬底/外延，2026Q1谁最赚钱",
+        "parent_folder_id": "folder_7475142506605908",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_7eb181aea587c1064b571205af96029b7460281424828946",
+        "title": "半导体核心材料：磷化铟、电子布、铜箔、电子级硫酸及龙头公司介绍",
+        "parent_folder_id": "folder_7475142506605908",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_83b6792aa81fc7d0fc1a8256eaac14d77460281424828946",
+        "title": "供需缺口超70%，铟价6个月翻倍",
+        "parent_folder_id": "folder_7475142506605908",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_eed164a4687677324c38d65fef78f2607460281424828946",
+        "title": "深度贴｜磷化铟概念龙头企业推荐",
+        "parent_folder_id": "folder_7475142506605908",
+        "tags": [
+          "个股价值投资",
+          "硬核"
+        ],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "img_a19d14e1af656fb2b12f36bab7603ed8_6804ab015d8f334f6ca979c66bafe6417460281424828946",
+        "title": "铟2025年报+2026一季报.jpg",
+        "parent_folder_id": "folder_7475142506605908",
+        "tags": [
+          "芯片",
+          "磷化铟",
+          "个股价值投资"
+        ],
+        "media_type": 9,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "img_a19d14e1af656fb2b12f36bab7603ed8_90960103ce14ef57dd83d6f71298bc877460281424828946",
+        "title": "磷化铟市场规模与上市公司.jpg",
+        "parent_folder_id": "folder_7475142506605908",
+        "tags": [
+          "市场分析",
+          "磷化铟",
+          "产业链",
+          "个股价值投资"
+        ],
+        "media_type": 9,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "img_a19d14e1af656fb2b12f36bab7603ed8_3f9c2e21719d31bbb059cd50d4a955c17460281424828946",
+        "title": "磷化铟2026Q1十家.jpg",
+        "parent_folder_id": "folder_7475142506605908",
+        "tags": [
+          "产业链",
+          "市场分析",
+          "磷化铟"
+        ],
+        "media_type": 9,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "img_a19d14e1af656fb2b12f36bab7603ed8_7236ddb486ddd4094e9de9e0779cdc687460281424828946",
+        "title": "磷化铟断供.jpg",
+        "parent_folder_id": "folder_7475142506605908",
+        "tags": [
+          "技术科普",
+          "芯片",
+          "市场分析",
+          "可持续性推测"
+        ],
+        "media_type": 9,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "img_a19d14e1af656fb2b12f36bab7603ed8_449d0a2a6160313f117aba06422b0bef7460281424828946",
+        "title": "磷化铟产业链及标的.jpg",
+        "parent_folder_id": "folder_7475142506605908",
+        "tags": [
+          "磷化铟",
+          "产业链",
+          "个股价值投资"
+        ],
+        "media_type": 9,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "folder_7460282028800514",
+        "title": "技术",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 99,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "folder_7475148898722876",
+        "title": "PCB",
+        "parent_folder_id": "folder_7460282028800514",
+        "tags": [],
+        "media_type": 99,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_b312a277e821db287ed43c4761bd38d47460281424828946",
+        "title": "具身机器人（人形机器人）内部的各类PCB板拆分详解图，包括机器人的“神经系统”和“器官”分工协作等等详细信息",
+        "parent_folder_id": "folder_7475148898722876",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_c75516505b801dc973746050d6ebec957460281424828946",
+        "title": "一篇吃透：半导体材料九大类龙头企业",
+        "parent_folder_id": "folder_7475148898722876",
+        "tags": [
+          "技术科普",
+          "硬核"
+        ],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_b36f194e5edaba8dafff0c9b6fd566017460281424828946",
+        "title": "一篇了解：机器人代表企业及行业名词",
+        "parent_folder_id": "folder_7475148898722876",
+        "tags": [
+          "技术科普",
+          "硬核"
+        ],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "img_a19d14e1af656fb2b12f36bab7603ed8_81aab561141859a891b7809dc26623687460281424828946",
+        "title": "PCB上游材料及上市公司.jpg",
+        "parent_folder_id": "folder_7475148898722876",
+        "tags": [
+          "硬核",
+          "产业链",
+          "干货",
+          "核心标的",
+          "芯片",
+          "技术科普"
+        ],
+        "media_type": 9,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "folder_7475148869352191",
+        "title": "MLCC",
+        "parent_folder_id": "folder_7460282028800514",
+        "tags": [],
+        "media_type": 99,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "folder_7475145283219566",
+        "title": "CoWos",
+        "parent_folder_id": "folder_7460282028800514",
+        "tags": [],
+        "media_type": 99,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_913b556039f774da32c62c97b6c5387a7460281424828946",
+        "title": "图说研报 | 下半年AI投资主线",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_ab526e098e5ec15fe67f30fcf661253d7460281424828946",
+        "title": "玻璃基板 + 封装设备 + 上游原材料，梳理产业链核心20+上市公司",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_d421f6cf71bff512590a4f4159a3b67b7460281424828946",
+        "title": "半导体封装测试产业链，有新进展的 10+公司",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_f37295be96674fee51ad7ae919be52337460281424828946",
+        "title": "半导体湿电子化学品 + PCB药水，最新进展的10+公司",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_88ea3c813ed0e57a628d8f6ebe6044747460281424828946",
+        "title": "先进封装 + HBM + 溅射靶材  ，产业链六大核心领域梳理",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_12232dd582f8c7bc770e0aadfd6d37257460281424828946",
+        "title": "第四代半导体 + 核心材料，产业深度布局的 10+ 公司",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_474b58c6e8bc2bffcbfaa722d2a886d37460281424828946",
+        "title": "华为超节点继续下钻：交换机后是NPO光互连",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_beae7ddd6bec72fb4a9db0569da746417460281424828946",
+        "title": "碲化铋！日本高纯原料库存即将耗尽——国内高端技术领先的10家企业",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_e41b2c7623e561d41d5cd2b09f209c4f7460281424828946",
+        "title": "MLCC现货价 现在都直接拉群跟了....",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_e4b6f65c2f1cdb544797fc3e2f4733037460281424828946",
+        "title": "玻璃基板量产？3家已送样、3家等风来、2家还在热身",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_bc11dbedb95e5fb48b09c0daacc415ed7460281424828946",
+        "title": "🔥 7 张图看懂产业链之“半导体设备”",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_c214ab2aea3f131c1fccfc1b1905e6657460281424828946",
+        "title": "AI未来已来：2027年前你必须布局的GEO优化战略",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_06387702033daabb7c33c29ec09384cc7460281424828946",
+        "title": "先进制程见顶之后：玻璃基板、HBM、Chiplet、混合键合与先进散热开启封装新时代",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_41242fbbaac6614615455f4eb1e133827460281424828946",
+        "title": "2026 化工安全行业新趋势！16 年总监直言：这 2 个方向缺口巨大，年薪 30 万没人干",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_2782581edb7e1e29bffd440b205742337460281424828946",
+        "title": "碳基材料爆发！深度布局的10家企业！",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_098987b67c87d12a899e44bbf50fb6bb7460281424828946",
+        "title": "强者恒强的共同基因是什么？——六氟化钨+PCB上游+激光设备+MLCC+玻璃基板",
+        "parent_folder_id": "7460281424828946",
+        "tags": [
+          "六氟化钨",
+          "MLCC",
+          "玻璃基板"
+        ],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_c6d39ce2690555a5630461b11ab49b4b7460281424828946",
+        "title": "2026年储能PCS的四大演进方向",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_5e04c998844d8c87c6d204f05789e7687460281424828946",
+        "title": "码住！2026 AI PC产业链全景图",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_fc62a873d67e2bdc3807dba13398a0617460281424828946",
+        "title": "6月，重点关注的7大方向（附名单）",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_4083a76272f9e4a28ed9775155c19a207460281424828946",
+        "title": "被低估的“工业粮食”：新材料卡脖子冠军赛道，相关龙头企业汇总",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_fd7424b13bcd2e00301e307e5b8329397460281424828946",
+        "title": "近期氟化工六氟磷酸锂、PVDF、氢氟酸等项目动态盘点",
+        "parent_folder_id": "7460281424828946",
+        "tags": [
+          "磷酸锂"
+        ],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_e7414c1851828e3962dc208758fd84e27460281424828946",
+        "title": "一图拆解：国产半导体材料产业链",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_d6fffe5af1740cdaf166bc04b3e14ab47460281424828946",
+        "title": "国产替代：半导体卡脖子材料",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_98ed05e97bbfcb0003c8dedec7753fd97460281424828946",
+        "title": "第三代半导体6大赛道",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_e8636ae226d2e681e1d331da3a371dd67460281424828946",
+        "title": "军工电子+钽电容+MLCC",
+        "parent_folder_id": "7460281424828946",
+        "tags": [
+          "MLCC",
+          "军工电子",
+          "钽电容"
+        ],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_74b1a96ff8cc566b940a920b3f625cc47460281424828946",
+        "title": "AI泡沫周期",
+        "parent_folder_id": "7460281424828946",
+        "tags": [
+          "新兴科技生命周期"
+        ],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_456af5b55d00dabee2000a98782644517460281424828946",
+        "title": "人形机器人爆发前夜：全球巨头开始疯狂布局“Physical AI”",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_1a2f854a06069d385844e4ab70f38c4e7460281424828946",
+        "title": "一篇吃透：国内半导体六大赛道及龙头企业",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_c8e3ad3ace98aa0427fe94b3843f14347460281424828946",
+        "title": "引领化工升级的“三剑客”：谁能突破化工材料瓶颈？",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_97246b7bbc5ce3da572cf8fb558c12357460281424828946",
+        "title": "六氟磷酸锂迎来新一轮上涨行情？",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_328e58558aec3edff07a3918674fd8dc7460281424828946",
+        "title": "电力的尽头是材料",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_df95f26011e70cd021738060590ecc007460281424828946",
+        "title": "手札 | “锂电产业”核心概念全景梳理",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_f3ca493fcc3bd5f8151dc2f556edb3017460281424828946",
+        "title": "Hermes从入门到精通26年最值得学的AI Agent",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_5b250db25e88889f6232027fff3bab0f7460281424828946",
+        "title": "净利增长555.24%！揭秘A股“超节点”超级赛道，这5家公司已翻倍",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_abcc87c44974c70ae967dc1a47ae10177460281424828946",
+        "title": "日本断供、涨价 90%！六氟化钨，半导体卡脖子核心材料",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_213dcf7d26e6c83f5f04b3a259e734667460281424828946",
+        "title": "一文梳理分析“算电协同”14家概念公司：谁在第一梯队，谁的利润弹性空间最大？",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_4e88d906fed4272d0889c905d7a5222f7460281424828946",
+        "title": "华泰 | 化工：需求旺盛下半导体材料景气或加速",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_b5ef312e0f3f53ce1a9a96194844d4c57460281424828946",
+        "title": "算力+氟化工，深度布局的10家公司",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_e4a34c8944d56e22ccc64f04775e2b277460281424828946",
+        "title": "分化的氟化工：四大龙头，四种成长逻辑",
+        "parent_folder_id": "7460281424828946",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_c3d7a2cd8060691d75346e099a1469ca7460281424828946",
+        "title": "收藏贴｜氢氟酸概念10大核心企业推荐",
+        "parent_folder_id": "7460281424828946",
+        "tags": [
+          "个股价值投资",
+          "硬核"
+        ],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_7671eb4428cc986f1d7dd184813e72ba7460281424828946",
+        "title": "AIDC篇 (11)：液冷支线行业梳理（上）",
+        "parent_folder_id": "7460281424828946",
+        "tags": [
+          "个股价值投资",
+          "硬核"
+        ],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_b662739e61334f750fdbfa4defed5e917460281424828946",
+        "title": "半导体核心材料：玻璃基板、ABF载板、碳化硅、高端PCB载板及龙头公司介绍",
+        "parent_folder_id": "7460281424828946",
+        "tags": [
+          "个股价值投资",
+          "硬核"
+        ],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_ceee9b57ac61496fdd6179665d0512e67460281424828946",
+        "title": "氟化工+存储芯片+液冷，深度布局的10家公司",
+        "parent_folder_id": "7460281424828946",
+        "tags": [
+          "个股价值投资",
+          "硬核"
+        ],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_4edecf0424ef3b071f007ca996df17c87460281424828946",
+        "title": "AIDC篇 (8)：电力支线：算电协同行业梳理（上）",
+        "parent_folder_id": "7460281424828946",
+        "tags": [
+          "个股价值投资",
+          "硬核"
+        ],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_ae123f0c77248f5a49c93e90c8e20f8d7460281424828946",
+        "title": "AI算力核心芯片：AI芯片+光芯片+存储芯片",
+        "parent_folder_id": "7460281424828946",
+        "tags": [
+          "个股价值投资",
+          "硬核"
+        ],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_825d8ebf988479f706e1325fada416eb7460281424828946",
+        "title": "看懂芯片底层材料，才看懂 AI 下半场",
+        "parent_folder_id": "7460281424828946",
+        "tags": [
+          "贵金属",
+          "AI",
+          "芯片"
+        ],
+        "media_type": 6,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "img_a19d14e1af656fb2b12f36bab7603ed8_9ab443767751fbdbeb8f45378fd121897460281424828946",
+        "title": "七大光器件.jpg",
+        "parent_folder_id": "7460281424828946",
+        "tags": [
+          "核心标的",
+          "技术科普",
+          "干货",
+          "市场分析",
+          "芯片",
+          "产业链"
+        ],
+        "media_type": 9,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "img_a19d14e1af656fb2b12f36bab7603ed8_d9c5e79735d0e61720841086b1e311157460281424828946",
+        "title": "光通信.jpg",
+        "parent_folder_id": "7460281424828946",
+        "tags": [
+          "光芯片",
+          "电芯片",
+          "技术科普",
+          "市场分析",
+          "产业链"
+        ],
+        "media_type": 9,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "img_a19d14e1af656fb2b12f36bab7603ed8_8bf2a9f3c59c144385af1afc3719fe517460281424828946",
+        "title": "光模块产业链（二）.jpg",
+        "parent_folder_id": "7460281424828946",
+        "tags": [
+          "干货",
+          "技术科普",
+          "可持续性推测",
+          "市场分析",
+          "产业链",
+          "芯片",
+          "光芯片"
+        ],
+        "media_type": 9,
+        "_kb": "芯片"
+      },
+      {
+        "media_id": "img_a19d14e1af656fb2b12f36bab7603ed8_cd610c6c3452653ddb822fc39ab29a177460281424828946",
+        "title": "光模块产业链.jpg",
+        "parent_folder_id": "7460281424828946",
+        "tags": [
+          "技术科普",
+          "市场分析",
+          "电芯片",
+          "光芯片",
+          "硬核",
+          "产业链"
+        ],
+        "media_type": 9,
+        "_kb": "芯片"
+      }
+    ]
+  },
+  "商业航天": {
+    "kb_id": "SRNwzMQWn1XYvBQpDaa_PDraKqPtyn7dUJDa0gxOV3o=",
+    "count": 4,
+    "items": [
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_016c239b3e8ba35ff6d6cf75e91661647481543408760555",
+        "title": "商业航天 · 中游产业图谱",
+        "parent_folder_id": "7481543408760555",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "商业航天"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_7d42981978b8f0cec208b1b96c3a21197481543408760555",
+        "title": "商业航天迈入小批量交付阶段，上游这些A股公司已卡位核心供应链，全梳理",
+        "parent_folder_id": "7481543408760555",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "商业航天"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_bc0acc7dab7a12e98c1d7a9b89e165a77481543408760555",
+        "title": "社保基金持仓商业航天，10家公司凭什么？",
+        "parent_folder_id": "7481543408760555",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "商业航天"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_bda0ae7a4e659bc2d8d1487cc86465c57481543408760555",
+        "title": "商业航天+不可复用，6家高关联公司",
+        "parent_folder_id": "7481543408760555",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "商业航天"
+      }
+    ]
+  },
+  "Coding": {
+    "kb_id": "y92n8W7LQGenlQfAy0fkp1AIvolVKdSqRpmvCzDnCyo=",
+    "count": 4,
+    "items": [
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_547684fd2fe8ee61f6e4c066736dfea7",
+        "title": "股票API 大合集（必收藏）",
+        "parent_folder_id": "001a8115f98051b8",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "Coding"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_a76a7d05d76c0f0759f716e7fff61c65",
+        "title": "前端 Skill 总清单：50 个常用 Skill 链接，一篇收齐",
+        "parent_folder_id": "001a8115f98051b8",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "Coding"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_5e77f1276e7acc34e2ac1af28ac42c3c",
+        "title": "没有 UI 稿怎么做前端 MVP？这 30 种页面布局，能直接套用",
+        "parent_folder_id": "001a8115f98051b8",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "Coding"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_b056776d0a95740a59d0d0c53b3fce40",
+        "title": "前端工程师这 15 个 AI Skill，别再乱装了，先把设计到交付这条链接顺",
+        "parent_folder_id": "001a8115f98051b8",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "Coding"
+      }
+    ]
+  },
+  "个股": {
+    "kb_id": "U5-P0EIZ6rFZ19IBADBS2c0Jy7BC3X04whkm7rmNkjg=",
+    "count": 2,
+    "items": [
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_0e7b1db2f4cea59c190eced87d93fce17475149225865979",
+        "title": "铜钴核心上市公司名单",
+        "parent_folder_id": "7475149225865979",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "个股"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_6be5424e1c7f66ddcf395a2e829f412d7475149225865979",
+        "title": "【研报493】巨化股份深度报告：超纯PFA突破垄断，半导体核心材料国产化加速",
+        "parent_folder_id": "7475149225865979",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "个股"
+      }
+    ]
+  },
+  "政策方针": {
+    "kb_id": "mhzR1IdsrW80yOQqDdaf6CqkSdazNgpRBqsCj-1N2Jw=",
+    "count": 21,
+    "items": [
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_24fce8ae9b331655d9f0944a1cf8a66d7475141223136255",
+        "title": "国家级“十五五”专项规划密集出炉！（附各专项规划全文链接）",
+        "parent_folder_id": "7475141223136255",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "政策方针"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_c708babc046859cbbc35ece8b168ae867475141223136255",
+        "title": "政策速览 | 2026年7月新经济领域重要政策汇总",
+        "parent_folder_id": "7475141223136255",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "政策方针"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_9639c1837e4ce72e3e7db9e728a7b9d67475141223136255",
+        "title": "环境监测服务 + 测量仪器设备，产业链重点参与 10+ 企业梳理",
+        "parent_folder_id": "7475141223136255",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "政策方针"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_ab327370c7e01f3974ebee4995fcc2e27475141223136255",
+        "title": "“十五五”：十大新赛道重塑中国经济“压舱石”",
+        "parent_folder_id": "7475141223136255",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "政策方针"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_72c7851bd67b7e72353aa6b36099dbef7475141223136255",
+        "title": "中金：哪些企业有望受益“六张网”？",
+        "parent_folder_id": "7475141223136255",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "政策方针"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_c26be19a3bd4ab718a18e4c78190d66c7475141223136255",
+        "title": "7月收官，八月重点关注的7个领域（附核心逻辑）",
+        "parent_folder_id": "7475141223136255",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "政策方针"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_dc56009d33cfa31a2653586d56f2b43a7475141223136255",
+        "title": "《瞭望》刊文：细化政策赋能未来产业发展",
+        "parent_folder_id": "7475141223136255",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "政策方针"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_11d6705b863422b623b7c091769ce4f57475141223136255",
+        "title": "地产｜房价底部初现，房企困境冰消：2026年下半年投资策略",
+        "parent_folder_id": "7475141223136255",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "政策方针"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_f4fc59c99ed443e2b6cc0a68e0dbd9037475141223136255",
+        "title": "北向资金最新动向（附十大成交股）",
+        "parent_folder_id": "7475141223136255",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "政策方针"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_c7a3e3cb6d7fe1622e6823972b6821947475141223136255",
+        "title": "被错杀的资产！高股息+高增长双优股，25只入选",
+        "parent_folder_id": "7475141223136255",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "政策方针"
+      },
+      {
+        "media_id": "img_a19d14e1af656fb2b12f36bab7603ed8_8105c4b2a7c19b83d35b9150856795837475141223136255",
+        "title": "中东大增持仓.jpg",
+        "parent_folder_id": "7475141223136255",
+        "tags": [],
+        "media_type": 9,
+        "_kb": "政策方针"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_b2e3a00b46b0bcab79934e5833dc8df57475141223136255",
+        "title": "电力 2026：电力时代全面到来",
+        "parent_folder_id": "7475141223136255",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "政策方针"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_cfd4fe4647299c3da1100bb9ddcec2887475141223136255",
+        "title": "【行业研究】2026年化工行业分析",
+        "parent_folder_id": "7475141223136255",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "政策方针"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_011e9cedd447accf9ae5f5322797173e7475141223136255",
+        "title": "中信建投杨晖：化工各子行业2026年中期投资策略展望",
+        "parent_folder_id": "7475141223136255",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "政策方针"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_50e451cfef7bd8f68e67a70074cf406a7475141223136255",
+        "title": "未来5年科技投资全景（2026—2031）",
+        "parent_folder_id": "7475141223136255",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "政策方针"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_c4945a56fd6c9ee68b913a4fdfbedc547475141223136255",
+        "title": "“十五五”深度透视：十大重点产业全产业链图谱与核心企业",
+        "parent_folder_id": "7475141223136255",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "政策方针"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_4d353ba8c187da40065a74bfe5891c767475141223136255",
+        "title": "最近一个月内，中国有哪些化工项目投产？有何行业影响？",
+        "parent_folder_id": "7475141223136255",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "政策方针"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_43988b77e6f5df713a9bcdae8ac150e97475141223136255",
+        "title": "未来十年（2026-2036）六大高潜力产业方向",
+        "parent_folder_id": "7475141223136255",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "政策方针"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_e682cde2b8144960130cdcaf563dc4e97475141223136255",
+        "title": "【招银研究|行业深度】化工新材料研究之总览篇——从规模效应到技术驱动的产业升级之路",
+        "parent_folder_id": "7475141223136255",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "政策方针"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_f81446d3571f4468f1d9b9524dff0be77475141223136255",
+        "title": "“十五五”十大重点产业分析——产业链及重点企业梳理",
+        "parent_folder_id": "7475141223136255",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "政策方针"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_3626a1aa88a775c1545b2236bbf5e7707475141223136255",
+        "title": "银行｜新叙事，新逻辑：2026年下半年投资策略",
+        "parent_folder_id": "7475141223136255",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "政策方针"
+      }
+    ]
+  },
+  "物理AI": {
+    "kb_id": "yvJyJC60lulKc95p1zwvzS0LS1SoR3fG7zdKpjTKJOk=",
+    "count": 22,
+    "items": [
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_5c60d5271936d5cfd19c2fea7a5b2ea87481543505241868",
+        "title": "别光热捧AI！一张表吃透2026算力核心20细分赛道，各领域四强标的一目了然",
+        "parent_folder_id": "7481543505241868",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "物理AI"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_7a56f469b0f224e528e337e2ea4ab5ae7481543505241868",
+        "title": "超级电容器，产业链深度参与10+企业梳理",
+        "parent_folder_id": "7481543505241868",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "物理AI"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_a13b01dec90e91c14d6b239e88849a7d7481543505241868",
+        "title": "新型工业基础原料：六大能源金属（清单各10家）",
+        "parent_folder_id": "7481543505241868",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "物理AI"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_ad6ac4a9bb5f54b5bc8b896e971082d37481543505241868",
+        "title": "每月关注：透过2026世界人工智能大会看AI六大核心赛道最新进展（附2026世界人工智能大会全量演讲稿汇总pdf）",
+        "parent_folder_id": "7481543505241868",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "物理AI"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_05ff486e73cdd208a28ecc7fcb663e797481543505241868",
+        "title": "宇树科技上市新进展！——最值得关注的六大产业方向（各附10家核心企业）",
+        "parent_folder_id": "7481543505241868",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "物理AI"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_0278e90e2a46022bef568771cf77e2927481543505241868",
+        "title": "近封装光学NPO，10家深度布局企业",
+        "parent_folder_id": "7481543505241868",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "物理AI"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_f66d1671fa959769badba2f69c9b0b547481543505241868",
+        "title": "存储芯片+光刻胶，10家公司，5家已供货长江、长鑫",
+        "parent_folder_id": "7481543505241868",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "物理AI"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_abda1db1b34530df9d74e6776866e9677481543505241868",
+        "title": "一图看懂机器人核心高壁垒赛道：减速器",
+        "parent_folder_id": "7481543505241868",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "物理AI"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_634de1b957132c0648ccd235cb7c24df7481543505241868",
+        "title": "机器人产业链+核心企业全景解析",
+        "parent_folder_id": "7481543505241868",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "物理AI"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_b30fb8ef987d8de3a051b1c3950798397481543505241868",
+        "title": "社保基金+中央汇金持仓，8家交换机企业凭什么？",
+        "parent_folder_id": "7481543505241868",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "物理AI"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_cc9799e679258a8029bd671cb3194e727481543505241868",
+        "title": "韬定律V2 六大核心产业链",
+        "parent_folder_id": "7481543505241868",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "物理AI"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_f91e312635bbe36889e96e2bc30ad40e7481543505241868",
+        "title": "国产算力产业链+核心公司全景解析",
+        "parent_folder_id": "7481543505241868",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "物理AI"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_87bad8298ac19e3002d5651f9c8a760a7481543505241868",
+        "title": "中央汇金持仓数据中心(AIDC) ，10家公司凭什么？",
+        "parent_folder_id": "7481543505241868",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "物理AI"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_137b609a81da3953e69875e4560606d97481543505241868",
+        "title": "算力租赁+云计算+中国AI 50，10家核心布局企业",
+        "parent_folder_id": "7481543505241868",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "物理AI"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_6883609a79b8ad78eb76436ca30ad8077481543505241868",
+        "title": "国产算力新主线：超节点+交换机核心全景梳理!",
+        "parent_folder_id": "7481543505241868",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "物理AI"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_408473126c5d619468b052671a591cda7481543505241868",
+        "title": "靶材+先进封装+HBM，重点关注领域（附名单）",
+        "parent_folder_id": "7481543505241868",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "物理AI"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_7be70cb1d37b496f1109f1ad1ab5a9dd7481543505241868",
+        "title": "高速交换机+满手订单，深度布局的6家公司",
+        "parent_folder_id": "7481543505241868",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "物理AI"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_f3827da9e1eb68d0eb0aa2476252b4bd7481543505241868",
+        "title": "华为950超节点+高速互联，深度布局的4家公司",
+        "parent_folder_id": "7481543505241868",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "物理AI"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_e515dec7b71c1761917c31dc697f17cb7481543505241868",
+        "title": "2026昇腾产业链全解密：系统级反超背后的10家核心“卖铲人”",
+        "parent_folder_id": "7481543505241868",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "物理AI"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_11335edb92bc1b244f146de733c3e8ad7481543505241868",
+        "title": "国产算力+今明两年业绩翻倍，深度布局的6家公司",
+        "parent_folder_id": "7481543505241868",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "物理AI"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_d60099307fdd431cef84ab7976d54cc37481543505241868",
+        "title": "利好爆发！下周A股，必须盯紧国产算力",
+        "parent_folder_id": "7481543505241868",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "物理AI"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_3fbfad9f447c9fda0c16553b2b5a02f17481543505241868",
+        "title": "AI数据探针 Datavibe 的 10 个应用场景：让用户声音真正进入业务判断",
+        "parent_folder_id": "7481543505241868",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "物理AI"
+      }
+    ]
+  },
+  "创新药": {
+    "kb_id": "f01z0UwwyAUqeL3BtVpnWt6l-1bbR94cOTSwrIeJU88=",
+    "count": 18,
+    "items": [
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_f993bbcc700be61ca85abcc73ff7f9ca7481543257777328",
+        "title": "创新药 完整梳理",
+        "parent_folder_id": "7481543257777328",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "创新药"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_c5604e46e6330f79d4b689e73da5ca9a7481543257777328",
+        "title": "创新药+智能医疗，长期价值不减，分析一家可重点关注的CRO龙头！",
+        "parent_folder_id": "7481543257777328",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "创新药"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_211491d67dcd8f4a0b0777f2110169107481543257777328",
+        "title": "创新药—CXO&CRO及BD出海大单品梳理",
+        "parent_folder_id": "7481543257777328",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "创新药"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_05dbaaae7ceb4d28c8aff0fdf6842b5a7481543257777328",
+        "title": "中国创新药概念：非常正宗的5家公司",
+        "parent_folder_id": "7481543257777328",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "创新药"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_07107c363c853b30ecb64a6010b3ce8b7481543257777328",
+        "title": "原研药、仿制药、创新药？？？",
+        "parent_folder_id": "7481543257777328",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "创新药"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_4d335e2bddc9c2549304df28011bb45e7481543257777328",
+        "title": "一文看懂创新药热潮",
+        "parent_folder_id": "7481543257777328",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "创新药"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_715fe598d4bacfb34217bd56ba430a1f7481543257777328",
+        "title": "生物制药未来前景",
+        "parent_folder_id": "7481543257777328",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "创新药"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_984cfc1efa38eb428881a96a2042e6687481543257777328",
+        "title": "创新药，机构重点关注的十家公司",
+        "parent_folder_id": "7481543257777328",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "创新药"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_b0a9f40e0ed2f472e196537ffb5586887481543257777328",
+        "title": "CRO专题研究：药明康德/泰格医药/凯莱英/昭衍新药/美迪西/阳光诺和/康龙化成，CRO订单全面回升，哪家最值得关注？",
+        "parent_folder_id": "7481543257777328",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "创新药"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_92412d97be55d0a5d32d566e1dba455e7481543257777328",
+        "title": "生物医药四大赛道之三：医疗器械！——10家核心企业",
+        "parent_folder_id": "7481543257777328",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "创新药"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_ff459328728c09e7ed619a5b34be6af07481543257777328",
+        "title": "一文吃透创新药产业链",
+        "parent_folder_id": "7481543257777328",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "创新药"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_704f77509419e10ef08cf69663eca4017481543257777328",
+        "title": "那些低估到离谱的医药公司1",
+        "parent_folder_id": "7481543257777328",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "创新药"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_101d9f60207aa963b9e79b7f323ff5e67481543257777328",
+        "title": "获得84亿美元投资，中国创新药，10家有新进展的公司",
+        "parent_folder_id": "7481543257777328",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "创新药"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_bbb282c598717a37593539f2669b0f7a7481543257777328",
+        "title": "一个月涨100元！谢治宇葛兰布局的赛道龙头，主升浪信号出现？",
+        "parent_folder_id": "7481543257777328",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "创新药"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_40714821b015f6af26d489cc2ed3ceb97481543257777328",
+        "title": "7月有望重演去年行情，再度布局创新药注意新逻辑",
+        "parent_folder_id": "7481543257777328",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "创新药"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_d9d74f6c86bc1d11510d97bc5f76bb187481543257777328",
+        "title": "创新药，国内最核心的6家龙头公司（转发留存）",
+        "parent_folder_id": "7481543257777328",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "创新药"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_6ca2d7b3c959937788527f7a28b2f15c7481543257777328",
+        "title": "医药领域细分拆解：CXO+创新药，9家核心公司",
+        "parent_folder_id": "7481543257777328",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "创新药"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_eb4933f84d4cb05db7f30feee1c2cf957481543257777328",
+        "title": "创新药，核心企业梳理（附名单）",
+        "parent_folder_id": "7481543257777328",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "创新药"
+      }
+    ]
+  },
+  "军工": {
+    "kb_id": "xIp0z_I5rc1qKotI16J4BBTlZG-t7IZUWK7C2juW-M4=",
+    "count": 4,
+    "items": [
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_f4daf2a2ed684d5e39e99bf2b6efdd257481545883412177",
+        "title": "热烈庆祝日本长崎市遭原子弹爆炸81周年！",
+        "parent_folder_id": "7481545883412177",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "军工"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_609708eefe74db888f3b190fae7b4ca67481545883412177",
+        "title": "新质生产力与新质战斗力融合互促：军工企业实践路径与战略前瞻",
+        "parent_folder_id": "7481545883412177",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "军工"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_107b74be3adb4cd0f2e50dc12ce71cd27481545883412177",
+        "title": "分享贴｜碳纤维概念十大关联企业拆解",
+        "parent_folder_id": "7481545883412177",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "军工"
+      },
+      {
+        "media_id": "wechatarticle_a19d14e1af656fb2b12f36bab7603ed8_95b4324a162b097160bd437ac81c94bb7481545883412177",
+        "title": "军工装备产业链及相关概念股",
+        "parent_folder_id": "7481545883412177",
+        "tags": [],
+        "media_type": 6,
+        "_kb": "军工"
+      }
+    ]
+  }
+}

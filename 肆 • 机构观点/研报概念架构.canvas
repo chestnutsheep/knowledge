@@ -1,0 +1,426 @@
+{
+  "nodes": [
+    {
+      "id": "root",
+      "type": "text",
+      "text": "# 📊 研报概念速览\n162篇研报 · 17概念",
+      "x": 520,
+      "y": 360,
+      "width": 240,
+      "height": 90,
+      "color": "#1f2937"
+    },
+    {
+      "id": "c0",
+      "type": "text",
+      "text": "🧩 个股中报业绩\n39篇\n[[概念卡片/个股中报业绩]]",
+      "x": 60,
+      "y": 60,
+      "width": 240,
+      "height": 90,
+      "color": "#95a5a6"
+    },
+    {
+      "id": "c1",
+      "type": "text",
+      "text": "🧩 医药/CXO\n31篇\n[[概念卡片/医药·CXO]]",
+      "x": 360,
+      "y": 60,
+      "width": 240,
+      "height": 90,
+      "color": "#e84393"
+    },
+    {
+      "id": "c2",
+      "type": "text",
+      "text": "🧩 半导体/先进封装\n27篇\n[[概念卡片/半导体·先进封装]]",
+      "x": 660,
+      "y": 60,
+      "width": 240,
+      "height": 90,
+      "color": "#7c5cff"
+    },
+    {
+      "id": "c3",
+      "type": "text",
+      "text": "🧩 储能/新能源\n15篇\n[[概念卡片/储能·新能源]]",
+      "x": 960,
+      "y": 60,
+      "width": 240,
+      "height": 90,
+      "color": "#27ae60"
+    },
+    {
+      "id": "c4",
+      "type": "text",
+      "text": "🧩 消费/出海\n12篇\n[[概念卡片/消费·出海]]",
+      "x": 60,
+      "y": 220,
+      "width": 240,
+      "height": 90,
+      "color": "#16a085"
+    },
+    {
+      "id": "c5",
+      "type": "text",
+      "text": "🧩 周期资源品\n9篇\n[[概念卡片/周期资源品]]",
+      "x": 360,
+      "y": 220,
+      "width": 240,
+      "height": 90,
+      "color": "#b9770e"
+    },
+    {
+      "id": "c6",
+      "type": "text",
+      "text": "🧩 汽车/两轮车\n9篇\n[[概念卡片/汽车·两轮车]]",
+      "x": 660,
+      "y": 220,
+      "width": 240,
+      "height": 90,
+      "color": "#c0392b"
+    },
+    {
+      "id": "c7",
+      "type": "text",
+      "text": "🧩 化工/材料\n9篇\n[[概念卡片/化工·材料]]",
+      "x": 960,
+      "y": 220,
+      "width": 240,
+      "height": 90,
+      "color": "#7f8c8d"
+    },
+    {
+      "id": "c8",
+      "type": "text",
+      "text": "🧩 物产/航运\n4篇\n[[概念卡片/物产·航运]]",
+      "x": 60,
+      "y": 380,
+      "width": 240,
+      "height": 90,
+      "color": "#2980b9"
+    },
+    {
+      "id": "c9",
+      "type": "text",
+      "text": "🧩 人形机器人\n2篇\n[[概念卡片/人形机器人]]",
+      "x": 360,
+      "y": 380,
+      "width": 240,
+      "height": 90,
+      "color": "#e67e22"
+    },
+    {
+      "id": "c10",
+      "type": "text",
+      "text": "🧩 纸业/包装\n2篇\n[[概念卡片/纸业·包装]]",
+      "x": 660,
+      "y": 380,
+      "width": 240,
+      "height": 90,
+      "color": "#a04000"
+    },
+    {
+      "id": "c11",
+      "type": "text",
+      "text": "🧩 AI算力/算电协同\n2篇\n[[概念卡片/AI算力·算电协同]]",
+      "x": 960,
+      "y": 380,
+      "width": 240,
+      "height": 90,
+      "color": "#2d9cdb"
+    },
+    {
+      "id": "c12",
+      "type": "text",
+      "text": "🧩 教育\n1篇\n[[概念卡片/教育]]",
+      "x": 60,
+      "y": 540,
+      "width": 240,
+      "height": 90,
+      "color": "#d35400"
+    },
+    {
+      "id": "c13",
+      "type": "text",
+      "text": "🧩 商业航天\n1篇\n[[概念卡片/商业航天]]",
+      "x": 360,
+      "y": 540,
+      "width": 240,
+      "height": 90,
+      "color": "#8e44ad"
+    },
+    {
+      "id": "b0",
+      "type": "text",
+      "text": "📁 总览\n[[零 • 导览/总览]]",
+      "x": 1100,
+      "y": 60,
+      "width": 240,
+      "height": 90,
+      "color": "#0e7490"
+    },
+    {
+      "id": "b1",
+      "type": "text",
+      "text": "📁 CXO与创新药产业链\n[[贰 • 杂学/03 创新药/CXO与创新药产业链]]",
+      "x": 1400,
+      "y": 60,
+      "width": 240,
+      "height": 90,
+      "color": "#0e7490"
+    },
+    {
+      "id": "b2",
+      "type": "text",
+      "text": "📁 先进封装与Chiplet\n[[贰 • 杂学/07 半导体/先进封装/先进封装与Chiplet]]",
+      "x": 1700,
+      "y": 60,
+      "width": 240,
+      "height": 90,
+      "color": "#0e7490"
+    },
+    {
+      "id": "b3",
+      "type": "text",
+      "text": "📁 半导体设备产业链全景\n[[贰 • 杂学/07 半导体/半导体设备/半导体设备产业链全景]]",
+      "x": 1100,
+      "y": 190,
+      "width": 240,
+      "height": 90,
+      "color": "#0e7490"
+    },
+    {
+      "id": "b4",
+      "type": "text",
+      "text": "📁 光模块产业链全景\n[[贰 • 杂学/07 半导体/光通信/光模块产业链全景]]",
+      "x": 1400,
+      "y": 190,
+      "width": 240,
+      "height": 90,
+      "color": "#0e7490"
+    },
+    {
+      "id": "b5",
+      "type": "text",
+      "text": "📁 TGV玻璃基板\n[[贰 • 杂学/07 半导体/半导体材料/封装与载板/TGV玻璃基板]]",
+      "x": 1700,
+      "y": 190,
+      "width": 240,
+      "height": 90,
+      "color": "#0e7490"
+    },
+    {
+      "id": "b6",
+      "type": "text",
+      "text": "📁 固态电池产业链全景\n[[贰 • 杂学/08 电力与储能/储能：固态电池/固态电池产业链全景]]",
+      "x": 1100,
+      "y": 320,
+      "width": 240,
+      "height": 90,
+      "color": "#0e7490"
+    },
+    {
+      "id": "b7",
+      "type": "text",
+      "text": "📁 储能PCS四大演进\n[[贰 • 杂学/08 电力与储能/储能：固态电池/储能PCS四大演进]]",
+      "x": 1400,
+      "y": 320,
+      "width": 240,
+      "height": 90,
+      "color": "#0e7490"
+    },
+    {
+      "id": "b8",
+      "type": "text",
+      "text": "📁 伍 • 基本信息池\n[[伍 • 基本信息池]]",
+      "x": 1700,
+      "y": 320,
+      "width": 240,
+      "height": 90,
+      "color": "#0e7490"
+    },
+    {
+      "id": "b9",
+      "type": "text",
+      "text": "📁 铜钴核心上市公司名单\n[[伍 • 基本信息池/铜钴核心上市公司名单]]",
+      "x": 1100,
+      "y": 450,
+      "width": 240,
+      "height": 90,
+      "color": "#0e7490"
+    },
+    {
+      "id": "b10",
+      "type": "text",
+      "text": "📁 产业链传递总览\n[[零 • 导览/产业链传递总览]]",
+      "x": 1400,
+      "y": 450,
+      "width": 240,
+      "height": 90,
+      "color": "#0e7490"
+    },
+    {
+      "id": "b11",
+      "type": "text",
+      "text": "📁 未来5年科技投资全景\n[[贰 • 杂学/09 科技投资研究/未来5年科技投资全景]]",
+      "x": 1700,
+      "y": 450,
+      "width": 240,
+      "height": 90,
+      "color": "#0e7490"
+    },
+    {
+      "id": "b12",
+      "type": "text",
+      "text": "📁 00-材料索引\n[[贰 • 杂学/00-材料索引]]",
+      "x": 1100,
+      "y": 580,
+      "width": 240,
+      "height": 90,
+      "color": "#0e7490"
+    },
+    {
+      "id": "b13",
+      "type": "text",
+      "text": "📁 超节点产业链\n[[贰 • 杂学/01 算力与服务器/超节点产业链]]",
+      "x": 1400,
+      "y": 580,
+      "width": 240,
+      "height": 90,
+      "color": "#0e7490"
+    },
+    {
+      "id": "b14",
+      "type": "text",
+      "text": "📁 AIDC与算电协同\n[[贰 • 杂学/08 电力与储能/AIDC与算电协同]]",
+      "x": 1700,
+      "y": 580,
+      "width": 240,
+      "height": 90,
+      "color": "#0e7490"
+    },
+    {
+      "id": "b15",
+      "type": "text",
+      "text": "📁 算电协同\n[[贰 • 杂学/09 科技投资研究/算电协同]]",
+      "x": 1100,
+      "y": 710,
+      "width": 240,
+      "height": 90,
+      "color": "#0e7490"
+    },
+    {
+      "id": "b16",
+      "type": "text",
+      "text": "📁 商业航天产业链全景\n[[贰 • 杂学/05 商业航天/商业航天产业链全景]]",
+      "x": 1400,
+      "y": 710,
+      "width": 240,
+      "height": 90,
+      "color": "#0e7490"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_root_c0",
+      "fromNode": "root",
+      "fromSide": "top",
+      "toNode": "c0",
+      "toSide": "bottom"
+    },
+    {
+      "id": "e_root_c1",
+      "fromNode": "root",
+      "fromSide": "top",
+      "toNode": "c1",
+      "toSide": "bottom"
+    },
+    {
+      "id": "e_root_c2",
+      "fromNode": "root",
+      "fromSide": "top",
+      "toNode": "c2",
+      "toSide": "bottom"
+    },
+    {
+      "id": "e_root_c3",
+      "fromNode": "root",
+      "fromSide": "top",
+      "toNode": "c3",
+      "toSide": "bottom"
+    },
+    {
+      "id": "e_root_c4",
+      "fromNode": "root",
+      "fromSide": "top",
+      "toNode": "c4",
+      "toSide": "bottom"
+    },
+    {
+      "id": "e_root_c5",
+      "fromNode": "root",
+      "fromSide": "top",
+      "toNode": "c5",
+      "toSide": "bottom"
+    },
+    {
+      "id": "e_root_c6",
+      "fromNode": "root",
+      "fromSide": "top",
+      "toNode": "c6",
+      "toSide": "bottom"
+    },
+    {
+      "id": "e_root_c7",
+      "fromNode": "root",
+      "fromSide": "top",
+      "toNode": "c7",
+      "toSide": "bottom"
+    },
+    {
+      "id": "e_root_c8",
+      "fromNode": "root",
+      "fromSide": "top",
+      "toNode": "c8",
+      "toSide": "bottom"
+    },
+    {
+      "id": "e_root_c9",
+      "fromNode": "root",
+      "fromSide": "top",
+      "toNode": "c9",
+      "toSide": "bottom"
+    },
+    {
+      "id": "e_root_c10",
+      "fromNode": "root",
+      "fromSide": "top",
+      "toNode": "c10",
+      "toSide": "bottom"
+    },
+    {
+      "id": "e_root_c11",
+      "fromNode": "root",
+      "fromSide": "top",
+      "toNode": "c11",
+      "toSide": "bottom"
+    },
+    {
+      "id": "e_root_c12",
+      "fromNode": "root",
+      "fromSide": "top",
+      "toNode": "c12",
+      "toSide": "bottom"
+    },
+    {
+      "id": "e_root_c13",
+      "fromNode": "root",
+      "fromSide": "top",
+      "toNode": "c13",
+      "toSide": "bottom"
+    }
+  ],
+  "version": 1.1,
+  "direction": "right"
+}
