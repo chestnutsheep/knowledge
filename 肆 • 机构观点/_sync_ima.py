@@ -4,7 +4,7 @@
 from pathlib import Path
 from datetime import date
 
-BASE = Path("/home/AI/scapegoat_data/notebooks/知识库")
+BASE = Path("/home/AI/Obsidian/知识库")
 TODAY = "2026-08-13"
 SYNC_TAG = f"ima_synced: {TODAY}"
 

@@ -3,7 +3,7 @@
 import json, os, re, subprocess, time
 
 SKILL = "/home/scapegoat/.codebuddy/skills/ima-skills/ima_api.cjs"
-ROOT = "/home/AI/scapegoat_data/notebooks/知识库"
+ROOT = "/home/AI/Obsidian/知识库"
 KB = os.path.join(ROOT, "肆 • 机构观点", "_ima_kb_items.json")
 CACHE = os.path.join(ROOT, "肆 • 机构观点", "_ima_urls.json")
 

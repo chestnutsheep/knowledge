@@ -43,6 +43,6 @@ for kb in kbs:
     result[kb_name] = {"kb_id": kb_id, "count": len(items), "items": items}
     print(f"  {kb_name}: {len(items)} 条", file=sys.stderr)
 
-with open("/home/AI/scapegoat_data/notebooks/知识库/肆 • 机构观点/_ima_kb_items.json", "w", encoding="utf-8") as f:
+with open("/home/AI/Obsidian/知识库/肆 • 机构观点/_ima_kb_items.json", "w", encoding="utf-8") as f:
     json.dump(result, f, ensure_ascii=False, indent=2)
 print("已保存 _ima_kb_items.json", file=sys.stderr)

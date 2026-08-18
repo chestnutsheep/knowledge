@@ -4,7 +4,7 @@
 import re, json
 from pathlib import Path
 
-REAL = Path("/home/AI/scapegoat_data/notebooks/知识库/肆 • 机构观点")
+REAL = Path("/home/AI/Obsidian/知识库/肆 • 机构观点")
 
 # 概念 -> 关键词（用于把行业/标的映射到上层概念卡片）
 CONCEPT_KW = {
@@ -76,35 +76,52 @@ for p in REAL.glob("*.md"):
     if p.name.startswith(("00-", "README", "_")):
         continue
     txt = p.read_text(encoding="utf-8")
-    # 提取 标的 / 行业 / 评级 行
+    # 优先从 frontmatter 读已有结构化字段（新格式已含）；缺失时再从正文 callout 抓
+    fm = {}
+    m = re.match(r"^---\n(.*?)\n---", txt, re.S)
+    if m:
+        for line in m.group(1).splitlines():
+            kv = re.match(r'(\w+):\s*"?([^"\n]*)"?', line)
+            if kv:
+                fm[kv.group(1)] = kv.group(2).strip()
     obj = re.search(r"标的[：:]\s*([^\｜|]+)", txt)
     ind = re.search(r"行业[：:]\s*([^\｜|]+)", txt)
     rat = re.search(r"评级[：:]\s*([^\｜|]+)", txt)
     org = re.search(r"org:\s*\"?([^\"\n]+)\"?", txt)
     date = re.search(r"declareDate:\s*\"?([0-9-]+)\"?", txt)
-    obj_v = obj.group(1).strip() if obj else ""
-    ind_v = ind.group(1).strip() if ind else ""
-    rat_v = rat.group(1).strip() if rat else ""
+    obj_v = fm.get("object") or (obj.group(1).strip() if obj else "")
+    ind_v = fm.get("industry") or (ind.group(1).strip() if ind else "")
+    rat_v = fm.get("rating") or (rat.group(1).strip() if rat else "")
     mobj = {"industry": ind_v, "object": obj_v, "stem": p.stem}
     concept = infer_concept(mobj)
     meta[p.stem] = {
         "object": obj_v, "industry": ind_v, "rating": rat_v,
-        "concept": concept, "org": org.group(1) if org else "", "date": date.group(1) if date else "",
+        "concept": concept, "org": fm.get("org") or (org.group(1) if org else ""),
+        "date": fm.get("declareDate") or (date.group(1) if date else ""),
     }
-    # 重算并覆盖 concept（保留已写入的 object/industry/rating）
-    # 移除旧 concept 行后重写
-    new_lines = []
-    for ln in txt.splitlines():
-        if ln.startswith("concept:"):
-            continue
-        new_lines.append(ln)
-    body = "\n".join(new_lines)
-    new_fm = body.replace(
-        "---\n",
-        f"---\nconcept: \"{concept}\"\nobject: \"{obj_v}\"\nindustry: \"{ind_v}\"\nrating: \"{rat_v}\"\n",
-        1,
-    )
-    p.write_text(new_fm, encoding="utf-8")
+    # 原地更新 frontmatter：仅覆盖 concept/object/industry/rating（不重复插入）
+    if not m:
+        continue
+    fm_block = m.group(1)
+    new_block_lines = []
+    seen = set()
+    for line in fm_block.splitlines():
+        kv = re.match(r'(\w+):', line)
+        key = kv.group(1) if kv else None
+        if key in ("concept", "object", "industry", "rating"):
+            if key in seen:
+                continue  # 去重：跳过后续重复行
+            seen.add(key)
+            val = {"concept": concept, "object": obj_v, "industry": ind_v, "rating": rat_v}[key]
+            new_block_lines.append(f'{key}: "{val}"')
+        else:
+            new_block_lines.append(line)
+    # 补齐缺失字段
+    for key, val in (("concept", concept), ("object", obj_v), ("industry", ind_v), ("rating", rat_v)):
+        if key not in seen:
+            new_block_lines.append(f'{key}: "{val}"')
+    new_txt = txt[:m.start(1)] + "\n".join(new_block_lines) + txt[m.end(1):]
+    p.write_text(new_txt, encoding="utf-8")
 
 # 统计概念分布
 from collections import Counter

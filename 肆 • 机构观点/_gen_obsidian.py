@@ -10,8 +10,8 @@ import json, re
 from pathlib import Path
 from datetime import datetime
 
-REAL = Path("/home/AI/scapegoat_data/notebooks/知识库/肆 • 机构观点")
-VAULT = Path("/home/AI/scapegoat_data/notebooks/知识库")
+REAL = Path("/home/AI/Obsidian/知识库/肆 • 机构观点")
+VAULT = Path("/home/AI/Obsidian/知识库")
 meta = json.load(open(REAL / "_meta.json", encoding="utf-8"))
 
 # 概念 -> notebook 已有逆检索板块 (逆检索核心)
@@ -90,6 +90,47 @@ by_concept = defaultdict(list)
 for stem, m in meta.items():
     by_concept[m["concept"]].append(stem)
 
+# ---------- 反向回填：把"概念卡片 + 逆检索板块"写回每篇研报笔记 ----------
+def fname(concept):
+    return concept.replace("/", "·")
+
+def backfill_crossref():
+    """让孤岛变网状：为每篇研报笔记的「## 知识库交叉引用」章节，
+    填入它归属的概念卡片 + 逆检索到的 notebook 板块链接。
+    仅重写该章节（从章节标题到文末分隔线之前），不动来源 callout / 核心观点。
+    """
+    crossref_pat = re.compile(
+        r"## 知识库交叉引用.*?(?=\n---|\Z)", re.S
+    )
+    updated = 0
+    for stem, m in meta.items():
+        concept = m.get("concept", "个股中报业绩")
+        boards = CONCEPT_TO_BOARD.get(concept, [])
+        card_link = f"[[概念卡片/{fname(concept)}]]"
+        lines = ["## 知识库交叉引用", ""]
+        lines.append(f"- 概念归类：{card_link}")
+        if boards:
+            lines.append("- 逆检索到的知识库板块：")
+            for b in boards:
+                lines.append(f"  - [[{b}]]")
+        else:
+            lines.append("- 逆检索板块：（暂无对应 notebook 板块，可在贰杂学/伍基本信息池新建主题笔记）")
+        block = "\n".join(lines) + "\n"
+
+        fpath = REAL / f"{stem}.md"
+        if not fpath.exists():
+            continue
+        text = fpath.read_text(encoding="utf-8")
+        # 只替换「## 知识库交叉引用 ... 到 --- 之前」这一段
+        new_text, n = crossref_pat.subn(lambda mm: block.rstrip("\n"), text)
+        if n:
+            fpath.write_text(new_text, encoding="utf-8")
+            updated += 1
+    return updated
+
+_xref = backfill_crossref()
+print(f"[INFO] 反向回填知识库交叉引用：{_xref} 篇研报笔记已写入概念卡片+逆检索板块链接")
+
 # 概念卡片页
 card_dir = REAL / "概念卡片"
 card_dir.mkdir(exist_ok=True)
@@ -152,6 +193,15 @@ moc += [
     "```dashboard",
     "title: \"各概念研报数量分布\"",
     "type: bar",
+    "```",
+    "",
+    "> 上方为静态预览；下方 Dataview 为**活清单**，新增研报笔记后自动聚合，无需重跑脚本。",
+    "",
+    "```dataview",
+    "TABLE org AS 机构, object AS 标的, rating AS 评级, industry AS 行业",
+    "FROM \"肆 • 机构观点\"",
+    "WHERE type != \"研报概念速览\" AND contains(tags, \"研报\")",
+    "SORT concept ASC, declareDate DESC",
     "```",
     "",
     "## 二、概念卡片网格",

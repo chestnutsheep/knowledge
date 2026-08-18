@@ -19,7 +19,7 @@ updated: 2026-08-13
 1. 载入环境变量并跑采集（若 key 缺失走主源即可）：
    ```bash
    if [ -f ~/.config/jrj/.env ]; then set -a; . ~/.config/jrj/.env; set +a; fi
-   cd "/home/AI/scapegoat_data/notebooks/知识库/肆 • 机构观点" && python3 fetch_reports.py
+   cd "/home/AI/Obsidian/知识库/肆 • 机构观点" && python3 fetch_reports.py
    ```
    - 看到 `[INFO] 模式: 真实拉取` = 已拉真实数据；若 DRY_RUN = key 未配，仅重建 timeline，正常。
    - 错误码 42902=配额耗尽，40101=key 失效，需提示用户处理。

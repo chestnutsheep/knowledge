@@ -5,8 +5,8 @@
 import os, re, json, glob
 from pathlib import Path
 
-REAL = Path("/home/AI/scapegoat_data/notebooks/知识库/肆 • 机构观点")
-VAULT = Path("/home/AI/scapegoat_data/notebooks/知识库")
+REAL = Path("/home/AI/Obsidian/知识库/肆 • 机构观点")
+VAULT = Path("/home/AI/Obsidian/知识库")
 
 # 概念/行业词典：概念名 -> 关键词(在标题/正文中匹配)
 CONCEPTS = {
@@ -31,10 +31,26 @@ CONCEPTS = {
 }
 
 def load_title(p):
+    """从 frontmatter 优先读 org/title（兼容新旧两种文件名）。"""
     name = p.stem
-    # 去 机构_日期_ 前缀
-    m = re.match(r"^(.+?)_\d{4}-\d{2}-\d{2}_(.+)$", name)
-    org, title = (m.group(1), m.group(2)) if m else ("?", name)
+    try:
+        txt = p.read_text(encoding="utf-8", errors="ignore")
+    except Exception:
+        txt = ""
+    fm = {}
+    m = re.match(r"^---\n(.*?)\n---", txt, re.S)
+    if m:
+        for line in m.group(1).splitlines():
+            kv = re.match(r'(\w+):\s*"?([^"\n]*)"?', line)
+            if kv:
+                fm[kv.group(1)] = kv.group(2).strip()
+    org = fm.get("org")
+    title = fm.get("title")
+    if not org or not title:
+        # 旧文件名兜底：机构_日期_标题
+        fm_m = re.match(r"^(.+?)_\d{4}-\d{2}-\d{2}_(.+)$", name)
+        org = org or (fm_m.group(1) if fm_m else "?")
+        title = title or (fm_m.group(2) if fm_m else name)
     return org, title, name
 
 # notebook 已有可链接主题板块
