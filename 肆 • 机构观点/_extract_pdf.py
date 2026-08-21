@@ -71,11 +71,66 @@ def download_pdf(url: str) -> bytes | None:
         print(f"  [DL ERR] {url} -> {e}")
         return None
 
+def _page_text(page) -> str:
+    """提取单页文本；双栏/侧栏页优先保留正文列，减少行情侧栏串入。"""
+    words = page.extract_words(x_tolerance=2, y_tolerance=3, keep_blank_chars=False)
+    if not words:
+        return page.extract_text(layout=True) or page.extract_text() or ""
+    lines = []
+    for word in sorted(words, key=lambda w: (w["top"], w["x0"])):
+        if lines and abs(word["top"] - lines[-1]["top"]) <= 3:
+            lines[-1]["words"].append(word)
+        else:
+            lines.append({"top": word["top"], "words": [word]})
+    clusters = []
+    for line in lines:
+        ws = sorted(line["words"], key=lambda w: w["x0"])
+        groups = []
+        for w in ws:
+            if groups and w["x0"] - groups[-1][-1]["x1"] <= 18:
+                groups[-1].append(w)
+            else:
+                groups.append([w])
+        for group in groups:
+            text = "".join(w["text"] for w in group).strip()
+            if text:
+                clusters.append((line["top"], group[0]["x0"], group[-1]["x1"], text))
+    width = float(page.width)
+    sidebar_re = re.compile(
+        r"市场数据|当前价格|52周|总市值|流通市值|总股本|流通股|近一月换手|股价走势|"
+        r"主要股东|A股数|A市值|机构投资者|产品组合|证券分析师|执业证书|邮箱|近期评等|"
+        r"股价涨跌|股价12个月|上证指数|沪深300|公司基本资讯|产业别|基础数据|相关研究|"
+        r"图表|股价表现|公司基本资料"
+    )
+    sidebar = [c for c in clusters if sidebar_re.search(c[3])]
+    if sidebar:
+        sidebar_x = [c[1] for c in sidebar]
+        median_x = sorted(sidebar_x)[len(sidebar_x) // 2]
+        # 仅当侧栏明显位于页面边缘，且正文列确实存在时才裁剪。
+        body_candidates = [c for c in clusters if len(c[3]) >= 20]
+        if median_x < width * .35 and any(c[1] > width * .35 for c in body_candidates):
+            cutoff = max(c[2] for c in sidebar) + 12
+            clusters = [c for c in clusters if c[1] >= cutoff]
+        elif median_x > width * .65 and any(c[2] < width * .65 for c in body_candidates):
+            cutoff = min(c[1] for c in sidebar) - 12
+            clusters = [c for c in clusters if c[2] <= cutoff]
+        # 右栏数字/图表经常没有关键词，按已识别侧栏的空间位置一并剔除。
+        if median_x > width * .55:
+            right_cutoff = min(c[1] for c in sidebar) - 8
+            clusters = [c for c in clusters if c[1] < right_cutoff]
+        # 同一行可能被拆成多个文字块；即使未达到 cutoff，也丢弃明确的侧栏块。
+        clusters = [c for c in clusters if not sidebar_re.search(c[3])]
+    result = "\n".join(t for _, _, _, t in sorted(clusters, key=lambda c: (c[0], c[1])))
+    # 复杂表格页可能被误裁剪；保留原始文本作为降级输入，不让整页消失。
+    if len(result) < 80:
+        return page.extract_text(layout=True) or page.extract_text() or result
+    return result
+
+
 def pdf_to_text(pdf_bytes: bytes) -> str:
     import io
     with pdfplumber.open(io.BytesIO(pdf_bytes)) as pdf:
-        pages = [pg.extract_text() or "" for pg in pdf.pages]
-    return "\n".join(pages)
+        return "\n".join(_page_text(pg) for pg in pdf.pages)
 
 # ---------- 结构化抽取 ----------
 # 首页页眉/侧栏噪声词（双栏排版会混入正文流）
@@ -125,25 +180,38 @@ def truncate_finance(s: str) -> str:
     return s.rstrip("，。、 ")
 
 def extract_rating(text: str) -> str:
-    # 首页评级如 "优于大市(维持)" 或 "买入(维持)"
-    m = re.search(r"(买入|增持|推荐|强烈推荐|优于大市|中性|减持|卖出|谨慎推荐|持有)\s*[（(]([^）)]*)[）)]", text)
+    # 首页评级如 "优于大市(维持)" 或 "买入(维持)"；PDF 换行不应进入字段。
+    compact = re.sub(r"\s+", "", text)
+    m = re.search(r"(买入|增持|推荐|强烈推荐|优于大市|中性|减持|卖出|谨慎推荐|持有)[（(]([^）)]*)[）)]", compact)
     if m:
         return f"{m.group(1)}({m.group(2)})"
-    m = re.search(r"维持[“\"]([^”\"]+)[”\"]评级", text)
+    m = re.search(r"维持[“\"]([^”\"]+)[”\"]评级", compact)
     if m:
         return m.group(1)
-    m = re.search(r"(买入|增持|推荐|强烈推荐|优于大市|中性|减持|卖出|谨慎推荐|持有)", text)
+    m = re.search(r"(买入|增持|推荐|强烈推荐|优于大市|中性|减持|卖出|谨慎推荐|持有)", compact)
     return m.group(1) if m else ""
 
 def extract_forecast(text: str) -> str:
-    # "归母净利润至 2.5/2.7/3.0 亿元，对应 PE 为 21/18/16 倍"
-    m = re.search(r"归母净利润[至到]?\s*([\d./]+\s*亿元)[，,]\s*对应\s*PE\s*[为是]?\s*([\d./]+\s*倍)", text)
+    """只从“盈利预测/投资评级”段提取预测，避免误抓实际利润。"""
+    section = text
+    m_section = re.search(
+        r"(?:盈利预测与投资评级|盈利预测及投资评级|盈利预测)\s*[：:]?(.*?)(?=\n\s*(?:风险提示|风险因素)|\Z)",
+        text, re.S,
+    )
+    if m_section:
+        section = m_section.group(1)
+    compact = re.sub(r"\s+", "", section)
+    # 常见表述：预计 2026-2028 年归母净利润分别为 38、48、51 亿元。
+    m = re.search(r"(?:归母净利润|归母净利).*?(?:分别为|分为|为)\s*([\d、,./]+)\s*亿元", compact)
+    if m:
+        nums = m.group(1).replace(",", "、").replace("/", "、")
+        return f"预计归母净利润 {nums} 亿元"
+    m = re.search(r"归母净利润[至到]\s*([\d./]+\s*亿元).*?对应PE[为是]?\s*([\d./]+\s*倍)", compact)
     if m:
         return f"预计归母净利润 {m.group(1)}，对应 PE {m.group(2)}"
-    m = re.search(r"归母净利润[至到]?\s*([\d./]+\s*亿元)", text)
-    if m:
-        return f"预计归母净利润 {m.group(1)}"
-    return ""
+    # 只有明确“预计”时才允许单值兜底，避免抓到“实现归母净利润”。
+    m = re.search(r"预计(?:公司)?(?:将实现)?归母净利润\s*([\d.]+\s*亿元)", compact)
+    return f"预计归母净利润 {m.group(1)}" if m else ""
 
 # 子句级垃圾碎片：含这些词的子句直接丢弃（分析师名/评级/股价/旧报告标题等）
 BAD_FRAG = ["分析师", "研究员", "（维持）", "证券", "《", "股价", "元；",
@@ -171,21 +239,139 @@ def _clean_sentences(raw: str) -> str:
 # 风险/建议段的终止锚（遇到即截断，不吞入正文图表/财务表/免责声明）
 SECTION_END = r"(?:投资建议[：:]|风险提示[：:]|图表|图\d|表\d|资料来源|免责|在任何情况|盈利预测和财务指标|财务预测与估值|资产负债表|相关研究报告|评级说明|披露声明)"
 
-def extract_risk(text: str) -> str:
-    m = re.search(r"风险提示[：:]\s*(.+?)(?=" + SECTION_END + r"|\Z)", text, re.S)
-    if m:
-        return _clean_sentences(m.group(1))
-    return ""
+DISCLAIMER_KW = [
+    "本报告", "本公司", "本报告信息均来源于", "市场有风险", "投资需谨慎",
+    "评级标准", "评级说明", "分析师承诺", "版权归", "未经书面许可",
+    "未经许可", "不得以任何方式", "客户使用", "风险自担", "退回并销毁",
+]
 
-DISCLAIMER_KW = ["责任", "谨慎", "版权", "许可", "翻版", "退回并销毁", "普通投资者"]
+# 一旦出现这些词，后续通常是评级定义、免责声明或财务表，不再写入正文。
+DISCLAIMER_RE = re.compile(
+    r"(?:本报告信息均来源于|本报告仅供|本公司不会因|市场有风险|投资需谨慎|"
+    r"投资评级说明|评级标准|评级说明|分析师承诺|免责声明|版权归|未经.{0,12}许可|"
+    r"不得以任何方式|请务必阅读.{0,12}免责|风险自担|年度截止|【投资评等说明】|"
+    r"东吴证券研究所|国信证券经济研究所|太平洋证券股份有限公司)"
+)
+
+
+def _cut_disclaimer(s: str) -> str:
+    m = DISCLAIMER_RE.search(s)
+    return s[:m.start()] if m else s
+
+
+def _is_noise_line(line: str) -> bool:
+    s = line.strip()
+    if not s:
+        return True
+    if any(w in s for w in SIDEBAR_NOISE):
+        return True
+    if any(w in s for w in ("证券研究所", "证券分析师", "执业证书", "联系方式", "Compa ny", "Ch in a Re sea", "点评报告")):
+        return True
+    if s in {"•", "-", "—", "·"}:
+        return True
+    if re.fullmatch(r"[\d\s./%+\-()（）亿元万股A-Za-z|]+", s):
+        return True
+    # 行情图坐标、表格列标题、连续日期串
+    if len(re.findall(r"20\d{2}", s)) >= 2 and re.search(r"20\d{2}[/年\-]", s):
+        return True
+    if re.search(r"(?:A股数|流通股|总市值|收盘价|一年最低|个股表现|主要股东|近一月换手|股价涨跌)", s):
+        return True
+    if re.search(r"(?:预测指标|年度截止|营业收入.*百万元|归母净利.*百万元|每股收益.*元|"
+                 r"基\s*础数据|每\s*股净资产|资产负债率|总\s*股本|流\s*通A股|"
+                 r"相关研究|特别声明|附录|损益表|资产负债表|现金流量表)", s):
+        return True
+    return False
+
+
+def _normalize_section(raw: str, max_chars: int = 1800) -> str:
+    raw = _cut_disclaimer(raw)
+    raw = raw.replace("", "\n• ").replace("◼", "\n• ")
+    lines = []
+    for line in raw.splitlines():
+        line = strip_noise(line)
+        line = re.sub(r"\s+", " ", line).strip()
+        # 页脚常与正文粘在同一行，先截断再判断噪声。
+        line = re.split(r"请认真阅读(?:正文之后|文后)的?免责声明?条款?", line)[0].strip()
+        line = re.split(r"(?:资料来源|数据来源)[:：]", line)[0].strip()
+        if _is_noise_line(line):
+            continue
+        if line:
+            lines.append(line)
+    if not lines:
+        return ""
+    # PDF 换行通常只是排版换行：中文相邻行直接合并，项目符号单独成段。
+    paragraphs = []
+    current = ""
+    for line in lines:
+        if line.startswith("•"):
+            if current:
+                paragraphs.append(current)
+            current = line[1:].strip()
+            if not current:
+                continue
+        elif not current:
+            current = line
+        elif current.endswith(("。", "！", "？", ";", "；")):
+            paragraphs.append(current)
+            current = line
+        else:
+            current += line if (current[-1] >= "\u4e00" and line[0] >= "\u4e00") else " " + line
+    if current:
+        paragraphs.append(current)
+    out = "\n\n".join(p.strip() for p in paragraphs if p.strip())
+    out = re.sub(r"[；;]{2,}", "；", out)
+    out = re.sub(r"\n{3,}", "\n\n", out)
+    # 删除常见的侧栏碎片被插入正文后的残留。
+    out = re.sub(r"\d{4}年\d{1,2}月\d{1,2}日", "", out)
+    out = re.sub(r"(?:当前价格|52周价格区间|总市值|流通市值|总股本|流通股|近一月换手)[^\n]{0,35}", "", out)
+    out = re.sub(r"\(?百万元\)?\s*[\d,.]+", "", out)
+    out = re.sub(r"(?:分析师|执业证书编号|邮箱)[:：]?[^\n]*", "", out)
+    out = re.sub(r"(?:基础数据|基\s*础数据|相关研究|图表|股价表现|公司基本资料)[^\n]*", "", out)
+    out = re.sub(r"^\s*[:：]\s*", "", out)
+    out = re.sub(r"\s+(?:基础数据|基\s*础数据|每\s*股净资产|资产负债率|总\s*股本|流\s*通A股)\b.*", "", out)
+    out = re.sub(r"较s年初", "较年初", out)
+    out = re.sub(r"(?<=[\u4e00-\u9fff])s(?=年)", "", out)
+    out = re.sub(r"(?:2025/\d{1,2}/\d{1,2}){2,}", "", out)
+    out = re.sub(r"(?:20\d{2}/){2,}20\d{2}/\d{1,2}/\d{1,2}", "", out)
+    # 不写入明显半句；允许最后是数字/单位，但不能是连接词。
+    if re.search(r"(?:公司下|其中|并且|以及|将|因而|因此|从而|在)$", out):
+        out = re.sub(r"[^。！？；]*$", "", out).rstrip("，、 ")
+    # 截断后的结果不能以明显的悬空连接词或页脚词结束。
+    out = re.sub(r"(?:公司下|一阶段业|研究所|分析师|邮箱|点评报告|[•·])$", "", out).rstrip("，、；; ")
+    if len(out) > max_chars:
+        # 在完整句/分号边界截断，避免把句子截成半句。
+        boundary = max(out.rfind("。", 0, max_chars), out.rfind("；", 0, max_chars))
+        out = out[:boundary + 1] if boundary >= max_chars // 2 else out[:max_chars]
+    return out.rstrip("，、；; ")
+
+
+def extract_risk(text: str) -> str:
+    m = re.search(r"(?:风险提示|风险因素)[：:]?\s*(.+?)(?="
+                  r"(?:盈利预测|财务预测|图\s*\d|表\s*\d|资料来源|免责声明|"
+                  r"投资评级说明|评级标准|请务必阅读|附录|三张报表|损益表|"
+                  r"资产负债表|现金流量表|特别声明|公司点评附录)|\Z)", text, re.S)
+    return _normalize_section(m.group(1), 900) if m else ""
+
 
 def extract_advice(text: str) -> str:
-    m = re.search(r"投资建议[：:]\s*(.+?)(?=" + SECTION_END + r"|\Z)", text, re.S)
-    if m:
-        s = _clean_sentences(m.group(1))
-        if any(k in s for k in DISCLAIMER_KW):
-            return ""  # 实为免责声明，丢弃
-        return s
+    # 优先正文中的投资建议；不把免责声明中出现的“投资建议”当作建议。
+    patterns = [
+        r"(?:^|\n)\s*投资建议[：:]\s*(.+?)(?=(?:\n|风险提示|盈利预测|财务预测|图\s*\d|表\s*\d)|\Z)",
+        r"(?:^|\n)\s*盈利预测及投资评级[：:]?\s*(.+?)(?=(?:\n|风险提示|盈利预测|财务预测|图\s*\d|表\s*\d)|\Z)",
+    ]
+    for pat in patterns:
+        for m in re.finditer(pat, text, re.S):
+            s = _normalize_section(m.group(1), 1000)
+            if not s or any(k in s for k in DISCLAIMER_KW) or len(s) < 18:
+                continue
+            # 过滤明显从段中间开始的残句，宁可不填。
+            if re.match(r"^(?:别为|利为|为|分别为|的|领)", s):
+                continue
+            if not re.search(r"[。！？；]$", s):
+                # 允许 PDF 没有句号，但必须有完整评级/盈利结论。
+                if not re.search(r"(?:评级|建议|买入|增持|持有|卖出|回避)[”）)]?$", s):
+                    continue
+            return s
     return ""
 
 # 侧栏/表格噪声词：出现在句子里即判定为非正文（市场数据、收盘价等）
@@ -195,38 +381,200 @@ SIDEBAR_NOISE = ["市场数据", "收盘价", "市净率", "流通A股市值", "
                  "(元)", "（元）", "EPS-最新摊薄"]
 
 def extract_core(text: str) -> str:
-    """核心观点：抓 '核心观点/投资要点/投资评级/内容摘要/摘要' 段，
-    按 ◼ 项目符号切分，丢弃混入的侧栏/表格噪声句，拼接业务实质内容。"""
-    anchor = r"(?:核心观点|投资要点|投资评级|内容摘要|摘要)\s*"
-    m = re.search(anchor + r"(.+?)(?:\n风险提示[：:]|\n投资建议[：:]|\n财务预测|\n图\d|\n表\d|盈利[预测与估]|\Z)", text, re.S)
-    raw = m.group(1) if m else ""
-    if not raw.strip():
-        m2 = re.search(r"◼\s*(.+?)(?:\n◼|\n风险提示[：:]|\Z)", text, re.S)
-        raw = m2.group(1) if m2 else text[:800]
-    # 按 ◼ / 换行 分句
-    parts = re.split(r"◼|\n", raw)
-    kept = []
-    for p in parts:
-        p = strip_noise(p)
-        p = re.sub(r"\s+", "", p)
-        if not p:
+    """抽取明确的投资要点块；遇到财务预测/风险提示等项目符号时停止。"""
+    headings = ["核心观点", "投资要点", "内容摘要", "摘要", "观点"]
+    stop = r"(?:风险提示|风险因素|投资建议|盈利预测与投资评级|盈利预测和财务指标|财务预测与估值|财务预测|图\s*\d|表\s*\d)"
+    candidates = []
+    for heading in headings:
+        # 允许标题后有右侧图表百分比行；必须捕获到正文项目符号。
+        pattern = (r"(?:^|\n)\s*" + re.escape(heading) +
+                   r"\s*(?:[^\n]*\n){0,5}?\s*(?:[◼•]\s*)?(.+?)" +
+                   r"(?=\n\s*[◼•]\s*(?:" + stop + r")|\n\s*(?:" + stop + r")|\Z)")
+        for m in re.finditer(pattern, text, re.S):
+            cleaned = _normalize_section(m.group(1), 1800)
+            if len(cleaned) >= 35:
+                candidates.append(cleaned)
+    if not candidates:
+        return ""
+    business = ("公司", "业绩", "收入", "利润", "产量", "需求", "订单", "项目", "产品", "产能")
+    candidates.sort(key=lambda s: (sum(w in s for w in business), min(len(s), 1800)), reverse=True)
+    result = candidates[0]
+    # 页面取词可能把“盈利预测与投资评级”粘在上一行，按内联锚点再次截断。
+    inline_stop = re.search(r"(?:盈利预测(?:与|及)投资评级|盈利预测和财务指标|风险提示|风险因素)", result)
+    if inline_stop:
+        result = result[:inline_stop.start()].rstrip("，、；; ")
+    result = re.sub(r"(?:盈利预测(?:与|及)投资评级|盈利预测和财务指标)[：:]?\s*", "", result)
+    result = result.lstrip("：:，,；; ")
+    if any(w in result for w in ("A股数", "损益表", "资产负债表", "现金流量表", "个股表现", "股价涨跌", "主要股东", "市场数据", "流通股市值", "分析师", "评级说明", "免责声明")):
+        return ""
+    return result
+
+def split_note(text: str):
+    """解析正常或历史损坏的笔记，兼容缺少结尾 --- 的 frontmatter。"""
+    if not text.startswith("---"):
+        return None
+    rest = text[3:].lstrip("\n")
+    marker = re.search(r"(?m)^---[ \t]*$", rest)
+    heading = re.search(r"(?m)^#\s", rest)
+    # 损坏旧笔记没有 frontmatter 结束符，但正文末尾有脚注 ---；
+    # 必须优先取正文标题之前的边界，不能把脚注分隔线误当成 frontmatter 结束符。
+    if heading and (not marker or heading.start() < marker.start()):
+        return rest[:heading.start()].rstrip("\n"), rest[heading.start():].lstrip("\n")
+    if marker:
+        return rest[:marker.start()].rstrip("\n"), rest[marker.end():].lstrip("\n")
+    return None
+
+
+def _quote_yaml_value(value: str) -> str:
+    value = str(value).replace('"', '\\"')
+    return f'"{value}"'
+
+
+def update_frontmatter(fm_raw: str, updates: dict) -> str:
+    """只更新指定字段，保留未知字段，并移除已知的孤立 YAML 延续行。"""
+    lines = fm_raw.splitlines()
+    seen = set()
+    out = []
+    previous_key = ""
+    for line in lines:
+        m = re.match(r"^([A-Za-z_][\w-]*):(?:\s*)(.*)$", line)
+        if not m:
+            # 兼容历史损坏的 rating: "增持"\n持"；不把孤立延续行带回去。
+            if previous_key in {"rating", "forecast"} and re.fullmatch(r"[^:\n]+[\"']", line.strip()):
+                continue
+            out.append(line)
             continue
-        if any(w in p for w in SIDEBAR_NOISE):
+        previous_key = m.group(1)
+        if m.group(1) not in updates:
+            out.append(line)
             continue
-        if not re.search(r"[\u4e00-\u9fff]", p):  # 无中文，丢弃
+        key = m.group(1)
+        value = updates[key]
+        out.append(f"{key}: {_quote_yaml_value(value)}")
+        seen.add(key)
+    for key, value in updates.items():
+        if key not in seen and value not in (None, ""):
+            out.append(f"{key}: {_quote_yaml_value(value)}")
+    return "---\n" + "\n".join(out).rstrip() + "\n---\n"
+
+
+def clean_section_text(value: str, heading: str = "") -> str:
+    """清除 PDF 双栏串列、页眉页脚和表格碎片，保持正文段落。"""
+    if not value:
+        return ""
+    value = value.replace("\uf075", "•").replace("\uf0be", "•").replace("\uf06c", "•")
+    value = value.replace("➢", "• ")
+    value = value.replace("扣扣非", "扣非").replace("非后归母", "扣非后归母").replace("营业比", "营业收入同比")
+    value = re.sub(r"(?m)^\s*\[Table_[^\]]+\]\s*$", "", value)
+    value = re.sub(r"(?:Table[_ ]*Author|Table[_ ]*A?uthor|分析师|执业证号|联系电话|联系方式|邮箱)[:：]?[^。；\n]*", "", value, flags=re.I)
+    value = re.sub(r"最高价/最低价[^。；\n]*", "", value)
+    value = re.sub(r"(?:12个月价格区间|交易数据|日均成交额)[^。；\n]*", "", value)
+    value = re.sub(r"(?:数据来源|资料来源)[:：]?\s*Wind", "", value, flags=re.I)
+    value = re.sub(r"优于大市\s*[（(]维持[）)]", "", value)
+    value = re.sub(r"/\s*[\d,./]+\s*百万元", "", value)
+    value = re.sub(r"\s*水\s*：\s*Wind", "", value, flags=re.I)
+    value = re.sub(r"(?:基础数据|基\s*础数据|相关研究|公司基本资料|股价表现)[^。；\n]*", "", value)
+    value = re.sub(r"[ \t]+", " ", value)
+    paragraphs = []
+    for paragraph in re.split(r"\n\s*\n", value):
+        paragraph = paragraph.strip(" \n；;，,")
+        if not paragraph or paragraph in {"•", "-", "—", "·"}:
             continue
-        kept.append(p)
-    out = "；".join(kept)
-    out = truncate_finance(out)
-    return out[:500].strip()
+        # 明显整行财务表/行情表不属于核心观点。
+        digits = len(re.findall(r"\d", paragraph))
+        if ("百万元" in paragraph and digits >= 8) or any(x in paragraph for x in ("损益表", "资产负债表", "现金流量表")):
+            continue
+        if re.search(r"(?:研究所|证券分析师|执业证书|Table[_ ]*Author)", paragraph, re.I):
+            continue
+        paragraph = re.sub(r"^\s*[^。；\n]{0,24}[：:]\s*", "", paragraph) if heading == "核心观点" and "：" in paragraph[:35] else paragraph
+        paragraph = re.sub(r"\s{2,}", " ", paragraph).strip()
+        if paragraph:
+            paragraphs.append(paragraph)
+    result = "\n\n".join(paragraphs)
+    result = re.sub(r"盈利预测(?:与|及)投资评级[：:]?.*$", "", result, flags=re.S)
+    result = re.sub(r"\n{3,}", "\n\n", result)
+    return result.strip(" \n；;，,")
+
+
+def update_body_sections(body: str, extracted: dict) -> str:
+    """局部更新自动章节，保留未知章节、人工内容、交叉引用和页脚。"""
+    headings = ["核心观点", "盈利预测", "投资建议", "风险因素"]
+    available = {h: clean_section_text(extracted.get({"核心观点": "core", "盈利预测": "forecast", "投资建议": "advice", "风险因素": "risk"}[h], ""), h) for h in headings}
+    section_re = re.compile(r"(?m)^##[ \t]+(核心观点|盈利预测|投资建议|风险因素)[ \t]*$")
+    matches = list(section_re.finditer(body))
+    replacements = []
+    for i, match in enumerate(matches):
+        heading = match.group(1)
+        value = available.get(heading, "")
+        end = matches[i + 1].start() if i + 1 < len(matches) else len(body)
+        # 自动章节的边界不能越过任意二级标题、交叉引用或文末脚注。
+        tail = body[match.end():]
+        boundaries = []
+        next_h2 = re.search(r"(?m)^##\s+", tail)
+        if next_h2:
+            boundaries.append(match.end() + next_h2.start())
+        footer = re.search(r"(?m)^---\s*$", tail)
+        if footer:
+            boundaries.append(match.end() + footer.start())
+        if boundaries:
+            end = min(end, *boundaries)
+        if value:
+            replacements.append((match.start(), end, f"## {heading}\n\n{value.strip()}\n\n"))
+        else:
+            # 没有可信新结果时保留原章节，避免误删用户手工补充。
+            continue
+    result = body
+    for start, end, replacement in reversed(replacements):
+        result = result[:start] + replacement + result[end:]
+    # 尚不存在的可信章节插入交叉引用之前；空结果不制造占位章节。
+    missing = [h for h in headings if available[h] and not re.search(rf"(?m)^##\s+{re.escape(h)}\s*$", result)]
+    if missing:
+        insert = "\n".join(f"## {h}\n\n{available[h].strip()}\n" for h in missing)
+        xref = re.search(r"(?m)^##\s+知识库交叉引用\s*$", result)
+        footer = re.search(r"(?m)^---\s*$", result)
+        positions = [m.start() for m in (xref, footer) if m]
+        pos = min(positions) if positions else len(result)
+        result = result[:pos].rstrip() + "\n\n" + insert.rstrip() + "\n\n" + result[pos:].lstrip()
+    return result.strip()
+
+
+def sanitize_existing_notes(dry_run: bool = False) -> dict:
+    """只净化既有自动章节与 frontmatter，不重抽取、不修改其他章节。"""
+    stats = {"done": 0, "unchanged": 0, "bad": 0, "dry_run": dry_run}
+    section_re = re.compile(r"(?ms)^(##[ \t]+(核心观点|盈利预测|投资建议|风险因素)[ \t]*$)\n*(.*?)(?=^##[ \t]+|^---[ \t]*$|\Z)")
+    for path in sorted(REAL.glob("研报_*.md")):
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        parsed = split_note(text)
+        if not parsed:
+            stats["bad"] += 1
+            continue
+        fm_raw, body = parsed
+        def repl(match):
+            cleaned = clean_section_text(match.group(3), match.group(2))
+            return f"{match.group(1)}\n\n{cleaned}\n\n" if cleaned else ""
+        new_body = section_re.sub(repl, body).strip()
+        candidate = update_frontmatter(fm_raw, {}) + "\n" + new_body + "\n"
+        if candidate == text:
+            stats["unchanged"] += 1
+            continue
+        if not split_note(candidate) or not re.search(r"(?m)^#\s+\S", split_note(candidate)[1]):
+            stats["bad"] += 1
+            continue
+        stats["done"] += 1
+        if not dry_run:
+            tmp = path.with_suffix(".md.tmp")
+            tmp.write_text(candidate, encoding="utf-8")
+            tmp.replace(path)
+    return stats
+
 
 def parse_note(path: Path) -> dict:
-    t = path.read_text(encoding="utf-8")
-    fm = {}
-    m = re.match(r"^---\n(.*?)\n---\n?(.*)$", t, re.S)
-    if not m:
+    parsed = split_note(path.read_text(encoding="utf-8"))
+    if not parsed:
         return {}
-    for line in m.group(1).splitlines():
+    fm_raw, _ = parsed
+    fm = {}
+    for line in fm_raw.splitlines():
         kv = re.match(r'(\w+):\s*(.*)$', line)
         if kv:
             v = kv.group(2).strip()
@@ -236,70 +584,30 @@ def parse_note(path: Path) -> dict:
     return fm
 
 def backfill_note(stem: str, extracted: dict):
-    """把抽取结果写回笔记：frontmatter 补 rating/forecast，正文补核心/风险/建议章节。"""
+    """安全回写：只改 frontmatter 的抽取字段和自动章节，保留其余内容。"""
     fpath = REAL / f"{stem}.md"
     if not fpath.exists():
         return False
     text = fpath.read_text(encoding="utf-8")
-    fm, body = {}, text
-    mm = re.match(r"^---\n(.*?)\n---\n?(.*)$", text, re.S)
-    if mm:
-        fm_raw, body = mm.group(1), mm.group(2)
-        for line in fm_raw.splitlines():
-            kv = re.match(r'(\w+):\s*(.*)$', line)
-            if kv:
-                v = kv.group(2).strip()
-                if v.startswith('"') and v.endswith('"'):
-                    v = v[1:-1]
-                fm[kv.group(1)] = v
-
-    # 更新 frontmatter 字段
+    parsed = split_note(text)
+    if not parsed:
+        return False
+    fm_raw, body = parsed
+    updates = {}
     if extracted.get("rating"):
-        fm["rating"] = extracted["rating"]
+        updates["rating"] = extracted["rating"]
     if extracted.get("forecast"):
-        fm["forecast"] = extracted["forecast"]
-
-    # 重建 frontmatter 文本
-    fm_lines = ["---"]
-    for k in ["tags", "org", "declareDate", "title", "concept", "rating",
-              "industry", "object", "analyst", "source", "pdfUrl", "pdfAvailable", "forecast"]:
-        if k in fm and fm[k] != "":
-            v = fm[k]
-            if k in ("tags",):
-                fm_lines.append(f"tags: {v}")
-            elif any(c in v for c in [":", "/", "（", "）", " "]) or k in ("title", "org", "concept", "industry", "object", "analyst", "source", "pdfUrl"):
-                fm_lines.append(f'{k}: "{v}"')
-            else:
-                fm_lines.append(f"{k}: {v}")
-    fm_block = "\n".join(fm_lines) + "\n"
-
-    # 重建正文：保留标题 + 来源 callout + 交叉引用；插入/更新核心观点/风险/建议
-    # 先分离「来源 callout」「交叉引用」「分隔线+脚注」
-    callout_m = re.search(r"(> \[!note\][\s\S]*?)(?=\n## 知识库交叉引用|\Z)", body)
-    callout = callout_m.group(1).strip() if callout_m else ""
-    # 保留原笔记已有的「知识库交叉引用」完整块（含概念卡片+逆检索板块链接，
-    # 由 _gen_obsidian.py 回填），切勿重写覆盖。仅在缺失时生成最小占位。
-    xref_m = re.search(r"(## 知识库交叉引用[\s\S]*?)(?=\n---|\Z)", body)
-    if xref_m:
-        xref = xref_m.group(1).strip()
-    else:
-        card = "概念卡片/" + fm.get("concept", "").replace("/", "·")
-        xref = f"## 知识库交叉引用\n\n- 概念归类：[[{card}]]"
-    footer_m = re.search(r"(\n---[\s\S]*)$", body)
-    footer = footer_m.group(1).strip() if footer_m else ""
-
-    new_body = [f"# {fm.get('title','')}", "", callout, ""]
-    if extracted.get("core"):
-        new_body += ["## 核心观点", "", extracted["core"], ""]
-    if extracted.get("forecast"):
-        new_body += ["## 盈利预测", "", extracted["forecast"], ""]
-    if extracted.get("advice"):
-        new_body += ["## 投资建议", "", extracted["advice"], ""]
-    if extracted.get("risk"):
-        new_body += ["## 风险因素", "", extracted["risk"], ""]
-    new_body += [xref, "", footer]
-
-    fpath.write_text(fm_block + "\n" + "\n".join(new_body).rstrip() + "\n", encoding="utf-8")
+        updates["forecast"] = extracted["forecast"]
+    fm_block = update_frontmatter(fm_raw, updates)
+    new_body = update_body_sections(body, extracted)
+    candidate = fm_block + "\n" + new_body.rstrip() + "\n"
+    # 写入前做结构校验，防止再次制造不可解析笔记。
+    check = split_note(candidate)
+    if not check or not re.search(r"(?m)^#\s+", check[1]):
+        return False
+    tmp = fpath.with_suffix(".md.tmp")
+    tmp.write_text(candidate, encoding="utf-8")
+    tmp.replace(fpath)
     return True
 
 def process_one(stem: str, url: str, force: bool = False) -> dict:
@@ -323,6 +631,47 @@ def process_one(stem: str, url: str, force: bool = False) -> dict:
     backfill_note(stem, ext)
     ext["ok"] = True
     return ext
+
+def process_cached(limit: int = 0, dry_run: bool = False) -> dict:
+    """只重解析本地缓存 PDF，修复历史污染；不下载、不触碰无缓存的新笔记。"""
+    stats = {"done": 0, "skip": 0, "fail": 0, "total": 0, "with_core": 0, "dry_run": dry_run}
+    targets = []
+    for pdf in sorted(CACHE.glob("研报_*.pdf")):
+        note = REAL / f"{pdf.stem}.md"
+        if note.exists():
+            targets.append(pdf.stem)
+    stats["total"] = len(targets)
+    for i, stem in enumerate(targets, 1):
+        try:
+            text = pdf_to_text((CACHE / f"{stem}.pdf").read_bytes())
+            ext = {
+                "core": extract_core(text),
+                "rating": extract_rating(text),
+                "forecast": extract_forecast(text),
+                "advice": extract_advice(text),
+                "risk": extract_risk(text),
+            }
+            # 只写有至少一个可信字段的结果；空结果不破坏原笔记。
+            if any(ext.get(k) for k in ("core", "forecast", "advice", "risk")):
+                if dry_run:
+                    stats["done"] += 1
+                    stats["with_core"] += bool(ext.get("core"))
+                    if stats["done"] <= 5:
+                        print(f"  [DRY] {stem}: core={len(ext['core'])} forecast={len(ext['forecast'])} advice={len(ext['advice'])} risk={len(ext['risk'])}")
+                elif backfill_note(stem, ext):
+                    stats["done"] += 1
+                    stats["with_core"] += bool(ext.get("core"))
+                else:
+                    stats["skip"] += 1
+            else:
+                stats["skip"] += 1
+        except Exception as e:
+            stats["fail"] += 1
+            print(f"  [ERR] {stem}: {e}")
+        if limit and i >= limit:
+            break
+    return stats
+
 
 def process_all(limit: int = 0, force: bool = False) -> dict:
     """批量抽取全部研报 PDF 内容回填笔记。幂等：已含『## 核心观点』的跳过。"""
@@ -357,7 +706,18 @@ def process_all(limit: int = 0, force: bool = False) -> dict:
 
 if __name__ == "__main__":
     import sys
-    if len(sys.argv) > 1 and sys.argv[1] == "all":
+    if len(sys.argv) > 1 and sys.argv[1] == "sanitize":
+        st = sanitize_existing_notes(dry_run="--dry-run" in sys.argv)
+        print("既有章节净化完成:", json.dumps(st, ensure_ascii=False))
+    elif len(sys.argv) > 1 and sys.argv[1] == "cached":
+        limit = 0
+        dry_run = "--dry-run" in sys.argv
+        for j, a in enumerate(sys.argv):
+            if a.startswith("--limit="):
+                limit = int(a.split("=")[1])
+        st = process_cached(limit=limit, dry_run=dry_run)
+        print("本地缓存修复完成:", json.dumps(st, ensure_ascii=False))
+    elif len(sys.argv) > 1 and sys.argv[1] == "all":
         force = "--force" in sys.argv
         limit = 0
         for j, a in enumerate(sys.argv):
