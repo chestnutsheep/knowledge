@@ -1,0 +1,8 @@
+{
+  "name": "李贺·天上谣",
+  "version": "1.2.0",
+  "minAppVersion": "1.4.0",
+  "author": "scapegoat",
+  "description": "李贺 · 暗色 Obsidian 主题（逐首精修·官方标题变量通道）— 单诗锚定《仙卷·仙绮》：#CDE8EC / #B0A4C8 / #E0DBD2 / #A8A0B8 / #6A9AA0 / #D0B468 成阶；四维度按诗境微调；支持 cssclasses 卷调。与 Guochao、LiHe 并存。",
+  "dir": "."
+}

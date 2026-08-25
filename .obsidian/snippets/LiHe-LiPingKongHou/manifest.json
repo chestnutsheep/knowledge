@@ -1,0 +1,8 @@
+{
+  "name": "李贺·李凭箜篌引",
+  "version": "1.2.0",
+  "minAppVersion": "1.4.0",
+  "author": "scapegoat",
+  "description": "李贺 · 暗色 Obsidian 主题（逐首精修·官方标题变量通道）— 单诗锚定《仙卷·声光》：#B0CCC8 / #DCD8D0 / #B0A4C8 / #C8B8D4 / #7CAAB0 / #D8DEE4 成阶；四维度按诗境微调；支持 cssclasses 卷调。与 Guochao、LiHe 并存。",
+  "dir": "."
+}

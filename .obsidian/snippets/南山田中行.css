@@ -1,0 +1,445 @@
+/*
+@settings
+
+name: 李贺·南山田中行
+id: lihe-nanshantianzhongxing-theme
+settings:
+  - id: lihe-nanshantianzhongxing-heading
+    title: 李贺·南山田中行 · 可调参数
+    type: heading
+    level: 1
+  - id: lihe-nanshantianzhongxing-accent
+    title: 链接 / 激活主色
+    description: 正文链接、激活态、复选框、强调节点
+    type: variable-color
+    default: '#4A8868'
+    format: hex
+  - id: lihe-nanshantianzhongxing-bg
+    title: 背景底色
+    description: 主背景（含渐变/噪点基底）
+    type: variable-color
+    default: '#242624'
+    format: hex
+  - id: lihe-nanshantianzhongxing-gold
+    title: 标题金调
+    description: 标题与金系点缀默认色
+    type: variable-color
+    default: '#5A7A5A'
+    format: hex
+*/
+
+/* ===================================================================
+李贺·南山田中行 · 暗色优先 Obsidian 主题（逐首精修 · 官方变量通道）
+单诗锚定《鬼卷·幽冷》：#5A7A5A / #4A8868 / #506848 / #3A3838 / #484848 / #282828
+描边·阴影·背景质感·字距 四维度按诗境微调
+=================================================================== */
+
+:root {
+  --lihe-accent: #4A8868;
+  --lihe-accent-hover: #282828;
+  --lihe-bg:     #242624;
+  --lihe-gold:   #5A7A5A;
+  --lihe-sidebar: #272927;
+  --lihe-elev:    #2C2D2C;
+  --lihe-text:   #EAE6DE;
+  --lihe-muted:  #9A958C;
+  --lihe-coldjade: #3A3838;
+  --lihe-cuicui: #484848;
+  --lihe-snow:   #484848;
+
+  --lihe-h1: #5A7A5A;
+  --lihe-h2: #4A8868;
+  --lihe-h3: #506848;
+  --lihe-h4: #3A3838;
+  --lihe-h5: #484848;
+  --lihe-h6: #282828;
+
+  --font-lihe-serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  --font-lihe-sans:  "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+}
+
+/* ---------- 背景质感：渐变 + 轻噪点 ---------- */
+.theme-dark .workspace-split,
+.theme-dark .workspace-tabs,
+.theme-dark .markdown-preview-view,
+.theme-dark .cm-editor .cm-scroller {
+  background-image: repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(180,160,130,0.025) 28px, rgba(180,160,130,0.025) 29px);
+  background-attachment: local;
+}
+.theme-dark .workspace-leaf { background: #242624; }
+
+.theme-dark {
+  --background-primary: #242624;
+  --background-primary-alt: #272927;
+  --background-secondary: #272927;
+  --background-secondary-alt: #2C2D2C;
+
+  --text-normal: var(--lihe-text);
+  --text-muted: var(--lihe-muted);
+  --text-faint: #6E6A62;
+
+  --text-accent: var(--lihe-accent);
+  --text-accent-hover: var(--lihe-accent-hover);
+
+  --interactive-normal: #2C2D2C;
+  --interactive-hover: #3b362f;
+  --interactive-accent: var(--lihe-accent);
+  --interactive-accent-hover: var(--lihe-accent-hover);
+
+  --background-modifier-hover: rgba(184, 48, 40, 0.08);
+  --background-modifier-active: rgba(184, 48, 40, 0.14);
+  --background-modifier-selected: rgba(184, 48, 40, 0.20);
+  --background-modifier-border: #3a352f;
+  --background-modifier-form-field: #211f1d;
+  --background-modifier-form-field-highlighted: #2C2D2C;
+  --background-modifier-success: var(--lihe-cuicui);
+  --background-modifier-error: var(--lihe-accent-hover);
+  --background-modifier-error-hover: #95525c;
+  --background-modifier-warning: var(--lihe-h2);
+
+  --border-color: #3a352f;
+  --divider-color: rgba(200, 168, 104, 0.18);
+  --divider-color-hover: rgba(200, 168, 104, 0.30);
+
+  --tag-background: var(--lihe-snow);
+  --tag-color: #242624;
+  --tag-background-hover: #c3b8d6;
+  --tag-color-hover: #1c1c1c;
+
+  --checkbox-color: var(--lihe-accent);
+  --checkbox-color-hover: var(--lihe-accent-hover);
+  --checklist-done-color: var(--lihe-h2);
+  --checklist-done-text-color: var(--lihe-muted);
+
+  --code-background: #211f1d;
+  --code-normal: var(--lihe-gold);
+  --code-text: var(--lihe-text);
+  --pre-code: #211f1d;
+  --code-border: #3a352f;
+
+  --graph-node: var(--lihe-gold);
+  --graph-node-active: var(--lihe-accent);
+  --graph-node-tag: var(--lihe-snow);
+  --graph-node-attachment: var(--lihe-cuicui);
+  --graph-line: #3a352f;
+  --graph-line-active: var(--lihe-accent);
+  --graph-text: var(--lihe-muted);
+  --graph-arrow: #4A3A33;
+  --graph-bg: var(--lihe-bg);
+
+  --titlebar-background: #211f1d;
+  --titlebar-text-color: var(--lihe-text);
+  --titlebar-background-focused: #211f1d;
+  --titlebar-text-color-focused: #F2E9DA;
+
+  --inline-title-color: var(--lihe-h1);
+  --heading-color: var(--lihe-h1);
+
+  --vault-name-color: var(--lihe-gold);
+  --vault-name-font-weight: 600;
+
+  --nav-item-color: #A39B8E;
+  --nav-item-color-hover: var(--lihe-text);
+  --nav-item-color-active: var(--lihe-text);
+  --nav-item-background-hover: rgba(184, 48, 40, 0.08);
+  --nav-item-background-active: rgba(184, 48, 40, 0.14);
+  --nav-heading-color: var(--lihe-gold);
+  --nav-heading-weight: 700;
+  --nav-indentation-guide-color: #2C2D2C;
+
+  --pill-color: var(--lihe-accent);
+  --pill-color-hover: var(--lihe-accent-hover);
+  --pill-background: rgba(184, 48, 40, 0.12);
+
+  --shadow-s: 0 1px 2px rgba(0,0,0,0.5);
+  --shadow-m: 0 4px 10px rgba(0,0,0,0.55);
+  --shadow-l: 0 10px 24px rgba(0,0,0,0.6);
+
+  --font-text: var(--font-lihe-serif);
+  --font-editor: var(--font-lihe-serif);
+  --font-ui: var(--font-lihe-sans);
+
+  --callout-quote-background: rgba(90, 136, 120, 0.08);
+  --callout-default: var(--lihe-gold);
+  --callout-info: #7E9BB0;
+  --callout-success: var(--lihe-cuicui);
+  --callout-warning: var(--lihe-h2);
+  --callout-danger: var(--lihe-accent);
+  --callout-error: var(--lihe-accent);
+  --callout-tip: var(--lihe-snow);
+
+  /* === 官方标题变量通道（Obsidian 原生渲染优先读取） === */
+  --h1-color: var(--lihe-h1);
+  --h1-size: 1.9em;
+  --h1-font-weight: 700;
+  --h1-font: var(--font-lihe-serif);
+  --h1-style: normal;
+  --h1-spacing: 0.02em;
+  --h1-line-height: 1.8;
+  --h1-variant: normal;
+  --h2-color: var(--lihe-h2);
+  --h2-size: 1.55em;
+  --h2-font-weight: 600;
+  --h2-font: var(--font-lihe-serif);
+  --h2-style: normal;
+  --h2-spacing: 0.02em;
+  --h2-line-height: 1.8;
+  --h2-variant: normal;
+  --h3-color: var(--lihe-h3);
+  --h3-size: 1.35em;
+  --h3-font-weight: 600;
+  --h3-font: var(--font-lihe-serif);
+  --h3-style: normal;
+  --h3-spacing: 0.02em;
+  --h3-line-height: 1.8;
+  --h3-variant: normal;
+  --h4-color: var(--lihe-h4);
+  --h4-size: 1.15em;
+  --h4-font-weight: 600;
+  --h4-font: var(--font-lihe-serif);
+  --h4-style: normal;
+  --h4-spacing: 0.02em;
+  --h4-line-height: 1.8;
+  --h4-variant: normal;
+  --h5-color: var(--lihe-h5);
+  --h5-size: 1.0em;
+  --h5-font-weight: 600;
+  --h5-font: var(--font-lihe-serif);
+  --h5-style: normal;
+  --h5-spacing: 0.02em;
+  --h5-line-height: 1.8;
+  --h5-variant: normal;
+  --h6-color: var(--lihe-h6);
+  --h6-size: 0.85em;
+  --h6-font-weight: 400;
+  --h6-font: var(--font-lihe-serif);
+  --h6-style: normal;
+  --h6-spacing: 0.02em;
+  --h6-line-height: 1.8;
+  --h6-variant: normal;
+}
+
+/* 浅色兜底 */
+.theme-light {
+  --background-primary: #EFE9DD;
+  --background-secondary: #E5DDCC;
+  --text-normal: #2B2620;
+  --text-muted: #6E6A62;
+  --text-accent: #9A2E26;
+  --interactive-accent: #B22A22;
+  --background-modifier-border: #D6C9AE;
+  --border-color: #D6C9AE;
+  --tag-background: rgba(176, 164, 200, 0.30);
+  --tag-color: #4A3A55;
+  --heading-color: #2B2620;
+  --inline-title-color: #506848;
+  --callout-default: #506848;
+}
+
+/* ---------- 标题阶梯：标准衬线 + 官方变量兜底 ---------- */
+.theme-dark .markdown-preview-view h1,
+.theme-dark .markdown-preview-view h2,
+.theme-dark .markdown-preview-view h3,
+.theme-dark .markdown-preview-view h4,
+.theme-dark .markdown-preview-view h5,
+.theme-dark .markdown-preview-view h6,
+.theme-dark .cm-header,
+.theme-dark .cm-header-1,
+.theme-dark .cm-header-2,
+.theme-dark .cm-header-3,
+.theme-dark .cm-header-4,
+.theme-dark .cm-header-5,
+.theme-dark .cm-header-6,
+.theme-dark .view-header-title,
+.theme-dark .inline-title,
+.theme-dark .workspace-leaf-content > .nav-folder-title,
+.theme-dark .nav-folder-title {
+  font-family: var(--font-lihe-serif);
+  letter-spacing: var(--h1-spacing);
+}
+
+/* H1 */
+.theme-dark .markdown-preview-view h1,
+.theme-dark .cm-header-1 {
+  font-size: var(--h1-size);
+  font-weight: var(--h1-font-weight);
+  color: var(--h1-color);
+  letter-spacing: var(--h1-spacing);
+  line-height: var(--h1-line-height);
+  margin-bottom: 0.5em;
+  text-shadow: 0 0 20px rgba(74,136,104,0.22);
+}
+/* H2 · 单诗描边 */
+.theme-dark .markdown-preview-view h2,
+.theme-dark .cm-header-2 {
+  font-size: var(--h2-size);
+  font-weight: var(--h2-font-weight);
+  color: var(--h2-color);
+  letter-spacing: var(--h2-spacing);
+  padding-bottom: 0.25em;
+  border-bottom: 1px solid rgba(74,136,104,0.35);
+  margin: 1.4em 0 0.5em;
+}
+/* H3 */
+.theme-dark .markdown-preview-view h3,
+.theme-dark .cm-header-3 {
+  font-size: var(--h3-size);
+  font-weight: var(--h3-font-weight);
+  color: var(--h3-color);
+  letter-spacing: var(--h3-spacing);
+  margin: 1.2em 0 0.4em;
+}
+/* H4 */
+.theme-dark .markdown-preview-view h4,
+.theme-dark .cm-header-4 {
+  font-size: var(--h4-size);
+  font-weight: var(--h4-font-weight);
+  color: var(--h4-color);
+  letter-spacing: var(--h4-spacing);
+  margin: 1.0em 0 0.4em;
+}
+/* H5 */
+.theme-dark .markdown-preview-view h5,
+.theme-dark .cm-header-5 {
+  font-size: var(--h5-size);
+  font-weight: var(--h5-font-weight);
+  color: var(--h5-color);
+  letter-spacing: var(--h5-spacing);
+  margin: 0.9em 0 0.35em;
+}
+/* H6 */
+.theme-dark .markdown-preview-view h6,
+.theme-dark .cm-header-6 {
+  font-size: var(--h6-size);
+  font-weight: var(--h6-font-weight);
+  color: var(--h6-color);
+  letter-spacing: var(--h6-spacing);
+  margin: 0.8em 0 0.3em;
+}
+
+/* ---------- 标题栏 ---------- */
+.theme-dark .titlebar {
+  border-bottom: 1px solid rgba(200, 168, 104, 0.25);
+  box-shadow: 0 1px 0 rgba(200, 168, 104, 0.15);
+}
+.theme-dark .workspace-tab-header.tappable-item.is-active .workspace-tab-header-inner {
+  border-top: 2px solid var(--lihe-accent);
+}
+
+/* ---------- 侧栏激活项 ---------- */
+.theme-dark .nav-folder.mod-root > .nav-folder-children > .nav-file.is-active > .nav-file-title,
+.theme-dark .nav-file.is-active > .nav-file-title {
+  border-left: 3px solid var(--lihe-accent);
+  padding-left: 5px;
+}
+
+/* ---------- 标签 ---------- */
+.theme-dark .tag,
+.theme-dark .cm-s-obsidian .cm-hashtag {
+  border-radius: 20px;
+  padding: 2px 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+/* ---------- 代码块 ---------- */
+.theme-dark pre code,
+.theme-dark .markdown-preview-view pre {
+  border: 1px solid var(--code-border);
+  border-radius: 6px;
+  background: var(--code-background);
+}
+.theme-dark .markdown-preview-view code,
+.theme-dark .cm-s-obsidian span.cm-inline-code {
+  color: var(--lihe-gold);
+  background: rgba(200, 168, 104, 0.08);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+
+/* ---------- 引用：单诗冷线 ---------- */
+.theme-dark blockquote {
+  border-left: 4px solid var(--lihe-coldjade);
+  background: rgba(90, 136, 120, 0.10);
+  padding: 0.4em 1em;
+  color: #cfe1d8;
+  font-style: italic;
+}
+
+/* ---------- 表格 ---------- */
+.theme-dark table { border-collapse: collapse; }
+.theme-dark th {
+  background: #2C2D2C;
+  color: var(--lihe-gold);
+  border-bottom: 2px solid var(--lihe-accent);
+}
+.theme-dark td,
+.theme-dark th {
+  border: 1px solid var(--border-color);
+  padding: 6px 10px;
+}
+.theme-dark tr:nth-child(even) td {
+  background: rgba(200, 168, 104, 0.04);
+}
+
+/* ---------- Callout ---------- */
+.theme-dark .callout {
+  border-left: 3px solid var(--callout-default);
+  background: rgba(200, 168, 104, 0.05);
+  border-radius: 6px;
+}
+.theme-dark .callout[data-callout="question"],
+.theme-dark .callout[data-callout="warning"],
+.theme-dark .callout[data-callout="danger"],
+.theme-dark .callout[data-callout="error"],
+.theme-dark .callout[data-callout="failure"],
+.theme-dark .callout[data-callout="bug"] {
+  border-left-color: var(--lihe-accent);
+}
+
+/* ---------- 状态栏 ---------- */
+.theme-dark .status-bar {
+  background: #211f1d;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-faint);
+}
+
+/* ---------- 滚动条 ---------- */
+.theme-dark ::-webkit-scrollbar-thumb {
+  background: #3a352f;
+  border-radius: 6px;
+}
+.theme-dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--lihe-gold);
+}
+
+/* ---------- cssclasses 卷调 ---------- */
+
+/* ================= cssclasses 卷调（单篇属性 cssclasses 切换） ================= */
+/* 用法：笔记 frontmatter 写  cssclasses: [lihe-gui]  即套该卷氛围（不改整 vault 主题） */
+.markdown-preview-view.lihe,
+.cm-editor.lihe,
+.markdown-preview-view.lihe-xian,
+.cm-editor.lihe-xian,
+.markdown-preview-view.lihe-ren,
+.cm-editor.lihe-ren,
+.markdown-preview-view.lihe-gui,
+.cm-editor.lihe-gui {
+  background: linear-gradient(180deg, rgba(74,136,104,0.04), transparent 70%);
+}
+.markdown-preview-view.lihe h1,
+.markdown-preview-view.lihe-xian h1,
+.markdown-preview-view.lihe-ren h1,
+.markdown-preview-view.lihe-gui h1,
+.markdown-preview-view.lihe h2,
+.markdown-preview-view.lihe-xian h2,
+.markdown-preview-view.lihe-ren h2,
+.markdown-preview-view.lihe-gui h2 {
+  filter: brightness(0.96);
+}
+/* 通用 .lihe 仅保证衬线字体回退 */
+.markdown-preview-view.lihe,
+.cm-editor.lihe {
+  font-family: var(--font-lihe-serif);
+}
+
