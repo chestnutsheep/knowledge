@@ -6,13 +6,46 @@
   - 研报概念架构.canvas (Advanced Canvas 可视化)
   - 研报逆检索索引.md   (反向挂到 notebook 各板块)
 """
-import json, re
+import json, re, os
 from pathlib import Path
 from datetime import datetime
 
-REAL = Path("/home/AI/Obsidian/知识库/肆 • 机构观点")
-VAULT = Path("/home/AI/Obsidian/知识库")
-meta = json.load(open(REAL / "_meta.json", encoding="utf-8"))
+# ---------- 路径探测（与 fetch_reports.py 一致） ----------
+VAULT_CANDIDATES = ["/home/AI/笔记/知识库", "/home/AI/Obsidian/知识库"]
+def _resolve_vault():
+    env = os.environ.get("VAULT_DIR")
+    if env and Path(env).is_dir():
+        return Path(env)
+    for c in VAULT_CANDIDATES:
+        if Path(c).is_dir():
+            return Path(c)
+    return Path(VAULT_CANDIDATES[0])
+VAULT = _resolve_vault()
+REAL = VAULT / "肆 • 机构观点"
+
+# ---------- 直接从当前研报笔记 frontmatter 重建元数据（不依赖陈旧的 _meta.json） ----------
+def _scan_meta():
+    meta = {}
+    for p in REAL.glob("研报_*.md"):
+        txt = p.read_text(encoding="utf-8", errors="ignore")
+        m = re.match(r"^---\n(.*?)\n---\n", txt, re.S)
+        if not m:
+            continue
+        d = {}
+        for line in m.group(1).splitlines():
+            kv = re.match(r'(\w+):\s*"?([^"\n]*)"?', line)
+            if kv:
+                d[kv.group(1)] = kv.group(2).strip()
+        meta[p.stem] = {
+            "concept": d.get("concept", "个股中报业绩"),
+            "date": d.get("declareDate", ""),
+            "org": d.get("org", ""),
+            "object": d.get("object", ""),
+            "industry": d.get("industry", ""),
+            "rating": d.get("rating", ""),
+        }
+    return meta
+meta = _scan_meta()
 
 # 概念 -> notebook 已有逆检索板块 (逆检索核心)
 CONCEPT_TO_BOARD = {
@@ -35,7 +68,8 @@ CONCEPT_TO_BOARD = {
         "贰 • 杂学/03 创新药/CXO与创新药产业链",
     ],
     "人形机器人": [
-        "贰 • 杂学/09 科技投资研究/未来5年科技投资全景",
+        "贰 • 杂学/02 物理AI/人形机器人/人形机器人整机",
+        "贰 • 杂学/02 物理AI/人形机器人/人形机器人与具身智能",
     ],
     "商业航天": [
         "贰 • 杂学/05 商业航天/商业航天产业链全景",
@@ -46,21 +80,22 @@ CONCEPT_TO_BOARD = {
         "零 • 导览/产业链传递总览",
     ],
     "汽车/两轮车": [
-        "贰 • 杂学/09 科技投资研究/未来5年科技投资全景",
+        "贰 • 杂学/11 汽车与两轮车/汽车与两轮车",
     ],
     "物产/航运": [
-        "贰 • 杂学/09 科技投资研究/未来5年科技投资全景",
+        "贰 • 杂学/12 航运物流/航运物流",
     ],
     "消费/出海": [
+        "贰 • 杂学/附件：材料篇/稀土篇/稀土永磁出海分析",
         "伍 • 基本信息池/东鹏饮料" if (VAULT/'伍 • 基本信息池/东鹏饮料.md').exists() else "伍 • 基本信息池",
     ],
-    "纸业/包装": ["贰 • 杂学/09 科技投资研究/未来5年科技投资全景"],
-    "金融/策略": ["零 • 导览/总览"],
+    "纸业/包装": ["贰 • 杂学/14 纸业与包装/纸业与包装"],
+    "金融/策略": ["叁 • 国家政策/银行2026下半年投资策略", "叁 • 国家政策/地产2026下半年投资策略"],
     "化工/材料": ["贰 • 杂学/00-材料索引"],
-    "教育": ["贰 • 杂学/09 科技投资研究/未来5年科技投资全景"],
+    "教育": ["贰 • 杂学/13 教育/教育"],
     "量子": ["贰 • 杂学/09 科技投资研究/未来5年科技投资全景"],
     "银发经济": ["贰 • 杂学/09 科技投资研究/未来5年科技投资全景"],
-    "个股中报业绩": ["零 • 导览/总览"],
+    "个股中报业绩": ["零 • 导览/知识库总览"],
 }
 
 # 概念配色（用于 Canvas / Dashboard）
@@ -170,7 +205,16 @@ for concept, keylist in by_concept.items():
         f"*这张卡是研报概念速览生成器自动出的（{datetime.now():%Y-%m-%d}）。回主驾驶舱：[[00-研报概念速览]]*",
         f"",
     ]
-    (card_dir / f"{fname(concept)}.md").write_text("\n".join(lines), encoding="utf-8")
+    card_path = card_dir / f"{fname(concept)}.md"
+    if card_path.exists():
+        ext = card_path.read_text(encoding="utf-8")
+        mcons = re.search(r"## 共识综述.*?(?=\n---|\Z)", ext, re.S)
+        if mcons:
+            for i, l in enumerate(lines):
+                if l == "---" and i + 1 < len(lines) and lines[i + 1].startswith("*这张卡"):
+                    lines[i:i] = [mcons.group(0).rstrip(), ""]
+                    break
+    card_path.write_text("\n".join(lines), encoding="utf-8")
 
 # 主 MOC 页面（Dashboard + Dataview + 卡片网格）
 concept_sorted = sorted(by_concept.items(), key=lambda x: -len(x[1]))

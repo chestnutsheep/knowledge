@@ -121,3 +121,18 @@ Component:
 - [[HBM高带宽存储]] — HBM 与先进封装协同
 - [[存储芯片产业链全景]] — 存储产业链
 - [[先进封装动态跟踪]] — 先进封装行情/供应链动态碎片
+
+---
+
+## 机构观点（自动聚合）
+
+> 由 Dataview 按概念/行业聚合「肆 • 机构观点」研报，采集器新增研报后此处自动更新，无需手工维护。
+> 相关概念卡片：[[概念卡片/半导体·先进封装|半导体·先进封装]]
+
+```dataview
+TABLE org AS 机构, rating AS 评级, declareDate AS 日期
+FROM "肆 • 机构观点"
+WHERE contains(concept, "半导体") OR contains(industry, "先进封装")
+SORT declareDate DESC
+LIMIT 30
+```

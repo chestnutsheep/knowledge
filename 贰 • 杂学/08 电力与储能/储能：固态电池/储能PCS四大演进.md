@@ -90,3 +90,18 @@ Component:
 
 ---
 *信息来源：信息图《迈向2026+：储能PCS的四大演进》*
+
+---
+
+## 机构观点（自动聚合）
+
+> 由 Dataview 按概念/行业聚合「肆 • 机构观点」研报，采集器新增研报后此处自动更新，无需手工维护。
+> 相关概念卡片：[[概念卡片/储能·新能源|储能·新能源]]
+
+```dataview
+TABLE org AS 机构, rating AS 评级, declareDate AS 日期
+FROM "肆 • 机构观点"
+WHERE contains(concept, "储能") OR contains(industry, "储能")
+SORT declareDate DESC
+LIMIT 30
+```

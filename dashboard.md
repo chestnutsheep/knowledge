@@ -38,6 +38,24 @@ columns:
   - name: Library
     color: "#8b5cf6"
     type: projects
+  - name: 机构研报股票池
+    color: "#10b981"
+    type: dataview
+    dataview:
+      title: "近期机构研报覆盖（活清单）"
+      query: "TABLE org AS 机构, rating AS 评级, concept AS 概念, declareDate AS 日期 FROM \"肆 • 机构观点\" WHERE contains(tags, \"研报\") SORT object ASC, declareDate DESC"
+      excludeFolders:
+        - "肆 • 机构观点/__pycache__"
+        - "肆 • 机构观点/_pdf_cache"
+  - name: 研报股票池·TOP
+    color: "#0ea5e9"
+    type: dataview
+    dataview:
+      title: "按覆盖篇数排名（股票 → 覆盖它的研报）"
+      query: "TABLE length(rows) AS 覆盖篇数, rows.concept AS 概念, rows.rating AS 评级 FROM \"肆 • 机构观点\" WHERE contains(tags, \"研报\") GROUP BY object SORT length(rows) DESC LIMIT 40"
+      excludeFolders:
+        - "肆 • 机构观点/__pycache__"
+        - "肆 • 机构观点/_pdf_cache"
 ---
 
 ## Memo
@@ -91,3 +109,7 @@ type: project
 ### Done
 id: demo-lib-done
 type: project
+
+## 机构研报股票池
+
+## 研报股票池·TOP

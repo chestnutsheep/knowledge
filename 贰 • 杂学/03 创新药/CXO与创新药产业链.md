@@ -321,3 +321,18 @@ GLP-1全球放量持续性：司美格鲁肽需求 vs 产能扩张 → 决定多
 [[CXO创新药专利研发调研_20260706]] — 前期专利维度调研
 [[生物医药行业概览]] — 更广泛的医药行业分析
 #创新药 #CXO #CRO #CDMO #ADC #BD出海 #医疗器械 #GLP-1
+
+---
+
+## 机构观点（自动聚合）
+
+> 由 Dataview 按概念/行业聚合「肆 • 机构观点」研报，采集器新增研报后此处自动更新，无需手工维护。
+> 相关概念卡片：[[概念卡片/医药·CXO|医药·CXO]]
+
+```dataview
+TABLE org AS 机构, rating AS 评级, declareDate AS 日期
+FROM "肆 • 机构观点"
+WHERE contains(concept, "医药") OR contains(industry, "CXO") OR contains(industry, "创新药")
+SORT declareDate DESC
+LIMIT 30
+```
