@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-07-19 A股盘前简报 · 隔夜催化信息整理</title>
+<style>
+/* ===== matin 主题（清晨：深绿+琥珀金，固定不变） ===== */
+:root {
+  --bg-deep: #1A2F2A;
+  --bg-panel: rgba(43,74,74,0.42);
+  --bg-panel-hover: rgba(43,74,74,0.62);
+  --bg-sidebar: rgba(20,30,30,0.98);
+  --border-subtle: rgba(212,168,83,0.14);
+  --border-hover: rgba(212,168,83,0.30);
+  --text-primary: #E8E0D0;
+  --text-secondary: #B8B0A0;
+  --text-muted: #A8A098;
+  --accent-gold: #D4A853;
+  --accent-rose: #C49BA5;
+  --accent-purple: #7B5E7B;
+  --accent-green: #5FBC8A;
+  --accent-green-deep: #2E8B57;
+  --accent-red: #E08585;
+  --accent-yellow-soft: #E8D68A;
+  --shadow-glow: rgba(212,168,83,0.10);
+  /* 4pt 间距体系 */
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 20px;
+  --s6: 24px; --s8: 32px; --s10: 40px; --s12: 48px; --s16: 64px;
+  --gutter: clamp(24px, 7vw, 100px);
+  --sec-y: clamp(36px, 4.5vw, 64px);
+  --sidebar-w: 280px;
+  --sidebar-collapsed-w: 64px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.85; min-height: 100vh;
+  font-size: 16px;
+  position: relative;
+  overflow-x: hidden;
+  transition: padding-left 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 30%, rgba(120,100,140,0.05) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 70%, rgba(100,140,120,0.06) 0%, transparent 50%);
+  pointer-events: none; z-index: -1;
+}
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-thumb { background: var(--accent-purple); border-radius: 4px; }
+
+/* ===== 侧边栏 - 可折叠（点击 ☰ 按钮展开/收起） ===== */
+body:not(.sb-collapsed) { padding-left: var(--sidebar-w); }
+body.sb-collapsed { padding-left: var(--sidebar-collapsed-w); }
+
+.sb {
+  position: fixed; left: 0; top: 0; bottom: 0;
+  width: var(--sidebar-w);
+  background: var(--bg-sidebar);
+  backdrop-filter: blur(20px); border-right: 1px solid var(--border-subtle);
+  padding: var(--s6) 0;
+  z-index: 100; overflow-x: hidden; overflow-y: auto;
+  transition: width 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+body.sb-collapsed .sb { width: var(--sidebar-collapsed-w); }
+
+/* 切换按钮 */
+.sb-toggle {
+  position: fixed; top: var(--s4);
+  left: calc(var(--sidebar-w) - var(--s5));
+  z-index: 110;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--bg-panel); border: 1px solid var(--border-hover);
+  color: var(--accent-gold); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+body.sb-collapsed .sb-toggle { left: calc(var(--sidebar-collapsed-w) - var(--s4)); }
+.sb-toggle:hover { background: var(--bg-panel-hover); transform: scale(1.08); box-shadow: 0 4px 16px var(--shadow-glow); }
+
+.sb-b { padding: 0 var(--s6) var(--s5); border-bottom: 1px solid var(--border-subtle); margin-bottom: var(--s4); white-space: nowrap; overflow: hidden; }
+.sb-b h1 { font-size: 18px; font-weight: 800; color: var(--accent-gold); letter-spacing: 1.2px; margin-bottom: var(--s1); }
+.sb-b p { font-size: 14px; color: var(--text-muted); letter-spacing: 0.5px; }
+.sb-s { padding: var(--s4) var(--s6) var(--s2); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); white-space: nowrap; overflow: hidden; }
+.sb a {
+  display: flex; align-items: center; gap: var(--s3);
+  padding: var(--s3) var(--s6); margin: var(--s1) var(--s3);
+  border-radius: var(--s3);
+  color: var(--text-secondary); text-decoration: none;
+  font-size: 15px; letter-spacing: 0.5px;
+  transition: all 0.2s ease; cursor: pointer;
+  white-space: nowrap; overflow: hidden;
+}
+.sb a:hover, .sb a.on { background: var(--bg-panel-hover); color: var(--text-primary); }
+.sb a .icon { flex-shrink: 0; font-size: 16px; width: 24px; text-align: center; }
+
+.sb-quick {
+  margin: 0 var(--s3) var(--s5); padding: var(--s4);
+  background: var(--bg-panel); border: 1px solid var(--border-subtle);
+  border-radius: var(--s3); font-size: 13px;
+  white-space: nowrap; overflow: hidden;
+}
+.sb-quick .row { display: flex; justify-content: space-between; padding: var(--s2) 0; gap: var(--s3); }
+.sb-quick .row .label { color: var(--text-muted); }
+.sb-quick .row .v-up { color: var(--accent-red); font-weight: 600; }
+.sb-quick .row .v-dn { color: var(--accent-green); font-weight: 600; }
+.sb-quick .row .v-fl { color: var(--text-secondary); }
+
+/* 折叠态：只显示图标 */
+body.sb-collapsed .sb-b h1, body.sb-collapsed .sb-b p,
+body.sb-collapsed .sb-s, body.sb-collapsed .sb a .text,
+body.sb-collapsed .sb-quick { display: none; }
+body.sb-collapsed .sb a { justify-content: center; padding: var(--s3) 0; margin: var(--s1) var(--s2); }
+
+/* ===== 主内容区 ===== */
+.mn { position: relative; z-index: 1; transition: padding-left 0.35s cubic-bezier(0.4,0,0.2,1); }
+.mn > section, .mn > footer, .mn > .warn-strip {
+  padding-left: var(--gutter); padding-right: var(--gutter);
+}
+
+/* ===== Hero 头部（纯色，无渐变） ===== */
+.hero { padding: var(--s12) 0 var(--s10); border-bottom: 1px solid var(--border-subtle); }
+.hero .tag {
+  display: inline-block; padding: var(--s2) var(--s5);
+  background: var(--shadow-glow); border: 1px solid var(--border-subtle);
+  border-radius: 24px; font-size: 14px; font-weight: 600;
+  color: var(--accent-gold); margin-bottom: var(--s6); letter-spacing: 0.8px;
+}
+.hero h1 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; letter-spacing: 1.5px; color: var(--text-primary); line-height: 1.3; margin-bottom: var(--s4); }
+.hero h1 .hl { color: var(--accent-gold); }
+.hero p { font-size: 15px; color: var(--text-secondary); max-width: 760px; margin-top: var(--s4); line-height: 1.85; }
+.hero .meta { display: flex; gap: var(--s8); margin-top: var(--s8); font-size: 15px; color: var(--text-muted); flex-wrap: wrap; letter-spacing: 0.4px; }
+.hero .meta .meta-item { display: flex; align-items: center; gap: var(--s2); }
+.hero .meta .meta-item .v { color: var(--text-secondary); font-weight: 600; }
+
+/* 非交易日警告 */
+.warn-strip {
+  padding: var(--s4) 0;
+  background: rgba(224,133,133,0.08); border-bottom: 1px solid rgba(224,133,133,0.22);
+  color: var(--accent-red); font-size: 16px; font-weight: 700;
+  letter-spacing: 0.8px; text-align: center;
+}
+
+/* ===== 通用区块 - 变化间距创造节奏 ===== */
+.se { padding: var(--sec-y) 0; border-bottom: 1px solid rgba(212,168,83,0.05); }
+.se:first-of-type { padding-top: var(--s12); }
+.sh { margin-bottom: var(--s8); }
+.sh .ba {
+  display: inline-flex; padding: var(--s2) var(--s4);
+  background: rgba(123,94,123,0.14); border: 1px solid rgba(123,94,123,0.24);
+  border-radius: 20px; font-size: 13px; font-weight: 600;
+  color: var(--accent-rose); margin-bottom: var(--s3); letter-spacing: 0.8px;
+}
+.sh h2 { font-size: clamp(24px, 3vw, 32px); font-weight: 800; margin-bottom: var(--s2); color: var(--text-primary); letter-spacing: 0.5px; }
+.sh h2 .hl { color: var(--accent-gold); }
+.sh p { color: var(--text-secondary); font-size: 15px; line-height: 1.85; letter-spacing: 0.3px; }
+
+/* 过滤栏 */
+.fl { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+.fl button {
+  padding: 8px 18px; border-radius: 20px; font-size: 13px; font-weight: 600;
+  border: 1px solid var(--border-subtle); background: transparent;
+  color: var(--text-secondary); cursor: pointer; transition: all 0.25s ease;
+}
+.fl button:hover { background: var(--shadow-glow); border-color: var(--border-hover); }
+.fl button.on { background: var(--shadow-glow); border-color: var(--border-hover); color: var(--accent-gold); }
+
+/* ===== ① 隔夜市场速览 - 4 卡片网格 ===== */
+.cg4 {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px; margin-bottom: 24px;
+}
+.cd {
+  background: var(--bg-panel); border: 1px solid var(--border-subtle);
+  border-radius: 14px; padding: 20px;
+  transition: all 0.3s ease; position: relative;
+  backdrop-filter: blur(10px);
+}
+.cd:hover { background: var(--bg-panel-hover); border-color: var(--border-hover); transform: translateY(-2px); }
+.cd h4 { font-size: 16px; font-weight: 700; margin-bottom: var(--s2); color: var(--text-primary); display: flex; align-items: center; gap: var(--s2); letter-spacing: 0.3px; }
+.cd .cd-c { font-size: 14px; color: var(--text-muted); letter-spacing: 0.3px; }
+.cd .cd-v { font-size: 28px; font-weight: 800; margin: var(--s3) 0; font-family: 'JetBrains Mono','SF Mono',monospace; color: var(--text-primary); letter-spacing: 0.5px; }
+.cd .cd-v.r { color: var(--accent-red); }
+.cd .cd-v.g { color: var(--accent-green); }
+.cd .cd-v.o { color: var(--accent-gold); }
+.cd .cd-sub { font-size: 14px; color: var(--text-secondary); line-height: 1.85; letter-spacing: 0.3px; }
+.cd .cd-sub .up { color: var(--accent-red); font-weight: 600; }
+.cd .cd-sub .dn { color: var(--accent-green); font-weight: 600; }
+
+/* ===== ② 催化事件汇总 - 卡片网格 ===== */
+.cg {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 20px;
+}
+.catalyst-card {
+  background: var(--bg-panel); border: 1px solid var(--border-subtle);
+  border-radius: 14px; padding: 24px 26px;
+  transition: all 0.3s ease; position: relative; overflow: hidden;
+  backdrop-filter: blur(10px);
+  display: flex; flex-direction: column;
+  min-height: 280px;
+}
+.catalyst-card::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+  background: transparent; transition: all 0.3s ease;
+}
+.catalyst-card.up::before { background: var(--accent-red); }
+.catalyst-card.dn::before { background: var(--accent-green-deep); }
+.catalyst-card.nt::before { background: var(--accent-yellow-soft); }
+.catalyst-card:hover { background: var(--bg-panel-hover); border-color: var(--border-hover); transform: translateY(-2px); }
+
+.catalyst-card .header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: 14px; gap: 12px;
+}
+.catalyst-card .title {
+  font-size: 18px; font-weight: 700; color: var(--text-primary);
+  flex: 1; line-height: 1.55; letter-spacing: 0.4px;
+}
+.catalyst-card .direction {
+  padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: 700;
+  white-space: nowrap; letter-spacing: 0.5px;
+}
+.catalyst-card .direction.up { background: rgba(224,133,133,0.18); color: var(--accent-red); border: 1px solid rgba(224,133,133,0.35); }
+.catalyst-card .direction.dn { background: rgba(46,139,87,0.20); color: var(--accent-green-deep); border: 1px solid rgba(46,139,87,0.40); }
+.catalyst-card .direction.nt { background: rgba(232,214,138,0.18); color: var(--accent-yellow-soft); border: 1px solid rgba(232,214,138,0.35); }
+
+.catalyst-card .summary {
+  font-size: 14px; color: var(--text-secondary); line-height: 1.95;
+  margin: 12px 0; letter-spacing: 0.3px;
+}
+.catalyst-card .sectors { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.catalyst-card .sector-tag {
+  padding: 5px 12px; background: rgba(212,168,83,0.10); color: var(--accent-gold);
+  border: 1px solid rgba(212,168,83,0.15); border-radius: 6px; font-size: 12px; font-weight: 500;
+}
+.catalyst-card .stocks {
+  font-size: 13px; color: var(--text-muted); margin-top: 12px;
+  padding-top: 12px; border-top: 1px dashed rgba(212,168,83,0.08);
+  letter-spacing: 0.3px;
+}
+.catalyst-card .stocks .stock { color: var(--text-secondary); margin-right: 12px; }
+.catalyst-card .view {
+  margin-top: 12px; padding: 12px 14px;
+  background: rgba(123,94,123,0.08); border-left: 2px solid var(--accent-rose);
+  border-radius: 4px; font-size: 13px; color: var(--text-secondary); line-height: 1.85;
+  letter-spacing: 0.3px;
+}
+.catalyst-card .view .label { color: var(--accent-rose); font-weight: 600; }
+
+/* meta 强制贴底 */
+.catalyst-card .meta {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: auto; padding-top: 14px;
+  font-size: 12px; color: var(--text-muted);
+  border-top: 1px dashed rgba(212,168,83,0.06);
+}
+.catalyst-card .meta .importance { color: var(--accent-gold); letter-spacing: 1.5px; font-size: 14px; }
+.catalyst-card .meta .source a {
+  color: var(--text-muted); text-decoration: none;
+  transition: color 0.2s;
+}
+.catalyst-card .meta .source a:hover { color: var(--accent-gold); }
+.catalyst-card .meta .time { color: var(--text-muted); font-family: 'JetBrains Mono','SF Mono',monospace; }
+
+/* ===== ③ 主线视角 - 五维面板 ===== */
+.f5d {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+}
+.f5 {
+  background: var(--bg-panel); border-radius: 14px; padding: 22px;
+  border: 1px solid var(--border-subtle); backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+.f5:hover { border-color: var(--border-hover); transform: translateY(-3px); }
+.f5 .h {
+  font-size: 15px; font-weight: 600; color: var(--accent-gold);
+  margin-bottom: 14px; display: flex; align-items: center; gap: 8px; letter-spacing: 0.5px;
+  padding-bottom: 10px; border-bottom: 1px solid var(--border-subtle);
+}
+.f5 .items { list-style: none; padding: 0; }
+.f5 .items li {
+  font-size: 13px; color: var(--text-secondary); padding: 10px 0;
+  border-bottom: 1px solid rgba(212,168,83,0.03); line-height: 1.75;
+  position: relative; cursor: pointer;
+  transition: color 0.2s;
+}
+.f5 .items li:last-child { border-bottom: none; }
+.f5 .items li:hover { color: var(--text-primary); }
+.f5 .items li .dir {
+  display: inline-block; padding: 2px 7px; border-radius: 3px;
+  font-size: 10px; font-weight: 700; margin-right: 8px; letter-spacing: 0.3px;
+}
+.f5 .items li .dir.up { background: rgba(224,133,133,0.18); color: var(--accent-red); }
+.f5 .items li .dir.dn { background: rgba(46,139,87,0.20); color: var(--accent-green-deep); }
+.f5 .items li .dir.nt { background: rgba(232,214,138,0.18); color: var(--accent-yellow-soft); }
+.f5 .items li.empty { color: var(--text-muted); font-style: italic; text-align: center; padding: 20px 0; cursor: default; }
+.f5 .items li.empty:hover { color: var(--text-muted); }
+
+/* 悬浮信息卡 tooltip - 显示完整内容 */
+.f5-tooltip {
+  position: absolute;
+  left: 50%; bottom: calc(100% + 8px);
+  transform: translateX(-50%);
+  min-width: 280px;
+  max-width: 420px;
+  background: rgba(20, 30, 30, 0.96);
+  border: 1px solid var(--border-hover);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  letter-spacing: 0.3px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  backdrop-filter: blur(16px);
+  z-index: 50;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.f5 .items li:hover .f5-tooltip { opacity: 1; }
+.f5-tooltip .tt-title {
+  color: var(--text-primary); font-weight: 700; font-size: 14px;
+  margin-bottom: 6px; padding-bottom: 6px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.f5-tooltip .tt-content { word-break: break-word; }
+.f5-tooltip .tt-link {
+  display: inline-block; margin-top: 8px;
+  color: var(--accent-gold); font-size: 12px; text-decoration: none;
+  border-bottom: 1px dashed var(--accent-gold);
+}
+
+/* ===== ④ 重点个股表格 ===== */
+.tw {
+  overflow-x: auto; border-radius: 14px;
+  border: 1px solid var(--border-subtle); margin-bottom: 20px;
+  backdrop-filter: blur(8px);
+}
+table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 760px; }
+th {
+  text-align: left; padding: 12px 16px; font-weight: 600;
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px;
+  color: var(--text-muted); background: var(--bg-sidebar);
+  border-bottom: 1px solid var(--border-subtle);
+}
+td { padding: 14px 16px; border-bottom: 1px solid rgba(212,168,83,0.03); color: var(--text-secondary); transition: background 0.2s ease; }
+tr:hover td { background: var(--bg-panel-hover); }
+td.nm { font-weight: 600; color: var(--text-primary); }
+td.up { color: var(--accent-red); }
+td.dn { color: var(--accent-green-deep); }
+td.nt { color: var(--accent-yellow-soft); }
+tr.hl td { background: var(--shadow-glow); }
+td.importance { color: var(--accent-gold); letter-spacing: 1px; }
+
+/* ===== ⑤ 风险提示 ===== */
+.risk-box {
+  background: rgba(196,123,123,0.04);
+  border: 1px solid rgba(196,123,123,0.08);
+  border-radius: 14px; padding: 24px;
+  font-size: 15px; color: var(--text-secondary); line-height: 1.95;
+}
+.risk-box p:first-child { color: var(--text-primary); font-weight: 600; margin-bottom: 14px; font-size: 16px; }
+.risk-box ul { padding-left: 24px; }
+.risk-box ul li { margin: 8px 0; }
+.risk-box .src { margin-top: 14px; padding-top: 12px; border-top: 1px dashed rgba(196,123,123,0.1); font-size: 12px; color: var(--text-muted); }
+
+/* ===== 页脚 ===== */
+.ft {
+  padding: 24px 0; border-top: 1px solid var(--border-subtle);
+  text-align: center; color: var(--text-muted); font-size: 12px; letter-spacing: 0.5px; line-height: 1.9;
+}
+.ft .disclaimer { color: var(--accent-red); font-weight: 600; margin-bottom: 8px; }
+
+/* ===== 数据缺失 ===== */
+.data-missing {
+  display: inline-block; padding: 2px 8px;
+  background: rgba(122,114,102,0.15); color: var(--text-muted);
+  border-radius: 4px; font-size: 11px; font-style: italic;
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 1024px) {
+  :root { --gutter: clamp(20px, 5vw, 60px); }
+}
+@media (max-width: 768px) {
+  :root { --gutter: 20px; --sec-y: 32px; }
+  .sb { transform: translateX(-100%); }
+  body:not(.sb-collapsed) { padding-left: 0; }
+  body.sb-collapsed { padding-left: 0; }
+  .sb-toggle { left: auto; right: var(--s4); }
+  body.sb-collapsed .sb-toggle { right: var(--s4); }
+  body:not(.sb-collapsed) .sb { transform: translateX(0); width: var(--sidebar-w); }
+  .hero { padding-top: var(--s8); padding-bottom: var(--s6); }
+  .hero h1 { font-size: 26px; }
+  .cg { grid-template-columns: 1fr; }
+  .cg4 { grid-template-columns: 1fr 1fr; }
+  .f5d { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body data-theme="matin">
+
+<!-- 侧边栏切换按钮 -->
+<button class="sb-toggle" onclick="document.body.classList.toggle('sb-collapsed')" title="切换侧边栏">☰</button>
+
+<!-- ===== 侧边栏 ===== -->
+<nav class="sb">
+  <div class="sb-b">
+    <h1>◈ 盘前简报</h1>
+    <p>2026-07-19 周日（非交易日）</p>
+  </div>
+
+  <div class="sb-quick">
+    <div class="row"><span class="label">美股</span> <span class="v-dn">📉 -1.06%</span></div>
+    <div class="row"><span class="label">A50夜盘</span> <span class="v-up">+0.08%</span></div>
+    <div class="row"><span class="label">原油</span> <span class="v-up">+0.03%</span></div>
+    <div class="row"><span class="label">黄金</span> <span class="v-up">+0.02%</span></div>
+    <div class="row"><span class="label">美元指数</span> <span class="v-up">100.76</span></div>
+    <div class="row"><span class="label">USD/CNH</span> <span class="v-dn">6.7781</span></div>
+  </div>
+
+  <div class="sb-s">📊 板块导航</div>
+  <a href="#overnight" class="on"><span class="icon">①</span><span class="text">隔夜市场速览</span></a>
+  <a href="#catalysts"><span class="icon">②</span><span class="text">催化事件汇总</span></a>
+  <a href="#mainline"><span class="icon">③</span><span class="text">主线视角</span></a>
+  <a href="#stocks"><span class="icon">④</span><span class="text">重点个股</span></a>
+  <a href="#risk"><span class="icon">⑤</span><span class="text">风险提示</span></a>
+
+  <div class="sb-s">🔗 信息源</div>
+  <a href="https://www.cls.cn" target="_blank"><span class="icon">📰</span><span class="text">财联社</span></a>
+  <a href="https://www.eastmoney.com" target="_blank"><span class="icon">💰</span><span class="text">东方财富</span></a>
+  <a href="https://www.10jqka.com.cn" target="_blank"><span class="icon">📈</span><span class="text">同花顺</span></a>
+  <a href="https://www.cninfo.com.cn" target="_blank"><span class="icon">📋</span><span class="text">巨潮资讯</span></a>
+</nav>
+
+<!-- ===== 主内容区 ===== -->
+<div class="mn">
+
+<!-- ===== Hero 头部 ===== -->
+<section class="hero">
+  <div class="tag">✦ 2026-07-19 · A股盘前简报</div>
+  <h1>隔夜催化 <span class="hl">信息整理</span></h1>
+  <div class="meta">
+    <span class="meta-item">◈ 报告日期: <span class="v">2026-07-19</span></span>
+    <span class="meta-item">◈ 交易日: <span class="v">2026-07-19 周日（非交易日）</span></span>
+    <span class="meta-item">◈ 时段: <span class="v">2026-07-18 15:00 → 2026-07-19 18:30（周末信息整理）</span></span>
+    <span class="meta-item">◈ 催化总数: <span class="v">18</span> 条</span>
+  </div>
+</section>
+
+<div class="warn-strip">⚠ 今日为周日非交易日，本简报仅作周末信息整理参考</div>
+
+<!-- ===== ① 隔夜市场速览 ===== -->
+<section class="se" id="overnight">
+  <div class="sh">
+    <div class="ba">◈ OVERSEAS · 隔夜市场</div>
+    <h2>海外市场 <span class="hl">速览</span></h2>
+    <p>美东时间前一日收盘数据 · 大宗商品 · 外汇 · 加密货币 · A股先行信号</p>
+  </div>
+
+  <div class="cg4">
+    <!-- 美股指数 -->
+    <div class="cd">
+      <h4>📈 美股三大指数</h4>
+      <div class="cd-c">道指 / 纳指 / 标普500</div>
+      <div class="cd-v g">全线下挫</div>
+      <div class="cd-sub">道指 52146.42 <span class='dn'>-0.77%</span> · 纳指 25520.24 <span class='dn'>-1.40%</span> · 标普500 7457.69 <span class='dn'>-1.01%</span>（7/17 收盘）</div>
+    </div>
+    <!-- 中概股/A50 -->
+    <div class="cd">
+      <h4>🇨🇳 A股先行信号</h4>
+      <div class="cd-c">A50期货夜盘 / 金龙中国指数</div>
+      <div class="cd-v g">偏弱</div>
+      <div class="cd-sub">A50期货夜盘 14434.7 <span class='up'>+0.08%</span> · 金龙中国 ETF 24.25 <span class='dn'>-1.70%</span> · 沪深300 ETF 87.57 <span class='dn'>-2.25%</span></div>
+    </div>
+    <!-- 大宗商品 -->
+    <div class="cd">
+      <h4>🛢️ 大宗商品</h4>
+      <div class="cd-c">原油 / 黄金 / 铜</div>
+      <div class="cd-v o">地缘冲突推升</div>
+      <div class="cd-sub">WTI原油 81.80 <span class='up'>+0.03%</span> · COMEX黄金 4023.5 <span class='up'>+0.02%</span> · COMEX白银 56.24（避险买盘）</div>
+    </div>
+    <!-- 外汇/加密 -->
+    <div class="cd">
+      <h4>💱 外汇 & 加密</h4>
+      <div class="cd-c">美元指数 / USD-CNH / BTC</div>
+      <div class="cd-v ">USD/CNH 6.7781</div>
+      <div class="cd-sub">美元兑离岸人民币 6.7781 · 美元指数 100.76 <span class='up'>+0.02%</span> · BTC $64400 <span class='up'>+0.34%</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ② 催化事件汇总 ===== -->
+<section class="se" id="catalysts">
+  <div class="sh">
+    <div class="ba">◈ CATALYSTS · 催化事件</div>
+    <h2>催化事件 <span class="hl">汇总</span></h2>
+    <p>每条事件标注方向、影响板块、关联标的与情绪周期定性 · 按重要性排序</p>
+  </div>
+
+  <div class="fl">
+    <button class="on" data-f="all">🌿 全部 (18)</button>
+    <button data-f="up">📈 利好 (11)</button>
+    <button data-f="dn">📉 利空 (5)</button>
+    <button data-f="nt">⚪ 中性 (2)</button>
+  </div>
+
+  <div class="cg" id="catalystGrid">
+    <div class="catalyst-card dn" data-dir="dn">
+  <div class="header">
+    <div class="title">美驻约旦使馆发布安全警示</div>
+    <div class="direction dn">📉 利空</div>
+  </div>
+  <div class="summary">美国驻约旦大使馆7月19日表示，约旦官方基于'具体且可信的威胁'对位于约旦南部城市亚喀巴的国际机场和港口区域进行了疏散。</div>
+  <div class="sectors"><span class="sector-tag">中东冲突</span></div>
+  <div class="view"><span class="label">情绪周期定性：</span>地缘冲突可能加剧市场风险偏好下行</div>
+  <div class="stocks"></div>
+  <div class="meta">
+    <span class="importance">★★</span>
+    <span class="source">来源: <a href="https://www.cls.cn/telegraph" target="_blank">财联社电报</a></span>
+    <span class="time">18:10:58</span>
+  </div>
+</div>
+<div class="catalyst-card nt" data-dir="nt">
+  <div class="header">
+    <div class="title">Facebook和Instagram出现大规模故障</div>
+    <div class="direction nt">⚪ 中性</div>
+  </div>
+  <div class="summary">据DownDetector数据，美国时间周日凌晨3:25开始，数千名用户报告Facebook和Instagram出现故障。</div>
+  <div class="sectors"><span class="sector-tag">美股动态</span><span class="sector-tag">海外科技</span></div>
+  
+  <div class="stocks">关联标的：<span class="stock">META Meta Platforms</span></div>
+  <div class="meta">
+    <span class="importance">★</span>
+    <span class="source">来源: <a href="https://www.cls.cn/telegraph" target="_blank">财联社电报</a></span>
+    <span class="time">17:58:23</span>
+  </div>
+</div>
+<div class="catalyst-card up" data-dir="up">
+  <div class="header">
+    <div class="title">FIFA因举办2026年世界杯将创纪录获利150亿美元</div>
+    <div class="direction up">📈 利好</div>
+  </div>
+  <div class="summary">国际足联通过2026年世界杯获得的收入将超过150亿美元，超最初预测110亿美元，门票销售带来收入显著增加。</div>
+  <div class="sectors"><span class="sector-tag">体育产业</span><span class="sector-tag">足球盛宴2026</span></div>
+  <div class="view"><span class="label">情绪周期定性：</span>对体育产业情绪周期可能产生【酝酿期】催化</div>
+  <div class="stocks"></div>
+  <div class="meta">
+    <span class="importance">★★</span>
+    <span class="source">来源: <a href="https://www.cls.cn/telegraph" target="_blank">财联社电报</a></span>
+    <span class="time">17:56:07</span>
+  </div>
+</div>
+<div class="catalyst-card up" data-dir="up">
+  <div class="header">
+    <div class="title">帝尔激光：董秘拟不低于50万元增持</div>
+    <div class="direction up">📈 利好</div>
+  </div>
+  <div class="summary">帝尔激光(300776.SZ)董秘乔端拟自公告披露之日起3个月内通过集中竞价增持公司股份，总金额不低于50万元，不设价格区间。</div>
+  <div class="sectors"><span class="sector-tag">A股公告</span><span class="sector-tag">激光设备</span><span class="sector-tag">增持</span></div>
+  <div class="view"><span class="label">情绪周期定性：</span>董秘增持信号，对该股情绪周期可能产生【退潮期】修复催化</div>
+  <div class="stocks">关联标的：<span class="stock">300776 帝尔激光</span></div>
+  <div class="meta">
+    <span class="importance">★★</span>
+    <span class="source">来源: <a href="https://www.cls.cn/telegraph" target="_blank">财联社电报</a></span>
+    <span class="time">17:48:29</span>
+  </div>
+</div>
+<div class="catalyst-card nt" data-dir="nt">
+  <div class="header">
+    <div class="title">新加坡拟削减对冲基金税负</div>
+    <div class="direction nt">⚪ 中性</div>
+  </div>
+  <div class="summary">据报道，新加坡拟削减对冲基金税负以强化金融中心地位。</div>
+  <div class="sectors"><span class="sector-tag">环球市场</span><span class="sector-tag">对冲基金</span></div>
+  
+  <div class="stocks"></div>
+  <div class="meta">
+    <span class="importance">★</span>
+    <span class="source">来源: <a href="https://www.cls.cn/telegraph" target="_blank">财联社电报</a></span>
+    <span class="time">17:47:14</span>
+  </div>
+</div>
+<div class="catalyst-card dn" data-dir="dn">
+  <div class="header">
+    <div class="title">伊朗革命卫队称霍尔木兹海峡两船事故</div>
+    <div class="direction dn">📉 利空</div>
+  </div>
+  <div class="summary">伊朗革命卫队称，两艘在霍尔木兹海峡南线过境的船只发生事故，另有两艘放弃过境。</div>
+  <div class="sectors"><span class="sector-tag">中东冲突</span><span class="sector-tag">航运期货</span><span class="sector-tag">船舶</span></div>
+  <div class="view"><span class="label">情绪周期定性：</span>霍尔木兹海峡通行受阻可能推升原油价格，对航运/能源板块情绪周期可能产生【冰点期→酝酿期】催化</div>
+  <div class="stocks"></div>
+  <div class="meta">
+    <span class="importance">★★★</span>
+    <span class="source">来源: <a href="https://www.cls.cn/telegraph" target="_blank">财联社电报</a></span>
+    <span class="time">17:40:19</span>
+  </div>
+</div>
+<div class="catalyst-card dn" data-dir="dn">
+  <div class="header">
+    <div class="title">国家防总针对广西启动防汛四级应急响应</div>
+    <div class="direction dn">📉 利空</div>
+  </div>
+  <div class="summary">7月19日至21日，广西北部东部有持续性强降雨，局地累计雨量可达300至450毫米。国家防总决定于7月19日17时启动防汛四级应急响应。</div>
+  <div class="sectors"><span class="sector-tag">天气变化</span><span class="sector-tag">水利</span><span class="sector-tag">防汛</span></div>
+  <div class="view"><span class="label">情绪周期定性：</span>对广西本地基建/水利板块情绪周期可能产生短期扰动</div>
+  <div class="stocks"></div>
+  <div class="meta">
+    <span class="importance">★★</span>
+    <span class="source">来源: <a href="https://www.cls.cn/telegraph" target="_blank">财联社电报</a></span>
+    <span class="time">17:38:19</span>
+  </div>
+</div>
+<div class="catalyst-card dn" data-dir="dn">
+  <div class="header">
+    <div class="title">美伊'高风险赌博'压缩降温空间</div>
+    <div class="direction dn">📉 利空</div>
+  </div>
+  <div class="summary">美军连续打击伊朗民用基础设施，伊朗警告将强力反击。双方跨越红线，局势降温空间被压缩。</div>
+  <div class="sectors"><span class="sector-tag">中东冲突</span><span class="sector-tag">能源</span><span class="sector-tag">电力</span><span class="sector-tag">港口</span></div>
+  <div class="view"><span class="label">情绪周期定性：</span>地缘冲突升级可能推升避险情绪，对A股整体情绪周期可能产生【高潮期→退潮期】压力</div>
+  <div class="stocks"></div>
+  <div class="meta">
+    <span class="importance">★★★</span>
+    <span class="source">来源: <a href="https://www.cls.cn/telegraph" target="_blank">财联社电报</a></span>
+    <span class="time">17:36:36</span>
+  </div>
+</div>
+<div class="catalyst-card up" data-dir="up">
+  <div class="header">
+    <div class="title">特锐德：上半年净利润同比预增20%-40%</div>
+    <div class="direction up">📈 利好</div>
+  </div>
+  <div class="summary">特锐德(300001.SZ)预计2026年半年度净利润3.92亿-4.58亿元，同比增长20%-40%。变电核心设备与充电网业务稳健增长，海外市场、AI算力基础设施、重卡充电及无人驾驶补能等新领域拓展顺利。Q2环比预增345%-436%。</div>
+  <div class="sectors"><span class="sector-tag">A股公告</span><span class="sector-tag">业绩预增</span><span class="sector-tag">充电桩</span><span class="sector-tag">AI算力</span><span class="sector-tag">特高压</span></div>
+  <div class="view"><span class="label">情绪周期定性：</span>业绩超预期+AI算力+充电桩多重催化，对该股及充电桩板块情绪周期可能产生【酝酿期→主升期】催化</div>
+  <div class="stocks">关联标的：<span class="stock">300001 特锐德</span></div>
+  <div class="meta">
+    <span class="importance">★★★</span>
+    <span class="source">来源: <a href="https://www.cls.cn/telegraph" target="_blank">财联社电报</a></span>
+    <span class="time">17:10:51</span>
+  </div>
+</div>
+<div class="catalyst-card up" data-dir="up">
+  <div class="header">
+    <div class="title">国际复材：上半年净利同比预增151%-194%</div>
+    <div class="direction up">📈 利好</div>
+  </div>
+  <div class="summary">国际复材(301526.SZ)预计上半年净利润5.80亿-6.80亿元，同比增长151%-194%。电子级玻璃纤维及制品价格上涨，产品量价双增长。</div>
+  <div class="sectors"><span class="sector-tag">A股公告</span><span class="sector-tag">业绩预增</span><span class="sector-tag">玻璃纤维</span><span class="sector-tag">电子级材料</span></div>
+  <div class="view"><span class="label">情绪周期定性：</span>电子级玻纤价格上涨+业绩大增，对玻纤/电子材料板块情绪周期可能产生【酝酿期→主升期】催化</div>
+  <div class="stocks">关联标的：<span class="stock">301526 国际复材</span></div>
+  <div class="meta">
+    <span class="importance">★★★</span>
+    <span class="source">来源: <a href="https://www.cls.cn/telegraph" target="_blank">财联社电报</a></span>
+    <span class="time">17:09:46</span>
+  </div>
+</div>
+<div class="catalyst-card up" data-dir="up">
+  <div class="header">
+    <div class="title">力源信息：上半年净利同比预增207%-217%</div>
+    <div class="direction up">📈 利好</div>
+  </div>
+  <div class="summary">力源信息(300184.SZ)预计上半年净利润2.95亿-3.05亿元，同比增长206.87%-217.28%。AI技术带动算力需求，AI电源、光模块、服务器、GPU、算力卡等客户需求大增，AI行业销售收入增幅超150%。</div>
+  <div class="sectors"><span class="sector-tag">A股公告</span><span class="sector-tag">业绩预增</span><span class="sector-tag">AI算力</span><span class="sector-tag">光模块</span><span class="sector-tag">MLCC</span><span class="sector-tag">半导体</span></div>
+  <div class="view"><span class="label">情绪周期定性：</span>AI算力链业绩兑现，对AI硬件/光模块/MLCC板块情绪周期可能产生【主升期】强化催化</div>
+  <div class="stocks">关联标的：<span class="stock">300184 力源信息</span></div>
+  <div class="meta">
+    <span class="importance">★★★</span>
+    <span class="source">来源: <a href="https://www.cls.cn/telegraph" target="_blank">财联社电报</a></span>
+    <span class="time">17:07:31</span>
+  </div>
+</div>
+<div class="catalyst-card up" data-dir="up">
+  <div class="header">
+    <div class="title">铜冠铜箔：上半年净利同比预增486%-544%</div>
+    <div class="direction up">📈 利好</div>
+  </div>
+  <div class="summary">铜冠铜箔(301217.SZ)预计上半年净利润2.05亿-2.25亿元，同比增长486%-544%。高频高速铜箔供不应求，销量同比增长，高附加值产品占比提升。</div>
+  <div class="sectors"><span class="sector-tag">A股公告</span><span class="sector-tag">业绩预增</span><span class="sector-tag">铜箔</span><span class="sector-tag">PCB</span><span class="sector-tag">高频高速</span></div>
+  <div class="view"><span class="label">情绪周期定性：</span>高频高速铜箔供不应求+业绩暴增，对铜箔/PCB板块情绪周期可能产生【酝酿期→主升期】催化</div>
+  <div class="stocks">关联标的：<span class="stock">301217 铜冠铜箔</span></div>
+  <div class="meta">
+    <span class="importance">★★★</span>
+    <span class="source">来源: <a href="https://www.cls.cn/telegraph" target="_blank">财联社电报</a></span>
+    <span class="time">17:06:32</span>
+  </div>
+</div>
+<div class="catalyst-card dn" data-dir="dn">
+  <div class="header">
+    <div class="title">巴林境内拉响防空警报</div>
+    <div class="direction dn">📉 利空</div>
+  </div>
+  <div class="summary">当地时间19日11时20分左右，巴林境内拉响防空警报。巴军方称'挫败了'伊朗的袭击行动。</div>
+  <div class="sectors"><span class="sector-tag">中东冲突</span></div>
+  <div class="view"><span class="label">情绪周期定性：</span>中东冲突扩散至巴林，避险情绪进一步升温</div>
+  <div class="stocks"></div>
+  <div class="meta">
+    <span class="importance">★★</span>
+    <span class="source">来源: <a href="https://www.cls.cn/telegraph" target="_blank">财联社电报</a></span>
+    <span class="time">16:53:26</span>
+  </div>
+</div>
+<div class="catalyst-card up" data-dir="up">
+  <div class="header">
+    <div class="title">荣昌生物：拟2500万-5000万元回购股份</div>
+    <div class="direction up">📈 利好</div>
+  </div>
+  <div class="summary">荣昌生物(688331.SH)拟以2500万-5000万元回购公司股份，用于员工持股计划或股权激励，回购价格不超过149元/股。</div>
+  <div class="sectors"><span class="sector-tag">A股公告</span><span class="sector-tag">回购</span><span class="sector-tag">生物医药</span></div>
+  <div class="view"><span class="label">情绪周期定性：</span>回购信号，对该股情绪周期可能产生【退潮期】修复催化</div>
+  <div class="stocks">关联标的：<span class="stock">688331 荣昌生物</span></div>
+  <div class="meta">
+    <span class="importance">★★</span>
+    <span class="source">来源: <a href="https://www.cls.cn/telegraph" target="_blank">财联社电报</a></span>
+    <span class="time">16:47:58</span>
+  </div>
+</div>
+<div class="catalyst-card up" data-dir="up">
+  <div class="header">
+    <div class="title">阿里千问Qwen3.8大模型即将发布并开源</div>
+    <div class="direction up">📈 利好</div>
+  </div>
+  <div class="summary">阿里千问Qwen3.8大模型即将发布并开源，拥有高达2.4T参数。千问3.8-Max预览版已在阿里巴巴的Token计划、Qoder和QoderWork上亮相。</div>
+  <div class="sectors"><span class="sector-tag">人工智能</span><span class="sector-tag">大模型</span><span class="sector-tag">阿里巴巴</span><span class="sector-tag">港股动态</span></div>
+  <div class="view"><span class="label">情绪周期定性：</span>国产大模型迭代+开源，对AI/大模型板块情绪周期可能产生【主升期】强化催化</div>
+  <div class="stocks">关联标的：<span class="stock">BABA 阿里巴巴</span><span class="stock">09988.HK 阿里巴巴</span></div>
+  <div class="meta">
+    <span class="importance">★★★</span>
+    <span class="source">来源: <a href="https://www.cls.cn/telegraph" target="_blank">财联社电报</a></span>
+    <span class="time">16:43:12</span>
+  </div>
+</div>
+<div class="catalyst-card up" data-dir="up">
+  <div class="header">
+    <div class="title">世界人工智能合作组织未来将重点开展三方面工作</div>
+    <div class="direction up">📈 利好</div>
+  </div>
+  <div class="summary">《关于成立世界人工智能合作组织的协定》签署仪式在上海举行，29个国家成为创始成员国。中方将推动组织尽早启动运转，未来重点开展三方面工作。</div>
+  <div class="sectors"><span class="sector-tag">人工智能</span><span class="sector-tag">TMT</span><span class="sector-tag">政策</span></div>
+  <div class="view"><span class="label">情绪周期定性：</span>AI国际合作机制建立，对AI板块情绪周期可能产生【酝酿期】催化</div>
+  <div class="stocks"></div>
+  <div class="meta">
+    <span class="importance">★★</span>
+    <span class="source">来源: <a href="https://www.cls.cn/telegraph" target="_blank">财联社电报</a></span>
+    <span class="time">16:40:33</span>
+  </div>
+</div>
+<div class="catalyst-card up" data-dir="up">
+  <div class="header">
+    <div class="title">善水科技：上半年净利润同比预增61%-99%</div>
+    <div class="direction up">📈 利好</div>
+  </div>
+  <div class="summary">善水科技(301190.SZ)预计上半年净利润7700万-9500万元，同比增长61%-99%。氯代吡啶系列产品产能释放，销量增长，规模效应带动毛利率提高。</div>
+  <div class="sectors"><span class="sector-tag">A股公告</span><span class="sector-tag">业绩预增</span><span class="sector-tag">农药中间体</span><span class="sector-tag">精细化工</span></div>
+  <div class="view"><span class="label">情绪周期定性：</span>产能释放+业绩增长，对该股情绪周期可能产生【酝酿期】催化</div>
+  <div class="stocks">关联标的：<span class="stock">301190 善水科技</span></div>
+  <div class="meta">
+    <span class="importance">★★</span>
+    <span class="source">来源: <a href="https://www.cls.cn/telegraph" target="_blank">财联社电报</a></span>
+    <span class="time">16:40:11</span>
+  </div>
+</div>
+<div class="catalyst-card up" data-dir="up">
+  <div class="header">
+    <div class="title">东田微：上半年净利润同比预增68%-87%</div>
+    <div class="direction up">📈 利好</div>
+  </div>
+  <div class="summary">东田微(301183.SZ)预计上半年净利润8500万-9500万元，同比增长68%-87%。AI算力需求驱动光模块产业链景气上行，光隔离器、WDM组件等通信产品收入占比提升，南昌光通信基地产能爬坡。Q2环比预增102%-138%。</div>
+  <div class="sectors"><span class="sector-tag">A股公告</span><span class="sector-tag">业绩预增</span><span class="sector-tag">光模块</span><span class="sector-tag">AI算力</span><span class="sector-tag">光通信</span></div>
+  <div class="view"><span class="label">情绪周期定性：</span>光模块业绩兑现+AI算力链高景气，对光模块/AI硬件板块情绪周期可能产生【主升期】强化催化</div>
+  <div class="stocks">关联标的：<span class="stock">301183 东田微</span></div>
+  <div class="meta">
+    <span class="importance">★★★</span>
+    <span class="source">来源: <a href="https://www.cls.cn/telegraph" target="_blank">财联社电报</a></span>
+    <span class="time">16:38:49</span>
+  </div>
+</div>
+  </div>
+</section>
+
+<!-- ===== ③ 主线视角 ===== -->
+<section class="se" id="mainline">
+  <div class="sh">
+    <div class="ba">◈ MAINLINE · 主线视角</div>
+    <h2>五维催化 <span class="hl">归集</span></h2>
+    <p>按催化类型分组：政策 / 产业 / 公司公告 / 海外映射 / 资金情绪</p>
+  </div>
+
+  <div class="f5d">
+    <!-- 政策催化 -->
+    <div class="f5">
+      <div class="h">🏛️ 政策催化</div>
+      <ul class="items">
+        <li onclick="window.open('https://www.cls.cn/telegraph', '_blank')">
+  <span class="dir up">利好</span>阿里千问Qwen3.8大模型即将发布并开源<br/>
+  <span style="color:var(--text-muted);font-size:11px;">阿里千问Qwen3.8大模型即将发布并开源，拥有高达2.4T参数。千问3.8-Max预览版已在阿里巴巴的Token计划、Qoder和QoderWork上亮相。</span>
+  <div class="f5-tooltip">
+    <div class="tt-title">阿里千问Qwen3.8大模型即将发布并开源</div>
+    <div class="tt-content">阿里千问Qwen3.8大模型即将发布并开源，拥有高达2.4T参数。千问3.8-Max预览版已在阿里巴巴的Token计划、Qoder和QoderWork上亮相。</div>
+    <a class="tt-link" href="https://www.cls.cn/telegraph" target="_blank" onclick="event.stopPropagation()">查看原文 →</a>
+  </div>
+</li><li onclick="window.open('https://www.cls.cn/telegraph', '_blank')">
+  <span class="dir up">利好</span>世界人工智能合作组织未来将重点开展三方面工作<br/>
+  <span style="color:var(--text-muted);font-size:11px;">《关于成立世界人工智能合作组织的协定》签署仪式在上海举行，29个国家成为创始成员国。中方将推动组织尽早启动运转，未来重点开展三方面工作。</span>
+  <div class="f5-tooltip">
+    <div class="tt-title">世界人工智能合作组织未来将重点开展三方面工作</div>
+    <div class="tt-content">《关于成立世界人工智能合作组织的协定》签署仪式在上海举行，29个国家成为创始成员国。中方将推动组织尽早启动运转，未来重点开展三方面工作。</div>
+    <a class="tt-link" href="https://www.cls.cn/telegraph" target="_blank" onclick="event.stopPropagation()">查看原文 →</a>
+  </div>
+</li>
+      </ul>
+    </div>
+    <!-- 产业动态 -->
+    <div class="f5">
+      <div class="h">🏭 产业动态</div>
+      <ul class="items">
+        <li onclick="window.open('https://www.cls.cn/telegraph', '_blank')">
+  <span class="dir dn">利空</span>美驻约旦使馆发布安全警示<br/>
+  <span style="color:var(--text-muted);font-size:11px;">美国驻约旦大使馆7月19日表示，约旦官方基于'具体且可信的威胁'对位于约旦南部城市亚喀巴的国际机场和港口区域进行了疏散。</span>
+  <div class="f5-tooltip">
+    <div class="tt-title">美驻约旦使馆发布安全警示</div>
+    <div class="tt-content">美国驻约旦大使馆7月19日表示，约旦官方基于'具体且可信的威胁'对位于约旦南部城市亚喀巴的国际机场和港口区域进行了疏散。</div>
+    <a class="tt-link" href="https://www.cls.cn/telegraph" target="_blank" onclick="event.stopPropagation()">查看原文 →</a>
+  </div>
+</li><li onclick="window.open('https://www.cls.cn/telegraph', '_blank')">
+  <span class="dir up">利好</span>FIFA因举办2026年世界杯将创纪录获利150亿美元<br/>
+  <span style="color:var(--text-muted);font-size:11px;">国际足联通过2026年世界杯获得的收入将超过150亿美元，超最初预测110亿美元，门票销售带来收入显著增加。</span>
+  <div class="f5-tooltip">
+    <div class="tt-title">FIFA因举办2026年世界杯将创纪录获利150亿美元</div>
+    <div class="tt-content">国际足联通过2026年世界杯获得的收入将超过150亿美元，超最初预测110亿美元，门票销售带来收入显著增加。</div>
+    <a class="tt-link" href="https://www.cls.cn/telegraph" target="_blank" onclick="event.stopPropagation()">查看原文 →</a>
+  </div>
+</li><li onclick="window.open('https://www.cls.cn/telegraph', '_blank')">
+  <span class="dir dn">利空</span>伊朗革命卫队称霍尔木兹海峡两船事故<br/>
+  <span style="color:var(--text-muted);font-size:11px;">伊朗革命卫队称，两艘在霍尔木兹海峡南线过境的船只发生事故，另有两艘放弃过境。</span>
+  <div class="f5-tooltip">
+    <div class="tt-title">伊朗革命卫队称霍尔木兹海峡两船事故</div>
+    <div class="tt-content">伊朗革命卫队称，两艘在霍尔木兹海峡南线过境的船只发生事故，另有两艘放弃过境。</div>
+    <a class="tt-link" href="https://www.cls.cn/telegraph" target="_blank" onclick="event.stopPropagation()">查看原文 →</a>
+  </div>
+</li><li onclick="window.open('https://www.cls.cn/telegraph', '_blank')">
+  <span class="dir dn">利空</span>国家防总针对广西启动防汛四级应急响应<br/>
+  <span style="color:var(--text-muted);font-size:11px;">7月19日至21日，广西北部东部有持续性强降雨，局地累计雨量可达300至450毫米。国家防总决定于7月19日17时启动防汛四级应急响应。</span>
+  <div class="f5-tooltip">
+    <div class="tt-title">国家防总针对广西启动防汛四级应急响应</div>
+    <div class="tt-content">7月19日至21日，广西北部东部有持续性强降雨，局地累计雨量可达300至450毫米。国家防总决定于7月19日17时启动防汛四级应急响应。</div>
+    <a class="tt-link" href="https://www.cls.cn/telegraph" target="_blank" onclick="event.stopPropagation()">查看原文 →</a>
+  </div>
+</li><li onclick="window.open('https://www.cls.cn/telegraph', '_blank')">
+  <span class="dir dn">利空</span>美伊'高风险赌博'压缩降温空间<br/>
+  <span style="color:var(--text-muted);font-size:11px;">美军连续打击伊朗民用基础设施，伊朗警告将强力反击。双方跨越红线，局势降温空间被压缩。</span>
+  <div class="f5-tooltip">
+    <div class="tt-title">美伊'高风险赌博'压缩降温空间</div>
+    <div class="tt-content">美军连续打击伊朗民用基础设施，伊朗警告将强力反击。双方跨越红线，局势降温空间被压缩。</div>
+    <a class="tt-link" href="https://www.cls.cn/telegraph" target="_blank" onclick="event.stopPropagation()">查看原文 →</a>
+  </div>
+</li>
+      </ul>
+    </div>
+    <!-- 公司公告 -->
+    <div class="f5">
+      <div class="h">🏢 公司公告</div>
+      <ul class="items">
+        <li onclick="window.open('https://www.cls.cn/telegraph', '_blank')">
+  <span class="dir up">利好</span>帝尔激光：董秘拟不低于50万元增持<br/>
+  <span style="color:var(--text-muted);font-size:11px;">帝尔激光(300776.SZ)董秘乔端拟自公告披露之日起3个月内通过集中竞价增持公司股份，总金额不低于50万元，不设价格区间。</span>
+  <div class="f5-tooltip">
+    <div class="tt-title">帝尔激光：董秘拟不低于50万元增持</div>
+    <div class="tt-content">帝尔激光(300776.SZ)董秘乔端拟自公告披露之日起3个月内通过集中竞价增持公司股份，总金额不低于50万元，不设价格区间。</div>
+    <a class="tt-link" href="https://www.cls.cn/telegraph" target="_blank" onclick="event.stopPropagation()">查看原文 →</a>
+  </div>
+</li><li onclick="window.open('https://www.cls.cn/telegraph', '_blank')">
+  <span class="dir up">利好</span>特锐德：上半年净利润同比预增20%-40%<br/>
+  <span style="color:var(--text-muted);font-size:11px;">特锐德(300001.SZ)预计2026年半年度净利润3.92亿-4.58亿元，同比增长20%-40%。变电核心设备与充电网业务稳健增长，海外市场、AI算力基础...</span>
+  <div class="f5-tooltip">
+    <div class="tt-title">特锐德：上半年净利润同比预增20%-40%</div>
+    <div class="tt-content">特锐德(300001.SZ)预计2026年半年度净利润3.92亿-4.58亿元，同比增长20%-40%。变电核心设备与充电网业务稳健增长，海外市场、AI算力基础设施、重卡充电及无人驾驶补能等新领域拓展顺利。Q2环比预增345%-436%。</div>
+    <a class="tt-link" href="https://www.cls.cn/telegraph" target="_blank" onclick="event.stopPropagation()">查看原文 →</a>
+  </div>
+</li><li onclick="window.open('https://www.cls.cn/telegraph', '_blank')">
+  <span class="dir up">利好</span>国际复材：上半年净利同比预增151%-194%<br/>
+  <span style="color:var(--text-muted);font-size:11px;">国际复材(301526.SZ)预计上半年净利润5.80亿-6.80亿元，同比增长151%-194%。电子级玻璃纤维及制品价格上涨，产品量价双增长。</span>
+  <div class="f5-tooltip">
+    <div class="tt-title">国际复材：上半年净利同比预增151%-194%</div>
+    <div class="tt-content">国际复材(301526.SZ)预计上半年净利润5.80亿-6.80亿元，同比增长151%-194%。电子级玻璃纤维及制品价格上涨，产品量价双增长。</div>
+    <a class="tt-link" href="https://www.cls.cn/telegraph" target="_blank" onclick="event.stopPropagation()">查看原文 →</a>
+  </div>
+</li><li onclick="window.open('https://www.cls.cn/telegraph', '_blank')">
+  <span class="dir up">利好</span>力源信息：上半年净利同比预增207%-217%<br/>
+  <span style="color:var(--text-muted);font-size:11px;">力源信息(300184.SZ)预计上半年净利润2.95亿-3.05亿元，同比增长206.87%-217.28%。AI技术带动算力需求，AI电源、光模块、服务器、...</span>
+  <div class="f5-tooltip">
+    <div class="tt-title">力源信息：上半年净利同比预增207%-217%</div>
+    <div class="tt-content">力源信息(300184.SZ)预计上半年净利润2.95亿-3.05亿元，同比增长206.87%-217.28%。AI技术带动算力需求，AI电源、光模块、服务器、GPU、算力卡等客户需求大增，AI行业销售收入增幅超150%。</div>
+    <a class="tt-link" href="https://www.cls.cn/telegraph" target="_blank" onclick="event.stopPropagation()">查看原文 →</a>
+  </div>
+</li><li onclick="window.open('https://www.cls.cn/telegraph', '_blank')">
+  <span class="dir up">利好</span>铜冠铜箔：上半年净利同比预增486%-544%<br/>
+  <span style="color:var(--text-muted);font-size:11px;">铜冠铜箔(301217.SZ)预计上半年净利润2.05亿-2.25亿元，同比增长486%-544%。高频高速铜箔供不应求，销量同比增长，高附加值产品占比提升。</span>
+  <div class="f5-tooltip">
+    <div class="tt-title">铜冠铜箔：上半年净利同比预增486%-544%</div>
+    <div class="tt-content">铜冠铜箔(301217.SZ)预计上半年净利润2.05亿-2.25亿元，同比增长486%-544%。高频高速铜箔供不应求，销量同比增长，高附加值产品占比提升。</div>
+    <a class="tt-link" href="https://www.cls.cn/telegraph" target="_blank" onclick="event.stopPropagation()">查看原文 →</a>
+  </div>
+</li>
+      </ul>
+    </div>
+    <!-- 海外映射 -->
+    <div class="f5">
+      <div class="h">🌍 海外映射</div>
+      <ul class="items">
+        <li onclick="window.open('https://www.cls.cn/telegraph', '_blank')">
+  <span class="dir nt">中性</span>Facebook和Instagram出现大规模故障<br/>
+  <span style="color:var(--text-muted);font-size:11px;">据DownDetector数据，美国时间周日凌晨3:25开始，数千名用户报告Facebook和Instagram出现故障。</span>
+  <div class="f5-tooltip">
+    <div class="tt-title">Facebook和Instagram出现大规模故障</div>
+    <div class="tt-content">据DownDetector数据，美国时间周日凌晨3:25开始，数千名用户报告Facebook和Instagram出现故障。</div>
+    <a class="tt-link" href="https://www.cls.cn/telegraph" target="_blank" onclick="event.stopPropagation()">查看原文 →</a>
+  </div>
+</li><li onclick="window.open('https://www.cls.cn/telegraph', '_blank')">
+  <span class="dir nt">中性</span>新加坡拟削减对冲基金税负<br/>
+  <span style="color:var(--text-muted);font-size:11px;">据报道，新加坡拟削减对冲基金税负以强化金融中心地位。</span>
+  <div class="f5-tooltip">
+    <div class="tt-title">新加坡拟削减对冲基金税负</div>
+    <div class="tt-content">据报道，新加坡拟削减对冲基金税负以强化金融中心地位。</div>
+    <a class="tt-link" href="https://www.cls.cn/telegraph" target="_blank" onclick="event.stopPropagation()">查看原文 →</a>
+  </div>
+</li><li onclick="window.open('https://www.cls.cn/telegraph', '_blank')">
+  <span class="dir up">利好</span>阿里千问Qwen3.8大模型即将发布并开源<br/>
+  <span style="color:var(--text-muted);font-size:11px;">阿里千问Qwen3.8大模型即将发布并开源，拥有高达2.4T参数。千问3.8-Max预览版已在阿里巴巴的Token计划、Qoder和QoderWork上亮相。</span>
+  <div class="f5-tooltip">
+    <div class="tt-title">阿里千问Qwen3.8大模型即将发布并开源</div>
+    <div class="tt-content">阿里千问Qwen3.8大模型即将发布并开源，拥有高达2.4T参数。千问3.8-Max预览版已在阿里巴巴的Token计划、Qoder和QoderWork上亮相。</div>
+    <a class="tt-link" href="https://www.cls.cn/telegraph" target="_blank" onclick="event.stopPropagation()">查看原文 →</a>
+  </div>
+</li>
+      </ul>
+    </div>
+    <!-- 资金情绪 -->
+    <div class="f5">
+      <div class="h">💰 资金情绪</div>
+      <ul class="items">
+        <li class="empty">周末无资金面数据</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ④ 重点个股 ===== -->
+<section class="se" id="stocks">
+  <div class="sh">
+    <div class="ba">◈ STOCKS · 重点个股</div>
+    <h2>催化关联 <span class="hl">重点个股</span></h2>
+    <p>催化事件关联的 A 股标的（仅作信息关联，不荐买卖）</p>
+  </div>
+
+  <div class="tw">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>代码</th>
+          <th>名称</th>
+          <th>催化类型</th>
+          <th>方向</th>
+          <th>关键变化</th>
+          <th>影响逻辑</th>
+          <th>关注</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="">
+  <td>1</td>
+  <td class="nm">300776</td>
+  <td class="nm">帝尔激光</td>
+  <td>业绩预增</td>
+  <td class="up">利好</td>
+  <td>帝尔激光(300776.SZ)董秘乔端拟自公告披露之日起3个月内通过集中竞价增持公司股份，总金额不低于50万元，不设价格...</td>
+  <td>董秘增持信号，对该股情绪周期可能产生【退潮期】修复催化</td>
+  <td class="importance">★★</td>
+</tr>
+<tr class="hl">
+  <td>2</td>
+  <td class="nm">300001</td>
+  <td class="nm">特锐德</td>
+  <td>业绩预增</td>
+  <td class="up">利好</td>
+  <td>特锐德(300001.SZ)预计2026年半年度净利润3.92亿-4.58亿元，同比增长20%-40%。变电核心设备与充...</td>
+  <td>业绩超预期+AI算力+充电桩多重催化，对该股及充电桩板块情绪周期可能产生【酝酿期→主升期】催化</td>
+  <td class="importance">★★★</td>
+</tr>
+<tr class="hl">
+  <td>3</td>
+  <td class="nm">301526</td>
+  <td class="nm">国际复材</td>
+  <td>业绩预增</td>
+  <td class="up">利好</td>
+  <td>国际复材(301526.SZ)预计上半年净利润5.80亿-6.80亿元，同比增长151%-194%。电子级玻璃纤维及制品...</td>
+  <td>电子级玻纤价格上涨+业绩大增，对玻纤/电子材料板块情绪周期可能产生【酝酿期→主升期】催化</td>
+  <td class="importance">★★★</td>
+</tr>
+<tr class="hl">
+  <td>4</td>
+  <td class="nm">300184</td>
+  <td class="nm">力源信息</td>
+  <td>业绩预增</td>
+  <td class="up">利好</td>
+  <td>力源信息(300184.SZ)预计上半年净利润2.95亿-3.05亿元，同比增长206.87%-217.28%。AI技术...</td>
+  <td>AI算力链业绩兑现，对AI硬件/光模块/MLCC板块情绪周期可能产生【主升期】强化催化</td>
+  <td class="importance">★★★</td>
+</tr>
+<tr class="hl">
+  <td>5</td>
+  <td class="nm">301217</td>
+  <td class="nm">铜冠铜箔</td>
+  <td>业绩预增</td>
+  <td class="up">利好</td>
+  <td>铜冠铜箔(301217.SZ)预计上半年净利润2.05亿-2.25亿元，同比增长486%-544%。高频高速铜箔供不应求...</td>
+  <td>高频高速铜箔供不应求+业绩暴增，对铜箔/PCB板块情绪周期可能产生【酝酿期→主升期】催化</td>
+  <td class="importance">★★★</td>
+</tr>
+<tr class="">
+  <td>6</td>
+  <td class="nm">688331</td>
+  <td class="nm">荣昌生物</td>
+  <td>业绩预增</td>
+  <td class="up">利好</td>
+  <td>荣昌生物(688331.SH)拟以2500万-5000万元回购公司股份，用于员工持股计划或股权激励，回购价格不超过149...</td>
+  <td>回购信号，对该股情绪周期可能产生【退潮期】修复催化</td>
+  <td class="importance">★★</td>
+</tr>
+<tr class="">
+  <td>7</td>
+  <td class="nm">301190</td>
+  <td class="nm">善水科技</td>
+  <td>业绩预增</td>
+  <td class="up">利好</td>
+  <td>善水科技(301190.SZ)预计上半年净利润7700万-9500万元，同比增长61%-99%。氯代吡啶系列产品产能释放...</td>
+  <td>产能释放+业绩增长，对该股情绪周期可能产生【酝酿期】催化</td>
+  <td class="importance">★★</td>
+</tr>
+<tr class="hl">
+  <td>8</td>
+  <td class="nm">301183</td>
+  <td class="nm">东田微</td>
+  <td>业绩预增</td>
+  <td class="up">利好</td>
+  <td>东田微(301183.SZ)预计上半年净利润8500万-9500万元，同比增长68%-87%。AI算力需求驱动光模块产业...</td>
+  <td>光模块业绩兑现+AI算力链高景气，对光模块/AI硬件板块情绪周期可能产生【主升期】强化催化</td>
+  <td class="importance">★★★</td>
+</tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== ⑤ 风险提示 ===== -->
+<section class="se" id="risk">
+  <div class="sh">
+    <div class="ba">◇ RISK · 风险提示</div>
+    <h2>风险提示 <span class="hl">与注意点</span></h2>
+  </div>
+
+  <div class="risk-box">
+    <p>📌 今日开盘需关注的风险点</p>
+    <ul>
+      
+    <li>中东冲突持续升级（美伊互相打击民用基础设施），可能推升原油价格、压制A股风险偏好</li>
+    <li>霍尔木兹海峡通行受阻，航运/能源板块波动加大</li>
+    <li>广西启动防汛四级应急响应，本地基建/水利板块短期扰动</li>
+    <li>周末海外Facebook/Instagram故障，关注美股科技股周一开盘表现</li>
+    <li>本日为周日非交易日，简报仅作信息整理参考，实际交易请以周一开盘后盘面为准</li>
+    
+    </ul>
+    <div class="src">📅 数据时段: 2026-07-18 15:00 → 2026-07-19 18:30（周末信息整理） | 信息源: 财联社/东方财富/同花顺/BBC/Reuters/akshare | 生成时间: 2026-07-19 18:30:00</div>
+  </div>
+</section>
+
+<!-- ===== 页脚 ===== -->
+<footer class="ft">
+  <p class="disclaimer">⚠ 免责声明</p>
+  <p>本简报仅作信息整理与方向标注，不构成任何投资建议。催化事件可能被市场反向解读，请结合自身风险承受能力判断。<br/>关联标的仅作信息关联，不荐买卖。短线交易高波动，请谨慎决策。</p>
+  <p style="margin-top: 10px;">2026-07-19 · A股盘前简报 · Powered by pre-market-briefing skill</p>
+</footer>
+
+</div>
+
+<script>
+/* ===== 催化事件过滤 ===== */
+document.querySelectorAll('#catalysts .fl button').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('#catalysts .fl button').forEach(function(b) { b.classList.remove('on'); });
+    this.classList.add('on');
+    var filter = this.dataset.f;
+    document.querySelectorAll('#catalystGrid .catalyst-card').forEach(function(card) {
+      if (filter === 'all' || card.dataset.dir === filter) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+});
+
+/* ===== 侧边栏导航高亮 ===== */
+document.querySelectorAll('.sb a[href^="#"]').forEach(function(link) {
+  link.addEventListener('click', function() {
+    document.querySelectorAll('.sb a').forEach(function(a) { a.classList.remove('on'); });
+    this.classList.add('on');
+  });
+});
+</script>
+
+</body>
+</html>

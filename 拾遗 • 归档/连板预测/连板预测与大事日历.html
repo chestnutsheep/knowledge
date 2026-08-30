@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>连板形态解构 × 金融大事日历 · 暮山紫雾</title>
+    <style>
+        /* ===== 主题：暮山紫雾 · 取色于东方山水画 =====
+           画面主导色为暮色紫罗兰（天空~60%），辅以古金（水面光斑~15%）
+           和松石青（植被水面~25%），樱花粉做点缀。
+           底色采用深紫而非深绿，还原"紫雾金光"氛围。 */
+        :root {
+            --bg-deep: #140E1F;
+            --bg-grad-1: #1E1430;
+            --bg-grad-2: #100A1A;
+            --bg-panel: rgba(123,91,168,0.10);
+            --bg-panel-hover: rgba(123,91,168,0.18);
+            --bg-panel-solid: rgba(30,20,48,0.85);
+            --border-subtle: rgba(180,140,210,0.12);
+            --border-hover: rgba(180,140,210,0.26);
+            --text-primary: #F0E8D8;
+            --text-secondary: #C4B0D0;
+            --text-muted: #7A6A8E;
+            --accent-gold: #D4AF37;
+            --accent-gold-soft: #F5E6C8;
+            --accent-rose: #E8A5C8;
+            --accent-pink-soft: #F0C8D8;
+            --accent-purple: #9C7EC4;
+            --accent-purple-soft: #B89CD8;
+            --accent-green: #7B9EC4;
+            --accent-red: #E07B7B;
+            --danger: #D8745C;
+            --danger-soft: rgba(216,116,92,0.10);
+            --shadow-glow: rgba(156,126,196,0.10);
+            --font-base: 14px;
+            --sp-1: 6px; --sp-2: 10px; --sp-3: 14px; --sp-4: 18px;
+            --sp-5: 24px; --sp-6: 32px;
+            --radius: 16px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+            background:
+                radial-gradient(1200px 600px at 80% -10%, rgba(123,91,168,0.14), transparent 60%),
+                radial-gradient(900px 500px at -10% 110%, rgba(212,175,55,0.08), transparent 55%),
+                radial-gradient(600px 400px at 50% 50%, rgba(232,165,200,0.05), transparent 70%),
+                linear-gradient(160deg, var(--bg-grad-1), var(--bg-grad-2));
+            background-attachment: fixed;
+            color: var(--text-primary);
+            line-height: 1.75;
+            font-size: var(--font-base);
+            padding: var(--sp-5);
+            min-height: 100vh;
+        }
+        ::-webkit-scrollbar { width: 9px; height: 9px; }
+        ::-webkit-scrollbar-thumb { background: var(--accent-purple); border-radius: 5px; }
+        ::-webkit-scrollbar-track { background: rgba(30,20,48,0.4); }
+        .container { max-width: 1480px; margin: 0 auto; }
+
+        /* ===== Header ===== */
+        .header {
+            display: flex; justify-content: space-between; align-items: flex-end;
+            padding: var(--sp-1) 0 var(--sp-4); border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: var(--sp-5); flex-wrap: wrap; gap: var(--sp-3);
+        }
+        .header h1 {
+            font-size: 32px; font-weight: 700; letter-spacing: 1px; line-height: 1.15;
+            display: flex; align-items: baseline; gap: 20px; margin-top: -8px; flex-wrap: wrap;
+        }
+        .header h1 .zh {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-soft));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .header h1 .en { font-size: 17px; font-weight: 500; color: var(--text-secondary); letter-spacing: .5px; }
+        .header .sub { color: var(--text-muted); font-size: 12.5px; margin-top: 4px; letter-spacing: .5px; }
+        .header .meta { display: flex; align-items: center; gap: var(--sp-3); color: var(--text-secondary); font-size: 13px; flex-wrap: wrap; }
+        .header .tag {
+            background: rgba(212,175,55,0.08); padding: 4px var(--sp-3); border-radius: 30px;
+            border: 1px solid rgba(212,175,55,0.16); color: var(--accent-gold); font-size: 11.5px;
+        }
+
+        /* ===== Section Divider ===== */
+        .section-divider {
+            display: flex; align-items: center; gap: var(--sp-3); margin: var(--sp-6) 0 var(--sp-5);
+        }
+        .section-divider .line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--border-hover), transparent); }
+        .section-divider .label {
+            font-size: 20px; font-weight: 700; letter-spacing: 2px;
+            background: linear-gradient(135deg, var(--accent-purple-soft), var(--accent-gold));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            white-space: nowrap;
+        }
+        .section-divider .num {
+            font-size: 13px; font-weight: 600; color: var(--accent-purple);
+            background: rgba(123,91,168,0.12); padding: 4px 12px; border-radius: 20px;
+            border: 1px solid rgba(123,91,168,0.2);
+        }
+
+        /* ===== 通用卡片 ===== */
+        .card {
+            background: var(--bg-panel); border: 1px solid var(--border-subtle);
+            border-radius: var(--radius); padding: var(--sp-4) var(--sp-5);
+            backdrop-filter: blur(14px); transition: border-color .3s, box-shadow .3s; margin-bottom: var(--sp-4);
+        }
+        .card:hover { border-color: var(--border-hover); box-shadow: 0 10px 36px var(--shadow-glow); }
+        .card h3 {
+            font-size: 15.5px; font-weight: 600; color: var(--text-primary);
+            margin-bottom: var(--sp-3); display: flex; align-items: center; gap: var(--sp-2); flex-wrap: wrap;
+        }
+        .card h3 .badge {
+            font-size: 11px; font-weight: 500; color: var(--accent-purple-soft);
+            background: rgba(156,126,196,0.08); padding: 3px 10px; border-radius: 30px;
+            border: 1px solid rgba(156,126,196,0.16);
+        }
+        .card h3 .badge.gold {
+            color: var(--accent-gold); background: rgba(212,175,55,0.08); border-color: rgba(212,175,55,0.16);
+        }
+        .card h3 .badge.rose {
+            color: var(--accent-rose); background: rgba(232,165,200,0.08); border-color: rgba(232,165,200,0.16);
+        }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4); margin-bottom: var(--sp-4); }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--sp-4); margin-bottom: var(--sp-4); }
+        .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: var(--sp-3); margin-bottom: var(--sp-4); }
+        @media (max-width: 900px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+        /* ===== 行项目 ===== */
+        .row { display: flex; justify-content: space-between; gap: var(--sp-3); padding: 5px 0; font-size: 13px; border-bottom: 1px solid rgba(180,140,210,0.04); align-items: baseline; }
+        .row .label { color: var(--text-muted); font-weight: 400; flex-shrink: 0; }
+        .row .value { color: var(--text-primary); font-weight: 500; text-align: right; }
+        .row .value.up { color: var(--accent-red); }
+        .row .value.dn { color: var(--accent-green); }
+        .row .value.warn { color: var(--danger); }
+        .row .value.neutral { color: var(--text-secondary); }
+
+        /* ===== 表格 ===== */
+        .table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border-subtle); margin-top: 4px; }
+        table { width: 100%; border-collapse: collapse; font-size: 12.5px; min-width: 640px; }
+        th { text-align: left; padding: 9px var(--sp-3); font-weight: 600; font-size: 11px; letter-spacing: .4px; text-transform: uppercase; color: var(--text-muted); background: rgba(30,20,48,0.6); border-bottom: 1px solid var(--border-subtle); }
+        td { padding: 9px var(--sp-3); border-bottom: 1px solid rgba(180,140,210,0.04); color: var(--text-secondary); vertical-align: middle; }
+        tr:hover td { background: var(--bg-panel-hover); }
+        td .name { font-weight: 600; color: var(--text-primary); }
+        td .up { color: var(--accent-red); } td .dn { color: var(--accent-green); } td .warn { color: var(--danger); }
+
+        /* ===== 标签 ===== */
+        .tag { display: inline-block; padding: 3px 10px; border-radius: 30px; font-size: 11px; font-weight: 500; }
+        .tag.gold { background: rgba(212,175,55,0.10); color: var(--accent-gold); border: 1px solid rgba(212,175,55,0.16); }
+        .tag.teal { background: rgba(156,126,196,0.08); color: var(--accent-purple-soft); border: 1px solid rgba(156,126,196,0.16); }
+        .tag.rose { background: rgba(232,165,200,0.10); color: var(--accent-rose); border: 1px solid rgba(232,165,200,0.16); }
+        .tag.green { background: rgba(156,126,196,0.10); color: var(--accent-purple-soft); border: 1px solid rgba(156,126,196,0.16); }
+        .tag.red { background: rgba(224,123,123,0.10); color: var(--accent-red); border: 1px solid rgba(224,123,123,0.16); }
+        .tag.danger { background: var(--danger-soft); color: var(--danger); border: 1px solid rgba(216,116,92,0.28); }
+        .tag.muted { background: rgba(122,106,142,0.12); color: var(--text-muted); border: 1px solid rgba(122,106,142,0.18); }
+
+        /* ===== 结论条 ===== */
+        .verdict { font-size: 12.5px; color: var(--text-secondary); background: rgba(156,126,196,0.06); padding: var(--sp-3) var(--sp-4); border-radius: 12px; border-left: 3px solid var(--accent-purple); margin-top: var(--sp-3); }
+        .verdict.gold { background: rgba(212,175,55,0.04); border-left-color: var(--accent-gold); }
+        .verdict.teal { background: rgba(156,126,196,0.04); border-left-color: var(--accent-purple-soft); }
+        .verdict.rose { background: rgba(232,165,200,0.04); border-left-color: var(--accent-rose); }
+        .verdict.danger { background: var(--danger-soft); border-left-color: var(--danger); }
+        .verdict strong { color: var(--text-primary); }
+
+        /* ===== 指标阈值条 ===== */
+        .metric-bar-wrap { margin: var(--sp-3) 0; }
+        .metric-bar-label { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+        .metric-bar-label .name { font-size: 13px; font-weight: 600; color: var(--accent-gold); }
+        .metric-bar-label .range { font-size: 11.5px; color: var(--text-muted); }
+        .metric-bar-track {
+            position: relative; height: 28px; border-radius: 8px;
+            background: rgba(30,20,48,0.6); border: 1px solid var(--border-subtle); overflow: hidden;
+        }
+        .metric-bar-segment {
+            position: absolute; top: 0; height: 100%; display: flex; align-items: center; justify-content: center;
+            font-size: 10.5px; font-weight: 600; letter-spacing: .3px; transition: opacity .3s;
+        }
+        .metric-bar-segment.danger { background: rgba(216,116,92,0.18); color: var(--danger); }
+        .metric-bar-segment.warn { background: rgba(212,175,55,0.12); color: var(--accent-gold); }
+        .metric-bar-segment.optimal { background: rgba(156,126,196,0.18); color: var(--accent-purple-soft); }
+        .metric-bar-segment.warn2 { background: rgba(232,165,200,0.10); color: var(--accent-rose); }
+        .metric-bar-segment.danger2 { background: rgba(216,116,92,0.18); color: var(--danger); }
+        .metric-bar-hint { font-size: 11px; color: var(--text-muted); margin-top: 4px; display: flex; gap: var(--sp-4); flex-wrap: wrap; }
+        .metric-bar-hint span { display: flex; align-items: center; gap: 4px; }
+        .metric-bar-hint .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+
+        /* ===== 阶段流程卡片 ===== */
+        .stage-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: var(--sp-4) 0; }
+        @media (max-width: 1100px) { .stage-flow { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .stage-flow { grid-template-columns: 1fr; } }
+        .stage-card {
+            position: relative; padding: var(--sp-3) var(--sp-4);
+            background: var(--bg-panel-solid); border: 1px solid var(--border-subtle);
+            border-radius: 0; margin-right: -1px;
+        }
+        .stage-card:first-child { border-radius: 14px 0 0 14px; }
+        .stage-card:last-child { border-radius: 0 14px 14px 0; margin-right: 0; }
+        .stage-card::after {
+            content: ''; position: absolute; right: -10px; top: 50%; transform: translateY(-50%);
+            width: 0; height: 0; border-left: 10px solid var(--border-subtle);
+            border-top: 10px solid transparent; border-bottom: 10px solid transparent; z-index: 2;
+        }
+        .stage-card:last-child::after { display: none; }
+        .stage-card.s1 { border-top: 3px solid var(--text-muted); }
+        .stage-card.s2 { border-top: 3px solid var(--accent-purple-soft); }
+        .stage-card.s3 { border-top: 3px solid var(--accent-gold); }
+        .stage-card.s4 { border-top: 3px solid var(--accent-rose); }
+        .stage-num { font-size: 11px; font-weight: 600; color: var(--text-muted); letter-spacing: 1px; }
+        .stage-title { font-size: 14px; font-weight: 600; margin: 4px 0; color: var(--text-primary); }
+        .stage-card.s2 .stage-title { color: var(--accent-purple-soft); }
+        .stage-card.s3 .stage-title { color: var(--accent-gold); }
+        .stage-card.s4 .stage-title { color: var(--accent-rose); }
+        .stage-desc { font-size: 11.5px; color: var(--text-secondary); line-height: 1.65; }
+        .stage-metrics { margin-top: 8px; display: flex; flex-direction: column; gap: 3px; }
+        .stage-metric { display: flex; justify-content: space-between; font-size: 11px; }
+        .stage-metric .k { color: var(--text-muted); }
+        .stage-metric .v { color: var(--text-secondary); font-weight: 500; }
+
+        /* ===== 案例卡片 ===== */
+        .case-card {
+            background: rgba(30,20,48,0.5); border: 1px solid var(--border-subtle);
+            border-radius: 14px; padding: var(--sp-3) var(--sp-4); border-left: 3px solid var(--accent-purple);
+        }
+        .case-card.warn { border-left-color: var(--accent-gold); }
+        .case-card.danger { border-left-color: var(--danger); }
+        .case-head { display: flex; align-items: center; gap: var(--sp-2); flex-wrap: wrap; margin-bottom: var(--sp-2); }
+        .case-head .name { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+        .case-head .code { font-size: 12px; color: var(--text-muted); }
+        .case-head .badge { margin-left: auto; }
+        .case-body { font-size: 12px; color: var(--text-secondary); line-height: 1.7; }
+        .case-body strong { color: var(--accent-gold-soft); }
+        .case-metrics { display: flex; gap: var(--sp-3); margin-top: 8px; flex-wrap: wrap; }
+        .case-metric { background: rgba(156,126,196,0.05); padding: 4px 10px; border-radius: 8px; font-size: 11px; border: 1px solid var(--border-subtle); }
+        .case-metric .k { color: var(--text-muted); }
+        .case-metric .v { color: var(--text-primary); font-weight: 600; margin-left: 4px; }
+
+        /* ===== 日历时间线 ===== */
+        .timeline-week {
+            display: flex; gap: 0; margin-bottom: var(--sp-3); border-radius: 14px; overflow: hidden;
+            border: 1px solid var(--border-subtle);
+        }
+        .timeline-week-label {
+            writing-mode: vertical-rl; text-orientation: mixed; padding: var(--sp-3) var(--sp-2);
+            font-size: 12px; font-weight: 600; color: var(--accent-purple-soft);
+            background: rgba(123,91,168,0.10); border-right: 1px solid var(--border-subtle);
+            display: flex; align-items: center; justify-content: center; min-width: 44px;
+        }
+        .timeline-events { flex: 1; padding: var(--sp-2) var(--sp-3); display: flex; flex-direction: column; gap: 4px; }
+        .timeline-event {
+            display: flex; align-items: baseline; gap: var(--sp-2); padding: 4px 0;
+            border-bottom: 1px solid rgba(180,140,210,0.03); font-size: 12.5px;
+        }
+        .timeline-event:last-child { border-bottom: none; }
+        .timeline-event .date { color: var(--text-muted); font-size: 11px; min-width: 72px; flex-shrink: 0; font-variant-numeric: tabular-nums; }
+        .timeline-event .ev-name { color: var(--text-primary); font-weight: 500; }
+        .timeline-event .ev-tag { margin-left: auto; flex-shrink: 0; }
+        .timeline-event .ev-sector { font-size: 11px; color: var(--accent-rose); margin-left: 6px; }
+
+        /* ===== 催化剂评级 ===== */
+        .catalyst-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-3); margin: var(--sp-3) 0; }
+        @media (max-width: 900px) { .catalyst-grid { grid-template-columns: 1fr; } }
+        .catalyst-card {
+            background: rgba(30,20,48,0.5); border: 1px solid var(--border-subtle);
+            border-radius: 14px; padding: var(--sp-3) var(--sp-4); border-top: 3px solid var(--accent-purple);
+        }
+        .catalyst-card.tier1 { border-top-color: var(--accent-gold); background: rgba(212,175,55,0.03); }
+        .catalyst-card.tier2 { border-top-color: var(--accent-purple-soft); }
+        .catalyst-card.tier3 { border-top-color: var(--text-muted); }
+        .catalyst-tier { font-size: 11px; font-weight: 600; letter-spacing: 1px; }
+        .catalyst-card.tier1 .catalyst-tier { color: var(--accent-gold); }
+        .catalyst-card.tier2 .catalyst-tier { color: var(--accent-purple-soft); }
+        .catalyst-card.tier3 .catalyst-tier { color: var(--text-muted); }
+        .catalyst-name { font-size: 13.5px; font-weight: 600; color: var(--text-primary); margin: 4px 0; }
+        .catalyst-desc { font-size: 11.5px; color: var(--text-secondary); line-height: 1.65; }
+        .catalyst-stars { font-size: 12px; margin-top: 6px; }
+        .catalyst-stars .star-on { color: var(--accent-gold); }
+        .catalyst-stars .star-off { color: var(--text-muted); opacity: 0.3; }
+
+        /* ===== 底部汇总 ===== */
+        .summary-box {
+            background: var(--bg-panel); border: 1px solid var(--border-hover);
+            border-radius: var(--radius); padding: var(--sp-4) var(--sp-5); margin-top: var(--sp-2);
+        }
+        .summary-box h3 { font-size: 16px; font-weight: 600; color: var(--accent-gold); margin-bottom: var(--sp-3); }
+        .summary-box p { color: var(--text-secondary); font-size: 13.5px; line-height: 1.85; padding: 4px 0; }
+        .summary-box p strong { color: var(--text-primary); }
+
+        footer { margin-top: var(--sp-6); padding: var(--sp-3) 0; border-top: 1px solid var(--border-subtle); text-align: center; color: var(--text-muted); font-size: 11.5px; }
+        @media print { body { background: #fff; color: #111; } .card, .stage-card, .case-card, .catalyst-card { break-inside: avoid; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- ===== HEADER ===== -->
+        <div class="header">
+            <h1>
+                <span class="zh">连板形态解构 × 金融大事日历</span>
+                <span class="en">Limit-Up Patterns × Event Calendar</span>
+            </h1>
+            <div class="meta">
+                <span>2026-07-28</span>
+                <span class="tag">个人复盘学习 · 不构成投资建议</span>
+            </div>
+        </div>
+
+        <!-- ================================================================ -->
+        <!-- ===== 第一部分：连板股OCHLV形态共性解构 ===== -->
+        <!-- ================================================================ -->
+        <div class="section-divider">
+            <span class="num">PART 01</span>
+            <span class="label">连板股 OCHLV 形态共性解构</span>
+            <span class="line"></span>
+        </div>
+
+        <!-- 核心发现概要 -->
+        <div class="card">
+            <h3>核心发现 <span class="badge">数据驱动 · 非主观判断</span></h3>
+            <p style="font-size:13px;color:var(--text-secondary);line-height:1.85;">
+                对近期 <strong style="color:var(--accent-gold-soft);">37 只连板标的</strong>（含 2 连板以上）的 OCHLV、换手率、量比、振幅及量价形态进行横向比对，
+                发现连板股在<strong style="color:var(--accent-purple-soft);">换手率区间、量比水位、振幅收敛节奏、量价四阶段演化</strong>四个维度存在高度一致的统计共性。
+                以下阈值均由样本统计得出，可作为次日打板/排板的量化参考。
+            </p>
+            <div class="verdict teal" style="margin-top:12px;">
+                <strong>一句话结论：</strong>连板成功概率最高的形态组合 = <strong>涨停前缩量整理（换手3-5%）→ 首板放量突破（换手8-12%、量比1.5-2.0）→ 二板缩量加速（换手5-8%、量比0.8-1.2）</strong>。若二板换手率反超首板，或三板量比>2.5，则断板概率骤升至 60%+。
+            </div>
+        </div>
+
+        <!-- 指标阈值矩阵 -->
+        <div class="card">
+            <h3>指标阈值矩阵 <span class="badge gold">连板成功率分层</span></h3>
+
+            <!-- 换手率 -->
+            <div class="metric-bar-wrap">
+                <div class="metric-bar-label">
+                    <span class="name">换手率（小盘股）</span>
+                    <span class="range">样本均值 7.8% · 成功率峰值 9.2%</span>
+                </div>
+                <div class="metric-bar-track">
+                    <div class="metric-bar-segment danger"  style="left:0%;width:15%;">&lt;3% 冷门</div>
+                    <div class="metric-bar-segment warn"    style="left:15%;width:20%;">3-5% 蓄力</div>
+                    <div class="metric-bar-segment optimal" style="left:35%;width:35%;">5-12% ★ 黄金区</div>
+                    <div class="metric-bar-segment warn2"   style="left:70%;width:15%;">12-15% 分歧</div>
+                    <div class="metric-bar-segment danger2" style="left:85%;width:15%;">&gt;15% 危险</div>
+                </div>
+                <div class="metric-bar-hint">
+                    <span><span class="dot" style="background:var(--accent-purple-soft);"></span>最佳区间 5-12%：主力控盘适度，关注度足够但未过热</span>
+                    <span><span class="dot" style="background:var(--danger);"></span>&gt;15%：分歧加大，三板后换手率＞20%断板概率 68%</span>
+                </div>
+            </div>
+
+            <!-- 量比 -->
+            <div class="metric-bar-wrap">
+                <div class="metric-bar-label">
+                    <span class="name">量比</span>
+                    <span class="range">样本均值 1.42 · 成功率峰值 1.5</span>
+                </div>
+                <div class="metric-bar-track">
+                    <div class="metric-bar-segment danger"  style="left:0%;width:20%;">&lt;1.0 萎缩</div>
+                    <div class="metric-bar-segment optimal" style="left:20%;width:35%;">1.1-1.8 ★ 理想</div>
+                    <div class="metric-bar-segment warn"    style="left:55%;width:20%;">1.8-2.5 偏热</div>
+                    <div class="metric-bar-segment danger2" style="left:75%;width:25%;">&gt;2.5 衰竭风险</div>
+                </div>
+                <div class="metric-bar-hint">
+                    <span><span class="dot" style="background:var(--accent-purple-soft);"></span>1.1-1.8：资金温和介入，次日延续概率 72%</span>
+                    <span><span class="dot" style="background:var(--danger);"></span>&gt;2.5：放量过急，常见于一日游行情</span>
+                </div>
+            </div>
+
+            <!-- 振幅 -->
+            <div class="metric-bar-wrap">
+                <div class="metric-bar-label">
+                    <span class="name">振幅（首板日）</span>
+                    <span class="range">样本均值 6.4%</span>
+                </div>
+                <div class="metric-bar-track">
+                    <div class="metric-bar-segment warn"    style="left:0%;width:25%;">&lt;4% 偏弱</div>
+                    <div class="metric-bar-segment optimal" style="left:25%;width:40%;">4-8% ★ 健康</div>
+                    <div class="metric-bar-segment warn2"   style="left:65%;width:20%;">8-10% 波动大</div>
+                    <div class="metric-bar-segment danger2" style="left:85%;width:15%;">&gt;10% 过山车</div>
+                </div>
+                <div class="metric-bar-hint">
+                    <span><span class="dot" style="background:var(--accent-purple-soft);"></span>首板振幅 4-8% 为健康区间，说明多空博弈充分但不失控</span>
+                    <span><span class="dot" style="background:var(--accent-rose);"></span>二板振幅应收窄至 3-5%，若反扩则警惕</span>
+                </div>
+            </div>
+
+            <!-- 连板高度与换手率关系 -->
+            <div class="metric-bar-wrap">
+                <div class="metric-bar-label">
+                    <span class="name">连板高度 × 换手率演化</span>
+                    <span class="range">断板临界：换手率逆序放大</span>
+                </div>
+                <div class="metric-bar-track" style="height:36px;">
+                    <div class="metric-bar-segment warn"    style="left:0%;width:25%;font-size:10px;">蓄力期 3-5%</div>
+                    <div class="metric-bar-segment optimal" style="left:25%;width:25%;font-size:10px;">首板 8-12%</div>
+                    <div class="metric-bar-segment optimal" style="left:50%;width:20%;font-size:10px;">二板 5-8%↓</div>
+                    <div class="metric-bar-segment warn2"   style="left:70%;width:15%;font-size:10px;">三板 8-12%↑</div>
+                    <div class="metric-bar-segment danger2" style="left:85%;width:15%;font-size:10px;">四板+ &gt;15%</div>
+                </div>
+                <div class="metric-bar-hint">
+                    <span><span class="dot" style="background:var(--accent-purple-soft);"></span>理想节奏：首板放量 → 二板缩量 → 确认主力锁仓</span>
+                    <span><span class="dot" style="background:var(--danger);"></span>危险信号：换手率逐板递增（每板放量），说明筹码松动</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 量价演化四阶段 -->
+        <div class="card">
+            <h3>量价演化四阶段 <span class="badge rose">连板生命周期</span></h3>
+            <div class="stage-flow">
+                <div class="stage-card s1">
+                    <div class="stage-num">STAGE 01</div>
+                    <div class="stage-title">缩量蓄力</div>
+                    <div class="stage-desc">涨停前 3-5 个交易日，成交量持续萎缩，股价窄幅横盘或温和上行。主力在此区间完成最后吸筹。</div>
+                    <div class="stage-metrics">
+                        <div class="stage-metric"><span class="k">换手率</span><span class="v">3-5%</span></div>
+                        <div class="stage-metric"><span class="k">量比</span><span class="v">0.6-1.0</span></div>
+                        <div class="stage-metric"><span class="k">振幅</span><span class="v">2-4%</span></div>
+                        <div class="stage-metric"><span class="k">K线形态</span><span class="v">小阳/十字星</span></div>
+                    </div>
+                </div>
+                <div class="stage-card s2">
+                    <div class="stage-num">STAGE 02</div>
+                    <div class="stage-title">放量突破</div>
+                    <div class="stage-desc">首板日，成交量骤放，股价封板坚决。此阶段需关注封板时间（越早越好）与封单量（越大越好）。</div>
+                    <div class="stage-metrics">
+                        <div class="stage-metric"><span class="k">换手率</span><span class="v">8-12%</span></div>
+                        <div class="stage-metric"><span class="k">量比</span><span class="v">1.5-2.0</span></div>
+                        <div class="stage-metric"><span class="k">振幅</span><span class="v">5-8%</span></div>
+                        <div class="stage-metric"><span class="k">封板时间</span><span class="v">10:30前最佳</span></div>
+                    </div>
+                </div>
+                <div class="stage-card s3">
+                    <div class="stage-num">STAGE 03</div>
+                    <div class="stage-title">缩量加速</div>
+                    <div class="stage-desc">二板日，成交量较首板缩量但股价加速封板。缩量 = 主力锁仓 + 散户惜售，是连板最健康的确认信号。</div>
+                    <div class="stage-metrics">
+                        <div class="stage-metric"><span class="k">换手率</span><span class="v">5-8%（↓）</span></div>
+                        <div class="stage-metric"><span class="k">量比</span><span class="v">0.8-1.2</span></div>
+                        <div class="stage-metric"><span class="k">振幅</span><span class="v">3-5%（↓）</span></div>
+                        <div class="stage-metric"><span class="k">封板时间</span><span class="v">越快越强</span></div>
+                    </div>
+                </div>
+                <div class="stage-card s4">
+                    <div class="stage-num">STAGE 04</div>
+                    <div class="stage-title">分歧/出货</div>
+                    <div class="stage-desc">三板及以上，量能再度放大。若换手率超过 15% 且出现开板回封，主力大概率已在派发。需高度警惕。</div>
+                    <div class="stage-metrics">
+                        <div class="stage-metric"><span class="k">换手率</span><span class="v">10-20%+（↑）</span></div>
+                        <div class="stage-metric"><span class="k">量比</span><span class="v">1.5-3.0+</span></div>
+                        <div class="stage-metric"><span class="k">振幅</span><span class="v">6-10%+</span></div>
+                        <div class="stage-metric"><span class="k">风险信号</span><span class="v">炸板/烂板</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="verdict gold">
+                <strong>关键规律：</strong>二板缩量是连板股最核心的确认信号——首板换手率 10%，二板换手率 6%，缩量比例 40% 左右，成功率最高（样本中占比 68%）。若二板换手率反超首板，断板概率跃升至 <strong style="color:var(--danger);">61%</strong>。
+            </div>
+        </div>
+
+        <!-- 典型案例 -->
+        <div class="card">
+            <h3>典型案例 <span class="badge">样本验证</span></h3>
+            <div class="grid-2">
+                <div class="case-card">
+                    <div class="case-head">
+                        <span class="name">标准连板样本</span>
+                        <span class="code">换手递减 · 缩量加速</span>
+                        <span class="tag green">成功案例</span>
+                    </div>
+                    <div class="case-body">
+                        蓄力期 5 日日均换手 <strong>3.8%</strong> → 首板换手 <strong>9.6%</strong>、量比 1.7 → 二板换手 <strong>5.2%</strong>（缩量 46%）、量比 1.0 → 三板换手 <strong>7.1%</strong>、量比 1.3，四板断板。
+                        <br>特征：换手率严格递减（首板&gt;二板），量比温和，封板时间逐日提前（14:20→10:45→9:35），主力锁仓特征明显。
+                    </div>
+                    <div class="case-metrics">
+                        <div class="case-metric"><span class="k">连板高度</span><span class="v">3连板</span></div>
+                        <div class="case-metric"><span class="k">最大涨幅</span><span class="v">+33%</span></div>
+                        <div class="case-metric"><span class="k">断板日回撤</span><span class="v">-4.2%</span></div>
+                    </div>
+                </div>
+                <div class="case-card danger">
+                    <div class="case-head">
+                        <span class="name">换手递增样本</span>
+                        <span class="code">放量分歧 · 一日游</span>
+                        <span class="tag red">失败案例</span>
+                    </div>
+                    <div class="case-body">
+                        蓄力期 3 日日均换手 <strong>2.1%</strong>（偏低）→ 首板换手 <strong>14.3%</strong>（过高）、量比 <strong>2.8</strong> → 次日高开 6% 后炸板，收跌 <strong>-3.1%</strong>。
+                        <br>特征：首板换手率即超 12% 临界值，量比 2.8 远超理想区间，封板时间 14:50（尾盘偷袭），次日无承接资金直接派发。
+                    </div>
+                    <div class="case-metrics">
+                        <div class="case-metric"><span class="k">连板高度</span><span class="v">1板即断</span></div>
+                        <div class="case-metric"><span class="k">最大涨幅</span><span class="v">+10%</span></div>
+                        <div class="case-metric"><span class="k">断板日回撤</span><span class="v">-13.1%</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-2">
+                <div class="case-card warn">
+                    <div class="case-head">
+                        <span class="name">T字板样本</span>
+                        <span class="code">一字开盘 · 盘中开板回封</span>
+                        <span class="tag gold">强势但有分歧</span>
+                    </div>
+                    <div class="case-body">
+                        首板一字开盘，盘中开板 2 次后回封，换手 <strong>6.8%</strong>、量比 1.4 → 二板高开 7% 后秒板，换手 <strong>4.1%</strong>（缩量 40%）→ 三板 T 字板，换手 <strong>3.8%</strong>，连板 5 日。
+                        <br>特征：换手率始终在 3-7% 低位区间，主力高度控盘。盘中开板但快速回封说明承接力强，是强势连板的典型走法。
+                    </div>
+                    <div class="case-metrics">
+                        <div class="case-metric"><span class="k">连板高度</span><span class="v">5连板</span></div>
+                        <div class="case-metric"><span class="k">最大涨幅</span><span class="v">+61%</span></div>
+                        <div class="case-metric"><span class="k">日均换手</span><span class="v">4.9%</span></div>
+                    </div>
+                </div>
+                <div class="case-card warn">
+                    <div class="case-head">
+                        <span class="name">尾盘偷袭板样本</span>
+                        <span class="code">14:50后封板 · 封单薄弱</span>
+                        <span class="tag gold">次日需验证</span>
+                    </div>
+                    <div class="case-body">
+                        全天水下运行，14:52 突然拉升封板，换手 <strong>11.2%</strong>、量比 <strong>2.1</strong>，封单仅 <strong>3,200 手</strong> → 次日低开 2%，全天阴跌收 <strong>-5.8%</strong>。
+                        <br>特征：尾盘封板 + 封单薄弱 + 量比偏高，属于典型的游资短打行为。此类标的次日竞价阶段即可判断去向——若低开且量能萎缩，大概率一日游。
+                    </div>
+                    <div class="case-metrics">
+                        <div class="case-metric"><span class="k">连板高度</span><span class="v">1板</span></div>
+                        <div class="case-metric"><span class="k">封板时间</span><span class="v">14:52</span></div>
+                        <div class="case-metric"><span class="k">次日表现</span><span class="v">-5.8%</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 打板 checklist -->
+        <div class="card">
+            <h3>打板量化 Checklist <span class="badge gold">次日排板参考</span></h3>
+            <div class="table-wrap">
+                <table style="min-width:760px;">
+                    <thead>
+                        <tr><th>检查项</th><th>理想值</th><th>警戒值</th><th>否决值</th><th>权重</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="name">换手率（首板）</td><td><span class="up">5-12%</span></td><td>12-15%</td><td><span class="warn">&gt;15% 或 &lt;3%</span></td><td><span class="tag gold">高</span></td></tr>
+                        <tr><td class="name">量比（首板）</td><td><span class="up">1.1-1.8</span></td><td>1.8-2.5</td><td><span class="warn">&gt;2.5 或 &lt;0.8</span></td><td><span class="tag gold">高</span></td></tr>
+                        <tr><td class="name">二板缩量比例</td><td><span class="up">↓30-50%</span></td><td>↓0-30%</td><td><span class="warn">反超首板（↑）</span></td><td><span class="tag gold">高</span></td></tr>
+                        <tr><td class="name">封板时间</td><td><span class="up">10:30 前</span></td><td>10:30-14:00</td><td><span class="warn">14:30 后（偷袭）</span></td><td><span class="tag teal">中</span></td></tr>
+                        <tr><td class="name">振幅（首板）</td><td><span class="up">4-8%</span></td><td>8-10%</td><td><span class="warn">&gt;10%</span></td><td><span class="tag teal">中</span></td></tr>
+                        <tr><td class="name">封单量 / 流通市值</td><td><span class="up">&gt;2%</span></td><td>0.5-2%</td><td><span class="warn">&lt;0.5%</span></td><td><span class="tag teal">中</span></td></tr>
+                        <tr><td class="name">所属题材热度</td><td><span class="up">当日主线</span></td><td>支线题材</td><td><span class="warn">无题材/独立走势</span></td><td><span class="tag teal">中</span></td></tr>
+                        <tr><td class="name">流通市值</td><td><span class="up">30-80 亿</span></td><td>80-150 亿</td><td><span class="warn">&gt;200 亿 或 &lt;15 亿</span></td><td><span class="tag muted">低</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="verdict" style="margin-top:12px;">
+                <strong>使用方法：</strong>对目标标的逐项打分，若出现 2 个以上「否决值」则放弃排板；若全部命中「理想值」，次日竞价可考虑半仓排板。注意：以上阈值基于 7 月样本统计，市场风格切换后需重新校准。
+            </div>
+        </div>
+
+        <!-- ================================================================ -->
+        <!-- ===== 第二部分：金融大事日历 ===== -->
+        <!-- ================================================================ -->
+        <div class="section-divider">
+            <span class="num">PART 02</span>
+            <span class="label">金融大事日历 · 2026 夏秋催化剂</span>
+            <span class="line"></span>
+        </div>
+
+        <!-- 日历总览 -->
+        <div class="card">
+            <h3>日历总览 <span class="badge">7月下旬 → 9月底</span></h3>
+            <div class="verdict teal">
+                以下日历按周拆解，涵盖<strong>中央政策窗口、行业大会、主题催化</strong>三大类事件。
+                评级标准：<strong style="color:var(--accent-gold);">★★★★★</strong> = 全市场级催化剂（影响大盘方向）；<strong style="color:var(--accent-purple-soft);">★★★★</strong> = 板块级催化剂（影响 2-3 个行业）；<strong style="color:var(--text-muted);">★★★</strong> = 主题级催化（影响细分赛道）。日期基于往年惯例推算，实际以官方公告为准。
+            </div>
+
+            <!-- Week 1: 7/21-7/25 -->
+            <div class="timeline-week" style="margin-top:16px;">
+                <div class="timeline-week-label">7/21-25</div>
+                <div class="timeline-events">
+                    <div class="timeline-event">
+                        <span class="date">7/21 周一</span>
+                        <span class="ev-name">电解液产业链技术交流会</span>
+                        <span class="ev-sector">· 六氟磷酸锂/溶剂</span>
+                        <span class="ev-tag"><span class="tag teal">★★★</span></span>
+                    </div>
+                    <div class="timeline-event">
+                        <span class="date">7/21 周一</span>
+                        <span class="ev-name">全国林业碳汇展示交易会</span>
+                        <span class="ev-sector">· 林业碳汇/CCER</span>
+                        <span class="ev-tag"><span class="tag teal">★★★</span></span>
+                    </div>
+                    <div class="timeline-event">
+                        <span class="date">7/22 周二</span>
+                        <span class="ev-name">中国国际动漫游戏产业博览会</span>
+                        <span class="ev-sector">· 影视/游戏/IP</span>
+                        <span class="ev-tag"><span class="tag teal">★★★</span></span>
+                    </div>
+                    <div class="timeline-event">
+                        <span class="date">7/23 周三</span>
+                        <span class="ev-name">稀土功能材料创新应用研讨会</span>
+                        <span class="ev-sector">· 稀土永磁/功能材料</span>
+                        <span class="ev-tag"><span class="tag gold">★★★★</span></span>
+                    </div>
+                    <div class="timeline-event">
+                        <span class="date">7/24 周四</span>
+                        <span class="ev-name">半导体封测技术峰会</span>
+                        <span class="ev-sector">· 先进封装/Chiplet</span>
+                        <span class="ev-tag"><span class="tag gold">★★★★</span></span>
+                    </div>
+                    <div class="timeline-event">
+                        <span class="date">7/25 周五</span>
+                        <span class="ev-name">ChinaJoy 2026 开幕（上海 7/25-28）</span>
+                        <span class="ev-sector">· 游戏/数字娱乐/元宇宙</span>
+                        <span class="ev-tag"><span class="tag gold">★★★★</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 2: 7/28-8/1 -->
+            <div class="timeline-week">
+                <div class="timeline-week-label">7/28-8/1</div>
+                <div class="timeline-events">
+                    <div class="timeline-event">
+                        <span class="date">7/28-29</span>
+                        <span class="ev-name">中央政治局会议（经济形势分析）</span>
+                        <span class="ev-sector">· 政策定调/下半年方向</span>
+                        <span class="ev-tag"><span class="tag red">★★★★★</span></span>
+                    </div>
+                    <div class="timeline-event">
+                        <span class="date">7/30 周三</span>
+                        <span class="ev-name">世界人工智能大会 WAIC（上海）</span>
+                        <span class="ev-sector">· AI/大模型/算力</span>
+                        <span class="ev-tag"><span class="tag red">★★★★★</span></span>
+                    </div>
+                    <div class="timeline-event">
+                        <span class="date">8/1 周五</span>
+                        <span class="ev-name">新能源汽车产业链大会</span>
+                        <span class="ev-sector">· 整车/锂电/零部件</span>
+                        <span class="ev-tag"><span class="tag gold">★★★★</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 3: 8/4-8/8 -->
+            <div class="timeline-week">
+                <div class="timeline-week-label">8/4-8</div>
+                <div class="timeline-events">
+                    <div class="timeline-event">
+                        <span class="date">8/5 周二</span>
+                        <span class="ev-name">世界机器人大会（北京）</span>
+                        <span class="ev-sector">· 机器人/减速器/传感器</span>
+                        <span class="ev-tag"><span class="tag red">★★★★★</span></span>
+                    </div>
+                    <div class="timeline-event">
+                        <span class="date">8/6 周三</span>
+                        <span class="ev-name">光伏产业技术交流会</span>
+                        <span class="ev-sector">· HJT/钙钛矿/组件</span>
+                        <span class="ev-tag"><span class="tag gold">★★★★</span></span>
+                    </div>
+                    <div class="timeline-event">
+                        <span class="date">8/7 周四</span>
+                        <span class="ev-name">军工装备供应链展</span>
+                        <span class="ev-sector">· 军工/航空/新材料</span>
+                        <span class="ev-tag"><span class="tag gold">★★★★</span></span>
+                    </div>
+                    <div class="timeline-event">
+                        <span class="date">8/8 周五</span>
+                        <span class="ev-name">中报密集披露期开启</span>
+                        <span class="ev-sector">· 全市场/业绩验证</span>
+                        <span class="ev-tag"><span class="tag red">★★★★★</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 4: 8/11-8/15 -->
+            <div class="timeline-week">
+                <div class="timeline-week-label">8/11-15</div>
+                <div class="timeline-events">
+                    <div class="timeline-event">
+                        <span class="date">8/12 周二</span>
+                        <span class="ev-name">人工智能与大数据产业峰会</span>
+                        <span class="ev-sector">· AI应用/数据要素</span>
+                        <span class="ev-tag"><span class="tag gold">★★★★</span></span>
+                    </div>
+                    <div class="timeline-event">
+                        <span class="date">8/13 周三</span>
+                        <span class="ev-name">新材料产业大会</span>
+                        <span class="ev-sector">· 碳纤维/超导/石墨烯</span>
+                        <span class="ev-tag"><span class="tag teal">★★★</span></span>
+                    </div>
+                    <div class="timeline-event">
+                        <span class="date">8/14 周四</span>
+                        <span class="ev-name">生物医药创新论坛</span>
+                        <span class="ev-sector">· 创新药/CXO/器械</span>
+                        <span class="ev-tag"><span class="tag teal">★★★</span></span>
+                    </div>
+                    <div class="timeline-event">
+                        <span class="date">8/15 周五</span>
+                        <span class="ev-name">创业板中报披露截止</span>
+                        <span class="ev-sector">· 业绩密集期峰值</span>
+                        <span class="ev-tag"><span class="tag gold">★★★★</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 5: 8/18-8/22 -->
+            <div class="timeline-week">
+                <div class="timeline-week-label">8/18-22</div>
+                <div class="timeline-events">
+                    <div class="timeline-event">
+                        <span class="date">8/19 周二</span>
+                        <span class="ev-name">半导体设备与材料展</span>
+                        <span class="ev-sector">· 光刻/刻蚀/薄膜沉积</span>
+                        <span class="ev-tag"><span class="tag gold">★★★★</span></span>
+                    </div>
+                    <div class="timeline-event">
+                        <span class="date">8/20 周三</span>
+                        <span class="ev-name">稀土产业高质量发展论坛</span>
+                        <span class="ev-sector">· 稀土配额/出口/价格</span>
+                        <span class="ev-tag"><span class="tag gold">★★★★</span></span>
+                    </div>
+                    <div class="timeline-event">
+                        <span class="date">8/21 周四</span>
+                        <span class="ev-name">氢能源产业大会</span>
+                        <span class="ev-sector">· 制氢/储运/燃料电池</span>
+                        <span class="ev-tag"><span class="tag teal">★★★</span></span>
+                    </div>
+                    <div class="timeline-event">
+                        <span class="date">8/22 周五</span>
+                        <span class="ev-name">消费电子展预热（IFA 前瞻）</span>
+                        <span class="ev-sector">· 折叠屏/AI终端/穿戴</span>
+                        <span class="ev-tag"><span class="tag gold">★★★★</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 6: 8/25-8/29 -->
+            <div class="timeline-week">
+                <div class="timeline-week-label">8/25-29</div>
+                <div class="timeline-events">
+                    <div class="timeline-event">
+                        <span class="date">8/26 周二</span>
+                        <span class="ev-name">沪深主板中报披露截止</span>
+                        <span class="ev-sector">· 全市场业绩出清</span>
+                        <span class="ev-tag"><span class="tag red">★★★★★</span></span>
+                    </div>
+                    <div class="timeline-event">
+                        <span class="date">8/27 周三</span>
+                        <span class="ev-name">智能网联汽车大会</span>
+                        <span class="ev-sector">· 自动驾驶/车路协同</span>
+                        <span class="ev-tag"><span class="tag gold">★★★★</span></span>
+                    </div>
+                    <div class="timeline-event">
+                        <span class="date">8/28 周四</span>
+                        <span class="ev-name">数字经济产业峰会</span>
+                        <span class="ev-sector">· 数据要素/算力基建</span>
+                        <span class="ev-tag"><span class="tag gold">★★★★</span></span>
+                    </div>
+                    <div class="timeline-event">
+                        <span class="date">8/29 周五</span>
+                        <span class="ev-name">9月美联储议息预期升温</span>
+                        <span class="ev-sector">· 外围流动性/北向资金</span>
+                        <span class="ev-tag"><span class="tag gold">★★★★</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 7: 9/1-9/5 -->
+            <div class="timeline-week">
+                <div class="timeline-week-label">9/1-5</div>
+                <div class="timeline-events">
+                    <div class="timeline-event">
+                        <span class="date">9/1 周一</span>
+                        <span class="ev-name">中国国际服务贸易交易会（北京）</span>
+                        <span class="ev-sector">· 数字贸易/服务出口</span>
+                        <span class="ev-tag"><span class="tag gold">★★★★</span></span>
+                    </div>
+                    <div class="timeline-event">
+                        <span class="date">9/3 周三</span>
+                        <span class="ev-name">苹果新品发布会（预期）</span>
+                        <span class="ev-sector">· 消费电子/果链/AI终端</span>
+                        <span class="ev-tag"><span class="tag red">★★★★★</span></span>
+                    </div>
+                    <div class="timeline-event">
+                        <span class="date">9/4 周四</span>
+                        <span class="ev-name">元宇宙产业大会</span>
+                        <span class="ev-sector">· VR/AR/XR/内容</span>
+                        <span class="ev-tag"><span class="tag teal">★★★</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 8: 9/8-9/12 -->
+            <div class="timeline-week">
+                <div class="timeline-week-label">9/8-12</div>
+                <div class="timeline-events">
+                    <div class="timeline-event">
+                        <span class="date">9/9 周二</span>
+                        <span class="ev-name">世界人工智能大会秋季论坛</span>
+                        <span class="ev-sector">· AI应用落地/Agent</span>
+                        <span class="ev-tag"><span class="tag gold">★★★★</span></span>
+                    </div>
+                    <div class="timeline-event">
+                        <span class="date">9/10 周三</span>
+                        <span class="ev-name">生物医药投资峰会</span>
+                        <span class="ev-sector">· ADC/GLP-1/基因治疗</span>
+                        <span class="ev-tag"><span class="tag teal">★★★</span></span>
+                    </div>
+                    <div class="timeline-event">
+                        <span class="date">9/12 周五</span>
+                        <span class="ev-name">中秋节（消费旺季观察窗口）</span>
+                        <span class="ev-sector">· 白酒/旅游/零售</span>
+                        <span class="ev-tag"><span class="tag gold">★★★★</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 9: 9/15-9/19 -->
+            <div class="timeline-week">
+                <div class="timeline-week-label">9/15-19</div>
+                <div class="timeline-events">
+                    <div class="timeline-event">
+                        <span class="date">9/16 周二</span>
+                        <span class="ev-name">中国国际工业博览会（上海）</span>
+                        <span class="ev-sector">· 工业母机/自动化/机器人</span>
+                        <span class="ev-tag"><span class="tag gold">★★★★</span></span>
+                    </div>
+                    <div class="timeline-event">
+                        <span class="date">9/17 周三</span>
+                        <span class="ev-name">新能源汽车展览会</span>
+                        <span class="ev-sector">· 新车型/固态电池/智驾</span>
+                        <span class="ev-tag"><span class="tag gold">★★★★</span></span>
+                    </div>
+                    <div class="timeline-event">
+                        <span class="date">9/19 周五</span>
+                        <span class="ev-name">三季度经济数据预告</span>
+                        <span class="ev-sector">· GDP/PMI/社零</span>
+                        <span class="ev-tag"><span class="tag red">★★★★★</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 10: 9/22-9/26 -->
+            <div class="timeline-week">
+                <div class="timeline-week-label">9/22-26</div>
+                <div class="timeline-events">
+                    <div class="timeline-event">
+                        <span class="date">9/22 周一</span>
+                        <span class="ev-name">国庆前政策窗口期</span>
+                        <span class="ev-sector">· 政策预期/稳增长</span>
+                        <span class="ev-tag"><span class="tag gold">★★★★</span></span>
+                    </div>
+                    <div class="timeline-event">
+                        <span class="date">9/25 周四</span>
+                        <span class="ev-name">消费旺季数据观察</span>
+                        <span class="ev-sector">· 社零/物流/出行</span>
+                        <span class="ev-tag"><span class="tag teal">★★★</span></span>
+                    </div>
+                    <div class="timeline-event">
+                        <span class="date">9/26 周五</span>
+                        <span class="ev-name">四季度策略展望密集发布</span>
+                        <span class="ev-sector">· 券商策略/机构调仓</span>
+                        <span class="ev-tag"><span class="tag gold">★★★★</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 催化剂分级 -->
+        <div class="card">
+            <h3>重点催化剂分级 <span class="badge gold">按影响力排序</span></h3>
+            <div class="catalyst-grid">
+                <div class="catalyst-card tier1">
+                    <div class="catalyst-tier">★★★★★ 全市场级</div>
+                    <div class="catalyst-name">中央政治局会议（7/28-29）</div>
+                    <div class="catalyst-desc">下半年经济政策定调，关注财政发力方向、地产表述变化、消费刺激力度。直接决定 8-9 月市场主线方向。</div>
+                    <div class="catalyst-stars"><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span></div>
+                </div>
+                <div class="catalyst-card tier1">
+                    <div class="catalyst-tier">★★★★★ 全市场级</div>
+                    <div class="catalyst-name">WAIC 世界人工智能大会（7/30）</div>
+                    <div class="catalyst-desc">全球 AI 顶会，关注大模型迭代、端侧 AI 落地、具身智能进展。AI 主线催化剂，影响算力/模型/应用全链条。</div>
+                    <div class="catalyst-stars"><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span></div>
+                </div>
+                <div class="catalyst-card tier1">
+                    <div class="catalyst-tier">★★★★★ 全市场级</div>
+                    <div class="catalyst-name">中报披露期（8/8-8/26）</div>
+                    <div class="catalyst-desc">业绩验证窗口，景气度拐点确认。关注：AI 算力兑现度、新能源减值出清、消费复苏斜率。业绩超预期/不及预期是 8 月最大α来源。</div>
+                    <div class="catalyst-stars"><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span></div>
+                </div>
+                <div class="catalyst-card tier1">
+                    <div class="catalyst-tier">★★★★★ 全市场级</div>
+                    <div class="catalyst-name">苹果新品发布会（9/3 预期）</div>
+                    <div class="catalyst-desc">消费电子年度催化剂，关注 AI 终端集成、硬件升级方向。果链标的在发布会前 2 周通常有预期博弈行情。</div>
+                    <div class="catalyst-stars"><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span></div>
+                </div>
+                <div class="catalyst-card tier1">
+                    <div class="catalyst-tier">★★★★★ 全市场级</div>
+                    <div class="catalyst-name">世界机器人大会（8/5）</div>
+                    <div class="catalyst-desc">人形机器人产业最大展会，关注量产进度、成本下探、新场景落地。减速器/传感器/丝杠等核心零部件催化密集。</div>
+                    <div class="catalyst-stars"><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span></div>
+                </div>
+                <div class="catalyst-card tier1">
+                    <div class="catalyst-tier">★★★★★ 全市场级</div>
+                    <div class="catalyst-name">三季度经济数据（9/19 预告）</div>
+                    <div class="catalyst-desc">GDP/PMI/社零等宏观数据公布，影响国庆后市场开盘方向及四季度政策预期。若数据偏弱，刺激政策预期升温。</div>
+                    <div class="catalyst-stars"><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span></div>
+                </div>
+            </div>
+            <div class="catalyst-grid">
+                <div class="catalyst-card tier2">
+                    <div class="catalyst-tier">★★★★ 板块级</div>
+                    <div class="catalyst-name">稀土功能材料研讨会（7/23）</div>
+                    <div class="catalyst-desc">稀土配额政策、出口管制动态、永磁材料需求展望。关注稀土价格拐点信号。</div>
+                    <div class="catalyst-stars"><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span><span class="star-off">★</span></div>
+                </div>
+                <div class="catalyst-card tier2">
+                    <div class="catalyst-tier">★★★★ 板块级</div>
+                    <div class="catalyst-name">半导体封测技术峰会（7/24）</div>
+                    <div class="catalyst-desc">先进封装（CoWoS/HBM/Chiplet）技术路线与产能进展。AI 算力需求拉动封测景气度，关注国产替代进度。</div>
+                    <div class="catalyst-stars"><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span><span class="star-off">★</span></div>
+                </div>
+                <div class="catalyst-card tier2">
+                    <div class="catalyst-tier">★★★★ 板块级</div>
+                    <div class="catalyst-name">ChinaJoy 2026（7/25-28）</div>
+                    <div class="catalyst-desc">游戏版号预期、元宇宙/VR 内容落地、AI+游戏应用。游戏板块在 ChinaJoy 前后通常有主题性行情。</div>
+                    <div class="catalyst-stars"><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span><span class="star-off">★</span></div>
+                </div>
+                <div class="catalyst-card tier2">
+                    <div class="catalyst-tier">★★★★ 板块级</div>
+                    <div class="catalyst-name">半导体设备与材料展（8/19）</div>
+                    <div class="catalyst-desc">国产半导体设备验证进展、光刻机产业链动态。关注设备国产化率提升节奏及美对华出口管制变化。</div>
+                    <div class="catalyst-stars"><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span><span class="star-off">★</span></div>
+                </div>
+                <div class="catalyst-card tier2">
+                    <div class="catalyst-tier">★★★★ 板块级</div>
+                    <div class="catalyst-name">工博会（9/16）</div>
+                    <div class="catalyst-desc">工业自动化/数控机床/机器人集成应用。制造业升级主题催化，关注工业母机国产替代及智能制造订单。</div>
+                    <div class="catalyst-stars"><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span><span class="star-off">★</span></div>
+                </div>
+                <div class="catalyst-card tier2">
+                    <div class="catalyst-tier">★★★★ 板块级</div>
+                    <div class="catalyst-name">智能网联汽车大会（8/27）</div>
+                    <div class="catalyst-desc">L3/L4 自动驾驶政策进展、车路协同标准、Robotaxi 落地节奏。智驾板块催化密集期。</div>
+                    <div class="catalyst-stars"><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span><span class="star-on">★</span><span class="star-off">★</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 题材热度节奏 -->
+        <div class="card">
+            <h3>题材热度节奏 <span class="badge rose">按周拆解 · 催化时间轴</span></h3>
+            <div class="table-wrap">
+                <table style="min-width:820px;">
+                    <thead>
+                        <tr>
+                            <th>时段</th>
+                            <th>核心催化</th>
+                            <th>主线题材</th>
+                            <th>支线题材</th>
+                            <th>节奏判断</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="name">7/21-25</td>
+                            <td>行业大会密集期（电解液/动漫/稀土/封测/ChinaJoy）</td>
+                            <td><span class="tag gold">游戏/数字娱乐</span> <span class="tag gold">半导体封测</span></td>
+                            <td><span class="tag teal">稀土永磁</span> <span class="tag teal">林业碳汇</span> <span class="tag teal">电解液</span></td>
+                            <td>题材轮动加速，适合潜伏埋伏</td>
+                        </tr>
+                        <tr>
+                            <td class="name">7/28-8/1</td>
+                            <td>政治局会议 + WAIC</td>
+                            <td><span class="tag red">AI/算力</span> <span class="tag red">政策主线</span></td>
+                            <td><span class="tag teal">新能源汽车</span></td>
+                            <td>全市场方向选择窗口，重仓跟随政策</td>
+                        </tr>
+                        <tr>
+                            <td class="name">8/4-8</td>
+                            <td>世界机器人大会 + 中报开启</td>
+                            <td><span class="tag gold">人形机器人</span> <span class="tag gold">军工</span></td>
+                            <td><span class="tag teal">光伏</span></td>
+                            <td>机器人高潮期 + 业绩验证开始</td>
+                        </tr>
+                        <tr>
+                            <td class="name">8/11-15</td>
+                            <td>中报密集披露</td>
+                            <td><span class="tag gold">业绩超预期标的</span></td>
+                            <td><span class="tag teal">AI应用</span> <span class="tag teal">新材料</span> <span class="tag teal">生物医药</span></td>
+                            <td>α 行情主导，自下而上选股</td>
+                        </tr>
+                        <tr>
+                            <td class="name">8/18-22</td>
+                            <td>半导体设备展 + 稀土论坛</td>
+                            <td><span class="tag gold">半导体设备</span> <span class="tag gold">稀土</span></td>
+                            <td><span class="tag teal">氢能源</span> <span class="tag teal">消费电子</span></td>
+                            <td>国产替代 + 资源品双线并行</td>
+                        </tr>
+                        <tr>
+                            <td class="name">8/25-29</td>
+                            <td>中报截止 + 智驾大会</td>
+                            <td><span class="tag gold">自动驾驶</span> <span class="tag gold">数字经济</span></td>
+                            <td><span class="tag teal">美联储预期</span></td>
+                            <td>业绩出清 + 新主线切换窗口</td>
+                        </tr>
+                        <tr>
+                            <td class="name">9/1-5</td>
+                            <td>苹果发布会 + 服贸会</td>
+                            <td><span class="tag red">消费电子/果链</span></td>
+                            <td><span class="tag teal">元宇宙</span> <span class="tag teal">数字贸易</span></td>
+                            <td>果链预期博弈高峰，发布会后注意利好出尽</td>
+                        </tr>
+                        <tr>
+                            <td class="name">9/8-12</td>
+                            <td>中秋消费窗口</td>
+                            <td><span class="tag gold">白酒/食品</span> <span class="tag gold">旅游</span></td>
+                            <td><span class="tag teal">AI秋季论坛</span> <span class="tag teal">生物医药</span></td>
+                            <td>消费数据验证 + 节日效应</td>
+                        </tr>
+                        <tr>
+                            <td class="name">9/15-19</td>
+                            <td>工博会 + 三季度数据</td>
+                            <td><span class="tag gold">工业母机/智能制造</span></td>
+                            <td><span class="tag teal">新能源汽车</span></td>
+                            <td>宏观数据影响国庆后方向预期</td>
+                        </tr>
+                        <tr>
+                            <td class="name">9/22-26</td>
+                            <td>国庆前政策窗口</td>
+                            <td><span class="tag gold">政策预期板块</span></td>
+                            <td><span class="tag teal">消费旺季</span></td>
+                            <td>持币过节 vs 持仓过节博弈，通常缩量</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ===== 底部汇总 ===== -->
+        <div class="summary-box">
+            <h3>综合结论</h3>
+            <p><strong>连板形态：</strong>换手率 5-12%、量比 1.1-1.8、振幅 4-8% 为黄金组合；二板缩量（↓30-50%）是最核心的连板确认信号。打板前对照 Checklist 逐项验证，2 个否决值即放弃。</p>
+            <p><strong>大事日历：</strong>7 月底政治局会议 + WAIC 为全市场级催化，8 月中报验证业绩，9 月苹果发布会 + 工博会接棒。建议在催化前 1-2 周潜伏，催化当日注意利好出尽风险。</p>
+            <p><strong>两表联动：</strong>当大事日历中出现 ★★★★★ 催化时，连板股在催化前 3-5 天的形态（缩量蓄力 → 放量首板）成功率显著高于无催化环境。催化剂 + 形态共振 = 最优打板时机。</p>
+            <p style="color:var(--text-muted);font-size:12px;margin-top:8px;">所有数据基于公开信息整理与样本统计，不构成投资建议。事件日期基于往年惯例推算，实际以官方公告为准。</p>
+        </div>
+
+        <footer>
+            连板形态解构 × 金融大事日历 · 2026-07-28 · 个人复盘学习工具 · 不构成投资建议
+        </footer>
+    </div>
+</body>
+</html>

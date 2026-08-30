@@ -50,8 +50,26 @@ import datetime as dt
 from pathlib import Path
 
 # ---------- 路径探测 ----------
-DEFAULT_VAULT = "/home/AI/Obsidian/知识库"
-VAULT_DIR = Path(os.environ.get("VAULT_DIR", DEFAULT_VAULT))
+# 候选 vault 列表（按优先级）：环境变量 > 实际在本机可用的路径。
+VAULT_CANDIDATES = [
+    "/home/AI/笔记/知识库",
+    "/home/AI/Obsidian/知识库",
+]
+
+def _resolve_vault():
+    env = os.environ.get("VAULT_DIR")
+    if env:
+        p = Path(env)
+        if p.is_dir():
+            return p
+    for c in VAULT_CANDIDATES:
+        p = Path(c)
+        if p.is_dir():
+            return p
+    # 都没有就退回第一个候选，让后续文件操作给出明确报错
+    return Path(VAULT_CANDIDATES[0])
+
+VAULT_DIR = _resolve_vault()
 REAL_DIR = VAULT_DIR / "肆 • 机构观点"
 
 # 代理（东方财富需代理，与项目约定一致：127.0.0.1:7897）

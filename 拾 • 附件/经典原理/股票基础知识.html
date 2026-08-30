@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>📚 K线形态图鉴｜桥影Pont橄榄棕主题</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <style>
+        :root {
+            --bg-deep: #1A2A1E;
+            --bg-card: rgba(40,70,50,0.35);
+            --bg-card-hover: rgba(40,70,50,0.55);
+            --border-subtle: rgba(160,180,140,0.15);
+            --border-hover: rgba(160,180,140,0.28);
+            --text-primary: #E0E8D0;
+            --text-secondary: #B0C0A0;
+            --text-muted: #7A8A6A;
+            --accent-gold: #9E8C42;
+            --accent-green: #547C4E;
+            --rise: #88b088;
+            --fall: #c98080;
+            --mid: #a89266;
+            --win-high: #78b488;
+            --win-low: #c48888;
+            --shadow-glow: rgba(140,156,112,0.10);
+            --r-lg: 18px;
+            --r-md: 14px;
+            --r-sm: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg-deep);
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            padding: 30px 20px;
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse 55% 45% at 30% 30%, rgba(84,124,78,0.07) 0%, transparent 52%),
+                radial-gradient(ellipse 50% 40% at 70% 65%, rgba(158,140,66,0.06) 0%, transparent 52%);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .page-title h1 {
+            font-size: 34px;
+            font-weight: 700;
+            color: var(--accent-gold);
+        }
+
+        .page-title p {
+            color: var(--text-secondary);
+            font-size: 16px;
+            margin-top: 6px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 28px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--r-lg);
+            border: 1px solid var(--border-subtle);
+            backdrop-filter: blur(12px);
+            padding: 20px 18px 18px;
+            transition: 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-hover);
+            background: var(--bg-card-hover);
+            box-shadow: 0 14px 40px var(--shadow-glow);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            border-bottom: 2px solid var(--border-subtle);
+            padding-bottom: 8px;
+        }
+
+        .card-header h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .signal {
+            font-size: 14px;
+            font-weight: 600;
+            padding: 4px 14px;
+            border-radius: 30px;
+        }
+
+        .signal.buy {
+            background: rgba(120,180,136,0.12);
+            color: var(--win-high);
+            border: 1px solid var(--win-high);
+        }
+
+        .signal.sell {
+            background: rgba(196,136,136,0.12);
+            color: var(--win-low);
+            border: 1px solid var(--win-low);
+        }
+
+        .signal.neutral {
+            background: rgba(158,140,66,0.12);
+            color: var(--mid);
+            border: 1px solid var(--mid);
+        }
+
+        .chart-wrapper {
+            width: 100%;
+            height: 140px;
+            margin-bottom: 10px;
+        }
+
+        .desc {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            flex: 1;
+        }
+
+        .desc strong {
+            color: var(--text-primary);
+        }
+
+        .desc .highlight {
+            background: rgba(158,140,66,0.15);
+            padding: 2px 6px;
+            border-radius: 6px;
+            color: var(--accent-gold);
+        }
+
+        .desc .pos {
+            display: inline-block;
+            border-radius: 12px;
+            padding: 0 10px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 2px 0;
+        }
+
+        .desc .pos.bottom {
+            background: rgba(120,180,136,0.12);
+            color: var(--win-high);
+        }
+
+        .desc .pos.top {
+            background: rgba(196,136,136,0.12);
+            color: var(--win-low);
+        }
+
+        .desc .pos.mid {
+            background: rgba(158,140,66,0.12);
+            color: var(--mid);
+        }
+
+        .footer-tip {
+            margin-top: 10px;
+            border-top: 1px dashed var(--border-subtle);
+            padding-top: 8px;
+            font-size: 12px;
+            color: var(--text-muted);
+            text-align: right;
+        }
+
+        @media (max-width: 600px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card-header h3 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="page-title">
+            <h1>📊 K线形态图鉴 · 桥影Pont</h1>
+            <p>适配炒股养家大局观｜六阶周期配套K线识别手册</p>
+        </div>
+        <div id="cardGrid" class="card-grid"></div>
+    </div>
+
+    <script>
+        const COLOR_RISE = "#78b488";
+        const COLOR_FALL = "#c48888";
+        const TEXT_PRIMARY = "#E0E8D0";
+        const TEXT_MUTED = "#7A8A6A";
+
+        const morphologyData = [
+            // ========== 【单根基础K线】 ==========
+            {
+                id: 'single-01',
+                name: '光头光脚大阳线',
+                signal: '买涨',
+                signalType: 'buy',
+                kdata: [[95, 105, 95, 105]],
+                desc: `<strong>特征：</strong>无上下影线，实体涨幅＞5%，多头极强。<br />
+                       <span class="pos bottom">底部</span>见底回升，多头开始反攻。<br />
+                       <span class="pos mid">上涨途中</span>趋势加速，继续持有。<br />
+                       <span class="pos top">顶部</span>连续大涨后警惕出货。`
+            },
+            {
+                id: 'single-02',
+                name: '光头光脚大阴线',
+                signal: '买跌',
+                signalType: 'sell',
+                kdata: [[105, 95, 95, 105]],
+                desc: `<strong>特征：</strong>无影大阴，空头主导。<br />
+                       <span class="pos top">顶部</span>见顶离场。<br />
+                       <span class="pos mid">下跌</span>加速持币。`
+            },
+            {
+                id: 'single-03',
+                name: '锤子线',
+                signal: '买涨',
+                signalType: 'buy',
+                kdata: [[98, 100, 90, 101]],
+                desc: `<strong>特征：</strong>下影≥实体2倍。<br />
+                       <span class="pos bottom">底部</span><span class="highlight">定海神针</span>反转信号。<br />
+                       <span class="pos top">顶部</span>上吊线看空。`
+            },
+            {
+                id: 'single-04',
+                name: '上吊线',
+                signal: '买跌',
+                signalType: 'sell',
+                kdata: [[102, 100, 90, 101]],
+                desc: `<strong>特征：</strong>高位长下影，获利兑现。<br />
+                       <span class="pos top">顶部</span>标准见顶形态。`
+            },
+            {
+                id: 'single-05',
+                name: '倒锤线',
+                signal: '买涨',
+                signalType: 'buy',
+                kdata: [[98, 100, 99, 110]],
+                desc: `<strong>特征：</strong>长上影低位试盘。<br />
+                       <span class="pos bottom">底部</span>次日收阳确认可买。`
+            },
+            {
+                id: 'single-06',
+                name: '流星线（射击之星）',
+                signal: '买跌',
+                signalType: 'sell',
+                kdata: [[102, 100, 97, 110]],
+                desc: `<strong>特征：</strong>高位长上影冲高回落。<br />
+                       <span class="pos top">顶部</span>抛压沉重，卖出。`
+            },
+            {
+                id: 'single-07',
+                name: '小阳线',
+                signal: '观望',
+                signalType: 'neutral',
+                kdata: [[99, 101, 98, 102]],
+                desc: `多空平衡，盘整阶段无明确方向，等待周期信号确认。`
+            },
+            {
+                id: 'single-08',
+                name: '小阴线',
+                signal: '观望',
+                signalType: 'neutral',
+                kdata: [[101, 99, 98, 102]],
+                desc: `窄幅震荡，多空僵持，不做预判。`
+            },
+            {
+                id: 'single-09',
+                name: '十字星',
+                signal: '观望',
+                signalType: 'neutral',
+                kdata: [[100, 100, 95, 105]],
+                desc: `<span class="pos top">黄昏十字</span> / <span class="pos bottom">早晨十字</span>，周期拐点预警K线。`
+            },
+            {
+                id: 'single-10',
+                name: 'T字线（蜻蜓线）',
+                signal: '买涨',
+                signalType: 'buy',
+                kdata: [[100, 100, 90, 100]],
+                desc: `低位强支撑，多头承接有力。高位出现则为滞涨预警。`
+            },
+            {
+                id: 'single-11',
+                name: '倒T字线（墓碑线）',
+                signal: '买跌',
+                signalType: 'sell',
+                kdata: [[100, 100, 100, 110]],
+                desc: `高位多头进攻失败，抛压集中释放；低位可视为试盘信号。`
+            },
+            {
+                id: 'single-12',
+                name: '下影阳线',
+                signal: '买涨',
+                signalType: 'buy',
+                kdata: [[95, 103, 85, 104]],
+                desc: `下跌抵抗，底部买盘进场信号。趋势下跌中可信度降低。`
+            },
+            {
+                id: 'single-13',
+                name: '下影阴线',
+                signal: '买涨（止跌）',
+                signalType: 'buy',
+                kdata: [[105, 97, 85, 106]],
+                desc: `大跌后承接显现，短期止跌。需要后续阳线确认反转。`
+            },
+            {
+                id: 'single-14',
+                name: '上影阳线',
+                signal: '买跌（滞涨）',
+                signalType: 'sell',
+                kdata: [[95, 103, 94, 115]],
+                desc: `上方压力位明确，上涨动能衰减。连续出现警惕拐点。`
+            },
+            {
+                id: 'single-15',
+                name: '上影阴线',
+                signal: '买跌',
+                signalType: 'sell',
+                kdata: [[105, 97, 94, 115]],
+                desc: `冲高溃败，空头占据优势，减仓规避回调。`
+            },
+            {
+                id: 'single-16',
+                name: '螺旋桨K线',
+                signal: '观望',
+                signalType: 'neutral',
+                kdata: [[97,103,92,108]],
+                desc: `<strong>特征：</strong>长上影+长下影，实体狭小。多空剧烈分歧，临近变盘。
+                <span class="pos bottom">低位</span>酝酿反弹，<span class="pos top">高位</span>极易大跌。`
+            },
+            // ========== 【双K线组合形态】 ==========
+            {
+                id: 'double-01',
+                name: '看涨吞没（阳包阴）',
+                signal: '强烈买涨',
+                signalType: 'buy',
+                kdata: [[102,96,95,103],[95,104,94,105]],
+                desc: `<strong>特征：</strong>后一根大阳线完全包裹前阴线。
+                <span class="pos bottom">下跌末端</span>经典反转；震荡区间信号有效性减弱。`
+            },
+            {
+                id: 'double-02',
+                name: '看跌吞没（阴包阳）',
+                signal: '强烈买跌',
+                signalType: 'sell',
+                kdata: [[96,103,95,104],[103,95,94,104]],
+                desc: `<strong>特征：</strong>大阴线完全包裹前面阳线。
+                <span class="pos top">上涨末端</span>多头溃败，分歧转退潮。`
+            },
+            {
+                id: 'double-03',
+                name: '孕线（阴孕阳）',
+                signal: '观望',
+                signalType: 'neutral',
+                kdata: [[94,105,93,106],[97,102,96,103]],
+                desc: `后一根K线实体完全包含在前一根实体内部。原有趋势放缓，等待方向选择。`
+            },
+            {
+                id: 'double-04',
+                name: '刺透形态（斩回线）',
+                signal: '买涨',
+                signalType: 'buy',
+                kdata: [[108, 102, 101, 109],[100, 106, 99, 107]],
+                desc: `下跌末期多头试错信号，阳线刺入前阴线实体一半以上，需要次日验证。`
+            },
+            {
+                id: 'double-05',
+                name: '乌云盖顶',
+                signal: '买跌',
+                signalType: 'sell',
+                kdata: [[100, 106, 99, 107],[108, 102, 101, 109]],
+                desc: `高潮转分歧标志性K线组合，阳线冲高后阴线深入实体内部，减仓信号。`
+            },
+            {
+                id: 'double-06',
+                name: '好友反攻',
+                signal: '买涨（弱反转）',
+                signalType: 'buy',
+                kdata: [[104,96,95,105],[96,101,95,102]],
+                desc: `阴线下跌后，阳线收盘价接近前阴线收盘价，止跌信号，反转力度偏弱。`
+            },
+            {
+                id: 'double-07',
+                name: '淡友反攻',
+                signal: '买跌（弱反转）',
+                signalType: 'sell',
+                kdata: [[95,104,94,105],[104,98,97,105]],
+                desc: `阳线冲高，次日高开低走阴线，多头无力延续，警惕阶段性调整。`
+            },
+            // ========== 【多K线反转形态】 ==========
+            {
+                id: 'multi-01',
+                name: '红三兵',
+                signal: '买涨（趋势延续）',
+                signalType: 'buy',
+                kdata: [[100, 103, 99, 104], [103.5, 106, 102, 107], [106.5, 110, 105, 111]],
+                desc: `发酵/加速周期标准多头组合，稳步抬升。高位红三兵警惕乏力诱多。`
+            },
+            {
+                id: 'multi-02',
+                name: '三只乌鸦',
+                signal: '买跌（趋势延续）',
+                signalType: 'sell',
+                kdata: [[110, 107, 106, 111], [107.5, 104, 103, 108], [104.5, 101, 100, 105]],
+                desc: `退潮周期标准空头组合，持续减仓空仓。下跌中途出现预示继续下探。`
+            },
+            {
+                id: 'multi-03',
+                name: '一阳包三阴（看涨吞没）',
+                signal: '强烈买涨',
+                signalType: 'buy',
+                kdata: [[105, 102, 101, 106], [102.5, 99, 98, 103], [99.5, 96, 95, 100], [95.5, 108, 94, 109]],
+                desc: `六阶周期见底强力反转形态，资金集中进场，盈亏比极高。`
+            },
+            {
+                id: 'multi-06',
+                name: '早晨之星',
+                signal: '强烈买涨',
+                signalType: 'buy',
+                kdata: [[110, 105, 104, 111], [104, 104, 103, 105], [105, 112, 104, 113]],
+                desc: `完整底部反转三段式K线，大跌→分歧十字星→收复阳线，启动周期前置信号。`
+            },
+            {
+                id: 'multi-07',
+                name: '黄昏之星',
+                signal: '强烈买跌',
+                signalType: 'sell',
+                kdata: [[100, 105, 99, 106], [106, 106, 105, 107], [104, 99, 98, 105]],
+                desc: `完整顶部三段式，大涨→分歧星线→回落阴线，正式进入滞涨/退潮周期。`
+            },
+            // ========== 【持续整理形态（基础）】 ==========
+            {
+                id: 'multi-08',
+                name: '上升三部曲',
+                signal: '买涨',
+                signalType: 'buy',
+                kdata: [[96,105,95,106],[104,101,100,105],[102,99,98,103],[99,108,98,109]],
+                desc: `上涨中途短暂回调洗盘，大阳+连续小阴，最终阳线创新高，原有趋势延续。`
+            },
+            {
+                id: 'multi-09',
+                name: '下降三部曲',
+                signal: '买跌',
+                signalType: 'sell',
+                kdata: [[106,97,96,107],[98,101,97,102],[100,103,99,104],[102,93,92,103]],
+                desc: `下跌过程小幅反弹修复，反弹无力后再创新低，空头趋势延续。`
+            }
+        ];
+
+        const grid = document.getElementById('cardGrid');
+
+        if (!grid) {
+            console.error('cardGrid 容器未找到');
+        }
+
+        const debounce = (func, delay) => {
+            let timer;
+            return (...args) => {
+                clearTimeout(timer);
+                timer = setTimeout(() => func.apply(this, args), delay);
+            };
+        };
+
+        morphologyData.forEach((item, index) => {
+            const card = document.createElement('div');
+            card.className = 'card';
+
+            const signalClass =
+                item.signalType === 'buy' ? 'buy' :
+                item.signalType === 'sell' ? 'sell' : 'neutral';
+
+            const header = document.createElement('div');
+            header.className = 'card-header';
+            header.innerHTML = `<h3>${item.name}</h3><span class="signal ${signalClass}">${item.signal}</span>`;
+
+            const chartDiv = document.createElement('div');
+            chartDiv.className = 'chart-wrapper';
+            chartDiv.id = `chart-${index}`;
+
+            const descDiv = document.createElement('div');
+            descDiv.className = 'desc';
+            descDiv.innerHTML = item.desc;
+
+            const footer = document.createElement('div');
+            footer.className = 'footer-tip';
+            footer.textContent = item.kdata.length > 1 ? '📌 多日组合K线' : '📍 单根基础K线';
+
+            card.append(header, chartDiv, descDiv, footer);
+            grid.appendChild(card);
+
+            setTimeout(() => {
+                const dom = document.getElementById(`chart-${index}`);
+
+                if (!dom) {
+                    console.error(`图表容器未找到：chart-${index}`);
+                    return;
+                }
+
+                const chart = echarts.init(dom);
+
+                const allVals = [];
+                item.kdata.forEach(d => {
+                    allVals.push(d[0], d[1], d[2], d[3]);
+                });
+
+                const min = Math.min(...allVals) - 2;
+                const max = Math.max(...allVals) + 2;
+
+                const option = {
+                    backgroundColor: 'transparent',
+                    tooltip: {
+                        trigger: 'axis',
+                        textStyle: {
+                            color: TEXT_PRIMARY
+                        },
+                        formatter: params => {
+                            const d = params[0].data;
+                            return `开:${d[0]} 收:${d[1]} 低:${d[2]} 高:${d[3]}`;
+                        }
+                    },
+                    grid: {
+                        left: '6%',
+                        right: '6%',
+                        bottom: '6%',
+                        top: '6%'
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: item.kdata.map((_, i) => i + 1),
+                        axisLabel: {
+                            fontSize: 10,
+                            color: TEXT_MUTED
+                        },
+                        axisLine: {
+                            show: false
+                        },
+                        axisTick: {
+                            show: false
+                        }
+                    },
+                    yAxis: {
+                        min,
+                        max,
+                        splitLine: {
+                            show: false
+                        },
+                        axisLabel: {
+                            show: false
+                        },
+                        axisLine: {
+                            show: false
+                        },
+                        axisTick: {
+                            show: false
+                        }
+                    },
+                    series: [
+                        {
+                            type: 'k',
+                            data: item.kdata,
+                            barWidth: '50%',
+                            itemStyle: {
+                                color: COLOR_FALL,
+                                color0: COLOR_RISE,
+                                borderColor: COLOR_FALL,
+                                borderColor0: COLOR_RISE
+                            }
+                        }
+                    ]
+                };
+
+                chart.setOption(option);
+
+                const handleResize = debounce(() => {
+                    chart.resize();
+                }, 150);
+
+                window.addEventListener('resize', handleResize);
+
+            }, 50);
+        });
+    </script>
+</body>
+</html>

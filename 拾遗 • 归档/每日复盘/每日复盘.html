@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>每日复盘与决策预演 · 2026-07-22</title>
+    <style>
+        /* ===== 主题：梦境（Rêve）· 精修版 ===== */
+        :root {
+            --bg-deep: #1B1726;
+            --bg-grad-1: #221C33;
+            --bg-grad-2: #181422;
+            --bg-panel: rgba(58,48,78,0.32);
+            --bg-panel-hover: rgba(58,48,78,0.52);
+            --border-subtle: rgba(168,148,190,0.14);
+            --border-hover: rgba(168,148,190,0.28);
+            --text-primary: #ECE6F4;
+            --text-secondary: #BCB2CE;
+            --text-muted: #847A98;
+            --accent-gold: #C9A861;
+            --accent-gold-soft: #E8D090;
+            --accent-rose: #C49DB2;
+            --accent-purple: #9C82B4;
+            --accent-green: #6FA088;
+            --accent-red: #C07C7C;
+            --danger: #D8745C;
+            --danger-soft: rgba(216,116,92,0.12);
+            --shadow-glow: rgba(156,130,180,0.12);
+            --font-base: 14px;
+            --sp-1: 6px; --sp-2: 10px; --sp-3: 14px; --sp-4: 18px;
+            --sp-5: 24px; --sp-6: 32px;
+            --radius: 16px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+            background:
+                radial-gradient(1200px 600px at 80% -10%, rgba(156,130,180,0.10), transparent 60%),
+                radial-gradient(900px 500px at -10% 110%, rgba(201,168,97,0.08), transparent 55%),
+                linear-gradient(160deg, var(--bg-grad-1), var(--bg-grad-2));
+            background-attachment: fixed;
+            color: var(--text-primary);
+            line-height: 1.75;
+            font-size: var(--font-base);
+            padding: var(--sp-5);
+            min-height: 100vh;
+        }
+        ::-webkit-scrollbar { width: 9px; height: 9px; }
+        ::-webkit-scrollbar-thumb { background: var(--accent-purple); border-radius: 5px; }
+        ::-webkit-scrollbar-track { background: rgba(58,48,78,0.2); }
+        .container { max-width: 1480px; margin: 0 auto; }
+
+        /* ===== Header ===== */
+        .header {
+            display: flex; justify-content: space-between; align-items: flex-end;
+            padding: var(--sp-1) 0 var(--sp-4); border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: var(--sp-5); flex-wrap: wrap; gap: var(--sp-3);
+        }
+        .header h1 {
+            font-size: 33px; font-weight: 700; letter-spacing: 1px; line-height: 1.15;
+            display: flex; align-items: baseline; gap: 22px; margin-top: -8px; flex-wrap: wrap;
+        }
+        .header h1 .zh {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-soft));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .header h1 .en { font-size: 19px; font-weight: 500; color: var(--text-secondary); letter-spacing: .5px; }
+        .header .sub { color: var(--text-muted); font-size: 12.5px; margin-top: 4px; letter-spacing: .5px; }
+        .header .meta { display: flex; align-items: center; gap: var(--sp-3); color: var(--text-secondary); font-size: 13px; flex-wrap: wrap; }
+        .header .tag {
+            background: rgba(201,168,97,0.10); padding: 4px var(--sp-3); border-radius: 30px;
+            border: 1px solid rgba(201,168,97,0.18); color: var(--accent-gold); font-size: 11.5px;
+        }
+
+        /* ===== 通用卡片 ===== */
+        .card {
+            background: var(--bg-panel); border: 1px solid var(--border-subtle);
+            border-radius: var(--radius); padding: var(--sp-4) var(--sp-5);
+            backdrop-filter: blur(14px); transition: border-color .3s, box-shadow .3s; margin-bottom: var(--sp-4);
+        }
+        .card:hover { border-color: var(--border-hover); box-shadow: 0 10px 36px var(--shadow-glow); }
+        .card h3 {
+            font-size: 15.5px; font-weight: 600; color: var(--text-primary);
+            margin-bottom: var(--sp-3); display: flex; align-items: center; gap: var(--sp-2); flex-wrap: wrap;
+        }
+        .card h3 .badge {
+            font-size: 11px; font-weight: 500; color: var(--accent-gold);
+            background: rgba(201,168,97,0.10); padding: 3px 10px; border-radius: 30px;
+            border: 1px solid rgba(201,168,97,0.18);
+        }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4); margin-bottom: var(--sp-4); }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--sp-4); margin-bottom: var(--sp-4); }
+
+        /* ===== 行项目 ===== */
+        .row { display: flex; justify-content: space-between; gap: var(--sp-3); padding: 5px 0; font-size: 13px; border-bottom: 1px solid rgba(168,148,190,0.05); align-items: baseline; }
+        .row .label { color: var(--text-muted); font-weight: 400; flex-shrink: 0; }
+        .row .value { color: var(--text-primary); font-weight: 500; text-align: right; }
+        .row .value.up { color: var(--accent-red); }
+        .row .value.dn { color: var(--accent-green); }
+        .row .value.warn { color: var(--danger); }
+        .row .value.neutral { color: var(--text-secondary); }
+
+        /* ===== 信号盒子 ===== */
+        .signal-box { background: rgba(201,168,97,0.04); border: 1px solid var(--border-subtle); border-radius: 12px; padding: var(--sp-3) var(--sp-4); margin-top: var(--sp-3); }
+        .signal-box .st { font-weight: 600; color: var(--accent-gold); font-size: 13px; margin-bottom: 4px; }
+        .signal-box .sd { color: var(--text-secondary); font-size: 12.5px; line-height: 1.7; }
+        .signal-box .sd strong { color: var(--text-primary); }
+
+        /* ===== 表格 ===== */
+        .table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border-subtle); margin-top: 4px; }
+        table { width: 100%; border-collapse: collapse; font-size: 12.5px; min-width: 640px; }
+        th { text-align: left; padding: 9px var(--sp-3); font-weight: 600; font-size: 11px; letter-spacing: .4px; text-transform: uppercase; color: var(--text-muted); background: rgba(58,48,78,0.55); border-bottom: 1px solid var(--border-subtle); }
+        td { padding: 9px var(--sp-3); border-bottom: 1px solid rgba(168,148,190,0.05); color: var(--text-secondary); vertical-align: middle; }
+        tr:hover td { background: var(--bg-panel-hover); }
+        td .name { font-weight: 600; color: var(--text-primary); }
+        td .up { color: var(--accent-red); } td .dn { color: var(--accent-green); } td .warn { color: var(--danger); }
+        .tag { display: inline-block; padding: 3px 10px; border-radius: 30px; font-size: 11px; font-weight: 500; }
+        .tag.gold { background: rgba(201,168,97,0.12); color: var(--accent-gold); border: 1px solid rgba(201,168,97,0.18); }
+        .tag.rose { background: rgba(196,157,178,0.12); color: var(--accent-rose); border: 1px solid rgba(196,157,178,0.18); }
+        .tag.green { background: rgba(111,160,136,0.14); color: var(--accent-green); border: 1px solid rgba(111,160,136,0.22); }
+        .tag.red { background: rgba(192,124,124,0.12); color: var(--accent-red); border: 1px solid rgba(192,124,124,0.18); }
+        .tag.danger { background: var(--danger-soft); color: var(--danger); border: 1px solid rgba(216,116,92,0.3); }
+
+        /* ===== 结论条 ===== */
+        .verdict { font-size: 12.5px; color: var(--text-secondary); background: rgba(111,160,136,0.08); padding: var(--sp-3) var(--sp-4); border-radius: 12px; border-left: 3px solid var(--accent-green); margin-top: var(--sp-3); }
+        .verdict.gold { background: rgba(201,168,97,0.05); border-left-color: var(--accent-gold); }
+        .verdict.danger { background: var(--danger-soft); border-left-color: var(--danger); }
+
+        /* ===== 底部汇总 ===== */
+        .summary-box { background: var(--bg-panel); border: 1px solid var(--border-hover); border-radius: var(--radius); padding: var(--sp-4) var(--sp-5); margin-top: var(--sp-2); }
+        .summary-box h3 { font-size: 16px; font-weight: 600; color: var(--accent-gold); margin-bottom: var(--sp-3); }
+        .summary-box p { color: var(--text-secondary); font-size: 13.5px; line-height: 1.85; padding: 4px 0; }
+        .summary-box p strong { color: var(--text-primary); }
+
+        /* ============================================================
+           对抗性决策预演（二叉树）核心组件
+           ============================================================ */
+        .adv-section { margin-bottom: var(--sp-4); }
+        .adv-note {
+            font-size: 12px; color: var(--text-muted); background: rgba(156,130,180,0.07);
+            border: 1px dashed var(--border-hover); border-radius: 12px; padding: var(--sp-3) var(--sp-4);
+            margin-bottom: var(--sp-4); line-height: 1.7;
+        }
+        .adv-note b { color: var(--accent-purple); }
+
+        /* ===== 流程图式二叉树决策参考（卡片 + 箭头 + 文本 + 红绿加粗） ===== */
+        .flow-root {
+            background: linear-gradient(180deg, rgba(201,168,97,0.10), rgba(201,168,97,0.03));
+            border: 1px solid rgba(201,168,97,0.30); border-radius: 14px;
+            padding: var(--sp-3) var(--sp-4); margin: var(--sp-2) 0;
+            font-size: 13px; color: var(--text-secondary); line-height: 1.8;
+        }
+        .flow-root .lbl { color: var(--text-muted); }
+        .flow-root b { color: var(--accent-gold-soft); }
+        .flow-root .up { color: var(--accent-red); font-weight: 600; }
+        .flow-root .dn { color: var(--accent-green); font-weight: 600; }
+        .flow-arrow {
+            text-align: center; color: var(--accent-purple); font-size: 16px;
+            line-height: 1.05; margin: 1px 0; letter-spacing: 3px;
+        }
+        .flow-branches { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4); }
+        @media (max-width: 900px) { .flow-branches { grid-template-columns: 1fr; } }
+        .branch.bull { border-top-color: var(--accent-green); }
+        .branch.bull .branch-head { color: var(--accent-green); }
+
+        .tree { display: flex; flex-direction: column; gap: var(--sp-4); }
+        .stock-node {
+            background: linear-gradient(180deg, rgba(58,48,78,0.42), rgba(58,48,78,0.22));
+            border: 1px solid var(--border-subtle); border-radius: 18px; padding: var(--sp-4) var(--sp-5);
+            position: relative;
+        }
+        .stock-head {
+            display: flex; align-items: center; gap: var(--sp-3); flex-wrap: wrap;
+            font-size: 15px; font-weight: 600; color: var(--text-primary);
+            padding-bottom: var(--sp-3); border-bottom: 1px solid var(--border-subtle); margin-bottom: var(--sp-3);
+        }
+        .stock-head .code { color: var(--text-muted); font-weight: 400; font-size: 13px; }
+        .stock-head .pnl { margin-left: auto; font-size: 13px; font-weight: 600; }
+        .stock-head .pnl.up { color: var(--accent-red); } .stock-head .pnl.dn { color: var(--accent-green); } .stock-head .pnl.warn { color: var(--danger); }
+
+        .branches { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4); }
+        @media (max-width: 900px) { .branches { grid-template-columns: 1fr; } .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+        .branch {
+            background: rgba(27,23,38,0.5); border: 1px solid var(--border-subtle);
+            border-radius: 14px; padding: var(--sp-3) var(--sp-4); border-top: 3px solid var(--accent-purple);
+        }
+        .branch.bear { border-top-color: var(--danger); }
+        .branch-head { font-size: 13.5px; font-weight: 600; color: var(--accent-gold-soft); margin-bottom: var(--sp-2); display: flex; align-items: center; gap: 8px; }
+        .branch.bear .branch-head { color: var(--danger); }
+        .branch-head .prob { margin-left: auto; font-size: 11.5px; color: var(--text-muted); font-weight: 400; }
+
+        /* 量化信号网格：指标 + 实测值 + 阈值 */
+        .sig-grid { display: flex; flex-direction: column; gap: 5px; margin: var(--sp-2) 0; }
+        .sig { display: grid; grid-template-columns: 92px 1fr auto; gap: var(--sp-2); align-items: center; font-size: 12px; padding: 4px 0; border-bottom: 1px dotted rgba(168,148,190,0.08); }
+        .sig .k { color: var(--accent-gold); font-weight: 600; }
+        .sig .v { color: var(--text-primary); }
+        .sig .v.bad { color: var(--danger); } .sig .v.good { color: var(--accent-green); }
+        .sig .t { color: var(--text-muted); font-size: 11px; text-align: right; white-space: nowrap; }
+        .sig-hint { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+        /* 行为定性：confidence 条 */
+        .behavior { margin: var(--sp-2) 0; }
+        .behavior .bt { font-size: 12px; color: var(--text-secondary); font-weight: 600; margin-bottom: 6px; }
+        .beh-row { display: grid; grid-template-columns: 84px 1fr 46px; gap: var(--sp-2); align-items: center; margin: 5px 0; }
+        .beh-name { font-size: 12px; color: var(--text-secondary); }
+        .conf-track { height: 9px; background: rgba(58,48,78,0.7); border-radius: 6px; overflow: hidden; }
+        .conf-fill { height: 100%; border-radius: 6px; transition: width .4s; }
+        .conf-fill.danger { background: linear-gradient(90deg, #b85c4c, var(--danger)); }
+        .conf-fill.warn { background: linear-gradient(90deg, #b89a4c, var(--accent-gold)); }
+        .conf-fill.neutral { background: linear-gradient(90deg, #6a5c8a, var(--accent-purple)); }
+        .conf-fill.good { background: linear-gradient(90deg, #4c8a6a, var(--accent-green)); }
+        .beh-val { font-size: 11.5px; text-align: right; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+
+        /* 操作卡 */
+        .op-card { background: rgba(27,23,38,0.6); border: 1px solid var(--border-subtle); border-radius: 12px; padding: var(--sp-3) var(--sp-4); margin-top: var(--sp-2); }
+        .op-card.danger { border-color: rgba(216,116,92,0.4); background: var(--danger-soft); }
+        .op-title { font-size: 12px; font-weight: 600; color: var(--accent-gold); margin-bottom: 4px; }
+        .op-card.danger .op-title { color: var(--danger); }
+        .op-action { font-size: 12.5px; color: var(--text-primary); line-height: 1.7; }
+        .op-action b { color: var(--accent-gold-soft); }
+        .op-margin { font-size: 11.5px; color: var(--danger); margin-top: 6px; padding-top: 6px; border-top: 1px dashed rgba(216,116,92,0.3); }
+        .op-level { display: inline-block; font-size: 11px; padding: 2px 9px; border-radius: 20px; margin-top: 6px; }
+        .op-level.hold { background: rgba(111,160,136,0.14); color: var(--accent-green); }
+        .op-level.reduce { background: rgba(201,168,97,0.14); color: var(--accent-gold); }
+        .op-level.exit { background: var(--danger-soft); color: var(--danger); }
+
+        /* 对抗过程（可折叠） */
+        .debate { margin-top: var(--sp-3); border: 1px solid var(--border-subtle); border-radius: 12px; overflow: hidden; }
+        .debate summary { cursor: pointer; padding: var(--sp-2) var(--sp-3); font-size: 12px; color: var(--accent-purple); background: rgba(156,130,180,0.06); list-style: none; }
+        .debate summary::-webkit-details-marker { display: none; }
+        .debate summary::before { content: "▸ "; }
+        .debate[open] summary::before { content: "▾ "; }
+        .debate .body { padding: var(--sp-3) var(--sp-4); font-size: 12px; line-height: 1.75; color: var(--text-secondary); }
+        .debate .agent { margin: 6px 0; padding-left: 10px; border-left: 2px solid var(--border-hover); }
+        .debate .agent .who { font-weight: 600; }
+        .debate .agent.bull .who { color: var(--accent-green); }
+        .debate .agent.bear .who { color: var(--danger); }
+        .debate .agent.risk .who { color: var(--accent-gold); }
+        .debate .agent.judge .who { color: var(--accent-purple); }
+
+        /* 个人批注 */
+        .notes { margin-top: var(--sp-4); }
+        .notes textarea {
+            width: 100%; min-height: 90px; background: rgba(58,48,78,0.5); border: 1px solid var(--border-subtle);
+            border-radius: 12px; padding: var(--sp-3); color: var(--text-primary); font-size: 13px;
+            font-family: inherit; resize: vertical; outline: none;
+        }
+        .notes textarea:focus { border-color: var(--accent-gold); }
+
+        /* 场景预演 */
+        .scene-box { background: rgba(58,48,78,0.22); border-left: 4px solid var(--accent-gold); padding: var(--sp-3) var(--sp-4); border-radius: 12px; margin-bottom: var(--sp-3); }
+        .scene-box .st { font-weight: 600; color: var(--accent-gold); font-size: 13px; }
+        .scene-box .sc { color: var(--text-secondary); font-size: 12.5px; margin-top: 3px; line-height: 1.7; }
+
+        footer { margin-top: var(--sp-6); padding: var(--sp-3) 0; border-top: 1px solid var(--border-subtle); text-align: center; color: var(--text-muted); font-size: 11.5px; }
+        @media print { body { background: #fff; color: #111; } .card, .stock-node, .branch, .op-card { break-inside: avoid; } .debate { display: none; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- ===== HEADER ===== -->
+        <div class="header">
+            <h1>
+                <span class="zh">每日复盘与决策预演</span>
+                <span class="en">Daily Review &amp; Decision Rehearsal</span>
+            </h1>
+            <div class="meta">
+                <span>📅 日期：2026-07-22</span>
+                <span>⏰ 时间：21:00</span>
+                <span class="tag">个人复盘学习 · 不构成投资建议 · 以最小代价离场优先</span>
+            </div>
+        </div>
+
+        <!-- ===== 第一部分：大盘结构 ===== -->
+        <div class="grid-2">
+            <div class="card">
+                <h3>📊 大盘整体表现 <span class="badge">结构</span></h3>
+                <div class="table-wrap"><table><thead><tr><th>指数</th><th>代码</th><th>收盘</th><th>涨跌幅</th></tr></thead><tbody><tr><td class="name">上证指数</td><td>000001</td><td class="up">3864.37</td><td class="up">+1.79%</td></tr><tr><td class="name">深证成指</td><td>399001</td><td class="up">14264.29</td><td class="up">+4.81%</td></tr><tr><td class="name">创业板指</td><td>399006</td><td class="up">3685.97</td><td class="up">+7.05%</td></tr><tr><td class="name">科创50</td><td>000688</td><td class="up">1903.16</td><td class="up">+10.73%</td></tr><tr><td class="name">沪深300</td><td>000300</td><td class="up">4739.23</td><td class="up">+3.06%</td></tr><tr><td class="name">北证50</td><td>899050</td><td class="up">1079.04</td><td class="up">+3.24%</td></tr></tbody></table></div>
+            </div>
+            <div class="card">
+                <h3>💧 资金面 <span class="badge">两融 · 主力 · 北向</span></h3>
+                <div class="verdict gold">⚠ 资金面 / 板块 / 龙虎榜依赖 akshare（东财），当前环境需代理恢复后自动填充；本节未编造数字，待下次运行补全。</div>
+            </div>
+        </div>
+
+        <!-- ===== 第二部分：板块与概念 ===== -->
+        <div class="card">
+            <h3>📈 板块 · 概念分析 <span class="badge">深度拆解</span></h3>
+            <div class="verdict gold">⚠ 资金面 / 板块 / 龙虎榜依赖 akshare（东财），当前环境需代理恢复后自动填充；本节未编造数字，待下次运行补全。</div>
+        </div>
+
+        <!-- ===== 第三部分：龙虎榜检验 ===== -->
+        <div class="card">
+            <h3>📜 龙虎榜检验 <span class="badge">机构 · 游资</span></h3>
+            <div class="verdict gold">⚠ 资金面 / 板块 / 龙虎榜依赖 akshare（东财），当前环境需代理恢复后自动填充；本节未编造数字，待下次运行补全。</div>
+        </div>
+
+        <!-- ===== 第四部分：对抗性决策预演（核心新增） ===== -->
+        <div class="card adv-section">
+            <h3>⚔️ 持仓股对抗性决策预演 <span class="badge">二叉树 · 多 Agent 辩论</span></h3>
+            <div class="adv-note">
+                <b>方法论：</b>对每只持仓股，由 <b>多头 Agent</b> / <b>空头 Agent</b> / <b>风控 Agent</b> / <b>裁判 Agent</b> 四方轮询辩论，互相挑刺，直至各方对「情形概率 + 行为定性 conf + 操作建议」达成可接受共识。
+                所有信号均<b>量化为具体指标与阈值</b>（非量价图形主观判断）。一切操作以<b>使用者资金最小损失</b>为前提——若已陷入狗庄僵持，优先考虑用最小代价离开泥潭。
+                危险情形下，止损/减仓位给出 <b>10%–15% 提前量</b>。
+            </div>
+            <div class="stock-node"><div class="stock-head"><span>贵州茅台</span><span class="code">600519</span><span class="pnl dn">成本 1480.0 · 现价 1308.0 · 盈亏 -11.62%</span></div><div class="flow-root"><span class="lbl">技术定位：</span>收盘 <b>1308.0</b> 站上 MA20(<b>1218.3</b>)；RSI6=<b>73.6</b>（超买）；价出布林<b>上</b>轨；今日 <b class="dn">-1.47%</b>。</div><div class="flow-arrow">▼ 二分情形</div><div class="flow-branches"><div class="branch bull"><div class="branch-head">情况A · 弱反弹 / 横盘<span class="prob">P=66%</span></div><div class="sig-hint">触发证据：站上MA20/60、量能温和</div><div class="sig-grid"><div class="sig"><span class="k">收盘/MA20</span><span class="v good">1308.0 / 1218.3</span><span class="t">站上</span></div><div class="sig"><span class="k">收盘/MA60</span><span class="v good">1308.0 / 1282.84</span><span class="t">站上</span></div><div class="sig"><span class="k">MACD</span><span class="v bad">DIF 7.123 &gt; DEA -10.063</span><span class="t">空方</span></div><div class="sig"><span class="k">RSI(6)</span><span class="v bad">73.6</span><span class="t">超买&gt;70</span></div><div class="sig"><span class="k">BOLL(20,2)</span><span class="v bad">上1298.91/中1218.3/下1137.68</span><span class="t">上轨上方</span></div><div class="sig"><span class="k">量比</span><span class="v neutral">1.18</span><span class="t">常态</span></div><div class="sig"><span class="k">上影线占比</span><span class="v neutral">0.12</span><span class="t">正常</span></div><div class="sig"><span class="k">今日涨跌</span><span class="v bad">-1.47%</span><span class="t"></span></div><div class="sig"><span class="k">ATR(14)</span><span class="v neutral">34.16</span><span class="t">波动参考</span></div></div><div class="behavior"><div class="bt">行为定性（confidence）</div><div class="beh-row"><span class="beh-name">诱多出货</span><span class="conf-track"><span class="conf-fill danger" style="width:45%"></span></span><span class="beh-val">45%</span></div><div class="beh-row"><span class="beh-name">断魂刀</span><span class="conf-track"><span class="conf-fill danger" style="width:0%"></span></span><span class="beh-val">0%</span></div><div class="beh-row"><span class="beh-name">正常拉升</span><span class="conf-track"><span class="conf-fill good" style="width:40%"></span></span><span class="beh-val">40%</span></div><div class="beh-row"><span class="beh-name">洗盘</span><span class="conf-track"><span class="conf-fill warn" style="width:65%"></span></span><span class="beh-val">65%</span></div><div class="beh-row"><span class="beh-name">机构建仓</span><span class="conf-track"><span class="conf-fill neutral" style="width:15%"></span></span><span class="beh-val">15%</span></div></div><div class="op-card danger"><div class="op-title">建议操作</div><div class="op-action">危险局：次日开盘先减 <b>1/2</b>，剩余仓位跌破 <b>MA20(1218.3)</b> 或 <b>1151.04</b> 全清；<b>不补仓摊平</b>。</div><div class="op-margin">⚠ 已实现浮亏 -11.62%，按最小代价离场优先；止损位较现价提前 <b>12%</b>（1151.04），避免越陷越深。</div><span class="op-level exit">离场/减仓</span></div></div><div class="branch bear"><div class="branch-head">情况B · 高位诱多出货<span class="prob">P=34%</span></div><div class="sig-hint">触发证据：RSI6超买、价出布林上轨</div><div class="sig-grid"><div class="sig"><span class="k">收盘/MA20</span><span class="v good">1308.0 / 1218.3</span><span class="t">站上</span></div><div class="sig"><span class="k">收盘/MA60</span><span class="v good">1308.0 / 1282.84</span><span class="t">站上</span></div><div class="sig"><span class="k">MACD</span><span class="v bad">DIF 7.123 &gt; DEA -10.063</span><span class="t">空方</span></div><div class="sig"><span class="k">RSI(6)</span><span class="v bad">73.6</span><span class="t">超买&gt;70</span></div><div class="sig"><span class="k">BOLL(20,2)</span><span class="v bad">上1298.91/中1218.3/下1137.68</span><span class="t">上轨上方</span></div><div class="sig"><span class="k">量比</span><span class="v neutral">1.18</span><span class="t">常态</span></div><div class="sig"><span class="k">上影线占比</span><span class="v neutral">0.12</span><span class="t">正常</span></div><div class="sig"><span class="k">今日涨跌</span><span class="v bad">-1.47%</span><span class="t"></span></div><div class="sig"><span class="k">ATR(14)</span><span class="v neutral">34.16</span><span class="t">波动参考</span></div></div><div class="behavior"><div class="bt">行为定性（confidence）</div><div class="beh-row"><span class="beh-name">诱多出货</span><span class="conf-track"><span class="conf-fill danger" style="width:45%"></span></span><span class="beh-val">45%</span></div><div class="beh-row"><span class="beh-name">断魂刀</span><span class="conf-track"><span class="conf-fill danger" style="width:0%"></span></span><span class="beh-val">0%</span></div><div class="beh-row"><span class="beh-name">正常拉升</span><span class="conf-track"><span class="conf-fill good" style="width:40%"></span></span><span class="beh-val">40%</span></div><div class="beh-row"><span class="beh-name">洗盘</span><span class="conf-track"><span class="conf-fill warn" style="width:65%"></span></span><span class="beh-val">65%</span></div><div class="beh-row"><span class="beh-name">机构建仓</span><span class="conf-track"><span class="conf-fill neutral" style="width:15%"></span></span><span class="beh-val">15%</span></div></div><div class="op-card danger"><div class="op-title">建议操作</div><div class="op-action">危险局：次日开盘先减 <b>1/2</b>，剩余仓位跌破 <b>MA20(1218.3)</b> 或 <b>1151.04</b> 全清；<b>不补仓摊平</b>。</div><div class="op-margin">⚠ 已实现浮亏 -11.62%，按最小代价离场优先；止损位较现价提前 <b>12%</b>（1151.04），避免越陷越深。</div><span class="op-level exit">离场/减仓</span></div></div></div><details class="debate"><summary>四 Agent 辩论过程（点击展开）</summary><div class="body"><div class="agent bull"><span class="who">多头 Agent：</span>我看多依据：站上MA20/60、量能温和。现价站上均线且动能未衰竭，正常拉升 conf=40%、洗盘 conf=65%，可持有等待。但我不否认上方有超买压力。</div><div class="agent bear"><span class="who">空头 Agent：</span>我反对盲目持有。诱多出货 conf=45%、断魂刀 conf=0%，证据：RSI6超买、价出布林上轨。这是典型高位派发/对倒痕迹，且使用者已浮亏 -11.62%，狗庄僵持特征明显。</div><div class="agent risk"><span class="who">风控 Agent：</span>风控介入：使用者本金安全第一。当前已浮亏且出现派发特征，必须最小代价离场——次日减 1/2，剩余破 MA20 或止损位全清，提前量 ⚠ 已实现浮亏 -11.62%，按最小代价离场优先；止损位较现价提前 &lt;b&gt;12%&lt;/b&gt;（1151.04），避免越陷越深。。禁止任何补仓摊平。</div><div class="agent judge"><span class="who">裁判 Agent：</span>裁判综合：情况A(偏多) 66% / 情况B(偏空) 34%。危险局成立，执行最小代价离场。本报告不含任何心理安慰，结论完全由指标驱动。</div></div></details></div><div class="stock-node"><div class="stock-head"><span>宁德时代</span><span class="code">300750</span><span class="pnl up">成本 320.0 · 现价 382.2 · 盈亏 +19.44%</span></div><div class="flow-root"><span class="lbl">技术定位：</span>收盘 <b>382.2</b> 站上 MA20(<b>376.15</b>)；RSI6=<b>61.0</b>；价布林<b>中</b>轨附近；今日 <b class="up">+1.53%</b>。</div><div class="flow-arrow">▼ 二分情形</div><div class="flow-branches"><div class="branch bull"><div class="branch-head">情况A · 弱反弹 / 横盘<span class="prob">P=90%</span></div><div class="sig-hint">触发证据：RSI未超买、量能温和</div><div class="sig-grid"><div class="sig"><span class="k">收盘/MA20</span><span class="v good">382.2 / 376.15</span><span class="t">站上</span></div><div class="sig"><span class="k">收盘/MA60</span><span class="v bad">382.2 / 403.95</span><span class="t">跌破</span></div><div class="sig"><span class="k">MACD</span><span class="v bad">DIF -7.776 &gt; DEA -9.748</span><span class="t">空方</span></div><div class="sig"><span class="k">RSI(6)</span><span class="v neutral">61.0</span><span class="t">中性30-70</span></div><div class="sig"><span class="k">BOLL(20,2)</span><span class="v neutral">上402.82/中376.15/下349.48</span><span class="t">中轨附近</span></div><div class="sig"><span class="k">量比</span><span class="v neutral">1.1</span><span class="t">常态</span></div><div class="sig"><span class="k">上影线占比</span><span class="v neutral">0.48</span><span class="t">正常</span></div><div class="sig"><span class="k">今日涨跌</span><span class="v good">+1.53%</span><span class="t"></span></div><div class="sig"><span class="k">ATR(14)</span><span class="v neutral">16.05</span><span class="t">波动参考</span></div></div><div class="behavior"><div class="bt">行为定性（confidence）</div><div class="beh-row"><span class="beh-name">诱多出货</span><span class="conf-track"><span class="conf-fill danger" style="width:0%"></span></span><span class="beh-val">0%</span></div><div class="beh-row"><span class="beh-name">断魂刀</span><span class="conf-track"><span class="conf-fill danger" style="width:0%"></span></span><span class="beh-val">0%</span></div><div class="beh-row"><span class="beh-name">正常拉升</span><span class="conf-track"><span class="conf-fill good" style="width:35%"></span></span><span class="beh-val">35%</span></div><div class="beh-row"><span class="beh-name">洗盘</span><span class="conf-track"><span class="conf-fill warn" style="width:20%"></span></span><span class="beh-val">20%</span></div><div class="beh-row"><span class="beh-name">机构建仓</span><span class="conf-track"><span class="conf-fill neutral" style="width:0%"></span></span><span class="beh-val">0%</span></div></div><div class="op-card"><div class="op-title">建议操作</div><div class="op-action">持仓观察，纪律线 <b>MA20(376.15)</b>：收盘跌破减 <b>1/3</b>；若放量破 <b>MA60(403.95)</b> 再减 1/3。</div><span class="op-level hold">持有观察</span></div></div><div class="branch bear"><div class="branch-head">情况B · 高位诱多出货<span class="prob">P=10%</span></div><div class="sig-hint">触发证据：信号不显著</div><div class="sig-grid"><div class="sig"><span class="k">收盘/MA20</span><span class="v good">382.2 / 376.15</span><span class="t">站上</span></div><div class="sig"><span class="k">收盘/MA60</span><span class="v bad">382.2 / 403.95</span><span class="t">跌破</span></div><div class="sig"><span class="k">MACD</span><span class="v bad">DIF -7.776 &gt; DEA -9.748</span><span class="t">空方</span></div><div class="sig"><span class="k">RSI(6)</span><span class="v neutral">61.0</span><span class="t">中性30-70</span></div><div class="sig"><span class="k">BOLL(20,2)</span><span class="v neutral">上402.82/中376.15/下349.48</span><span class="t">中轨附近</span></div><div class="sig"><span class="k">量比</span><span class="v neutral">1.1</span><span class="t">常态</span></div><div class="sig"><span class="k">上影线占比</span><span class="v neutral">0.48</span><span class="t">正常</span></div><div class="sig"><span class="k">今日涨跌</span><span class="v good">+1.53%</span><span class="t"></span></div><div class="sig"><span class="k">ATR(14)</span><span class="v neutral">16.05</span><span class="t">波动参考</span></div></div><div class="behavior"><div class="bt">行为定性（confidence）</div><div class="beh-row"><span class="beh-name">诱多出货</span><span class="conf-track"><span class="conf-fill danger" style="width:0%"></span></span><span class="beh-val">0%</span></div><div class="beh-row"><span class="beh-name">断魂刀</span><span class="conf-track"><span class="conf-fill danger" style="width:0%"></span></span><span class="beh-val">0%</span></div><div class="beh-row"><span class="beh-name">正常拉升</span><span class="conf-track"><span class="conf-fill good" style="width:35%"></span></span><span class="beh-val">35%</span></div><div class="beh-row"><span class="beh-name">洗盘</span><span class="conf-track"><span class="conf-fill warn" style="width:20%"></span></span><span class="beh-val">20%</span></div><div class="beh-row"><span class="beh-name">机构建仓</span><span class="conf-track"><span class="conf-fill neutral" style="width:0%"></span></span><span class="beh-val">0%</span></div></div><div class="op-card"><div class="op-title">建议操作</div><div class="op-action">持仓观察，纪律线 <b>MA20(376.15)</b>：收盘跌破减 <b>1/3</b>；若放量破 <b>MA60(403.95)</b> 再减 1/3。</div><span class="op-level hold">持有观察</span></div></div></div><details class="debate"><summary>四 Agent 辩论过程（点击展开）</summary><div class="body"><div class="agent bull"><span class="who">多头 Agent：</span>我看多依据：RSI未超买、量能温和。现价站上均线且动能未衰竭，正常拉升 conf=35%、洗盘 conf=20%，可持有等待。但我不否认上方有超买压力。</div><div class="agent bear"><span class="who">空头 Agent：</span>我反对盲目持有。诱多出货 conf=0%、断魂刀 conf=0%，证据：无明显看空信号。这是典型高位派发/对倒痕迹，一旦破位杀伤大。</div><div class="agent risk"><span class="who">风控 Agent：</span>风控介入：暂未触发危险，但纪律线 MA20=376.15 不可破；若收盘跌破即减 1/3，不赌反弹。</div><div class="agent judge"><span class="who">裁判 Agent：</span>裁判综合：情况A(偏多) 90% / 情况B(偏空) 10%。维持持有观察，严守纪律线。本报告不含任何心理安慰，结论完全由指标驱动。</div></div></details></div><div class="stock-node"><div class="stock-head"><span>招商银行</span><span class="code">600036</span><span class="pnl dn">成本 48.0 · 现价 37.99 · 盈亏 -20.85%</span></div><div class="flow-root"><span class="lbl">技术定位：</span>收盘 <b>37.99</b> 站上 MA20(<b>37.13</b>)；RSI6=<b>54.5</b>；价布林<b>中</b>轨附近；今日 <b class="dn">-2.36%</b>。</div><div class="flow-arrow">▼ 二分情形</div><div class="flow-branches"><div class="branch bull"><div class="branch-head">情况A · 弱反弹 / 横盘<span class="prob">P=86%</span></div><div class="sig-hint">触发证据：站上MA20/60、RSI未超买、量能温和、机构建仓迹象</div><div class="sig-grid"><div class="sig"><span class="k">收盘/MA20</span><span class="v good">37.99 / 37.13</span><span class="t">站上</span></div><div class="sig"><span class="k">收盘/MA60</span><span class="v good">37.99 / 37.79</span><span class="t">站上</span></div><div class="sig"><span class="k">MACD</span><span class="v warn">DIF 0.128 &gt; DEA -0.058</span><span class="t">柱收窄</span></div><div class="sig"><span class="k">RSI(6)</span><span class="v neutral">54.5</span><span class="t">中性30-70</span></div><div class="sig"><span class="k">BOLL(20,2)</span><span class="v neutral">上38.81/中37.13/下35.46</span><span class="t">中轨附近</span></div><div class="sig"><span class="k">量比</span><span class="v neutral">1.47</span><span class="t">常态</span></div><div class="sig"><span class="k">上影线占比</span><span class="v neutral">0.15</span><span class="t">正常</span></div><div class="sig"><span class="k">今日涨跌</span><span class="v bad">-2.36%</span><span class="t"></span></div><div class="sig"><span class="k">ATR(14)</span><span class="v neutral">0.83</span><span class="t">波动参考</span></div></div><div class="behavior"><div class="bt">行为定性（confidence）</div><div class="beh-row"><span class="beh-name">诱多出货</span><span class="conf-track"><span class="conf-fill danger" style="width:15%"></span></span><span class="beh-val">15%</span></div><div class="beh-row"><span class="beh-name">断魂刀</span><span class="conf-track"><span class="conf-fill danger" style="width:0%"></span></span><span class="beh-val">0%</span></div><div class="beh-row"><span class="beh-name">正常拉升</span><span class="conf-track"><span class="conf-fill good" style="width:60%"></span></span><span class="beh-val">60%</span></div><div class="beh-row"><span class="beh-name">洗盘</span><span class="conf-track"><span class="conf-fill warn" style="width:15%"></span></span><span class="beh-val">15%</span></div><div class="beh-row"><span class="beh-name">机构建仓</span><span class="conf-track"><span class="conf-fill neutral" style="width:40%"></span></span><span class="beh-val">40%</span></div></div><div class="op-card"><div class="op-title">建议操作</div><div class="op-action">持仓观察，纪律线 <b>MA20(37.13)</b>：收盘跌破减 <b>1/3</b>；若放量破 <b>MA60(37.79)</b> 再减 1/3。</div><span class="op-level reduce">减仓观察</span></div></div><div class="branch bear"><div class="branch-head">情况B · 高位诱多出货<span class="prob">P=14%</span></div><div class="sig-hint">触发证据：MACD柱收窄</div><div class="sig-grid"><div class="sig"><span class="k">收盘/MA20</span><span class="v good">37.99 / 37.13</span><span class="t">站上</span></div><div class="sig"><span class="k">收盘/MA60</span><span class="v good">37.99 / 37.79</span><span class="t">站上</span></div><div class="sig"><span class="k">MACD</span><span class="v warn">DIF 0.128 &gt; DEA -0.058</span><span class="t">柱收窄</span></div><div class="sig"><span class="k">RSI(6)</span><span class="v neutral">54.5</span><span class="t">中性30-70</span></div><div class="sig"><span class="k">BOLL(20,2)</span><span class="v neutral">上38.81/中37.13/下35.46</span><span class="t">中轨附近</span></div><div class="sig"><span class="k">量比</span><span class="v neutral">1.47</span><span class="t">常态</span></div><div class="sig"><span class="k">上影线占比</span><span class="v neutral">0.15</span><span class="t">正常</span></div><div class="sig"><span class="k">今日涨跌</span><span class="v bad">-2.36%</span><span class="t"></span></div><div class="sig"><span class="k">ATR(14)</span><span class="v neutral">0.83</span><span class="t">波动参考</span></div></div><div class="behavior"><div class="bt">行为定性（confidence）</div><div class="beh-row"><span class="beh-name">诱多出货</span><span class="conf-track"><span class="conf-fill danger" style="width:15%"></span></span><span class="beh-val">15%</span></div><div class="beh-row"><span class="beh-name">断魂刀</span><span class="conf-track"><span class="conf-fill danger" style="width:0%"></span></span><span class="beh-val">0%</span></div><div class="beh-row"><span class="beh-name">正常拉升</span><span class="conf-track"><span class="conf-fill good" style="width:60%"></span></span><span class="beh-val">60%</span></div><div class="beh-row"><span class="beh-name">洗盘</span><span class="conf-track"><span class="conf-fill warn" style="width:15%"></span></span><span class="beh-val">15%</span></div><div class="beh-row"><span class="beh-name">机构建仓</span><span class="conf-track"><span class="conf-fill neutral" style="width:40%"></span></span><span class="beh-val">40%</span></div></div><div class="op-card"><div class="op-title">建议操作</div><div class="op-action">持仓观察，纪律线 <b>MA20(37.13)</b>：收盘跌破减 <b>1/3</b>；若放量破 <b>MA60(37.79)</b> 再减 1/3。</div><span class="op-level reduce">减仓观察</span></div></div></div><details class="debate"><summary>四 Agent 辩论过程（点击展开）</summary><div class="body"><div class="agent bull"><span class="who">多头 Agent：</span>我看多依据：站上MA20/60、RSI未超买、量能温和、机构建仓迹象。现价站上均线且动能未衰竭，正常拉升 conf=60%、洗盘 conf=15%，可持有等待。但我不否认上方有超买压力。</div><div class="agent bear"><span class="who">空头 Agent：</span>我反对盲目持有。诱多出货 conf=15%、断魂刀 conf=0%，证据：MACD柱收窄。这是典型高位派发/对倒痕迹，且使用者已浮亏 -20.85%，狗庄僵持特征明显。</div><div class="agent risk"><span class="who">风控 Agent：</span>风控介入：暂未触发危险，但纪律线 MA20=37.13 不可破；若收盘跌破即减 1/3，不赌反弹。</div><div class="agent judge"><span class="who">裁判 Agent：</span>裁判综合：情况A(偏多) 86% / 情况B(偏空) 14%。维持持有观察，严守纪律线。本报告不含任何心理安慰，结论完全由指标驱动。</div></div></details></div>
+        </div>
+
+        <!-- ===== 第五部分：量化回测锚点 ===== -->
+        <div class="card">
+            <h3>📐 量化回测辅助决策 <span class="badge">次日策略锚点</span></h3>
+            <div class="table-wrap"><table><thead><tr><th>标的</th><th>代码</th><th>MA20</th><th>MA60</th><th>BOLL中</th><th>盈亏</th><th>纪律线/止损</th></tr></thead><tbody><tr><td class="name">贵州茅台</td><td>600519</td><td>1218.3</td><td>1282.84</td><td>1218.3</td><td class="dn">-11.62%</td><td>MA20=1218.3 / MA60=1282.84 / 止损参考=1151.04</td></tr><tr><td class="name">宁德时代</td><td>300750</td><td>376.15</td><td>403.95</td><td>376.15</td><td class="up">19.44%</td><td>MA20=376.15 / MA60=403.95 / 止损参考=353.58</td></tr><tr><td class="name">招商银行</td><td>600036</td><td>37.13</td><td>37.79</td><td>37.13</td><td class="dn">-20.85%</td><td>MA20=37.13 / MA60=37.79 / 止损参考=34.9</td></tr></tbody></table></div>
+        </div>
+
+        <!-- ===== 第六部分：明日场景预演 ===== -->
+        <div class="card">
+            <h3>🎯 明日场景预演 <span class="badge">场景化应对</span></h3>
+            <div class="scene-box"><div class="st">贵州茅台（600519）明日应对</div><div class="sc"><b>情况A（66%）弱反弹 / 横盘</b> → 反弹减仓；<b>情况B（34%）高位诱多出货</b> → 减仓/离场。纪律线：MA20=1218.3 / MA60=1282.84 / 止损参考=1151.04</div></div><div class="scene-box"><div class="st">宁德时代（300750）明日应对</div><div class="sc"><b>情况A（90%）弱反弹 / 横盘</b> → 持有/加仓观察；<b>情况B（10%）高位诱多出货</b> → 跌破MA20减1/3。纪律线：MA20=376.15 / MA60=403.95 / 止损参考=353.58</div></div><div class="scene-box"><div class="st">招商银行（600036）明日应对</div><div class="sc"><b>情况A（86%）弱反弹 / 横盘</b> → 持有/加仓观察；<b>情况B（14%）高位诱多出货</b> → 跌破MA20减1/3。纪律线：MA20=37.13 / MA60=37.79 / 止损参考=34.9</div></div>
+        </div>
+
+        <!-- ===== 底部汇总 ===== -->
+        <div class="summary-box">
+            <h3>📌 今日复盘结论</h3>
+            <p>大盘：6/6 指数收红。</p><p>持仓 3 只，<b>危险标的 贵州茅台(-11.6%)</b>，已触发最小代价离场预案，禁止补仓摊平。</p><p>所有结论由量化信号驱动，不含心理安慰；最终以使用者资金最小损失为第一原则。</p>
+        </div>
+
+        <!-- ===== 个人批注 ===== -->
+        <div class="notes">
+            <h3 style="font-size:13px;color:var(--text-muted);font-weight:500;margin-bottom:8px;">✍️ 个人批注（可编辑）</h3>
+            <textarea placeholder="在此补充你的主观判断、盘感、待办事项……"></textarea>
+        </div>
+
+        <footer>
+            每日复盘与决策预演 · 由 daily-review 技能于每日 21:00 自动生成 · 数据可能延迟，以交易所官方为准
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>十五五 · 六张网标的图谱 · 2026-07</title>
+    <style>
+        /* ===== 主题：梦境 · 紫金玫瑰 ===== */
+        :root {
+            --bg-deep: #140E1F;
+            --bg-grad-1: #1E1430;
+            --bg-grad-2: #100A1A;
+            --bg-panel: rgba(123,91,168,0.10);
+            --bg-panel-hover: rgba(123,91,168,0.18);
+            --bg-panel-solid: rgba(30,20,48,0.85);
+            --border-subtle: rgba(180,140,210,0.12);
+            --border-hover: rgba(180,140,210,0.26);
+            --text-primary: #F0E8D8;
+            --text-secondary: #C4B0D0;
+            --text-muted: #7A6A8E;
+            --accent-gold: #D4AF37;
+            --accent-gold-soft: #F5E6C8;
+            --accent-rose: #E8A5C8;
+            --accent-pink-soft: #F0C8D8;
+            --accent-purple: #9C7EC4;
+            --accent-purple-soft: #B89CD8;
+            --accent-green: #7B9EC4;
+            --accent-red: #E07B7B;
+            --danger: #D8745C;
+            --danger-soft: rgba(216,116,92,0.10);
+            --shadow-glow: rgba(156,126,196,0.10);
+            --font-base: 14px;
+            --sp-1: 6px; --sp-2: 10px; --sp-3: 14px; --sp-4: 18px;
+            --sp-5: 24px; --sp-6: 32px;
+            --radius: 16px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+            background:
+                radial-gradient(1200px 600px at 80% -10%, rgba(123,91,168,0.14), transparent 60%),
+                radial-gradient(900px 500px at -10% 110%, rgba(212,175,55,0.08), transparent 55%),
+                radial-gradient(600px 400px at 50% 50%, rgba(232,165,200,0.05), transparent 70%),
+                linear-gradient(160deg, var(--bg-grad-1), var(--bg-grad-2));
+            background-attachment: fixed;
+            color: var(--text-primary);
+            line-height: 1.75;
+            font-size: var(--font-base);
+            padding: var(--sp-5);
+            min-height: 100vh;
+        }
+        ::-webkit-scrollbar { width: 9px; height: 9px; }
+        ::-webkit-scrollbar-thumb { background: var(--accent-purple); border-radius: 5px; }
+        ::-webkit-scrollbar-track { background: rgba(58,48,78,0.2); }
+        .container { max-width: 1520px; margin: 0 auto; }
+
+        /* ===== Header ===== */
+        .header {
+            display: flex; justify-content: space-between; align-items: flex-end;
+            padding: var(--sp-1) 0 var(--sp-4); border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: var(--sp-5); flex-wrap: wrap; gap: var(--sp-3);
+        }
+        .header h1 {
+            font-size: 34px; font-weight: 700; letter-spacing: 1px; line-height: 1.15;
+            display: flex; align-items: baseline; gap: 22px; margin-top: -8px; flex-wrap: wrap;
+        }
+        .header h1 .zh {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-soft));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .header h1 .en { font-size: 18px; font-weight: 500; color: var(--text-secondary); letter-spacing: .5px; }
+        .header .sub { color: var(--text-muted); font-size: 12.5px; margin-top: 4px; letter-spacing: .5px; }
+        .header .meta { display: flex; align-items: center; gap: var(--sp-3); color: var(--text-secondary); font-size: 13px; flex-wrap: wrap; }
+        .header .tag {
+            background: rgba(201,168,97,0.10); padding: 4px var(--sp-3); border-radius: 30px;
+            border: 1px solid rgba(201,168,97,0.18); color: var(--accent-gold); font-size: 11.5px;
+        }
+
+        /* ===== 概览导航 ===== */
+        .overview-nav {
+            display: grid; grid-template-columns: repeat(6,1fr); gap: var(--sp-3); margin-bottom: var(--sp-5);
+        }
+        @media (max-width: 1100px) { .overview-nav { grid-template-columns: repeat(3,1fr); } }
+        @media (max-width: 700px) { .overview-nav { grid-template-columns: repeat(2,1fr); } }
+        .nav-card {
+            background: var(--bg-panel); border: 1px solid var(--border-subtle); border-radius: var(--radius);
+            padding: var(--sp-3) var(--sp-4); text-decoration: none; transition: all .3s; position: relative; overflow: hidden;
+        }
+        .nav-card:hover { border-color: var(--border-hover); background: var(--bg-panel-hover); transform: translateY(-2px); }
+        .nav-card .nc-icon { font-size: 28px; margin-bottom: 6px; display: block; }
+        .nav-card .nc-title { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+        .nav-card .nc-invest { font-size: 18px; font-weight: 700; color: var(--accent-gold); }
+        .nav-card .nc-label { font-size: 11px; color: var(--text-muted); }
+
+        /* ===== 总览卡片 ===== */
+        .summary-card {
+            background: var(--bg-panel); border: 1px solid var(--border-subtle); border-radius: var(--radius);
+            padding: var(--sp-4) var(--sp-5); backdrop-filter: blur(14px); margin-bottom: var(--sp-5);
+        }
+        .summary-card h3 {
+            font-size: 16px; font-weight: 600; color: var(--accent-gold); margin-bottom: var(--sp-3);
+            display: flex; align-items: center; gap: var(--sp-2);
+        }
+        .summary-card p { color: var(--text-secondary); font-size: 13px; line-height: 1.9; padding: 3px 0; }
+        .summary-card p strong { color: var(--text-primary); }
+        .summary-card p .hl { color: var(--accent-gold); font-weight: 600; }
+        .summary-card p .rose { color: var(--accent-rose); font-weight: 600; }
+
+        /* ===== 六张网区块 ===== */
+        .net-section {
+            background: var(--bg-panel); border: 1px solid var(--border-subtle); border-radius: var(--radius);
+            padding: var(--sp-5); margin-bottom: var(--sp-5); backdrop-filter: blur(14px);
+            transition: border-color .3s;
+        }
+        .net-section:hover { border-color: var(--border-hover); }
+        .net-header {
+            display: flex; align-items: center; gap: var(--sp-4); margin-bottom: var(--sp-5);
+            padding-bottom: var(--sp-4); border-bottom: 1px solid var(--border-subtle); flex-wrap: wrap;
+        }
+        .net-icon { font-size: 42px; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center;
+            border-radius: 16px; flex-shrink: 0; }
+        .net-icon.c1 { background: rgba(111,160,200,0.15); }
+        .net-icon.c2 { background: rgba(212,175,55,0.15); }
+        .net-icon.c3 { background: rgba(156,126,196,0.15); }
+        .net-icon.c4 { background: rgba(232,165,200,0.15); }
+        .net-icon.c5 { background: rgba(180,140,100,0.15); }
+        .net-icon.c6 { background: rgba(111,160,136,0.15); }
+        .net-title { font-size: 24px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+        .net-subtitle { font-size: 13px; color: var(--text-secondary); }
+        .net-invest { margin-left: auto; text-align: right; }
+        .net-invest .amount { font-size: 28px; font-weight: 700; color: var(--accent-gold); }
+        .net-invest .label { font-size: 12px; color: var(--text-muted); }
+
+        /* ===== 政策详情 ===== */
+        .policy-box {
+            background: rgba(156,126,196,0.06); border: 1px solid var(--border-subtle); border-radius: 14px;
+            padding: var(--sp-4) var(--sp-5); margin-bottom: var(--sp-4);
+        }
+        .policy-box h4 { font-size: 14px; font-weight: 600; color: var(--accent-gold-soft); margin-bottom: var(--sp-2); }
+        .policy-box ul { list-style: none; padding: 0; }
+        .policy-box li {
+            font-size: 13px; color: var(--text-secondary); padding: 5px 0; padding-left: 20px; position: relative; line-height: 1.7;
+        }
+        .policy-box li::before { content: '▸'; position: absolute; left: 0; color: var(--accent-purple); }
+        .policy-box li strong { color: var(--text-primary); }
+        .policy-box li .hl { color: var(--accent-gold); font-weight: 600; }
+
+        /* ===== 最新进展 ===== */
+        .progress-box {
+            background: rgba(212,175,55,0.05); border-left: 3px solid var(--accent-gold); border-radius: 8px;
+            padding: var(--sp-3) var(--sp-4); margin-bottom: var(--sp-4); font-size: 13px; color: var(--text-secondary); line-height: 1.8;
+        }
+        .progress-box strong { color: var(--accent-gold-soft); }
+
+        /* ===== 标的卡片网格 ===== */
+        .stocks-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); gap: var(--sp-4); }
+        @media (max-width: 900px) { .stocks-grid { grid-template-columns: 1fr; } }
+        .stock-card {
+            background: linear-gradient(180deg, rgba(30,20,48,0.6), rgba(30,20,48,0.3));
+            border: 1px solid var(--border-subtle); border-radius: 14px; padding: var(--sp-4);
+            transition: all .3s; position: relative; overflow: hidden;
+        }
+        .stock-card:hover { border-color: var(--border-hover); box-shadow: 0 8px 28px var(--shadow-glow); transform: translateY(-1px); }
+        .stock-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
+            background: linear-gradient(180deg, var(--accent-purple), transparent);
+        }
+        .stock-card.gold::before { background: linear-gradient(180deg, var(--accent-gold), transparent); }
+        .stock-card.rose::before { background: linear-gradient(180deg, var(--accent-rose), transparent); }
+        .stock-card.green::before { background: linear-gradient(180deg, var(--accent-green), transparent); }
+
+        .stock-head {
+            display: flex; align-items: center; gap: var(--sp-2); margin-bottom: var(--sp-3);
+            padding-bottom: var(--sp-2); border-bottom: 1px solid var(--border-subtle);
+        }
+        .stock-name { font-size: 17px; font-weight: 700; color: var(--text-primary); }
+        .stock-code { font-size: 12px; color: var(--text-muted); font-weight: 400; }
+        .stock-price { margin-left: auto; text-align: right; }
+        .stock-price .px { font-size: 20px; font-weight: 700; color: var(--text-primary); }
+        .stock-price .chg { font-size: 13px; font-weight: 600; }
+        .stock-price .chg.up { color: var(--accent-red); }
+        .stock-price .chg.dn { color: var(--accent-green); }
+
+        .stock-tags { display: flex; gap: 6px; margin-bottom: var(--sp-2); flex-wrap: wrap; }
+        .stag { font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 500; }
+        .stag.gold { background: rgba(212,175,55,0.12); color: var(--accent-gold); border: 1px solid rgba(212,175,55,0.18); }
+        .stag.rose { background: rgba(232,165,200,0.12); color: var(--accent-rose); border: 1px solid rgba(232,165,200,0.18); }
+        .stag.purple { background: rgba(156,126,196,0.12); color: var(--accent-purple-soft); border: 1px solid rgba(156,126,196,0.18); }
+        .stag.green { background: rgba(111,160,136,0.12); color: var(--accent-green); border: 1px solid rgba(111,160,136,0.22); }
+        .stag.blue { background: rgba(111,160,200,0.12); color: var(--accent-green); border: 1px solid rgba(111,160,200,0.22); }
+
+        .stock-role { font-size: 12.5px; color: var(--text-secondary); margin-bottom: var(--sp-2); line-height: 1.6; }
+        .stock-role strong { color: var(--accent-gold-soft); }
+
+        .stock-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; margin: var(--sp-2) 0; }
+        .metric { display: flex; justify-content: space-between; font-size: 12px; padding: 3px 0; border-bottom: 1px dotted rgba(168,148,190,0.06); }
+        .metric .mk { color: var(--text-muted); }
+        .metric .mv { color: var(--text-primary); font-weight: 500; font-variant-numeric: tabular-nums; }
+        .metric .mv.up { color: var(--accent-red); }
+        .metric .mv.dn { color: var(--accent-green); }
+        .metric .mv.warn { color: var(--danger); }
+
+        .stock-fund {
+            background: rgba(30,20,48,0.4); border-radius: 10px; padding: var(--sp-2) var(--sp-3); margin-top: var(--sp-2);
+            font-size: 12px; color: var(--text-secondary); line-height: 1.7;
+        }
+        .stock-fund .ft { font-weight: 600; color: var(--accent-gold); font-size: 12px; margin-bottom: 3px; }
+        .stock-fund .flow-in { color: var(--accent-red); font-weight: 600; }
+        .stock-fund .flow-out { color: var(--accent-green); font-weight: 600; }
+
+        .stock-sentiment {
+            background: rgba(232,165,200,0.05); border-radius: 10px; padding: var(--sp-2) var(--sp-3); margin-top: var(--sp-2);
+            font-size: 12px; color: var(--text-secondary); line-height: 1.7;
+        }
+        .stock-sentiment .st { font-weight: 600; color: var(--accent-rose); font-size: 12px; margin-bottom: 3px; }
+
+        .stock-tech {
+            background: rgba(111,160,200,0.05); border-radius: 10px; padding: var(--sp-2) var(--sp-3); margin-top: var(--sp-2);
+            font-size: 12px; color: var(--text-secondary); line-height: 1.7;
+        }
+        .stock-tech .tt { font-weight: 600; color: var(--accent-green); font-size: 12px; margin-bottom: 3px; }
+
+        /* ===== 技术指标条 ===== */
+        .tech-bars { display: flex; flex-direction: column; gap: 6px; margin-top: 6px; }
+        .tech-bar { display: grid; grid-template-columns: 60px 1fr 50px; gap: 8px; align-items: center; font-size: 11px; }
+        .tech-bar .tb-label { color: var(--text-muted); }
+        .tech-bar .tb-track { height: 6px; background: rgba(58,48,78,0.6); border-radius: 4px; overflow: hidden; }
+        .tech-bar .tb-fill { height: 100%; border-radius: 4px; transition: width .5s; }
+        .tech-bar .tb-fill.bull { background: linear-gradient(90deg, #4c8a6a, var(--accent-green)); }
+        .tech-bar .tb-fill.bear { background: linear-gradient(90deg, #b85c4c, var(--danger)); }
+        .tech-bar .tb-fill.neutral { background: linear-gradient(90deg, #6a5c8a, var(--accent-purple)); }
+        .tech-bar .tb-val { text-align: right; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+
+        /* ===== 配置建议 ===== */
+        .strategy-box {
+            background: linear-gradient(135deg, rgba(212,175,55,0.08), rgba(156,126,196,0.06));
+            border: 1px solid rgba(212,175,55,0.20); border-radius: var(--radius);
+            padding: var(--sp-5); margin-bottom: var(--sp-5);
+        }
+        .strategy-box h3 { font-size: 18px; font-weight: 600; color: var(--accent-gold); margin-bottom: var(--sp-4); }
+        .strategy-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--sp-4); }
+        @media (max-width: 900px) { .strategy-grid { grid-template-columns: 1fr; } }
+        .strategy-item {
+            background: rgba(30,20,48,0.5); border-radius: 14px; padding: var(--sp-4); border-top: 3px solid var(--accent-purple);
+        }
+        .strategy-item.p1 { border-top-color: var(--accent-gold); }
+        .strategy-item.p2 { border-top-color: var(--accent-rose); }
+        .strategy-item.p3 { border-top-color: var(--accent-green); }
+        .strategy-item .si-title { font-size: 14px; font-weight: 600; margin-bottom: var(--sp-2); }
+        .strategy-item.p1 .si-title { color: var(--accent-gold); }
+        .strategy-item.p2 .si-title { color: var(--accent-rose); }
+        .strategy-item.p3 .si-title { color: var(--accent-green); }
+        .strategy-item p { font-size: 12.5px; color: var(--text-secondary); line-height: 1.8; }
+        .strategy-item p strong { color: var(--text-primary); }
+
+        /* ===== 底部免责 ===== */
+        .disclaimer {
+            text-align: center; font-size: 11.5px; color: var(--text-muted); padding: var(--sp-4);
+            border-top: 1px solid var(--border-subtle); margin-top: var(--sp-4); line-height: 1.8;
+        }
+
+        @media (max-width: 900px) {
+            .header h1 { font-size: 26px; }
+            .net-title { font-size: 20px; }
+            .net-invest .amount { font-size: 22px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- ===== Header ===== -->
+    <div class="header">
+        <div>
+            <h1><span class="zh">十五五 · 六张网标的图谱</span><span class="en">15th FYP · Six Networks Map</span></h1>
+            <div class="sub">国家水网 · 新型电网 · 算力网 · 新一代通信网 · 城市地下管网 · 现代物流网 ｜ 数据截至 2026-07-28</div>
+        </div>
+        <div class="meta">
+            <span class="tag">7万亿/年</span>
+            <span class="tag">16万亿+ 十五五</span>
+            <span>更新于 2026-07-29</span>
+        </div>
+    </div>
+
+    <!-- ===== 概览导航 ===== -->
+    <div class="overview-nav">
+        <a href="#net1" class="nav-card">
+            <span class="nc-icon">💧</span>
+            <div class="nc-title">国家水网</div>
+            <div class="nc-invest">6万亿+</div>
+            <div class="nc-label">十五五投资</div>
+        </a>
+        <a href="#net2" class="nav-card">
+            <span class="nc-icon">⚡</span>
+            <div class="nc-title">新型电网</div>
+            <div class="nc-invest">5万亿+</div>
+            <div class="nc-label">十五五投资</div>
+        </a>
+        <a href="#net3" class="nav-card">
+            <span class="nc-icon">🖥️</span>
+            <div class="nc-title">算力网</div>
+            <div class="nc-invest">2万亿+</div>
+            <div class="nc-label">十五五投资</div>
+        </a>
+        <a href="#net4" class="nav-card">
+            <span class="nc-icon">📡</span>
+            <div class="nc-title">新一代通信网</div>
+            <div class="nc-invest">1.5万亿+</div>
+            <div class="nc-label">十五五投资</div>
+        </a>
+        <a href="#net5" class="nav-card">
+            <span class="nc-icon">🔧</span>
+            <div class="nc-title">城市地下管网</div>
+            <div class="nc-invest">5万亿</div>
+            <div class="nc-label">十五五投资</div>
+        </a>
+        <a href="#net6" class="nav-card">
+            <span class="nc-icon">🚛</span>
+            <div class="nc-title">现代物流网</div>
+            <div class="nc-invest">2.5万亿</div>
+            <div class="nc-label">十五五投资</div>
+        </a>
+    </div>
+
+    <!-- ===== 总览 ===== -->
+    <div class="summary-card">
+        <h3>📋 政策背景与总览</h3>
+        <p>2026年4月28日中央政治局会议明确提出加强<span class="hl">水网、新型电网、算力网、新一代通信网、城市地下管网、物流网</span>等"六张网"规划建设，5月9日国务院常务会议作出具体部署。这是"十五五"时期基础设施建设的一项重要布局，从传统的"铁公机"转向<span class="rose">地下隐形基建与数字底层基建</span>。</p>
+        <p>国家发改委主任郑栅洁在2026年全国两会期间透露，"六张网"及重点领域建设今年初步估算投资将超过<span class="hl">7万亿元</span>；"十五五"期间仅国家水网、新型电网、城市地下管网三项投资合计将超<span class="hl">16万亿元</span>。1.3万亿元超长期特别国债、7550亿元中央预算内投资于6月底前基本下达完毕，重大项目进入密集开工期。</p>
+        <p>"六张网"正从"各自成网"走向"多网协同"：<strong>算力网与新型电网融合</strong>（广东阳江海底算力中心依托海上风电实现绿电直供，能效提升30%+）；<strong>算力网与通信网融合</strong>（围绕算力枢纽建成干线光缆145条，时延降至20毫秒以内）；<strong>水网与电网融合</strong>（抽水蓄能电站既是水利设施又是电网"超级充电宝"）。</p>
+    </div>
+
+    <!-- ===== 第一张网：国家水网 ===== -->
+    <div class="net-section" id="net1">
+        <div class="net-header">
+            <div class="net-icon c1">💧</div>
+            <div>
+                <div class="net-title">一、国家水网</div>
+                <div class="net-subtitle">跨流域引调水 · 灌区现代化 · 城乡供水安全保障 · 抽水蓄能 · 智慧水务</div>
+            </div>
+            <div class="net-invest">
+                <div class="amount">6万亿+</div>
+                <div class="label">"十五五"期间投资</div>
+            </div>
+        </div>
+
+        <div class="policy-box">
+            <h4>📌 系统组成与重要部分</h4>
+            <ul>
+                <li><strong>"四横三纵"国家水网主骨架</strong>：南水北调东、中、西线工程 + 长江、黄河、淮河、海河四大流域<span class="hl">跨流域调配大动脉</span></li>
+                <li><strong>重大引调水工程</strong>：滇中引水、引江济淮二期、引汉济渭二期、环北部湾水资源配置等</li>
+                <li><strong>灌区现代化改造</strong>：1485处大中型灌区续建配套与节水改造，新增恢复灌溉面积数千万亩</li>
+                <li><strong>城乡供水一体化</strong>：农村供水保障工程、规模化供水管网延伸，覆盖率目标98%+</li>
+                <li><strong>抽水蓄能电站</strong>：既是水利设施又是电网储能，"十五五"新开工抽蓄规模超1亿千瓦</li>
+                <li><strong>防洪减灾体系</strong>：江河治理、病险水库除险加固、蓄滞洪区建设</li>
+                <li><strong>智慧水务</strong>：数字孪生流域、水资源在线监测、调度信息化平台</li>
+            </ul>
+        </div>
+
+        <div class="progress-box">
+            <strong>最新进展：</strong>国家水网主骨架加速构建，平陆运河已全线通水。上半年水上运输业投资增长19.8%。"十五五"时期水利年均投资规模有望达1.2万亿元以上，可新增超过300万个就业岗位。
+        </div>
+
+        <div class="stocks-grid">
+            <!-- 中国电建 -->
+            <div class="stock-card gold">
+                <div class="stock-head">
+                    <div><span class="stock-name">中国电建</span> <span class="stock-code">601669.SH</span></div>
+                    <div class="stock-price"><div class="px">4.79</div><div class="chg up">+0.84%</div></div>
+                </div>
+                <div class="stock-tags"><span class="stag gold">工程总包龙头</span><span class="stag blue">央企</span><span class="stag purple">水利第一</span></div>
+                <div class="stock-role">国内水利水电工程<strong>绝对龙头</strong>，占据国内大中型水利枢纽工程60%以上市场份额。业务覆盖水利、水电、抽水蓄能、新能源EPC全产业链，直接受益于国家水网主骨架建设。</div>
+                <div class="stock-metrics">
+                    <div class="metric"><span class="mk">最新价</span><span class="mv">4.79元</span></div>
+                    <div class="metric"><span class="mk">7/27涨跌</span><span class="mv up">+0.84%</span></div>
+                    <div class="metric"><span class="mk">换手率</span><span class="mv">0.67%</span></div>
+                    <div class="metric"><span class="mk">市盈TTM</span><span class="mv">8.84</span></div>
+                    <div class="metric"><span class="mk">10日走势</span><span class="mv up">跑赢大盘</span></div>
+                    <div class="metric"><span class="mk">估值分位</span><span class="mv">历史低位</span></div>
+                </div>
+                <div class="stock-fund">
+                    <div class="ft">💰 机构资金动向</div>
+                    7/27主力<span class="flow-in">净流入1125万</span>，近5日主力整体呈净流入状态，净占比高于市场平均。机构5日流向-303万，机构调研频率较低。主动偏股基金持仓比例变化-0.06%，同期股价+10.38%。
+                </div>
+                <div class="stock-sentiment">
+                    <div class="st">📢 舆情信息</div>
+                    市场关注度一般，整体舆情偏中性。机构目标均价7.68元（买入评级4家），较现价有约60%上行空间。融资余额34.52亿元，占流通市值5.54%。融券指标处于高位，反映市场对后续走势存在一定分歧。
+                </div>
+                <div class="stock-tech">
+                    <div class="tt">📈 技术指标验证</div>
+                    近期平均成本4.75元，压力位4.75元，处于高度控盘状态。过去10个交易日走势跑赢大盘、跑赢行业平均。MACD处于零轴附近整理，布林带中轨获得支撑，量能温和放大。
+                </div>
+            </div>
+
+            <!-- 新兴铸管 -->
+            <div class="stock-card">
+                <div class="stock-head">
+                    <div><span class="stock-name">新兴铸管</span> <span class="stock-code">000778.SZ</span></div>
+                    <div class="stock-price"><div class="px">3.76</div><div class="chg up">+0.53%</div></div>
+                </div>
+                <div class="stock-tags"><span class="stag gold">管材龙头</span><span class="stag green">球墨铸管</span><span class="stag purple">市占率第一</span></div>
+                <div class="stock-role"><strong>球墨铸铁管领域市占率领先</strong>，产品广泛用于输水管道。国家水网建设中跨流域引调水及城乡供水管网改造对大口径铸管需求巨大，公司直接受益。</div>
+                <div class="stock-metrics">
+                    <div class="metric"><span class="mk">最新价</span><span class="mv">3.76元</span></div>
+                    <div class="metric"><span class="mk">7/27涨跌</span><span class="mv up">+0.53%</span></div>
+                    <div class="metric"><span class="mk">换手率</span><span class="mv">0.97%</span></div>
+                    <div class="metric"><span class="mk">成交额</span><span class="mv">1.43亿</span></div>
+                    <div class="metric"><span class="mk">5日走势</span><span class="mv up">强于大盘</span></div>
+                    <div class="metric"><span class="mk">估值分位</span><span class="mv">历史低位</span></div>
+                </div>
+                <div class="stock-fund">
+                    <div class="ft">💰 机构资金动向</div>
+                    7/27主力<span class="flow-out">净流出1811万</span>（占成交额12.7%），游资净流入715万。7/15-7/16主力连续净流出，7/23净流出状态延续。近5日主力资金整体呈净流出，但净占比接近市场平均。融资融券差额占比5.31%。
+                </div>
+                <div class="stock-sentiment">
+                    <div class="st">📢 舆情信息</div>
+                    市场关注度一般，整体舆情偏中性。机构调研频率较低，整体研报评级有所提升。公司盈利能力一般，当前估值在历史低位区间。
+                </div>
+                <div class="stock-tech">
+                    <div class="tt">📈 技术指标验证</div>
+                    股价在3.69-3.76元窄幅震荡，量能持续萎缩。近5日DDX波动较小，BBD维持中性。布林带收口，面临方向选择。低估值+政策催化背景下，下行空间有限，属低位蓄势型。
+                </div>
+            </div>
+
+            <!-- 青龙管业 -->
+            <div class="stock-card">
+                <div class="stock-head">
+                    <div><span class="stock-name">青龙管业</span> <span class="stock-code">002457.SZ</span></div>
+                    <div class="stock-price"><div class="px">10.03</div><div class="chg up">+3.94%</div></div>
+                </div>
+                <div class="stock-tags"><span class="stag gold">PCCP管</span><span class="stag rose">高弹性</span><span class="stag purple">水利概念</span></div>
+                <div class="stock-role">在PCCP管（预应力钢筒混凝土管）领域具备优势，产品主要用于大口径长距离输水工程，是国家水网跨流域引调水项目的<strong>核心管材供应商</strong>。</div>
+                <div class="stock-metrics">
+                    <div class="metric"><span class="mk">最新价</span><span class="mv">10.03元</span></div>
+                    <div class="metric"><span class="mk">7/23涨跌</span><span class="mv up">+3.94%</span></div>
+                    <div class="metric"><span class="mk">换手率</span><span class="mv">7.35%</span></div>
+                    <div class="metric"><span class="mk">成交额</span><span class="mv">2.43亿</span></div>
+                    <div class="metric"><span class="mk">7/6涨停</span><span class="mv up">14.07元</span></div>
+                    <div class="metric"><span class="mk">振幅</span><span class="mv warn">较大</span></div>
+                </div>
+                <div class="stock-fund">
+                    <div class="ft">💰 机构资金动向</div>
+                    7/23主力<span class="flow-out">净流出558万</span>（占2.3%），散户净流入775万。7/22主力净流出2943万。7/6涨停日主力曾净流入5702万。资金博弈激烈，短线游资特征明显，主力在高位持续兑现。
+                </div>
+                <div class="stock-sentiment">
+                    <div class="st">📢 舆情信息</div>
+                    市场关注度一般，整体舆情偏中性。7月曾因水利政策催化连续涨停，后冲高回落。机构调研频率较低，研报评级有所提升。
+                </div>
+                <div class="stock-tech">
+                    <div class="tt">📈 技术指标验证</div>
+                    从7月6日14.07元高点回撤至10元附近，回撤幅度约29%。高换手率（7%+）显示交投活跃但分歧大。MACD死叉向下，短期偏弱。若能在9.5元附近企稳，可能形成二次上攻。属高弹性题材型标的。
+                </div>
+            </div>
+
+            <!-- 航天宏图 -->
+            <div class="stock-card rose">
+                <div class="stock-head">
+                    <div><span class="stock-name">航天宏图</span> <span class="stock-code">688066.SH</span></div>
+                    <div class="stock-price"><div class="px">—</div><div class="chg">科创板</div></div>
+                </div>
+                <div class="stock-tags"><span class="stag rose">智慧水利</span><span class="stag purple">遥感+GIS</span><span class="stag blue">数字孪生</span></div>
+                <div class="stock-role">在水利信息化和<strong>数字孪生流域</strong>领域有成熟解决方案，提供水资源调度与监测信息化方案。卫星遥感+GIS技术赋能国家水网智慧化运营。</div>
+                <div class="stock-metrics">
+                    <div class="metric"><span class="mk">板块</span><span class="mv">科创板</span></div>
+                    <div class="metric"><span class="mk">细分</span><span class="mv">遥感软件</span></div>
+                    <div class="metric"><span class="mk">业务</span><span class="mv">PIE软件</span></div>
+                    <div class="metric"><span class="mk">概念</span><span class="mv">卫星互联网</span></div>
+                </div>
+                <div class="stock-fund">
+                    <div class="ft">💰 机构资金动向</div>
+                    作为水利信息化+卫星遥感双概念标的，受益于智慧水利渗透率提升。机构持仓较集中，但近期随科创板块调整资金有所流出。
+                </div>
+                <div class="stock-sentiment">
+                    <div class="st">📢 舆情信息</div>
+                    水利数字化政策持续推进，数字孪生流域建设是重点方向。公司在水利部信息化项目中中标率较高，舆情偏正面。
+                </div>
+                <div class="stock-tech">
+                    <div class="tt">📈 技术指标验证</div>
+                    科创板标的波动较大，需关注估值消化进度。核心技术指标处于调整区间，若大盘企稳有望跟随反弹。长期看，遥感+水利信息化赛道确定性强。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 第二张网：新型电网 ===== -->
+    <div class="net-section" id="net2">
+        <div class="net-header">
+            <div class="net-icon c2">⚡</div>
+            <div>
+                <div class="net-title">二、新型电网</div>
+                <div class="net-subtitle">特高压输电 · 智能配网 · 储能系统 · 虚拟电厂 · 算电协同 · 新能源消纳</div>
+            </div>
+            <div class="net-invest">
+                <div class="amount">5万亿+</div>
+                <div class="label">"十五五"期间投资</div>
+            </div>
+        </div>
+
+        <div class="policy-box">
+            <h4>📌 系统组成与重要部分</h4>
+            <ul>
+                <li><strong>特高压输电通道</strong>：藏粤直流特高压（世界海拔最高换流站已开工，跨2681公里仅需9毫秒）、新增"西电东送"通道，适配高比例绿电<span class="hl">较十四五投资+40%</span></li>
+                <li><strong>智能配电网</strong>：城市配电网更新、县域电网改造，配网自动化率提升至90%+</li>
+                <li><strong>储能系统</strong>：电化学储能（"新能源+储能"模式普及）、抽水蓄能新开工超1亿千瓦</li>
+                <li><strong>虚拟电厂与数字化</strong>：电网需求响应、数字化调度、能源大数据新业态</li>
+                <li><strong>算电协同</strong>：海上风电绿电直供算力中心，能效提升30%+，"算力网+电网"融合典型样本</li>
+                <li><strong>新能源消纳</strong>：风光大基地配套送出工程、分布式光伏并网、微电网建设</li>
+            </ul>
+        </div>
+
+        <div class="progress-box">
+            <strong>最新进展：</strong>世界海拔最高的藏粤直流特高压换流站已开工。7月23日特高压概念主力资金净流入40.15亿元，中国西电、特变电工、思源电气集体爆发。电力设备行业获逾177亿元主力资金净流入，是当前市场最强主线之一。
+        </div>
+
+        <div class="stocks-grid">
+            <!-- 国电南瑞 -->
+            <div class="stock-card gold">
+                <div class="stock-head">
+                    <div><span class="stock-name">国电南瑞</span> <span class="stock-code">600406.SH</span></div>
+                    <div class="stock-price"><div class="px">23.56</div><div class="chg dn">-1.42%</div></div>
+                </div>
+                <div class="stock-tags"><span class="stag gold">电网设备龙头</span><span class="stag blue">央企</span><span class="stag purple">特高压+智能电网</span></div>
+                <div class="stock-role">国家电网旗下<strong>核心科技平台</strong>，业务覆盖特高压、智能电网、配网自动化、虚拟电厂全链条。是电网二次设备绝对龙头，受益于特高压建设加速与电网数字化双重驱动。</div>
+                <div class="stock-metrics">
+                    <div class="metric"><span class="mk">最新价</span><span class="mv">23.56元</span></div>
+                    <div class="metric"><span class="mk">7/28涨跌</span><span class="mv dn">-1.42%</span></div>
+                    <div class="metric"><span class="mk">换手率</span><span class="mv">0.63%</span></div>
+                    <div class="metric"><span class="mk">大宗交易</span><span class="mv">3.25亿</span></div>
+                    <div class="metric"><span class="mk">10日走势</span><span class="mv up">明显跑赢大盘</span></div>
+                    <div class="metric"><span class="mk">控盘状态</span><span class="mv">中度控盘</span></div>
+                </div>
+                <div class="stock-fund">
+                    <div class="ft">💰 机构资金动向</div>
+                    7/28主力<span class="flow-out">净流出6319万</span>，游资净流入3561万，散户净流入2759万。7/27主力净流入442万，7/23主力大幅净流入1.7亿（超大单净入5.75亿）。近10日主力集中一定筹码，呈中度控盘。7/28现3.25亿大宗交易。
+                </div>
+                <div class="stock-sentiment">
+                    <div class="st">📢 舆情信息</div>
+                    作为电网设备龙头，市场关注度较高。特高压+虚拟电厂+算电协同多重概念叠加，机构调研频繁。电网设备板块7月持续走强，舆情偏正面。压力位23.52元，近期在该位置反复争夺。
+                </div>
+                <div class="stock-tech">
+                    <div class="tt">📈 技术指标验证</div>
+                    压力位23.52元，支撑位22元附近。过去10个交易日明显跑赢大盘及行业。DDX近5日转正后小幅波动，BBD显示主力筹码集中。MACD在零轴上方运行，布林带中上轨区间，中期趋势偏多。大宗交易或为机构调仓。
+                </div>
+            </div>
+
+            <!-- 特变电工 -->
+            <div class="stock-card gold">
+                <div class="stock-head">
+                    <div><span class="stock-name">特变电工</span> <span class="stock-code">600089.SH</span></div>
+                    <div class="stock-price"><div class="px">20.76</div><div class="chg up">+2.52%</div></div>
+                </div>
+                <div class="stock-tags"><span class="stag gold">特高压核心</span><span class="stag green">变压器龙头</span><span class="stag rose">多晶硅</span></div>
+                <div class="stock-role"><strong>特高压变压器核心供应商</strong>，同时布局多晶硅及新能源电站。7月23日获逾10亿元主力资金净流入，是特高压板块资金承接最强的标的之一。</div>
+                <div class="stock-metrics">
+                    <div class="metric"><span class="mk">最新价</span><span class="mv">20.76元</span></div>
+                    <div class="metric"><span class="mk">7/29涨幅</span><span class="mv up">+2.52%</span></div>
+                    <div class="metric"><span class="mk">7/23主力</span><span class="mv up">净入10亿+</span></div>
+                    <div class="metric"><span class="mk">7/24融资</span><span class="mv">净买入8335万</span></div>
+                    <div class="metric"><span class="mk">行业资金</span><span class="mv up">177亿净流入</span></div>
+                    <div class="metric"><span class="mk">年内回撤</span><span class="mv warn">约50%</span></div>
+                </div>
+                <div class="stock-fund">
+                    <div class="ft">💰 机构资金动向</div>
+                    7/23主力大幅<span class="flow-in">净流入超10亿元</span>，7/27主力净流出8596万。融资盘持续加仓，7/24融资净买入8335万元（全市场排名第16）。电力设备行业整体获得177亿主力净流入，资金虹吸效应显著。
+                </div>
+                <div class="stock-sentiment">
+                    <div class="st">📢 舆情信息</div>
+                    特高压建设加速+藏粤直流开工是核心催化剂。7月23日板块全线爆发，特变电工涨8.90%。多晶硅业务受硅料价格周期影响，但电网设备业务确定性高。市场情绪从悲观逐步修复。
+                </div>
+                <div class="stock-tech">
+                    <div class="tt">📈 技术指标验证</div>
+                    7月5日盘中创近10年新高后回撤约50%，当前在20元附近企稳反弹。7/23放量上涨8.90%确认支撑。MACD底部金叉，量比放大，短期资金介入明显。若站稳20元，有望向前期高点发起二次冲击。
+                </div>
+            </div>
+
+            <!-- 中国西电 -->
+            <div class="stock-card">
+                <div class="stock-head">
+                    <div><span class="stock-name">中国西电</span> <span class="stock-code">601179.SH</span></div>
+                    <div class="stock-price"><div class="px">14.09</div><div class="chg up">+3.99%</div></div>
+                </div>
+                <div class="stock-tags"><span class="stag gold">特高压设备</span><span class="stag blue">央企</span><span class="stag rose">GIS/换流变</span></div>
+                <div class="stock-role"><strong>特高压GIS、换流变压器核心供应商</strong>。7月23日近乎涨停，主力净流入6.41亿，是特高压板块弹性最大的标的之一。2026年国网第三批招标中标的重公告。</div>
+                <div class="stock-metrics">
+                    <div class="metric"><span class="mk">最新价</span><span class="mv">14.09元</span></div>
+                    <div class="metric"><span class="mk">7/23涨幅</span><span class="mv up">+9.99%</span></div>
+                    <div class="metric"><span class="mk">7/23主力</span><span class="mv up">净入6.41亿</span></div>
+                    <div class="metric"><span class="mk">7/22主力</span><span class="mv up">净入2020万</span></div>
+                    <div class="metric"><span class="mk">当日增仓</span><span class="mv up">26.59%</span></div>
+                    <div class="metric"><span class="mk">资金/市值</span><span class="mv">0.917%</span></div>
+                </div>
+                <div class="stock-fund">
+                    <div class="ft">💰 机构资金动向</div>
+                    7/23主力<span class="flow-in">净流入6.41亿元</span>，近乎涨停封板，资金/市值比0.917%，当日增仓26.59%。7/22主力净流入2020万。连续获资金加仓，属龙头确认型。机构目标均价17.93元。
+                </div>
+                <div class="stock-sentiment">
+                    <div class="st">📢 舆情信息</div>
+                    2026年国网特高压及输变电设备第三次招标结果落地，中国西电披露中标公告。市场预期后续招标持续放量。舆情偏强，属板块龙头确认阶段。
+                </div>
+                <div class="stock-tech">
+                    <div class="tt">📈 技术指标验证</div>
+                    7/23涨停放量确认龙头地位，当日增仓26.59%显示主力高度介入。短线已接近高潮，追高风险增大。技术上需消化涨停日获利盘，回踩不破13元支撑则趋势延续。属高弹性进攻型。
+                </div>
+            </div>
+
+            <!-- 宁德时代 -->
+            <div class="stock-card gold">
+                <div class="stock-head">
+                    <div><span class="stock-name">宁德时代</span> <span class="stock-code">300750.SZ</span></div>
+                    <div class="stock-price"><div class="px">390.33</div><div class="chg dn">-2.42%</div></div>
+                </div>
+                <div class="stock-tags"><span class="stag gold">储能龙头</span><span class="stag rose">动力电池</span><span class="stag purple">全球第一</span></div>
+                <div class="stock-role"><strong>全球动力电池+储能电池双龙头</strong>。在电化学储能领域技术领先，随"新能源+储能"模式普及，储能装机量有望大幅增长。是新型电网储能系统的核心供应商。</div>
+                <div class="stock-metrics">
+                    <div class="metric"><span class="mk">最新价</span><span class="mv">390.33元</span></div>
+                    <div class="metric"><span class="mk">7/28涨跌</span><span class="mv dn">-2.42%</span></div>
+                    <div class="metric"><span class="mk">7/27主力</span><span class="mv up">净入7.08亿</span></div>
+                    <div class="metric"><span class="mk">10日主力</span><span class="mv up">净入45亿</span></div>
+                    <div class="metric"><span class="mk">成交额</span><span class="mv">188.76亿</span></div>
+                    <div class="metric"><span class="mk">机构目标</span><span class="mv">543.94元</span></div>
+                </div>
+                <div class="stock-fund">
+                    <div class="ft">💰 机构资金动向</div>
+                    7/27主力<span class="flow-in">净流入7.08亿</span>（占成交额3.75%），7/23净流入7.04亿，7/24净流入1.09亿。<strong>10日主力累计净流入45亿元</strong>，是所有标的中资金流入最强劲的。3日主力净流入8.16亿，5日净流入11.52亿。游资有所分歧但主力持续加仓。
+                </div>
+                <div class="stock-sentiment">
+                    <div class="st">📢 舆情信息</div>
+                    机构目标均价543.94元，较现价有约39%上行空间。储能+动力电池双重逻辑，市场关注度极高。近期随大盘调整但主力逆势加仓，舆情偏正面。半年报业绩预期支撑。
+                </div>
+                <div class="stock-tech">
+                    <div class="tt">📈 技术指标验证</div>
+                    10日主力净流入45亿验证机构持续建仓。DDX近10日持续为正，BBD大幅流入。股价在390-400元区间震荡整理，MACD在零轴附近蓄势。放量突破400元则打开上行空间，属蓄势待发型。
+                </div>
+            </div>
+
+            <!-- 思源电气 -->
+            <div class="stock-card">
+                <div class="stock-head">
+                    <div><span class="stock-name">思源电气</span> <span class="stock-code">002028.SZ</span></div>
+                    <div class="stock-price"><div class="px">—</div><div class="chg up">+6.70%</div></div>
+                </div>
+                <div class="stock-tags"><span class="stag gold">开关设备</span><span class="stag green">配网改造</span><span class="stag purple">份额领先</span></div>
+                <div class="stock-role">在开关、保护设备等领域<strong>份额领先</strong>，配网改造带来持续订单。7月23日上涨6.70%，主力净流入2.52亿。作为大市值趋势中军，产业地位稳定。</div>
+                <div class="stock-metrics">
+                    <div class="metric"><span class="mk">7/23涨幅</span><span class="mv up">+6.70%</span></div>
+                    <div class="metric"><span class="mk">7/23主力</span><span class="mv up">净入2.52亿</span></div>
+                    <div class="metric"><span class="mk">资金/市值</span><span class="mv">0.495%</span></div>
+                    <div class="metric"><span class="mk">定位</span><span class="mv">趋势中军</span></div>
+                </div>
+                <div class="stock-fund">
+                    <div class="ft">💰 机构资金动向</div>
+                    7/23主力<span class="flow-in">净流入2.52亿元</span>，资金/市值比0.495%。资金表现很强，但已接近短线高潮。作为大市值趋势中军，短线爆发力不强但产业地位稳定。
+                </div>
+                <div class="stock-sentiment">
+                    <div class="st">📢 舆情信息</div>
+                    配网改造+特高压双重受益，研报覆盖度较高。市场定位为电网设备趋势中军，适合中长期配置。舆情偏正面。
+                </div>
+                <div class="stock-tech">
+                    <div class="tt">📈 技术指标验证</div>
+                    7/23放量上涨6.70%，资金介入明显但接近短线高潮。后续需消化获利盘，回踩缩量企稳可二次介入。中期趋势看好。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 第三张网：算力网 ===== -->
+    <div class="net-section" id="net3">
+        <div class="net-header">
+            <div class="net-icon c3">🖥️</div>
+            <div>
+                <div class="net-title">三、算力网</div>
+                <div class="net-subtitle">智算中心 · AI服务器 · 光模块 · 液冷散热 · 算力调度 · 东数西算</div>
+            </div>
+            <div class="net-invest">
+                <div class="amount">2万亿+</div>
+                <div class="label">"十五五"期间投资</div>
+            </div>
+        </div>
+
+        <div class="policy-box">
+            <h4>📌 系统组成与重要部分</h4>
+            <ul>
+                <li><strong>"8+10+3"空间布局</strong>：8大国家算力枢纽节点（智能算力占全国80%+）、10大数据中心集群、3类算力调度平台<span class="hl">全面铺开</span></li>
+                <li><strong>智能算力基础设施</strong>：已建成智能算力188.2万P（去年同期2.5倍），智算中心建设持续提速</li>
+                <li><strong>AI服务器与算力硬件</strong>：训练/推理服务器、AI芯片、HBM存储等底层算力底座</li>
+                <li><strong>光模块与光通信</strong>：算力集群间高速互联，400G/800G/1.6T光模块需求爆发</li>
+                <li><strong>液冷散热</strong>：单机柜功率密度提升驱动液冷成为刚需</li>
+                <li><strong>算力调度与运营</strong>：算力像水电一样跨区域流动，近两年建成超70条算力大通道</li>
+                <li><strong>算电协同</strong>：西部绿电直供东部算力需求，宁夏中卫、内蒙古和林格尔等西部基地承接东部需求</li>
+            </ul>
+        </div>
+
+        <div class="progress-box">
+            <strong>最新进展：</strong>算力网已建成智能算力188.2万P，相当于去年同期的2.5倍，"8+10+3"空间布局全面铺开。围绕算力枢纽建成干线光缆145条，八大枢纽互联互通，时延降至20毫秒以内。广东阳江海底算力中心依托千万千瓦级海上风电实现绿电直供，能效提升30%以上。互联网和相关服务业投资同比增长39.9%。
+        </div>
+
+        <div class="stocks-grid">
+            <!-- 中际旭创 -->
+            <div class="stock-card gold">
+                <div class="stock-head">
+                    <div><span class="stock-name">中际旭创</span> <span class="stock-code">300308.SZ</span></div>
+                    <div class="stock-price"><div class="px">1076.94</div><div class="chg dn">-2.81%</div></div>
+                </div>
+                <div class="stock-tags"><span class="stag gold">光模块全球龙头</span><span class="stag rose">1.6T放量</span><span class="stag purple">高度控盘</span></div>
+                <div class="stock-role"><strong>全球光模块龙头</strong>，市场份额约20%-30%，已率先量产400G、800G及1.6T产品。客户包括谷歌、英伟达、字节等。AI数据中心内部互联从铜线转向光通信趋势明确，1.6T光模块需求爆发。</div>
+                <div class="stock-metrics">
+                    <div class="metric"><span class="mk">周收盘</span><span class="mv">1076.94元</span></div>
+                    <div class="metric"><span class="mk">周涨幅</span><span class="mv dn">-2.81%</span></div>
+                    <div class="metric"><span class="mk">近期均价</span><span class="mv">1043.71元</span></div>
+                    <div class="metric"><span class="mk">动态PE</span><span class="mv">52.15</span></div>
+                    <div class="metric"><span class="mk">10日DDX</span><span class="mv dn">-0.43</span></div>
+                    <div class="metric"><span class="mk">控盘状态</span><span class="mv">高度控盘</span></div>
+                </div>
+                <div class="stock-fund">
+                    <div class="ft">💰 机构资金动向</div>
+                    近15日DDX为-0.43，BBD流出4871万，通吃率-1.27%。<strong>近5日主力累计净流出超47.84亿元</strong>，近10日主力流出86.13亿，特大单10日流出74.36亿。7/22主力流出超36亿，7/28机构5日流向-4864万。主力高位持续兑现，资金面偏空。
+                </div>
+                <div class="stock-sentiment">
+                    <div class="st">📢 舆情信息</div>
+                    业绩预期炸裂但股价在1100元附近反复震荡，冲高回落。5日累计DDX为-0.653，大单持续流出。MACD绿柱持续放大，双线死叉，空头趋势尚未明确扭转。套牢盘集中在160元区间（注：前复权），短期支撑与压力间博弈。
+                </div>
+                <div class="stock-tech">
+                    <div class="tt">📈 技术指标验证</div>
+                    压力位1032.62元，支撑位988.69元。MACD绿柱放大双线死叉，RSI下穿50短期走弱。量比0.63属缩量冲高回落——下跌放量、反弹缩量的弱势格局。通信设备行业近5日资金总体流出。长期趋势看多但短期需消化获利盘。
+                </div>
+            </div>
+
+            <!-- 浪潮信息 -->
+            <div class="stock-card">
+                <div class="stock-head">
+                    <div><span class="stock-name">浪潮信息</span> <span class="stock-code">000977.SZ</span></div>
+                    <div class="stock-price"><div class="px">80.15</div><div class="chg dn">-5.71%</div></div>
+                </div>
+                <div class="stock-tags"><span class="stag gold">AI服务器</span><span class="stag blue">国内主力</span><span class="stag rose">算力底座</span></div>
+                <div class="stock-role">国内<strong>AI服务器主力供应商</strong>，互联网大厂资本开支持续高增，服务器出货量保持较快增速。是算力网硬件底座的核心标的。</div>
+                <div class="stock-metrics">
+                    <div class="metric"><span class="mk">最新价</span><span class="mv">80.15元</span></div>
+                    <div class="metric"><span class="mk">近期涨跌</span><span class="mv dn">-5.71%</span></div>
+                    <div class="metric"><span class="mk">7/9主力</span><span class="mv up">净入24.74亿</span></div>
+                    <div class="metric"><span class="mk">7/9涨停</span><span class="mv up">+10.00%</span></div>
+                    <div class="metric"><span class="mk">3日净值</span><span class="mv dn">流出</span></div>
+                    <div class="metric"><span class="mk">成交活跃</span><span class="mv">高</span></div>
+                </div>
+                <div class="stock-fund">
+                    <div class="ft">💰 机构资金动向</div>
+                    7/9主力大幅<span class="flow-in">净流入24.74亿</span>涨停，7/20净流入超4亿，7/3午盘净流入8.01亿。但近期3日净值增加额为流出状态，资金高低切换明显。短线资金进出频繁，波动剧烈。
+                </div>
+                <div class="stock-sentiment">
+                    <div class="st">📢 舆情信息</div>
+                    AI算力需求井喷的核心受益标的，市场关注度极高。互联网大厂资本开支高增驱动业绩预期。但股价波动大，冲高回落频繁，市场分歧明显。
+                </div>
+                <div class="stock-tech">
+                    <div class="tt">📈 技术指标验证</div>
+                    从7月9日涨停高点回撤，近期放量下跌。DDX波动剧烈，短线资金特征明显。支撑位75元附近，若企稳可关注二次上攻机会。属高波动进攻型。
+                </div>
+            </div>
+
+            <!-- 润泽科技 -->
+            <div class="stock-card rose">
+                <div class="stock-head">
+                    <div><span class="stock-name">润泽科技</span> <span class="stock-code">300442.SZ</span></div>
+                    <div class="stock-price"><div class="px">61.10</div><div class="chg dn">-3.37%</div></div>
+                </div>
+                <div class="stock-tags"><span class="stag gold">IDC/智算中心</span><span class="stag purple">大规模运营</span><span class="stag rose">算力调度</span></div>
+                <div class="stock-role">运营<strong>大规模数据中心</strong>，是智算中心核心运营商标的。受益于"东数西算"工程与算力枢纽建设。总市值约1085亿元。</div>
+                <div class="stock-metrics">
+                    <div class="metric"><span class="mk">最新价</span><span class="mv">61.10元</span></div>
+                    <div class="metric"><span class="mk">7/29跌幅</span><span class="mv dn">-3.37%</span></div>
+                    <div class="metric"><span class="mk">7/27开盘</span><span class="mv up">+2.10%</span></div>
+                    <div class="metric"><span class="mk">总市值</span><span class="mv">1085亿</span></div>
+                    <div class="metric"><span class="mk">5日跌幅</span><span class="mv dn">-12.13%</span></div>
+                    <div class="metric"><span class="mk">10日走势</span><span class="mv dn">跑输行业</span></div>
+                </div>
+                <div class="stock-fund">
+                    <div class="ft">💰 机构资金动向</div>
+                    7/27开盘上涨2.10%但主力<span class="flow-out">净流出438万</span>。7/22主力净流出1.72亿（超大单流出1.36亿）。7/29加速下跌5分钟跌超2%。通信服务行业近5日资金总体流出。7/29净流出4247万。主力持续兑现。
+                </div>
+                <div class="stock-sentiment">
+                    <div class="st">📢 舆情信息</div>
+                    市场关注度较高但近期走势偏弱，过去10日跑输行业平均。7/22曾报87.97元后持续下跌至61元，跌幅超30%。压力位64.08元，市场情绪偏谨慎。
+                </div>
+                <div class="stock-tech">
+                    <div class="tt">📈 技术指标验证</div>
+                    压力位64.08元，近期从87元持续下跌，5日跌幅12%。技术面弱势，MACD死叉向下，量能萎缩。通信服务行业资金流出。需等待企稳信号，属调整中的观望型。
+                </div>
+            </div>
+
+            <!-- 光迅科技 -->
+            <div class="stock-card">
+                <div class="stock-head">
+                    <div><span class="stock-name">光迅科技</span> <span class="stock-code">002281.SZ</span></div>
+                    <div class="stock-price"><div class="px">238.49</div><div class="chg up">+10.00%</div></div>
+                </div>
+                <div class="stock-tags"><span class="stag gold">光通信器件</span><span class="stag rose">高速互联</span><span class="stag purple">央企</span></div>
+                <div class="stock-role"><strong>算力集群间高速互联关键器件供应商</strong>。7月9日涨停（+10%），主力净流入12.05亿。在光模块/光器件领域与中际旭创、新易盛形成三足鼎立。</div>
+                <div class="stock-metrics">
+                    <div class="metric"><span class="mk">7/9收盘</span><span class="mv">238.49元</span></div>
+                    <div class="metric"><span class="mk">7/9涨幅</span><span class="mv up">+10.00%</span></div>
+                    <div class="metric"><span class="mk">7/9主力</span><span class="mv up">净入12.05亿</span></div>
+                    <div class="metric"><span class="mk">7/21主力</span><span class="mv up">净入5亿+</span></div>
+                    <div class="metric"><span class="mk">暗盘资金</span><span class="mv up">双流入</span></div>
+                    <div class="metric"><span class="mk">2026E净利</span><span class="mv">14.71亿</span></div>
+                </div>
+                <div class="stock-fund">
+                    <div class="ft">💰 机构资金动向</div>
+                    7/9主力<span class="flow-in">净流入12.05亿</span>涨停，7/21主力净流入超5亿。7/7暗盘资金双流入，涨幅6.05%。长江证券预测2026年净利14.71亿。资金面表现强劲。
+                </div>
+                <div class="stock-sentiment">
+                    <div class="st">📢 舆情信息</div>
+                    光通信板块核心标的，机构覆盖度提升。作为央企在光器件领域有独特优势。市场预期1.6T光模块放量带动业绩增长。舆情偏正面。
+                </div>
+                <div class="stock-tech">
+                    <div class="tt">📈 技术指标验证</div>
+                    7/9涨停放量确认趋势，DDX大幅为正。后续虽有波动但资金持续回流。技术面强于板块平均，属强势调整型。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 第四张网：新一代通信网 ===== -->
+    <div class="net-section" id="net4">
+        <div class="net-header">
+            <div class="net-icon c4">📡</div>
+            <div>
+                <div class="net-title">四、新一代通信网</div>
+                <div class="net-subtitle">5G-A部署 · 万兆光网 · 6G技术 · 卫星互联网 · "空天地海"一体化</div>
+            </div>
+            <div class="net-invest">
+                <div class="amount">1.5万亿+</div>
+                <div class="label">"十五五"期间投资</div>
+            </div>
+        </div>
+
+        <div class="policy-box">
+            <h4>📌 系统组成与重要部分</h4>
+            <ul>
+                <li><strong>5G-A加速部署</strong>：5G基站总数超500万个，光纤接入端口占比达96.7%，5G-A网络覆盖持续扩大<span class="hl">年均投资约3000亿</span></li>
+                <li><strong>万兆光网</strong>：千兆光网深化部署，万兆接入试点推广，助力"东数西算"骨干网升级</li>
+                <li><strong>6G关键技术</strong>：已进入试验阶段，太赫兹通信、空天地海一体化组网</li>
+                <li><strong>卫星互联网</strong>：通信卫星编织太空信息网，"空天地海"一体化通信网络</li>
+                <li><strong>算力承载网络</strong>：围绕算力枢纽建成干线光缆145条，时延降至20毫秒以内</li>
+                <li><strong>网络建设与运维</strong>：运营商负责网络投资建设，铁塔公司提供基础设施共享</li>
+            </ul>
+        </div>
+
+        <div class="progress-box">
+            <strong>最新进展：</strong>5G-A加速部署，6G关键技术进入试验阶段。5G基站总数超500万个，光纤接入端口占比达96.7%。上半年信息传输、互联网、光纤制造等领域投资均实现两位数增长。通信卫星编织太空信息网，"空天地海"触角延伸至前所未有的空间维度。
+        </div>
+
+        <div class="stocks-grid">
+            <!-- 中兴通讯 -->
+            <div class="stock-card gold">
+                <div class="stock-head">
+                    <div><span class="stock-name">中兴通讯</span> <span class="stock-code">000063.SZ</span></div>
+                    <div class="stock-price"><div class="px">35.92</div><div class="chg dn">-4.21%</div></div>
+                </div>
+                <div class="stock-tags"><span class="stag gold">通信主设备</span><span class="stag blue">5G基站</span><span class="stag rose">核心网</span></div>
+                <div class="stock-role">在<strong>5G基站和光传输设备领域占据主要份额</strong>，是通信主设备双寡头之一。7月22日大涨7.51%，主力净流入32.25亿元，是通信板块资金虹吸核心。</div>
+                <div class="stock-metrics">
+                    <div class="metric"><span class="mk">最新价</span><span class="mv">35.92元</span></div>
+                    <div class="metric"><span class="mk">7/22涨幅</span><span class="mv up">+7.51%</span></div>
+                    <div class="metric"><span class="mk">7/22主力</span><span class="mv up">净入32.25亿</span></div>
+                    <div class="metric"><span class="mk">7/22换手</span><span class="mv">11.98%</span></div>
+                    <div class="metric"><span class="mk">成交额</span><span class="mv">极大</span></div>
+                    <div class="metric"><span class="mk">ETF重仓</span><span class="mv">通信ETF</span></div>
+                </div>
+                <div class="stock-fund">
+                    <div class="ft">💰 机构资金动向</div>
+                    7/22主力大幅<span class="flow-in">净流入32.25亿元</span>，居全市场首位。但7/17主力流出超31亿，资金进出剧烈。通信行业资金分化严重：中兴通讯流入32亿的同时，新易盛流出47.85亿、中际旭创流出37.57亿、亨通光电流出16亿。
+                </div>
+                <div class="stock-sentiment">
+                    <div class="st">📢 舆情信息</div>
+                    国金证券给出"买入"评级。通信ETF国泰基金重仓该股。5G-A部署+6G研发双重催化，市场关注极高。但资金高低切换明显，板块内分化加剧。
+                </div>
+                <div class="stock-tech">
+                    <div class="tt">📈 技术指标验证</div>
+                    7/22放量涨7.51%突破，换手率11.98%交投极度活跃。后续回落至35.9元，需确认支撑。DDX大幅波动，短线资金特征明显。通信行业整体资金分化，中兴作为主设备龙头相对抗跌。
+                </div>
+            </div>
+
+            <!-- 亨通光电 -->
+            <div class="stock-card">
+                <div class="stock-head">
+                    <div><span class="stock-name">亨通光电</span> <span class="stock-code">600487.SH</span></div>
+                    <div class="stock-price"><div class="px">55.67</div><div class="chg up">+1.00%</div></div>
+                </div>
+                <div class="stock-tags"><span class="stag gold">光纤光缆</span><span class="stag green">双龙头</span><span class="stag purple">海缆</span></div>
+                <div class="stock-role">国内<strong>光纤光缆双龙头</strong>（与中天科技并列），受益于千兆光网和东数西算骨干网升级。同时布局海底光缆，受益于海底数据中心与海上风电建设。</div>
+                <div class="stock-metrics">
+                    <div class="metric"><span class="mk">最新价</span><span class="mv">55.67元</span></div>
+                    <div class="metric"><span class="mk">7/22涨幅</span><span class="mv up">+5.95%</span></div>
+                    <div class="metric"><span class="mk">7/22主力</span><span class="mv dn">流出16亿</span></div>
+                    <div class="metric"><span class="mk">7/17流出</span><span class="mv dn">超6亿</span></div>
+                    <div class="metric"><span class="mk">板块资金</span><span class="mv dn">分化</span></div>
+                    <div class="metric"><span class="mk">海缆概念</span><span class="mv up">加分</span></div>
+                </div>
+                <div class="stock-fund">
+                    <div class="ft">💰 机构资金动向</div>
+                    7/22虽涨5.95%但主力<span class="flow-out">净流出16亿元</span>，7/17流出超6亿，7/21流出超1亿。通信行业资金分化严重，亨通光电持续遭主力兑现。但游资和散户承接积极。
+                </div>
+                <div class="stock-sentiment">
+                    <div class="st">📢 舆情信息</div>
+                    光纤光缆+海缆双重概念，市场关注度较高。但近期主力持续流出，舆情偏谨慎。千兆光网升级和海底算力中心是长期催化剂。
+                </div>
+                <div class="stock-tech">
+                    <div class="tt">📈 技术指标验证</div>
+                    7/22放量上涨但主力流出，价量背离。DDX转负，BBD流出。技术面有隐忧，上涨持续性存疑。需关注主力流出是否放缓。
+                </div>
+            </div>
+
+            <!-- 中国卫通 -->
+            <div class="stock-card rose">
+                <div class="stock-head">
+                    <div><span class="stock-name">中国卫通</span> <span class="stock-code">601698.SH</span></div>
+                    <div class="stock-price"><div class="px">25.33</div><div class="chg up">+1.20%</div></div>
+                </div>
+                <div class="stock-tags"><span class="stag gold">卫星运营</span><span class="stag blue">央企</span><span class="stag rose">卫星互联网</span></div>
+                <div class="stock-role"><strong>卫星运营央企核心平台</strong>，受卫星组网进程催化。业务覆盖卫星网络申报、协调及维护、卫星项目建设、卫星运营服务。是"空天地海"通信网中"天"的核心。</div>
+                <div class="stock-metrics">
+                    <div class="metric"><span class="mk">最新价</span><span class="mv">25.33元</span></div>
+                    <div class="metric"><span class="mk">7/27涨跌</span><span class="mv up">+1.20%</span></div>
+                    <div class="metric"><span class="mk">7/10涨停</span><span class="mv up">32.88元</span></div>
+                    <div class="metric"><span class="mk">7/23主力</span><span class="mv up">净入4384万</span></div>
+                    <div class="metric"><span class="mk">5日主力</span><span class="mv dn">-8635万</span></div>
+                    <div class="metric"><span class="mk">融资余额</span><span class="mv">15.31亿</span></div>
+                </div>
+                <div class="stock-fund">
+                    <div class="ft">💰 机构资金动向</div>
+                    7/10涨停日主力<span class="flow-in">净流入5.44亿</span>（占成交26.25%），7/23净流入4384万。但近5日主力净流入-8635万，资金高位分歧。7/27获融资买入4499万，融资余额15.31亿。
+                </div>
+                <div class="stock-sentiment">
+                    <div class="st">📢 舆情信息</div>
+                    卫星互联网+北斗导航+航天概念热股。7月10日曾涨停，商业航天概念异动拉升。太空算力概念受关注，中国卫星、航宇微、寒武纪、中国卫通四家龙头发布重要公告。舆情偏正面。
+                </div>
+                <div class="stock-tech">
+                    <div class="tt">📈 技术指标验证</div>
+                    从7/10涨停32.88元回撤至25元附近，回撤约23%。7/23放量反弹+3.6%。布林带中轨附近震荡，若25元支撑有效可企稳。属卫星互联网高弹性题材型。
+                </div>
+            </div>
+
+            <!-- 中国卫星 -->
+            <div class="stock-card">
+                <div class="stock-head">
+                    <div><span class="stock-name">中国卫星</span> <span class="stock-code">600118.SH</span></div>
+                    <div class="stock-price"><div class="px">—</div><div class="chg up">涨超8%</div></div>
+                </div>
+                <div class="stock-tags"><span class="stag gold">卫星制造</span><span class="stag blue">央企</span><span class="stag rose">商业航天</span></div>
+                <div class="stock-role"><strong>卫星制造央企核心平台</strong>。7月商业航天概念异动拉升，中国卫星涨超8%。7/9卫星互联网概念主力净流入77.13亿，中国卫星净流入2.78亿。</div>
+                <div class="stock-metrics">
+                    <div class="metric"><span class="mk">7/9主力</span><span class="mv up">净入2.78亿</span></div>
+                    <div class="metric"><span class="mk">板块资金</span><span class="mv up">77.13亿</span></div>
+                    <div class="metric"><span class="mk">概念</span><span class="mv">商业航天</span></div>
+                    <div class="metric"><span class="mk">定位</span><span class="mv">卫星制造龙头</span></div>
+                </div>
+                <div class="stock-fund">
+                    <div class="ft">💰 机构资金动向</div>
+                    7/9主力<span class="flow-in">净流入2.78亿</span>，卫星互联网板块整体净流入77.13亿。资金批量涌入卫星互联网赛道，中国卫星作为制造端核心标的受益。
+                </div>
+                <div class="stock-sentiment">
+                    <div class="st">📢 舆情信息</div>
+                    商业航天概念持续升温，长十乙回收破局推动行业提速。中国卫星作为卫星制造央企龙头，舆情偏正面。太空算力概念受关注。
+                </div>
+                <div class="stock-tech">
+                    <div class="tt">📈 技术指标验证</div>
+                    商业航天概念异动拉升涨超8%，放量突破。属事件驱动型，需关注后续组网发射进度。卫星互联网板块整体资金流入强劲。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 第五张网：城市地下管网 ===== -->
+    <div class="net-section" id="net5">
+        <div class="net-header">
+            <div class="net-icon c5">🔧</div>
+            <div>
+                <div class="net-title">五、城市地下管网</div>
+                <div class="net-subtitle">燃气/供排水/供热管网改造 · 综合管廊 · 智慧管网 · 管材防水</div>
+            </div>
+            <div class="net-invest">
+                <div class="amount">5万亿</div>
+                <div class="label">"十五五"期间投资</div>
+            </div>
+        </div>
+
+        <div class="policy-box">
+            <h4>📌 系统组成与重要部分</h4>
+            <ul>
+                <li><strong>管网建设改造</strong>："十五五"期间全国将建设改造地下管网约<span class="hl">77万公里</span>，涵盖燃气、供排水、供热管网</li>
+                <li><strong>城市地下综合管廊</strong>：电力、通信、燃气、供热、供水等管线入廊，统一建设管理</li>
+                <li><strong>管材与防水材料</strong>：PVC/PE管、球墨铸铁管、防水卷材等需求拉动</li>
+                <li><strong>智慧管网</strong>：管网监测传感器、GIS系统、智慧运维平台，让城市生命线有感知能力</li>
+                <li><strong>工程施工</strong>：非开挖技术、盾构隧道施工等</li>
+                <li><strong>年均拉动效应</strong>：预计年均拉动GDP约7.5万亿至10万亿元，年均带动就业约280万个</li>
+            </ul>
+        </div>
+
+        <div class="progress-box">
+            <strong>最新进展：</strong>城市地下管网"十五五"期间预计建设改造约77万公里，带动投资约5万亿元。地下管网与通信网融合，让城市生命线有了感知能力。该板块此前关注度较低，指数处于历史低位，具备逆向投资价值。
+        </div>
+
+        <div class="stocks-grid">
+            <!-- 伟星新材 -->
+            <div class="stock-card gold">
+                <div class="stock-head">
+                    <div><span class="stock-name">伟星新材</span> <span class="stock-code">002372.SZ</span></div>
+                    <div class="stock-price"><div class="px">8.35</div><div class="chg up">+2.20%</div></div>
+                </div>
+                <div class="stock-tags"><span class="stag gold">管材龙头</span><span class="stag green">品牌力强</span><span class="stag purple">零售渠道</span></div>
+                <div class="stock-role">在管材领域<strong>品牌力强</strong>，是国内PPR管材零售龙头。受益于城市老旧管网改造与新建需求，零售+工程双渠道布局。公司盈利能力优秀。</div>
+                <div class="stock-metrics">
+                    <div class="metric"><span class="mk">最新价</span><span class="mv">8.35元</span></div>
+                    <div class="metric"><span class="mk">7/28涨跌</span><span class="mv up">+2.20%</span></div>
+                    <div class="metric"><span class="mk">7/28主力</span><span class="mv up">净入716万</span></div>
+                    <div class="metric"><span class="mk">换手率</span><span class="mv">0.71%</span></div>
+                    <div class="metric"><span class="mk">5日走势</span><span class="mv up">强于大盘</span></div>
+                    <div class="metric"><span class="mk">估值分位</span><span class="mv">历史低位</span></div>
+                </div>
+                <div class="stock-fund">
+                    <div class="ft">💰 机构资金动向</div>
+                    7/28主力<span class="flow-in">净流入715.71万</span>（占成交8.34%），游资净流出818万。7/27主力净流出446万。近5日震荡偏强，主动偏股基金持仓+0.04%，同期股价+7.57%。机构调研较频繁。
+                </div>
+                <div class="stock-sentiment">
+                    <div class="st">📢 舆情信息</div>
+                    市场关注度一般，整体舆情偏中性。机构调研较频繁，研报评级变化不大。公司盈利能力优秀，当前估值在历史低位区间。安全边际较高，政策落地后有望迎来估值修复。
+                </div>
+                <div class="stock-tech">
+                    <div class="tt">📈 技术指标验证</div>
+                    近5日震荡偏强，跑赢大盘。7/28放量涨2.20%，主力净流入。布林带中轨上方运行，MACD零轴附近蓄势。低估值+政策催化，属低位稳健型。
+                </div>
+            </div>
+
+            <!-- 东方雨虹 -->
+            <div class="stock-card">
+                <div class="stock-head">
+                    <div><span class="stock-name">东方雨虹</span> <span class="stock-code">002271.SZ</span></div>
+                    <div class="stock-price"><div class="px">—</div><div class="chg up">+2.44%</div></div>
+                </div>
+                <div class="stock-tags"><span class="stag gold">防水龙头</span><span class="stag green">管材防水</span><span class="stag purple">品牌力强</span></div>
+                <div class="stock-role">在防水领域<strong>品牌力强</strong>，同时布局管材业务。受益于城市老旧管网改造与新建需求。7/27主力净流入813万。</div>
+                <div class="stock-metrics">
+                    <div class="metric"><span class="mk">7/27涨幅</span><span class="mv up">+2.44%</span></div>
+                    <div class="metric"><span class="mk">7/27主力</span><span class="mv up">净入813万</span></div>
+                    <div class="metric"><span class="mk">换手率</span><span class="mv">1.74%</span></div>
+                    <div class="metric"><span class="mk">5日走势</span><span class="mv">震荡偏弱</span></div>
+                    <div class="metric"><span class="mk">基金持仓</span><span class="mv up">+1.96%</span></div>
+                    <div class="metric"><span class="mk">同期股价</span><span class="mv up">+12.66%</span></div>
+                </div>
+                <div class="stock-fund">
+                    <div class="ft">💰 机构资金动向</div>
+                    7/27主力<span class="flow-in">净流入812.58万</span>。近5日震荡行情，主力资金整体呈净流入，净占比高于市场平均。主动偏股基金持仓+1.96%，同期股价+12.66%。机构调研较频繁。
+                </div>
+                <div class="stock-sentiment">
+                    <div class="st">📢 舆情信息</div>
+                    市场关注度一般，整体舆情偏中性。机构调研较频繁，研报评级变化不大。公司盈利能力良好，成长能力优秀。融资融券差额占比3.61%。
+                </div>
+                <div class="stock-tech">
+                    <div class="tt">📈 技术指标验证</div>
+                    近5日震荡偏弱于大盘但强于行业。7/27放量反弹。基金持仓增加1.96%显示机构看好。属低位蓄势型，政策催化下有估值修复空间。
+                </div>
+            </div>
+
+            <!-- 数字政通 -->
+            <div class="stock-card rose">
+                <div class="stock-head">
+                    <div><span class="stock-name">数字政通</span> <span class="stock-code">300075.SZ</span></div>
+                    <div class="stock-price"><div class="px">—</div><div class="chg">智慧城市</div></div>
+                </div>
+                <div class="stock-tags"><span class="stag rose">智慧管网</span><span class="stag purple">监测系统</span><span class="stag blue">数字城市</span></div>
+                <div class="stock-role">专注<strong>智慧管网系统</strong>，提供管网监测与智慧运维方案。地下管网与通信网融合，让城市生命线有感知能力，公司直接受益于智慧管网渗透率提升。</div>
+                <div class="stock-metrics">
+                    <div class="metric"><span class="mk">细分</span><span class="mv">智慧管网</span></div>
+                    <div class="metric"><span class="mk">业务</span><span class="mv">城市网格化</span></div>
+                    <div class="metric"><span class="mk">概念</span><span class="mv">智慧城市</span></div>
+                    <div class="metric"><span class="mk">定位</span><span class="mv">细分龙头</span></div>
+                </div>
+                <div class="stock-fund">
+                    <div class="ft">💰 机构资金动向</div>
+                    作为智慧管网细分龙头，受益于城市生命线工程政策推进。资金体量较小，易受游资关注。政策催化下有望迎来资金关注。
+                </div>
+                <div class="stock-sentiment">
+                    <div class="st">📢 舆情信息</div>
+                    智慧城市+地下管网监测双概念。城市生命线安全工程试点扩大，舆情偏正面。公司在管网GIS和监测领域有成熟方案。
+                </div>
+                <div class="stock-tech">
+                    <div class="tt">📈 技术指标验证</div>
+                    小市值题材型标的，波动较大。需关注政策落地节奏和订单兑现情况。属低位题材潜伏型。
+                </div>
+            </div>
+
+            <!-- 隧道股份 -->
+            <div class="stock-card">
+                <div class="stock-head">
+                    <div><span class="stock-name">隧道股份</span> <span class="stock-code">600820.SH</span></div>
+                    <div class="stock-price"><div class="px">—</div><div class="chg">工程施工</div></div>
+                </div>
+                <div class="stock-tags"><span class="stag gold">地下施工</span><span class="stag green">综合管廊</span><span class="stag blue">国企</span></div>
+                <div class="stock-role">承担<strong>城市地下综合管廊与管网施工</strong>。在地下工程领域技术领先，是地下管网建设改造的施工端核心标的。</div>
+                <div class="stock-metrics">
+                    <div class="metric"><span class="mk">细分</span><span class="mv">地下工程施工</span></div>
+                    <div class="metric"><span class="mk">业务</span><span class="mv">盾构隧道</span></div>
+                    <div class="metric"><span class="mk">概念</span><span class="mv">地下管廊</span></div>
+                    <div class="metric"><span class="mk">定位</span><span class="mv">施工龙头</span></div>
+                </div>
+                <div class="stock-fund">
+                    <div class="ft">💰 机构资金动向</div>
+                    作为地下工程施工龙头，5万亿管网投资直接拉动订单。估值处于历史低位，安全边际较高。
+                </div>
+                <div class="stock-sentiment">
+                    <div class="st">📢 舆情信息</div>
+                    地下管廊建设加速是核心催化。公司在盾构隧道和非开挖技术领域有优势。舆情偏中性，关注度有待提升。
+                </div>
+                <div class="stock-tech">
+                    <div class="tt">📈 技术指标验证</div>
+                    低估值稳健型标的，波动较小。随政策落地和订单释放，有望迎来估值修复。属价值洼地型。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 第六张网：现代物流网 ===== -->
+    <div class="net-section" id="net6">
+        <div class="net-header">
+            <div class="net-icon c6">🚛</div>
+            <div>
+                <div class="net-title">六、现代物流网</div>
+                <div class="net-subtitle">国家物流枢纽 · 冷链物流基地 · 多式联运 · 智慧仓储 · 跨境物流</div>
+            </div>
+            <div class="net-invest">
+                <div class="amount">2.5万亿</div>
+                <div class="label">"十五五"期间投资</div>
+            </div>
+        </div>
+
+        <div class="policy-box">
+            <h4>📌 系统组成与重要部分</h4>
+            <ul>
+                <li><strong>"通道+枢纽+网络"体系</strong>：构建现代物流运行体系，"四横五纵"大通道加快形成<span class="hl">181个国家物流枢纽</span></li>
+                <li><strong>国家骨干冷链物流基地</strong>：105个国家骨干冷链物流基地加快互联</li>
+                <li><strong>多式联运</strong>：铁水联运、公铁联运、陆空联运，降低社会物流成本</li>
+                <li><strong>智慧仓储与无人配送</strong>：无人仓、智慧供应链、物流无人机/无人车</li>
+                <li><strong>跨境物流</strong>：中欧班列与国内物流网无缝衔接，"一带一路"物流通道</li>
+                <li><strong>内河水运</strong>：平陆运河已全线通水，三峡水运新通道动工，物流从"枢纽节点"迈向"服务网络"</li>
+            </ul>
+        </div>
+
+        <div class="progress-box">
+            <strong>最新进展：</strong>181个国家物流枢纽、105个国家骨干冷链物流基地加快互联，平陆运河已全线通水。三峡水运新通道动工。上半年水上运输业投资增长19.8%，航空运输业投资增长11%。"四横五纵"大通道加快形成。
+        </div>
+
+        <div class="stocks-grid">
+            <!-- 顺丰控股 -->
+            <div class="stock-card gold">
+                <div class="stock-head">
+                    <div><span class="stock-name">顺丰控股</span> <span class="stock-code">002352.SZ</span></div>
+                    <div class="stock-price"><div class="px">33.76</div><div class="chg up">+0.78%</div></div>
+                </div>
+                <div class="stock-tags"><span class="stag gold">综合物流龙头</span><span class="stag rose">冷链+跨境</span><span class="stag purple">智慧物流</span></div>
+                <div class="stock-role">作为<strong>综合物流龙头</strong>，受益于冷链和跨境物流建设。业务覆盖快递、冷链、供应链、国际物流全链条。是物流网升级的核心受益标的。</div>
+                <div class="stock-metrics">
+                    <div class="metric"><span class="mk">最新价</span><span class="mv">33.76元</span></div>
+                    <div class="metric"><span class="mk">7/27涨跌</span><span class="mv up">+0.78%</span></div>
+                    <div class="metric"><span class="mk">7/27主力</span><span class="mv dn">净出2410万</span></div>
+                    <div class="metric"><span class="mk">换手率</span><span class="mv">0.32%</span></div>
+                    <div class="metric"><span class="mk">成交额</span><span class="mv">5.17亿</span></div>
+                    <div class="metric"><span class="mk">行业排名</span><span class="mv">物流前列</span></div>
+                </div>
+                <div class="stock-fund">
+                    <div class="ft">💰 机构资金动向</div>
+                    7/27主力<span class="flow-out">净流出2409.76万</span>（占成交4.66%），游资净流入937万，散户净流入1473万。主力小幅流出但游资和散户承接。整体资金波动不大。
+                </div>
+                <div class="stock-sentiment">
+                    <div class="st">📢 舆情信息</div>
+                    综合物流龙头，市场关注度较高。冷链物流+跨境物流+智慧物流多重概念。行业排名前列（8.70%月涨幅）。舆情偏中性偏正面。
+                </div>
+                <div class="stock-tech">
+                    <div class="tt">📈 技术指标验证</div>
+                    低换手率（0.32%）显示筹码稳定。33-34元区间窄幅震荡。属大市值稳健型，波动较小。物流网政策催化下有估值修复空间。
+                </div>
+            </div>
+
+            <!-- 中储股份 -->
+            <div class="stock-card">
+                <div class="stock-head">
+                    <div><span class="stock-name">中储股份</span> <span class="stock-code">600787.SH</span></div>
+                    <div class="stock-price"><div class="px">—</div><div class="chg">物流枢纽</div></div>
+                </div>
+                <div class="stock-tags"><span class="stag gold">物流仓储</span><span class="stag blue">央企</span><span class="stag green">资源壁垒</span></div>
+                <div class="stock-role">在<strong>物流仓储和铁路运输领域有资源壁垒</strong>，是国家级物流枢纽建设核心标的。作为中国物流集团旗下上市平台，直接受益于国家物流枢纽布局。</div>
+                <div class="stock-metrics">
+                    <div class="metric"><span class="mk">3日主力</span><span class="mv dn">净出385万</span></div>
+                    <div class="metric"><span class="mk">5日主力</span><span class="mv dn">净出1361万</span></div>
+                    <div class="metric"><span class="mk">10日主力</span><span class="mv dn">净出4056万</span></div>
+                    <div class="metric"><span class="mk">10日走势</span><span class="mv up">跑赢大盘</span></div>
+                    <div class="metric"><span class="mk">压力位</span><span class="mv">4.55元</span></div>
+                    <div class="metric"><span class="mk">估值分位</span><span class="mv">历史低位</span></div>
+                </div>
+                <div class="stock-fund">
+                    <div class="ft">💰 机构资金动向</div>
+                    近10日主力<span class="flow-out">净流出4056万</span>（-4.02%），5日净流出1361万（-3.17%），3日净流出385万（-2.08%）。主力持续小幅流出，但流出幅度递减。物流行业近5日资金总体无进出。机构今日流向-1100万。
+                </div>
+                <div class="stock-sentiment">
+                    <div class="st">📢 舆情信息</div>
+                    市场关注度一般，整体舆情偏中性。机构调研频率较低。当前估值在历史低位区间，安全边际较高，政策落地后有望迎来估值修复。过去10日跑赢大盘。
+                </div>
+                <div class="stock-tech">
+                    <div class="tt">📈 技术指标验证</div>
+                    压力位4.55元，过去10日跑赢大盘和行业。主力流出幅度递减，或接近流出尾声。低估值+政策催化，属逆向布局价值洼地型。
+                </div>
+            </div>
+
+            <!-- 铁龙物流 -->
+            <div class="stock-card green">
+                <div class="stock-head">
+                    <div><span class="stock-name">铁龙物流</span> <span class="stock-code">600125.SH</span></div>
+                    <div class="stock-price"><div class="px">5.45</div><div class="chg up">+0.55%</div></div>
+                </div>
+                <div class="stock-tags"><span class="stag gold">铁路物流</span><span class="stag green">多式联运</span><span class="stag purple">铁水联运</span></div>
+                <div class="stock-role">在<strong>铁路运输领域有资源壁垒</strong>，是铁水联运核心标的。受益于多式联运发展和内河水运建设（平陆运河通水、三峡水运新通道动工）。</div>
+                <div class="stock-metrics">
+                    <div class="metric"><span class="mk">最新价</span><span class="mv">5.45元</span></div>
+                    <div class="metric"><span class="mk">7/28涨跌</span><span class="mv up">+0.55%</span></div>
+                    <div class="metric"><span class="mk">7/27主力</span><span class="mv up">净入942万</span></div>
+                    <div class="metric"><span class="mk">换手率</span><span class="mv">0.73%</span></div>
+                    <div class="metric"><span class="mk">市盈TTM</span><span class="mv">8.22</span></div>
+                    <div class="metric"><span class="mk">市净率</span><span class="mv">0.92</span></div>
+                </div>
+                <div class="stock-fund">
+                    <div class="ft">💰 机构资金动向</div>
+                    7/27主力<span class="flow-in">净流入942.31万</span>（占成交18.34%），游资净流入249万。近5日主力资金整体呈净流入状态。基金持仓+0.27%，同期股价+7.61%。
+                </div>
+                <div class="stock-sentiment">
+                    <div class="st">📢 舆情信息</div>
+                    市场关注度一般，整体舆情偏中性。机构调研频率较低。公司盈利能力一般但偿债能力良好。当前估值在历史低位区间（PE 8.22，PB 0.92破净）。多式联运政策催化。
+                </div>
+                <div class="stock-tech">
+                    <div class="tt">📈 技术指标验证</div>
+                    低换手率筹码稳定。PB 0.92破净，PE仅8.22，安全边际极高。近5日主力净流入。属深度价值型，政策催化下估值修复空间大。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 配置策略建议 ===== -->
+    <div class="strategy-box">
+        <h3>🎯 配置优先级建议</h3>
+        <div class="strategy-grid">
+            <div class="strategy-item p1">
+                <div class="si-title">第一梯队：优先配置</div>
+                <p><strong>算力网（中际旭创）</strong> + <strong>新型电网（国电南瑞、宁德时代）</strong></p>
+                <p>理由：AI资本开支持续高增，1.6T光模块放量；特高压建设加速，储能装机爆发。业绩确定性高、技术壁垒强。宁德时代10日主力净流入45亿，资金面最强。</p>
+            </div>
+            <div class="strategy-item p2">
+                <div class="si-title">第二梯队：积极关注</div>
+                <p><strong>水网（新兴铸管、中国电建）</strong> + <strong>通信网（中兴通讯）</strong></p>
+                <p>理由：水利投资破万亿，智慧水务渗透提升；5G-A部署+6G研发催化。中国电建机构目标价7.68元（+60%空间），中兴通讯7/22主力净流入32亿。</p>
+            </div>
+            <div class="strategy-item p3">
+                <div class="si-title">第三梯队：逆向布局</div>
+                <p><strong>地下管网（伟星新材）</strong> + <strong>物流网（中储股份、铁龙物流）</strong></p>
+                <p>理由：当前安全边际最高，板块处于历史低位。铁龙物流PB 0.92破净，中储股份估值历史低位。政策落地后有望迎来估值修复，适合左侧潜伏。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 免责声明 ===== -->
+    <div class="disclaimer">
+        本报告基于公开信息整理，不构成投资建议。股票价格及资金流向数据截至2026年7月28日收盘，后续可能发生变化。<br>
+        "六张网"政策信息来源于国家发改委、人民日报、经济日报等官方渠道。标的数据来源于交易所公开行情及证券之星、东方财富等数据平台。<br>
+        投资有风险，入市需谨慎。请根据自身风险承受能力独立决策。
+    </div>
+
+</div>
+</body>
+</html>
