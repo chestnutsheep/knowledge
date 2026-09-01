@@ -35,24 +35,25 @@ settings:
 =================================================================== */
 
 :root {
-  --lihe-accent: #3E4850;
-  --lihe-accent-hover: #3E4850;
-  --lihe-bg:     #262524;
-  --lihe-gold:   #8A3028;
-  --lihe-sidebar: #2A2827;
-  --lihe-elev:    #302d2b;
-  --lihe-text:   #EAE6DE;
-  --lihe-muted:  #9A958C;
-  --lihe-coldjade: #788080;
-  --lihe-cuicui: #3A3838;
-  --lihe-snow:   #3A3838;
+  /* 神弦 · 诡谲赤黑：玄褐底 + 朱砂祭红，巫风暗朱 */
+  --lihe-accent: #B23A2E;
+  --lihe-accent-hover: #C8483A;
+  --lihe-bg:     #1E1A18;
+  --lihe-gold:   #9A5A2E;
+  --lihe-sidebar: #221C19;
+  --lihe-elev:    #2A221E;
+  --lihe-text:   #ECE3D6;
+  --lihe-muted:  #9A8576;
+  --lihe-coldjade: #6E8A7E;
+  --lihe-cuicui: #7A3A30;
+  --lihe-snow:   #B23A2E;
 
-  --lihe-h1: #A88838;
-  --lihe-h2: #808078;
-  --lihe-h3: #6A5840;
-  --lihe-h4: #788080;
-  --lihe-h5: #3A3838;
-  --lihe-h6: #3E4850;
+  --lihe-h1: #C8923A;
+  --lihe-h2: #B23A2E;
+  --lihe-h3: #9A5A2E;
+  --lihe-h4: #6E8A7E;
+  --lihe-h5: #7A3A30;
+  --lihe-h6: #B23A2E;
 
   --font-lihe-serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif;
   --font-lihe-sans:  "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
@@ -69,68 +70,68 @@ settings:
 .theme-dark .workspace-leaf { background: #262524; }
 
 .theme-dark {
-  --background-primary: #262524;
-  --background-primary-alt: #2A2827;
-  --background-secondary: #2A2827;
-  --background-secondary-alt: #302d2b;
+  --background-primary: #1E1A18;
+  --background-primary-alt: #221C19;
+  --background-secondary: #221C19;
+  --background-secondary-alt: #2A221E;
 
   --text-normal: var(--lihe-text);
   --text-muted: var(--lihe-muted);
-  --text-faint: #6E6A62;
+  --text-faint: #6A5A4E;
 
   --text-accent: var(--lihe-accent);
   --text-accent-hover: var(--lihe-accent-hover);
 
-  --interactive-normal: #302d2b;
-  --interactive-hover: #3b362f;
+  --interactive-normal: #2A221E;
+  --interactive-hover: #352a23;
   --interactive-accent: var(--lihe-accent);
   --interactive-accent-hover: var(--lihe-accent-hover);
 
-  --background-modifier-hover: rgba(184, 48, 40, 0.08);
-  --background-modifier-active: rgba(184, 48, 40, 0.14);
-  --background-modifier-selected: rgba(184, 48, 40, 0.20);
-  --background-modifier-border: #3a352f;
-  --background-modifier-form-field: #211f1d;
-  --background-modifier-form-field-highlighted: #302d2b;
-  --background-modifier-success: var(--lihe-cuicui);
-  --background-modifier-error: var(--lihe-accent-hover);
-  --background-modifier-error-hover: #95525c;
-  --background-modifier-warning: var(--lihe-h2);
+  --background-modifier-hover: rgba(178, 58, 46, 0.10);
+  --background-modifier-active: rgba(178, 58, 46, 0.16);
+  --background-modifier-selected: rgba(178, 58, 46, 0.22);
+  --background-modifier-border: #3a2a22;
+  --background-modifier-form-field: #18130f;
+  --background-modifier-form-field-highlighted: #2A221E;
+  --background-modifier-success: #6E8A7E;
+  --background-modifier-error: #B23A2E;
+  --background-modifier-error-hover: #C8483A;
+  --background-modifier-warning: #9A5A2E;
 
-  --border-color: #3a352f;
-  --divider-color: rgba(200, 168, 104, 0.18);
-  --divider-color-hover: rgba(200, 168, 104, 0.30);
+  --border-color: #3a2a22;
+  --divider-color: rgba(200, 120, 60, 0.18);
+  --divider-color-hover: rgba(200, 120, 60, 0.32);
 
-  --tag-background: var(--lihe-snow);
-  --tag-color: #262524;
-  --tag-background-hover: #c3b8d6;
-  --tag-color-hover: #1c1c1c;
+  --tag-background: rgba(178, 58, 46, 0.22);
+  --tag-color: #F0D9C8;
+  --tag-background-hover: rgba(200, 72, 58, 0.38);
+  --tag-color-hover: #FFF1E6;
 
   --checkbox-color: var(--lihe-accent);
   --checkbox-color-hover: var(--lihe-accent-hover);
-  --checklist-done-color: var(--lihe-h2);
+  --checklist-done-color: #9A5A2E;
   --checklist-done-text-color: var(--lihe-muted);
 
-  --code-background: #211f1d;
+  --code-background: #18130f;
   --code-normal: var(--lihe-gold);
   --code-text: var(--lihe-text);
-  --pre-code: #211f1d;
-  --code-border: #3a352f;
+  --pre-code: #18130f;
+  --code-border: #3a2a22;
 
   --graph-node: var(--lihe-gold);
   --graph-node-active: var(--lihe-accent);
-  --graph-node-tag: var(--lihe-snow);
-  --graph-node-attachment: var(--lihe-cuicui);
-  --graph-line: #3a352f;
+  --graph-node-tag: #B23A2E;
+  --graph-node-attachment: #7A3A30;
+  --graph-line: #3a2a22;
   --graph-line-active: var(--lihe-accent);
   --graph-text: var(--lihe-muted);
-  --graph-arrow: #4A3A33;
+  --graph-arrow: #5A3326;
   --graph-bg: var(--lihe-bg);
 
-  --titlebar-background: #211f1d;
+  --titlebar-background: #18130f;
   --titlebar-text-color: var(--lihe-text);
-  --titlebar-background-focused: #211f1d;
-  --titlebar-text-color-focused: #F2E9DA;
+  --titlebar-background-focused: #18130f;
+  --titlebar-text-color-focused: #F7EAD8;
 
   --inline-title-color: var(--lihe-h1);
   --heading-color: var(--lihe-h1);
@@ -138,35 +139,35 @@ settings:
   --vault-name-color: var(--lihe-gold);
   --vault-name-font-weight: 600;
 
-  --nav-item-color: #A39B8E;
+  --nav-item-color: #B49A86;
   --nav-item-color-hover: var(--lihe-text);
   --nav-item-color-active: var(--lihe-text);
-  --nav-item-background-hover: rgba(184, 48, 40, 0.08);
-  --nav-item-background-active: rgba(184, 48, 40, 0.14);
+  --nav-item-background-hover: rgba(178, 58, 46, 0.10);
+  --nav-item-background-active: rgba(178, 58, 46, 0.16);
   --nav-heading-color: var(--lihe-gold);
   --nav-heading-weight: 700;
-  --nav-indentation-guide-color: #302d2b;
+  --nav-indentation-guide-color: #2A221E;
 
   --pill-color: var(--lihe-accent);
   --pill-color-hover: var(--lihe-accent-hover);
-  --pill-background: rgba(184, 48, 40, 0.12);
+  --pill-background: rgba(178, 58, 46, 0.16);
 
-  --shadow-s: 0 1px 2px rgba(0,0,0,0.45);
-  --shadow-m: 0 4px 10px rgba(0,0,0,0.5);
-  --shadow-l: 0 10px 24px rgba(0,0,0,0.55);
+  --shadow-s: 0 1px 2px rgba(0,0,0,0.50);
+  --shadow-m: 0 4px 10px rgba(0,0,0,0.55);
+  --shadow-l: 0 10px 24px rgba(0,0,0,0.60);
 
   --font-text: var(--font-lihe-serif);
   --font-editor: var(--font-lihe-serif);
   --font-ui: var(--font-lihe-sans);
 
-  --callout-quote-background: rgba(90, 136, 120, 0.08);
+  --callout-quote-background: rgba(110, 138, 126, 0.10);
   --callout-default: var(--lihe-gold);
   --callout-info: #7E9BB0;
-  --callout-success: var(--lihe-cuicui);
-  --callout-warning: var(--lihe-h2);
+  --callout-success: #6E8A7E;
+  --callout-warning: #9A5A2E;
   --callout-danger: var(--lihe-accent);
   --callout-error: var(--lihe-accent);
-  --callout-tip: var(--lihe-snow);
+  --callout-tip: #B23A2E;
 
   /* === 官方标题变量通道（Obsidian 原生渲染优先读取） === */
   --h1-color: var(--lihe-h1);

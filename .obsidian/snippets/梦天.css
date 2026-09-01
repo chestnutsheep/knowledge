@@ -35,24 +35,25 @@ settings:
 =================================================================== */
 
 :root {
-  --lihe-accent: #EDE8DC;
-  --lihe-accent-hover: #EDE8DC;
-  --lihe-bg:     #282828;
-  --lihe-gold:   #C8B870;
-  --lihe-sidebar: #2E3030;
-  --lihe-elev:    #322e29;
-  --lihe-text:   #EAE6DE;
-  --lihe-muted:  #9A958C;
-  --lihe-coldjade: #A8A0B0;
-  --lihe-cuicui: #8A9098;
-  --lihe-snow:   #8A9098;
+  /* 梦天 · 空灵霜白：黛墨底 + 霜青冷光，俯瞰天宇 */
+  --lihe-accent: #7FA8C8;
+  --lihe-accent-hover: #9CC0DA;
+  --lihe-bg:     #1C2026;
+  --lihe-gold:   #9CB0C4;
+  --lihe-sidebar: #21262E;
+  --lihe-elev:    #282E38;
+  --lihe-text:   #EAF0F6;
+  --lihe-muted:  #8E9AAB;
+  --lihe-coldjade: #7FA8C8;
+  --lihe-cuicui: #5A7A92;
+  --lihe-snow:   #7FA8C8;
 
-  --lihe-h1: #C4C9D0;
-  --lihe-h2: #DCD8D0;
-  --lihe-h3: #D0D2D6;
-  --lihe-h4: #A8A0B0;
-  --lihe-h5: #8A9098;
-  --lihe-h6: #EDE8DC;
+  --lihe-h1: #D6E2EE;
+  --lihe-h2: #AEC6DC;
+  --lihe-h3: #9CB0C4;
+  --lihe-h4: #C2B0D4;
+  --lihe-h5: #7FA8C8;
+  --lihe-h6: #9CC0DA;
 
   --font-lihe-serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif;
   --font-lihe-sans:  "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
@@ -66,71 +67,71 @@ settings:
   background-image: none;
   background-attachment: local;
 }
-.theme-dark .workspace-leaf { background: #282828; }
+.theme-dark .workspace-leaf { background: #1C2026; }
 
 .theme-dark {
-  --background-primary: #282828;
-  --background-primary-alt: #2E3030;
-  --background-secondary: #2E3030;
-  --background-secondary-alt: #322e29;
+  --background-primary: #1C2026;
+  --background-primary-alt: #21262E;
+  --background-secondary: #21262E;
+  --background-secondary-alt: #282E38;
 
   --text-normal: var(--lihe-text);
   --text-muted: var(--lihe-muted);
-  --text-faint: #6E6A62;
+  --text-faint: #5A6678;
 
   --text-accent: var(--lihe-accent);
   --text-accent-hover: var(--lihe-accent-hover);
 
-  --interactive-normal: #322e29;
-  --interactive-hover: #3b362f;
+  --interactive-normal: #282E38;
+  --interactive-hover: #313A46;
   --interactive-accent: var(--lihe-accent);
   --interactive-accent-hover: var(--lihe-accent-hover);
 
-  --background-modifier-hover: rgba(184, 48, 40, 0.08);
-  --background-modifier-active: rgba(184, 48, 40, 0.14);
-  --background-modifier-selected: rgba(184, 48, 40, 0.20);
-  --background-modifier-border: #3a352f;
-  --background-modifier-form-field: #211f1d;
-  --background-modifier-form-field-highlighted: #322e29;
-  --background-modifier-success: var(--lihe-cuicui);
-  --background-modifier-error: var(--lihe-accent-hover);
-  --background-modifier-error-hover: #95525c;
-  --background-modifier-warning: var(--lihe-h2);
+  --background-modifier-hover: rgba(127, 168, 200, 0.10);
+  --background-modifier-active: rgba(127, 168, 200, 0.16);
+  --background-modifier-selected: rgba(127, 168, 200, 0.22);
+  --background-modifier-border: #2C3440;
+  --background-modifier-form-field: #161A1F;
+  --background-modifier-form-field-highlighted: #282E38;
+  --background-modifier-success: #5A7A92;
+  --background-modifier-error: #C25A6A;
+  --background-modifier-error-hover: #D86A7A;
+  --background-modifier-warning: #9CB0C4;
 
-  --border-color: #3a352f;
-  --divider-color: rgba(200, 168, 104, 0.18);
-  --divider-color-hover: rgba(200, 168, 104, 0.30);
+  --border-color: #2C3440;
+  --divider-color: rgba(150, 180, 210, 0.16);
+  --divider-color-hover: rgba(150, 180, 210, 0.30);
 
-  --tag-background: var(--lihe-snow);
-  --tag-color: #282828;
-  --tag-background-hover: #c3b8d6;
-  --tag-color-hover: #1c1c1c;
+  --tag-background: rgba(127, 168, 200, 0.22);
+  --tag-color: #E6F0FA;
+  --tag-background-hover: rgba(156, 192, 218, 0.38);
+  --tag-color-hover: #F4FAFF;
 
   --checkbox-color: var(--lihe-accent);
   --checkbox-color-hover: var(--lihe-accent-hover);
-  --checklist-done-color: var(--lihe-h2);
+  --checklist-done-color: #9CB0C4;
   --checklist-done-text-color: var(--lihe-muted);
 
-  --code-background: #211f1d;
+  --code-background: #161A1F;
   --code-normal: var(--lihe-gold);
   --code-text: var(--lihe-text);
-  --pre-code: #211f1d;
-  --code-border: #3a352f;
+  --pre-code: #161A1F;
+  --code-border: #2C3440;
 
   --graph-node: var(--lihe-gold);
   --graph-node-active: var(--lihe-accent);
-  --graph-node-tag: var(--lihe-snow);
-  --graph-node-attachment: var(--lihe-cuicui);
-  --graph-line: #3a352f;
+  --graph-node-tag: #7FA8C8;
+  --graph-node-attachment: #5A7A92;
+  --graph-line: #2C3440;
   --graph-line-active: var(--lihe-accent);
   --graph-text: var(--lihe-muted);
-  --graph-arrow: #4A3A33;
+  --graph-arrow: #3A4A5A;
   --graph-bg: var(--lihe-bg);
 
-  --titlebar-background: #211f1d;
+  --titlebar-background: #161A1F;
   --titlebar-text-color: var(--lihe-text);
-  --titlebar-background-focused: #211f1d;
-  --titlebar-text-color-focused: #F2E9DA;
+  --titlebar-background-focused: #161A1F;
+  --titlebar-text-color-focused: #EAF4FF;
 
   --inline-title-color: var(--lihe-h1);
   --heading-color: var(--lihe-h1);
@@ -138,35 +139,35 @@ settings:
   --vault-name-color: var(--lihe-gold);
   --vault-name-font-weight: 600;
 
-  --nav-item-color: #A39B8E;
+  --nav-item-color: #9CB0C4;
   --nav-item-color-hover: var(--lihe-text);
   --nav-item-color-active: var(--lihe-text);
-  --nav-item-background-hover: rgba(184, 48, 40, 0.08);
-  --nav-item-background-active: rgba(184, 48, 40, 0.14);
+  --nav-item-background-hover: rgba(127, 168, 200, 0.10);
+  --nav-item-background-active: rgba(127, 168, 200, 0.16);
   --nav-heading-color: var(--lihe-gold);
   --nav-heading-weight: 700;
-  --nav-indentation-guide-color: #322e29;
+  --nav-indentation-guide-color: #282E38;
 
   --pill-color: var(--lihe-accent);
   --pill-color-hover: var(--lihe-accent-hover);
-  --pill-background: rgba(184, 48, 40, 0.12);
+  --pill-background: rgba(127, 168, 200, 0.16);
 
-  --shadow-s: 0 1px 2px rgba(0,0,0,0.4);
-  --shadow-m: 0 4px 10px rgba(0,0,0,0.45);
-  --shadow-l: 0 10px 24px rgba(0,0,0,0.5);
+  --shadow-s: 0 1px 2px rgba(0,0,0,0.50);
+  --shadow-m: 0 4px 10px rgba(0,0,0,0.55);
+  --shadow-l: 0 10px 24px rgba(0,0,0,0.60);
 
   --font-text: var(--font-lihe-serif);
   --font-editor: var(--font-lihe-serif);
   --font-ui: var(--font-lihe-sans);
 
-  --callout-quote-background: rgba(90, 136, 120, 0.08);
+  --callout-quote-background: rgba(127, 168, 200, 0.10);
   --callout-default: var(--lihe-gold);
-  --callout-info: #7E9BB0;
-  --callout-success: var(--lihe-cuicui);
-  --callout-warning: var(--lihe-h2);
-  --callout-danger: var(--lihe-accent);
-  --callout-error: var(--lihe-accent);
-  --callout-tip: var(--lihe-snow);
+  --callout-info: #7FA8C8;
+  --callout-success: #5A7A92;
+  --callout-warning: #9CB0C4;
+  --callout-danger: #C25A6A;
+  --callout-error: #C25A6A;
+  --callout-tip: #7FA8C8;
 
   /* === 官方标题变量通道（Obsidian 原生渲染优先读取） === */
   --h1-color: var(--lihe-h1);
