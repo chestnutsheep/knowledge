@@ -16,6 +16,7 @@
 依赖：pdfplumber（已装）、代理在线（pdf.dfcfw.com 走直连，但稳妥起见仍用系统网络）
 """
 import re
+import os
 import ssl
 import json
 import urllib.request
@@ -24,7 +25,17 @@ from datetime import datetime
 
 import pdfplumber
 
-REAL = Path("/home/AI/Obsidian/知识库/肆 • 机构观点")
+# ---------- 路径探测（与 fetch_reports.py / _gen_obsidian.py 一致） ----------
+VAULT_CANDIDATES = ["/home/AI/笔记/知识库", "/home/AI/Obsidian/知识库"]
+def _resolve_vault():
+    env = os.environ.get("VAULT_DIR")
+    if env and Path(env).is_dir():
+        return Path(env)
+    for c in VAULT_CANDIDATES:
+        if Path(c).is_dir():
+            return Path(c)
+    return Path(VAULT_CANDIDATES[0])
+REAL = _resolve_vault() / "肆 • 机构观点"
 CACHE = REAL / "_pdf_cache"
 CACHE.mkdir(exist_ok=True)
 
@@ -64,8 +75,15 @@ def download_pdf(url: str) -> bytes | None:
     ctx = ssl.create_default_context()
     ctx.check_hostname = False
     ctx.verify_mode = ssl.CERT_NONE
+    proxy = os.environ.get("HTTPS_PROXY") or os.environ.get("HTTP_PROXY") or "http://127.0.0.1:7897"
+    handlers = []
+    if proxy:
+        handlers.append(urllib.request.ProxyHandler({"http": proxy, "https": proxy}))
     try:
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        if handlers:
+            opener = urllib.request.build_opener(*handlers)
+            return opener.open(req, timeout=40).read()
         return urllib.request.urlopen(req, timeout=40, context=ctx).read()
     except Exception as e:
         print(f"  [DL ERR] {url} -> {e}")
@@ -265,6 +283,8 @@ def _is_noise_line(line: str) -> bool:
         return True
     if any(w in s for w in SIDEBAR_NOISE):
         return True
+    if re.search(r"Table|Footnote|Simple|china|投Ta|bl摘e|投资摘要", s):
+        return True
     if any(w in s for w in ("证券研究所", "证券分析师", "执业证书", "联系方式", "Compa ny", "Ch in a Re sea", "点评报告")):
         return True
     if s in {"•", "-", "—", "·"}:
@@ -346,8 +366,9 @@ def _normalize_section(raw: str, max_chars: int = 1800) -> str:
 
 
 def extract_risk(text: str) -> str:
-    m = re.search(r"(?:风险提示|风险因素)[：:]?\s*(.+?)(?="
-                  r"(?:盈利预测|财务预测|图\s*\d|表\s*\d|资料来源|免责声明|"
+    m = re.search(r"(?:风险提示|风险因素|评级面临的主要风险|主要风险|投资风险|风险分析)[：:]?\s*(.+?)(?="
+                  r"(?:盈利预测|财务预测|图\s*\d|表\s*\d|资料来源|免责声明|年结日|"
+                  r"人民币百万|百万元|Table|投资摘要|"
                   r"投资评级说明|评级标准|请务必阅读|附录|三张报表|损益表|"
                   r"资产负债表|现金流量表|特别声明|公司点评附录)|\Z)", text, re.S)
     return _normalize_section(m.group(1), 900) if m else ""
@@ -395,7 +416,28 @@ def extract_core(text: str) -> str:
             if len(cleaned) >= 35:
                 candidates.append(cleaned)
     if not candidates:
-        return ""
+        # 兜底：抓「首个要点符号(◼•)段 → 估值/评级/风险锚」之间的正文（含紧邻前一导语段）
+        stop_re = re.compile(
+            r"(?:估值|盈利预测(?:与|及)投资评级|投资评级|评级面临的主要风险|"
+            r"风险提示|风险因素|投资风险|主要风险|资产负债表|资料来源|Table|图\s*\d|表\s*\d)")
+        m0 = re.search(r"[◼•]", text)
+        if not m0:
+            return ""
+        ps = text.rfind("\n", 0, m0.start())
+        ps = 0 if ps < 0 else ps + 1
+        prev = text.rfind("\n", 0, ps)
+        if prev >= 0:
+            prev_line = text[prev + 1:ps].strip()
+            if len(prev_line) >= 18 and not re.match(r"^\d{4}年", prev_line) and "：" not in prev_line[:6]:
+                ps = prev + 1
+        m_stop = stop_re.search(text, ps)
+        end = m_stop.start() if m_stop else len(text)
+        cleaned = _normalize_section(text[ps:end], 1800)
+        if any(w in cleaned for w in ("A股数", "损益表", "资产负债表", "现金流量表", "个股表现",
+                                      "股价涨跌", "主要股东", "市场数据", "流通股市值",
+                                      "分析师", "评级说明", "免责声明")):
+            return ""
+        return cleaned if len(cleaned) >= 35 else ""
     business = ("公司", "业绩", "收入", "利润", "产量", "需求", "订单", "项目", "产品", "产能")
     candidates.sort(key=lambda s: (sum(w in s for w in business), min(len(s), 1800)), reverse=True)
     result = candidates[0]

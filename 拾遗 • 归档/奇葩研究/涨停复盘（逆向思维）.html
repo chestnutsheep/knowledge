@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>涨停概念倒推与利好催化分析 · 2026.08.14</title>
+<style>
+@font-face {
+  font-family: 'Outfit';
+  src: url('_shared/fonts/Outfit-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Outfit';
+  src: url('_shared/fonts/Outfit-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'InstrumentSans';
+  src: url('_shared/fonts/InstrumentSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'InstrumentSans';
+  src: url('_shared/fonts/InstrumentSans-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --bg: #0a0e1a;
+  --bg2: #111827;
+  --bg3: #1a2332;
+  --ink: #e8ecf4;
+  --muted: #8b95a7;
+  --rule: #1e293b;
+  --accent: #3b82f6;
+  --accent2: #f59e0b;
+  --accent3: #10b981;
+  --accent4: #ef4444;
+  --accent5: #8b5cf6;
+  --accent6: #ec4899;
+  --grad-hero: linear-gradient(135deg, #0a0e1a 0%, #0d1424 40%, #111827 100%);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'InstrumentSans', 'PingFang SC', 'Noto Sans CJK SC', 'Microsoft YaHei', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ===== HERO ===== */
+.hero {
+  background: var(--grad-hero);
+  padding: 80px 0 60px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--rule);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -20%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -30%; left: -10%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(245,158,11,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-inner { position: relative; z-index: 1; }
+.hero-tag {
+  display: inline-block;
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding: 6px 14px;
+  border: 1px solid rgba(59,130,246,0.3);
+  border-radius: 4px;
+  margin-bottom: 24px;
+}
+.hero h1 {
+  font-family: 'Outfit', 'PingFang SC', sans-serif;
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+.hero h1 .highlight { color: var(--accent2); }
+.hero-sub {
+  font-size: 17px;
+  color: var(--muted);
+  max-width: 680px;
+  line-height: 1.6;
+}
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  margin-top: 48px;
+  background: var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.hero-stat {
+  background: var(--bg2);
+  padding: 20px 24px;
+}
+.hero-stat .label {
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+.hero-stat .value {
+  font-family: 'Outfit', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+}
+.hero-stat .value.up { color: var(--accent3); }
+.hero-stat .value.down { color: var(--accent4); }
+.hero-stat .value.neutral { color: var(--accent); }
+.hero-stat .sub {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* ===== SECTION ===== */
+section {
+  padding: 56px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.section-num {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+.section-title {
+  font-family: 'Outfit', 'PingFang SC', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.section-desc {
+  color: var(--muted);
+  font-size: 15px;
+  margin-bottom: 32px;
+  max-width: 720px;
+}
+
+/* ===== CONCEPT TABLE ===== */
+.concept-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.concept-table th {
+  text-align: left;
+  padding: 14px 16px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  border-bottom: 1px solid var(--rule);
+  background: var(--bg2);
+}
+.concept-table td {
+  padding: 16px;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+.concept-table tr:hover td { background: var(--bg2); }
+.concept-table .rank {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--accent);
+}
+.concept-table .concept-name {
+  font-weight: 700;
+  font-size: 15px;
+}
+.concept-table .strength-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+.strength-badge.s1 { background: rgba(239,68,68,0.15); color: var(--accent4); }
+.strength-badge.s2 { background: rgba(245,158,11,0.15); color: var(--accent2); }
+.strength-badge.s3 { background: rgba(16,185,129,0.15); color: var(--accent3); }
+.strength-badge.s4 { background: rgba(59,130,246,0.15); color: var(--accent); }
+.strength-badge.s5 { background: rgba(139,92,246,0.15); color: var(--accent5); }
+.concept-table .flow {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  color: var(--accent3);
+}
+.concept-table .stocks {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.concept-table .stocks strong { color: var(--ink); }
+
+/* ===== CHART ===== */
+.chart-figure {
+  margin: 0 0 40px;
+}
+.chart-figure figcaption {
+  font-family: 'Outfit', 'PingFang SC', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.chart-figure .chart-desc {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.chart-box {
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 24px;
+}
+.chart-box > div { width: 100%; }
+
+/* ===== CONCEPT CARDS ===== */
+.concept-card {
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+.concept-card-header {
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--rule);
+}
+.concept-card-header .left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.concept-card .icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Outfit', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.concept-card .title-block h3 {
+  font-family: 'Outfit', 'PingFang SC', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.concept-card .title-block .meta {
+  font-size: 13px;
+  color: var(--muted);
+}
+.concept-card .flow-pill {
+  text-align: right;
+}
+.concept-card .flow-pill .amount {
+  font-family: 'Outfit', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent3);
+}
+.concept-card .flow-pill .label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.concept-card-body {
+  padding: 24px 28px;
+}
+.concept-card-body .stocks-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.stock-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--bg3);
+  border: 1px solid var(--rule);
+}
+.stock-tag .pct {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  color: var(--accent3);
+}
+.stock-tag .pct.cm { color: var(--accent2); }
+.catalyst-list {
+  list-style: none;
+}
+.catalyst-list li {
+  position: relative;
+  padding: 12px 0 12px 28px;
+  border-bottom: 1px solid var(--rule);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.catalyst-list li:last-child { border-bottom: none; }
+.catalyst-list li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 18px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+}
+.catalyst-list li.cat-policy::before { background: var(--accent); }
+.catalyst-list li.cat-industry::before { background: var(--accent3); }
+.catalyst-list li.cat-company::before { background: var(--accent2); }
+.catalyst-list li.cat-external::before { background: var(--accent5); }
+.catalyst-list li .cat-label {
+  display: inline-block;
+  font-family: 'Outfit', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 2px 8px;
+  border-radius: 3px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.catalyst-list li.cat-policy .cat-label { background: rgba(59,130,246,0.15); color: var(--accent); }
+.catalyst-list li.cat-industry .cat-label { background: rgba(16,185,129,0.15); color: var(--accent3); }
+.catalyst-list li.cat-company .cat-label { background: rgba(245,158,11,0.15); color: var(--accent2); }
+.catalyst-list li.cat-external .cat-label { background: rgba(139,92,246,0.15); color: var(--accent5); }
+.catalyst-list li strong { color: var(--ink); }
+.catalyst-list li .source {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* ===== CONCLUSION ===== */
+.conclusion {
+  background: var(--bg2);
+  border-radius: 12px;
+  padding: 36px 40px;
+  border: 1px solid var(--rule);
+}
+.conclusion h3 {
+  font-family: 'Outfit', 'PingFang SC', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--accent2);
+}
+.conclusion p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+.conclusion .key-point {
+  display: flex;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.conclusion .key-point:last-child { border-bottom: none; }
+.conclusion .key-point .num {
+  font-family: 'Outfit', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+  flex-shrink: 0;
+  width: 32px;
+}
+.conclusion .key-point .text {
+  font-size: 14px;
+  line-height: 1.6;
+}
+.conclusion .key-point .text strong { color: var(--accent2); }
+
+/* ===== FOOTER ===== */
+footer {
+  padding: 40px 0;
+  text-align: center;
+}
+footer p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+footer .disclaimer {
+  margin-top: 12px;
+  font-size: 12px;
+  color: rgba(139,149,167,0.6);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container { padding: 0 20px; }
+  .hero { padding: 48px 0 40px; }
+  .hero h1 { font-size: 28px; }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .section-title { font-size: 22px; }
+  .concept-card-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .concept-table { font-size: 12px; }
+  .concept-table th, .concept-table td { padding: 10px 8px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="container hero-inner">
+    <span class="hero-tag">Market Intelligence · A股</span>
+    <h1>涨停概念倒推与<span class="highlight">利好催化</span>分析</h1>
+    <p class="hero-sub">基于2026年8月14日A股64只涨停股票的关联概念板块，逆向推演当日市场核心主线，并溯源每个热门概念背后的政策、产业与事件级催化剂。</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="label">涨停 / 跌停</div>
+        <div class="value up">64 <span style="color:var(--muted);font-size:16px">/ 13</span></div>
+        <div class="sub">较昨日情绪修复</div>
+      </div>
+      <div class="hero-stat">
+        <div class="label">成交额</div>
+        <div class="value neutral">2.14万亿</div>
+        <div class="sub">缩量约4080亿</div>
+      </div>
+      <div class="hero-stat">
+        <div class="label">创业板指</div>
+        <div class="value up">+1.12%</div>
+        <div class="sub">科技成长拉动反弹</div>
+      </div>
+      <div class="hero-stat">
+        <div class="label">通信主力净流入</div>
+        <div class="value up">+141亿</div>
+        <div class="sub">全市场唯一百亿级</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== SECTION 1: 概念总览 ===== -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">热门概念总览</h2>
+    </div>
+    <p class="section-desc">从今日64只涨停股票的所属概念板块进行聚类分析，按涨停个股数量、主力资金净流入规模及连板高度综合排序，提炼出9大热门概念方向。</p>
+
+    <table class="concept-table">
+      <thead>
+        <tr>
+          <th style="width:48px">排名</th>
+          <th style="width:180px">概念方向</th>
+          <th style="width:90px">强度</th>
+          <th style="width:110px">主力净流入</th>
+          <th>涨停个股</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="rank">1</td>
+          <td class="concept-name">CPO / 光通信 / 通信设备</td>
+          <td><span class="strength-badge s1">极强</span></td>
+          <td class="flow">+141亿</td>
+          <td class="stocks"><strong>亨通光电</strong>(涨停)、<strong>中石科技</strong>(20cm)、<strong>阿莱德</strong>(20cm)、<strong>富信科技</strong>(20cm)、剑桥科技、中瓷电子、大唐电信、共进股份、杭电股份、华西股份、天洋新材</td>
+        </tr>
+        <tr>
+          <td class="rank">2</td>
+          <td class="concept-name">算力 / 液冷 / 国产替代</td>
+          <td><span class="strength-badge s2">强</span></td>
+          <td class="flow">+94亿</td>
+          <td class="stocks"><strong>网宿科技</strong>(20cm)、数据港、利通电子、康盛股份、大豪科技</td>
+        </tr>
+        <tr>
+          <td class="rank">3</td>
+          <td class="concept-name">稀土永磁 / 小金属</td>
+          <td><span class="strength-badge s2">强</span></td>
+          <td class="flow">+8.4亿</td>
+          <td class="stocks"><strong>中国稀土</strong>(涨停)、<strong>金田股份</strong>(涨停)、华宏科技</td>
+        </tr>
+        <tr>
+          <td class="rank">4</td>
+          <td class="concept-name">创新药 / CXO / CRO</td>
+          <td><span class="strength-badge s3">中强</span></td>
+          <td class="flow">-32亿</td>
+          <td class="stocks"><strong>博济医药</strong>(20cm,2连板)、<strong>澳洋健康</strong>(3连板)、<strong>神奇制药</strong>(2连板)、西点药业、华森制药、重药控股、开开实业</td>
+        </tr>
+        <tr>
+          <td class="rank">5</td>
+          <td class="concept-name">存储芯片 / 半导体</td>
+          <td><span class="strength-badge s3">中强</span></td>
+          <td class="flow">分化</td>
+          <td class="stocks"><strong>长鑫科技</strong>(净流入20.6亿)、兆易创新、中芯国际(跟涨)</td>
+        </tr>
+        <tr>
+          <td class="rank">6</td>
+          <td class="concept-name">低空经济 / 资产重组</td>
+          <td><span class="strength-badge s4">中</span></td>
+          <td class="flow">—</td>
+          <td class="stocks"><strong>蓝盾光电</strong>(5连板,累计+148.76%)</td>
+        </tr>
+        <tr>
+          <td class="rank">7</td>
+          <td class="concept-name">汽车零部件</td>
+          <td><span class="strength-badge s4">中</span></td>
+          <td class="flow">-9亿</td>
+          <td class="stocks"><strong>坤泰股份</strong>(3连板)、成飞集成、正裕工业</td>
+        </tr>
+        <tr>
+          <td class="rank">8</td>
+          <td class="concept-name">军工 / 航空装备</td>
+          <td><span class="strength-badge s5">弱</span></td>
+          <td class="flow">—</td>
+          <td class="stocks">成飞集成(涨停)、利君股份(涨停)</td>
+        </tr>
+        <tr>
+          <td class="rank">9</td>
+          <td class="concept-name">电子化学品 / 玻纤</td>
+          <td><span class="strength-badge s5">弱</span></td>
+          <td class="flow">+11亿</td>
+          <td class="stocks">中国巨石(涨超5%)、越剑智能(涨停)、大豪科技(涨停)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== SECTION 2: 资金流向图表 ===== -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">主力资金流向</h2>
+    </div>
+    <p class="section-desc">今日全市场主力资金净流出57.38亿元，但结构极度分化——通信板块以141亿净流入独占鳌头，资金从权重蓝筹撤出、挤向科技成长中小票。</p>
+
+    <figure class="chart-figure">
+      <figcaption>图1：今日热门概念板块主力资金净流入对比（亿元）</figcaption>
+      <div class="chart-desc">红色为百亿级以上流入的核心主线，金色为数十亿级，绿色为净流出方向。通信板块是全场唯一超百亿流入的板块。</div>
+      <div class="chart-box">
+        <div id="chart-flow" style="min-height:420px"></div>
+      </div>
+    </figure>
+
+    <figure class="chart-figure">
+      <figcaption>图2：热门概念涨停个股数量分布</figcaption>
+      <div class="chart-desc">按概念方向统计今日涨停个股数量，直观展示各概念的涨停广度。CPO/光通信以11只涨停遥遥领先。</div>
+      <div class="chart-box">
+        <div id="chart-count" style="min-height:360px"></div>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<!-- ===== SECTION 3: 概念催化详解 ===== -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">利好催化详解</h2>
+    </div>
+    <p class="section-desc">针对今日核心热门概念，溯源政策文件、产业事件、公司公告与外围映射四类催化剂，还原资金进攻的底层逻辑。</p>
+
+    <!-- Concept 1: CPO/光通信 -->
+    <div class="concept-card">
+      <div class="concept-card-header" style="border-left:4px solid var(--accent4)">
+        <div class="left">
+          <div class="icon" style="background:rgba(239,68,68,0.15);color:var(--accent4)">01</div>
+          <div class="title-block">
+            <h3>CPO / 光通信 / 通信设备</h3>
+            <div class="meta">全场最强主线 · 通信板块涨3.45%领涨 · 11只涨停</div>
+          </div>
+        </div>
+        <div class="flow-pill">
+          <div class="amount">+141亿</div>
+          <div class="label">主力净流入</div>
+        </div>
+      </div>
+      <div class="concept-card-body">
+        <div class="stocks-list">
+          <span class="stock-tag">亨通光电 <span class="pct">+10.01%</span></span>
+          <span class="stock-tag">中石科技 <span class="pct cm">+20%</span></span>
+          <span class="stock-tag">阿莱德 <span class="pct cm">+20%</span></span>
+          <span class="stock-tag">富信科技 <span class="pct cm">+20%</span></span>
+          <span class="stock-tag">剑桥科技 <span class="pct">涨停</span></span>
+          <span class="stock-tag">中瓷电子 <span class="pct">涨停</span></span>
+          <span class="stock-tag">大唐电信 <span class="pct">涨停</span></span>
+          <span class="stock-tag">共进股份 <span class="pct">涨停</span></span>
+          <span class="stock-tag">杭电股份 <span class="pct">涨停</span></span>
+          <span class="stock-tag">华西股份 <span class="pct">涨停</span></span>
+          <span class="stock-tag">天洋新材 <span class="pct">涨停</span></span>
+        </div>
+        <ul class="catalyst-list">
+          <li class="cat-policy">
+            <span class="cat-label">政策</span>
+            <strong>新闻联播重磅催化：</strong>8月13日晚央视新闻联播报道"我国加快推动新一代通信网建设"，明确通信网年内投资8000亿-1万亿元。"十五五"期间六张网总投资约26.9万亿，其中新一代通信网投资约1.3万亿，重点投向5G-A、6G、千兆光网、低轨卫星互联网等领域。
+            <span class="source">[央视网 2026-08-13]</span>
+          </li>
+          <li class="cat-company">
+            <span class="cat-label">公司</span>
+            <strong>中际旭创17.47亿入股中石科技：</strong>8月13日晚间，光模块龙头中际旭创公告拟以55.70元/股、现金17.47亿元受让中石科技10.47%股权。此举打通"光模块+散热"产业链，引爆光模块散热链条（中石科技20cm涨停、富信科技20cm涨停），中际旭创本身也获主力大幅回流。
+            <span class="source">[深交所公告 / 每日经济新闻 2026-08-13]</span>
+          </li>
+          <li class="cat-external">
+            <span class="cat-label">外围</span>
+            <strong>美股半导体映射：</strong>隔夜费城半导体指数涨2.04%，美光科技涨超4%、SK海力士涨超7%，直接映射A股光芯片与存储方向。AI数据中心需求持续拉动光模块、铜缆、液冷、光纤全线回流。
+            <span class="source">[证券时报 2026-08-14]</span>
+          </li>
+          <li class="cat-industry">
+            <span class="cat-label">产业</span>
+            <strong>光通信概念本周获超122亿主力净流入：</strong>为本周唯一获得超百亿元净流入的板块，6G概念获逾83亿净流入，CPO概念获超50亿净流入，资金沉淀效应显著。
+            <span class="source">[证券时报 2026-08-14]</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Concept 2: 算力/液冷 -->
+    <div class="concept-card">
+      <div class="concept-card-header" style="border-left:4px solid var(--accent2)">
+        <div class="left">
+          <div class="icon" style="background:rgba(245,158,11,0.15);color:var(--accent2)">02</div>
+          <div class="title-block">
+            <h3>算力 / 液冷 / 国产替代</h3>
+            <div class="meta">AI推理扩容+国产替代 · 算力概念净流入93.8亿 · 液冷83.6亿</div>
+          </div>
+        </div>
+        <div class="flow-pill">
+          <div class="amount">+94亿</div>
+          <div class="label">算力概念净流入</div>
+        </div>
+      </div>
+      <div class="concept-card-body">
+        <div class="stocks-list">
+          <span class="stock-tag">网宿科技 <span class="pct cm">+20%</span></span>
+          <span class="stock-tag">数据港 <span class="pct">涨停</span></span>
+          <span class="stock-tag">利通电子 <span class="pct">涨停</span></span>
+          <span class="stock-tag">康盛股份 <span class="pct">涨停</span></span>
+          <span class="stock-tag">大豪科技 <span class="pct">涨停</span></span>
+        </div>
+        <ul class="catalyst-list">
+          <li class="cat-policy">
+            <span class="cat-label">政策</span>
+            <strong>数据中心PUE硬约束：</strong>国家明确要求新建大型数据中心PUE降至1.25以内，传统风冷（通常1.3-1.6）难以达标，液冷可将PUE压至1.1-1.2甚至更低。上海等地已强制要求新建智算中心液冷机柜占比超50%。7月9日国务院印发《"十五五"碳达峰行动方案》提出完善算力设施节能降碳标准。
+            <span class="source">[东方财富 2026-08-14]</span>
+          </li>
+          <li class="cat-industry">
+            <span class="cat-label">产业</span>
+            <strong>DeepSeek大幅涨价引爆算力需求：</strong>AI推理侧扩容加速，资金从"海外链光模块"切换到"国产服务器PCB+液冷+算力租赁"自主可控分支。英伟达Rubin平台进入全面量产阶段，100%全液冷全覆盖，倒逼国内液冷产业链加速渗透。
+            <span class="source">[东方财富 / 液冷行业报告 2026-08]</span>
+          </li>
+          <li class="cat-industry">
+            <span class="cat-label">产业</span>
+            <strong>国产算力替代预期升温：</strong>康盛股份涨停逻辑涉及液冷国家标准制定，英维克2026Q1算力温控业务收入同比增幅96%，高澜股份配套省级智算中心与国资算力平台，产业景气度获实质性验证。
+            <span class="source">[行业研报 2026-08]</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Concept 3: 稀土永磁 -->
+    <div class="concept-card">
+      <div class="concept-card-header" style="border-left:4px solid var(--accent3)">
+        <div class="left">
+          <div class="icon" style="background:rgba(16,185,129,0.15);color:var(--accent3)">03</div>
+          <div class="title-block">
+            <h3>稀土永磁 / 小金属</h3>
+            <div class="meta">价格上行+业绩验证 · 有色金属板块净流入8.4亿</div>
+          </div>
+        </div>
+        <div class="flow-pill">
+          <div class="amount">+8.4亿</div>
+          <div class="label">有色金属净流入</div>
+        </div>
+      </div>
+      <div class="concept-card-body">
+        <div class="stocks-list">
+          <span class="stock-tag">中国稀土 <span class="pct">涨停</span></span>
+          <span class="stock-tag">金田股份 <span class="pct">涨停</span></span>
+          <span class="stock-tag">华宏科技 <span class="pct">跟涨</span></span>
+        </div>
+        <ul class="catalyst-list">
+          <li class="cat-industry">
+            <span class="cat-label">产业</span>
+            <strong>稀土价格上半年大幅上涨：</strong>氧化镨钕上半年涨幅达22.42%，氧化镝上涨5.97%，氧化铽涨幅8.37%。稀土价格上行直接增厚产业链企业经营收益，属周期品超跌反弹+价格催化双重逻辑。
+            <span class="source">[SMM / 每日经济新闻 2026-08-14]</span>
+          </li>
+          <li class="cat-company">
+            <span class="cat-label">业绩</span>
+            <strong>10家稀土企业中报全线增长：</strong>据SMM统计，已披露半年报、业绩快报及业绩预告的10家稀土相关企业上半年业绩均实现不同程度增长。其中中国稀土2026年半年报净利润同比增长46.53%，业绩验证充分。
+            <span class="source">[SMM 2026-08-14]</span>
+          </li>
+          <li class="cat-industry">
+            <span class="cat-label">产业</span>
+            <strong>旺季临近+资源价值重估：</strong>研究机构表示有色金属行业资源价值重估逻辑清晰，关注具有资源储备优势的企业。当前氧化镨钕报价约72万元/吨，虽然短期有所回调，但下半年旺季需求预期仍在。
+            <span class="source">[生意社 / SMM 2026-08-14]</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Concept 4: 创新药/CXO -->
+    <div class="concept-card">
+      <div class="concept-card-header" style="border-left:4px solid var(--accent)">
+        <div class="left">
+          <div class="icon" style="background:rgba(59,130,246,0.15);color:var(--accent)">04</div>
+          <div class="title-block">
+            <h3>创新药 / CXO / CRO</h3>
+            <div class="meta">龙头中报超预期+BD交易活跃 · 7只涨停</div>
+          </div>
+        </div>
+        <div class="flow-pill">
+          <div class="amount" style="color:var(--accent4)">-32亿</div>
+          <div class="label">医药生物净流出</div>
+        </div>
+      </div>
+      <div class="concept-card-body">
+        <div class="stocks-list">
+          <span class="stock-tag">博济医药 <span class="pct cm">+20% 2连板</span></span>
+          <span class="stock-tag">澳洋健康 <span class="pct">3连板</span></span>
+          <span class="stock-tag">神奇制药 <span class="pct">2连板</span></span>
+          <span class="stock-tag">西点药业 <span class="pct">涨停</span></span>
+          <span class="stock-tag">华森制药 <span class="pct">涨停</span></span>
+          <span class="stock-tag">重药控股 <span class="pct">涨停</span></span>
+          <span class="stock-tag">开开实业 <span class="pct">涨停</span></span>
+        </div>
+        <ul class="catalyst-list">
+          <li class="cat-company">
+            <span class="cat-label">业绩</span>
+            <strong>药明康德中报大超预期：</strong>上半年净利润增逾80%，同时全面上调2026年全年业绩指引——整体收入由513-530亿元上调至585-605亿元，持续经营业务收入增速由18-22%上调至35-39%，经调整自由现金流由105-115亿元上调至135-145亿元。在手订单达664亿元，产业链景气度获实质性验证。
+            <span class="source">[证券时报 / 新浪财经 2026-08-09]</span>
+          </li>
+          <li class="cat-company">
+            <span class="cat-label">公司</span>
+            <strong>博济医药创新药BD交易：</strong>博济医药作为CRO和创新药细分标的，同时受益于出海爆发和AI制药价值重估双重逻辑，今日20cm涨停实现2连板。澳洋健康3连板涉及创新药BD交易+战略合作+中药创新药。
+            <span class="source">[金融界 2026-08-14]</span>
+          </li>
+          <li class="cat-industry">
+            <span class="cat-label">产业</span>
+            <strong>创新药出海与AI制药双重逻辑：</strong>头部企业半年度业绩超预期并上调全年指引，叠加AI制药赛道价值重估，CRO/CXO产业链景气度持续向上。但需注意医药生物板块整体仍净流出32亿，资金呈现"精选个股"而非"板块普涨"特征。
+            <span class="source">[头条 2026-08-14]</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Concept 5: 存储芯片 -->
+    <div class="concept-card">
+      <div class="concept-card-header" style="border-left:4px solid var(--accent5)">
+        <div class="left">
+          <div class="icon" style="background:rgba(139,92,246,0.15);color:var(--accent5)">05</div>
+          <div class="title-block">
+            <h3>存储芯片 / 半导体</h3>
+            <div class="meta">美股存储暴涨映射+国内中报超预期 · 超跌修复</div>
+          </div>
+        </div>
+        <div class="flow-pill">
+          <div class="amount">+20.6亿</div>
+          <div class="label">长鑫科技净流入</div>
+        </div>
+      </div>
+      <div class="concept-card-body">
+        <div class="stocks-list">
+          <span class="stock-tag">长鑫科技 <span class="pct">净流入20.6亿</span></span>
+          <span class="stock-tag">兆易创新 <span class="pct">跟涨</span></span>
+          <span class="stock-tag">中芯国际 <span class="pct">跟涨</span></span>
+        </div>
+        <ul class="catalyst-list">
+          <li class="cat-external">
+            <span class="cat-label">外围</span>
+            <strong>美股存储板块全线暴涨：</strong>当地时间8月13日，美股存储板块重拾涨势——闪迪大涨超13%（总市值2277亿美元），西部数据、SK海力士双双涨超7%，美光科技涨超4%，希捷科技涨近5%，铠侠ADR涨7.6%。费城半导体指数涨0.46%。
+            <span class="source">[新浪财经 / 证券时报 2026-08-14]</span>
+          </li>
+          <li class="cat-company">
+            <span class="cat-label">公司</span>
+            <strong>闪迪投资者日公布长期财务模型：</strong>闪迪目标在2028至2030财年实现中高双位数收入增长，提振全球存储芯片行业信心，直接映射A股存储方向。
+            <span class="source">[证券时报 2026-08-14]</span>
+          </li>
+          <li class="cat-company">
+            <span class="cat-label">业绩</span>
+            <strong>国内存储龙头中报超预期：</strong>中芯国际、兆易创新等受中报超预期带动，存储方向早盘领涨。昨日科技杀跌后超跌修复，长鑫科技主力净流入20.61亿居个股前列。
+            <span class="source">[头条 2026-08-14]</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Concept 6: 低空经济 -->
+    <div class="concept-card">
+      <div class="concept-card-header" style="border-left:4px solid var(--accent6)">
+        <div class="left">
+          <div class="icon" style="background:rgba(236,72,153,0.15);color:var(--accent6)">06</div>
+          <div class="title-block">
+            <h3>低空经济 / 重大资产重组</h3>
+            <div class="meta">蓝盾光电5连板 · 累计涨幅148.76% · 成交34.7亿</div>
+          </div>
+        </div>
+        <div class="flow-pill">
+          <div class="amount">5连板</div>
+          <div class="label">全场最高连板</div>
+        </div>
+      </div>
+      <div class="concept-card-body">
+        <div class="stocks-list">
+          <span class="stock-tag">蓝盾光电 <span class="pct cm">+20% 5连板</span></span>
+        </div>
+        <ul class="catalyst-list">
+          <li class="cat-company">
+            <span class="cat-label">公司</span>
+            <strong>重大资产重组预案落地：</strong>8月7日晚间，蓝盾光电披露重组预案，拟通过发行股份及支付现金方式购买苏州岚创科技有限公司控股权，并募集配套资金。标的公司主营高性能真空镀膜设备，是公司上游核心光学元器件的制造装备。自8月10日复牌以来4个交易日即实现翻倍。
+            <span class="source">[深交所公告 / 新浪财经 2026-08-14]</span>
+          </li>
+          <li class="cat-industry">
+            <span class="cat-label">产业</span>
+            <strong>低空经济+光学元器件概念叠加：</strong>蓝盾光电自身涉及低空经济概念，此次收购岚创科技进一步延伸至光学元器件制造装备领域，叠加重大资产重组的情绪溢价，形成"重组+低空+光学"三重催化。
+            <span class="source">[头条 2026-08-14]</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== SECTION 4: 总结 ===== -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">综合研判</h2>
+    </div>
+
+    <div class="conclusion">
+      <h3>今日市场核心逻辑</h3>
+      <p>今日A股呈"缩量修复、深强沪弱、结构分化"格局。表面看是昨日恐慌后的企稳反弹，实质是<strong>"政策催化+外围映射+业绩验证"</strong>三因子共振下的科技硬件超跌回流。通信板块单日吸走141亿主力资金，CPO/光通信当之无愧为全场最强主线。</p>
+
+      <div class="key-point">
+        <div class="num">1</div>
+        <div class="text"><strong>政策面最强催化——新一代通信网万亿投资。</strong>新闻联播定调通信网年内投资8000亿-1万亿，"十五五"期间约1.3万亿，这是继"东数西算"后又一国家级基础设施投资主线，直接利好5G-A/6G/光通信/低轨卫星全产业链。</div>
+      </div>
+      <div class="key-point">
+        <div class="num">2</div>
+        <div class="text"><strong>产业并购引爆细分赛道——中际旭创入股中石科技。</strong>光模块龙头17.47亿战略入股散热龙头，打通"光模块+散热"产业链闭环，中石科技、富信科技20cm涨停。这一并购标志着AI算力散热从"配套"升级为"战略核心"。</div>
+      </div>
+      <div class="key-point">
+        <div class="num">3</div>
+        <div class="text"><strong>外围映射持续——美股存储暴涨传导A股。</strong>闪迪+13%、西部数据+7%、SK海力士+7%、美光+4%，叠加闪迪投资者日长期财务模型提振信心，A股存储方向获超跌修复动能。</div>
+      </div>
+      <div class="key-point">
+        <div class="num">4</div>
+        <div class="text"><strong>业绩验证——稀土与创新药中报双双超预期。</strong>中国稀土净利增46.53%，药明康德净利增超80%且大幅上调全年指引。但需注意医药板块整体净流出32亿，资金"精选个股"而非"板块普涨"。</div>
+      </div>
+      <div class="key-point">
+        <div class="num">5</div>
+        <div class="text"><strong>市场偏好仍偏谨慎。</strong>缩量4080亿意味着下周若不放量回补，3900-3940点箱体震荡还将延续。64只涨停vs 2970只下跌的"指数红、个股绿"格局，说明赚钱效应集中在科技硬件龙头，亏钱效应散在防御端获利回吐。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>涨停概念倒推与利好催化分析 · 2026年8月14日</p>
+    <p class="disclaimer">本报告基于公开市场数据整理，仅供研究参考，不构成任何投资建议。市场有风险，投资需谨慎。</p>
+  </div>
+</footer>
+
+<script src="_shared/js/echarts.min.js"></script>
+<script src="assets/charts.js"></script>
+
+</body>
+</html>

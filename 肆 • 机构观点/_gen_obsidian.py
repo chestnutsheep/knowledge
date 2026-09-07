@@ -43,6 +43,7 @@ def _scan_meta():
             "object": d.get("object", ""),
             "industry": d.get("industry", ""),
             "rating": d.get("rating", ""),
+            "title": d.get("title", ""),
         }
     return meta
 meta = _scan_meta()
@@ -171,9 +172,62 @@ card_dir = REAL / "概念卡片"
 card_dir.mkdir(exist_ok=True)
 def fname(concept):
     return concept.replace("/", "·")
+
+# ---------- 共识综述：按概念聚合机构立场，输出「共识/分歧」信号（规则聚合，不依赖 LLM） ----------
+def build_consensus(concept, items):
+    from collections import Counter
+    ratings = Counter()
+    orgs = set()
+    stocks = Counter()
+    for it in items:
+        r = (it.get("rating") or "").strip()
+        base = re.split(r"[（(]", r)[0].strip() if r else ""
+        if base:
+            ratings[base] += 1
+        if it.get("org"):
+            orgs.add(it["org"])
+        obj = it.get("object") or ""
+        if obj:
+            name = obj.split("(")[0].strip()
+            if name:
+                stocks[name] += 1
+    bull = sum(v for k, v in ratings.items() if k in ("买入", "增持", "强烈推荐", "推荐", "优于大市"))
+    neutral = sum(v for k, v in ratings.items() if k in ("中性", "持有", "谨慎推荐"))
+    bear = sum(v for k, v in ratings.items() if k in ("减持", "卖出"))
+    total_rated = bull + neutral + bear
+    if total_rated == 0:
+        stance = "多数中报点评未给明确评级，立场以业绩描述为主"
+    elif bear == 0 and neutral == 0:
+        stance = "机构高度共识看多（清一色买入/增持）"
+    elif bull == 0 and neutral == 0:
+        stance = "机构一致谨慎（清一色减持/卖出）"
+    elif bull >= neutral + bear:
+        stance = f"整体偏多，但存在分歧（看多 {bull} 篇 vs 中性/谨慎 {neutral + bear} 篇）"
+    else:
+        stance = f"分歧明显（看多 {bull} 篇 vs 中性/谨慎 {neutral + bear} 篇）"
+    out = [
+        "## 共识综述",
+        "",
+        f"- **覆盖规模**：{len(items)} 篇研报，来自 {len(orgs)} 家机构。",
+        f"- **评级分布**：" + ("、".join(f"{k} {v}" for k, v in ratings.most_common()) if ratings else "（多为中报点评，未给明确评级）") + "。",
+        f"- **机构立场**：{stance}。",
+    ]
+    if stocks:
+        top = "、".join(f"{n}（{c}篇）" for n, c in stocks.most_common(6))
+        out.append(f"- **高关注标的**（按覆盖频次）：{top}。")
+    recent = sorted(items, key=lambda x: x["date"], reverse=True)[:8]
+    if recent:
+        out.append("")
+        out.append("**近期观点脉络**（倒序）：")
+        for it in recent:
+            out.append(f"  - {it['date']} ｜ {it['org']} ｜ {it['title']}")
+    out.append("")
+    return "\n".join(out)
+
 for concept, keylist in by_concept.items():
     items = [meta[k] for k in keylist]
     items.sort(key=lambda x: x["date"], reverse=True)
+    consensus_block = build_consensus(concept, items)
     boards = CONCEPT_TO_BOARD.get(concept, [])
     board_links = "\n".join(f"- [[{b}]]" for b in boards) or "- （暂无对应 notebook 板块，可在贰杂学/伍基本信息池新建主题笔记）"
     lines = [
@@ -187,6 +241,7 @@ for concept, keylist in by_concept.items():
         f"> 「肆 • 机构观点」里研究对象属于 **{concept}** 的研报，一共 {len(items)} 篇，都收在这张卡里。",
         f"> 点条目进具体研报；卡片底部的「逆检索到的知识库板块」能跳到你之前写过的主题研究。",
         f"",
+        consensus_block,
         f"## 本概念研报清单（按日期倒序）",
         f"",
         f"| 日期 | 机构 | 研报 | 标的 | 行业 | 评级 |",
@@ -206,14 +261,6 @@ for concept, keylist in by_concept.items():
         f"",
     ]
     card_path = card_dir / f"{fname(concept)}.md"
-    if card_path.exists():
-        ext = card_path.read_text(encoding="utf-8")
-        mcons = re.search(r"## 共识综述.*?(?=\n---|\Z)", ext, re.S)
-        if mcons:
-            for i, l in enumerate(lines):
-                if l == "---" and i + 1 < len(lines) and lines[i + 1].startswith("*这张卡"):
-                    lines[i:i] = [mcons.group(0).rstrip(), ""]
-                    break
     card_path.write_text("\n".join(lines), encoding="utf-8")
 
 # 主 MOC 页面（Dashboard + Dataview + 卡片网格）
@@ -229,7 +276,7 @@ moc += [
     "---",
     "# 研报概念速览",
     "",
-    f"> 截至 2026-08-12，机构观点库里攒了 {total} 篇研报。光按时间翻太累，所以按「研究对象属于哪个概念」重新切了一刀，归成 {len(concept_sorted)} 张卡片。",
+    f"> 截至 {datetime.now():%Y-%m-%d}，机构观点库里攒了 {total} 篇研报。光按时间翻太累，所以按「研究对象属于哪个概念」重新切了一刀，归成 {len(concept_sorted)} 张卡片。",
     "> 点卡片进去看具体研报；每张卡片底部挂着 notebook 里已有的相关板块，顺着链接就能从机构观点摸到自己的研究底稿。",
     "",
     "## 一、概念分布仪表盘（Apex Dashboard）",

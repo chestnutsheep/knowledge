@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>创新药 + 中药 · 涨停基因图谱与龙头清单</title>
+<style>
+/* ==================== Fonts ==================== */
+@font-face { font-family: 'GeistMono'; src: local('SF Mono'), local('Menlo'), local('Consolas'); font-weight: 700; font-style: normal; }
+@font-face { font-family: 'GeistMono'; src: local('SF Mono'), local('Menlo'), local('Consolas'); font-weight: 400; font-style: normal; }
+@font-face { font-family: 'Outfit'; src: local('SF Pro Display'), local('PingFang SC'), local('Microsoft YaHei'); font-weight: 700; font-style: normal; }
+@font-face { font-family: 'Outfit'; src: local('SF Pro Display'), local('PingFang SC'), local('Microsoft YaHei'); font-weight: 400; font-style: normal; }
+
+/* ==================== Variables ==================== */
+:root {
+  --bg: #060614;
+  --bg2: rgba(18, 18, 42, 0.55);
+  --ink: #d8d8f0;
+  --muted: #7878a0;
+  --rule: rgba(120, 120, 180, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-blur: 16px;
+
+  --c-innov: #00e5ff;
+  --c-tcm: #ff2d92;
+  --c-cro: #00ff9d;
+  --c-policy: #b14dff;
+  --c-accent: #ff9500;
+
+  --glow-innov: 0 0 20px rgba(0, 229, 255, 0.3);
+  --glow-tcm: 0 0 20px rgba(255, 45, 146, 0.3);
+  --glow-cro: 0 0 20px rgba(0, 255, 157, 0.3);
+  --glow-policy: 0 0 20px rgba(177, 77, 255, 0.3);
+}
+
+/* ==================== Reset ==================== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  padding: 0 0 80px;
+}
+
+/* ==================== Animated Background ==================== */
+.bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden; }
+.blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.12; animation: drift 20s ease-in-out infinite; }
+.blob-1 { width: 500px; height: 500px; background: var(--c-innov); top: -10%; left: -5%; animation-delay: 0s; }
+.blob-2 { width: 600px; height: 600px; background: var(--c-tcm); top: 30%; right: -10%; animation-delay: -5s; }
+.blob-3 { width: 450px; height: 450px; background: var(--c-policy); bottom: -5%; left: 20%; animation-delay: -10s; }
+.blob-4 { width: 400px; height: 400px; background: var(--c-cro); top: 50%; left: 40%; animation-delay: -15s; }
+@keyframes drift { 0%,100% { transform: translate(0,0) scale(1); } 33% { transform: translate(40px,-30px) scale(1.1); } 66% { transform: translate(-30px,40px) scale(0.95); } }
+
+.bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;
+  background-image: linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+}
+
+/* ==================== Layout ==================== */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+
+/* ==================== Header ==================== */
+.header { padding: 60px 0 40px; text-align: center; }
+.header .label { font-family: 'GeistMono', monospace; font-size: 12px; letter-spacing: 4px; color: var(--c-innov); text-transform: uppercase; margin-bottom: 16px; }
+.header h1 { font-size: 42px; font-weight: 700; letter-spacing: -1px; background: linear-gradient(135deg, #fff 0%, var(--c-innov) 50%, var(--c-tcm) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 16px; }
+.header .sub { color: var(--muted); font-size: 16px; max-width: 800px; margin: 0 auto; line-height: 1.7; }
+.header .meta { display: flex; gap: 24px; justify-content: center; margin-top: 24px; flex-wrap: wrap; }
+.header .meta span { font-family: 'GeistMono', monospace; font-size: 12px; color: var(--muted); border: 1px solid var(--glass-border); border-radius: 20px; padding: 4px 16px; background: var(--bg2); backdrop-filter: blur(var(--glass-blur)); }
+
+/* ==================== Section ==================== */
+.section { margin-top: 56px; }
+.section-title { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+.section-title .num { font-family: 'GeistMono', monospace; font-size: 14px; color: var(--c-accent); border: 1px solid var(--c-accent); border-radius: 6px; padding: 2px 10px; }
+.section-title h2 { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
+.section-title .line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--rule), transparent); }
+
+/* ==================== Glass Card ==================== */
+.glass { background: var(--bg2); border: 1px solid var(--glass-border); border-radius: 16px; backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); }
+
+/* ==================== Summary Grid ==================== */
+.summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 40px; }
+.scard { padding: 20px 22px; position: relative; overflow: hidden; }
+.scard::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; }
+.scard.innov::before { background: var(--c-innov); box-shadow: var(--glow-innov); }
+.scard.tcm::before { background: var(--c-tcm); box-shadow: var(--glow-tcm); }
+.scard.cro::before { background: var(--c-cro); box-shadow: var(--glow-cro); }
+.scard.policy::before { background: var(--c-policy); box-shadow: var(--glow-policy); }
+.scard .icon { font-size: 28px; margin-bottom: 10px; }
+.scard .title { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.scard .desc { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+.scard .val { font-family: 'GeistMono', monospace; font-size: 24px; font-weight: 700; }
+.scard.innov .val { color: var(--c-innov); }
+.scard.tcm .val { color: var(--c-tcm); }
+.scard.cro .val { color: var(--c-cro); }
+.scard.policy .val { color: var(--c-policy); }
+
+/* ==================== Tier Badge ==================== */
+.tier-badge { display: inline-block; font-family: 'GeistMono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 1px; padding: 3px 10px; border-radius: 4px; text-transform: uppercase; }
+.tier-1 { background: rgba(255,149,0,0.15); color: var(--c-accent); border: 1px solid var(--c-accent); }
+.tier-2 { background: rgba(0,229,255,0.12); color: var(--c-innov); border: 1px solid var(--c-innov); }
+.tier-3 { background: rgba(177,77,255,0.12); color: var(--c-policy); border: 1px solid var(--c-policy); }
+
+/* ==================== Stock Card ==================== */
+.stock-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+.stock-card { padding: 24px 28px; position: relative; overflow: hidden; transition: transform 0.2s; }
+.stock-card:hover { transform: translateY(-2px); }
+.stock-card .top-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; gap: 12px; }
+.stock-card .name-block { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.stock-card .name { font-size: 22px; font-weight: 700; }
+.stock-card .code { font-family: 'GeistMono', monospace; font-size: 14px; color: var(--muted); }
+.stock-card .tag-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.tag { font-family: 'GeistMono', monospace; font-size: 11px; padding: 2px 8px; border-radius: 4px; border: 1px solid var(--glass-border); color: var(--muted); }
+.tag.t-innov { color: var(--c-innov); border-color: rgba(0,229,255,0.3); }
+.tag.t-tcm { color: var(--c-tcm); border-color: rgba(255,45,146,0.3); }
+.tag.t-cro { color: var(--c-cro); border-color: rgba(0,255,157,0.3); }
+.tag.t-hot { color: var(--c-accent); border-color: rgba(255,149,0,0.4); background: rgba(255,149,0,0.08); }
+
+.stock-card .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin: 16px 0; }
+.metric { text-align: center; padding: 10px; border: 1px solid var(--glass-border); border-radius: 8px; background: rgba(255,255,255,0.02); }
+.metric .mlabel { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+.metric .mval { font-family: 'GeistMono', monospace; font-size: 18px; font-weight: 700; }
+.metric .mval.up { color: #ef5350; }
+.metric .mval.down { color: #26a69a; }
+
+.stock-card .logic { font-size: 14px; line-height: 1.8; color: var(--ink); margin-top: 12px; }
+.stock-card .logic strong { color: var(--c-accent); }
+.stock-card .logic .highlight { color: var(--c-innov); font-weight: 600; }
+
+/* ==================== Data Table ==================== */
+.data-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 13px; }
+.data-table th { text-align: left; padding: 12px 14px; font-family: 'GeistMono', monospace; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--glass-border); }
+.data-table td { padding: 12px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover { background: rgba(255,255,255,0.02); }
+.data-table .nm { font-weight: 700; color: #fff; }
+.data-table .cd { font-family: 'GeistMono', monospace; color: var(--muted); font-size: 12px; }
+.data-table .gene-bar { display: inline-block; height: 8px; border-radius: 4px; vertical-align: middle; }
+.gene-5 { width: 100%; background: linear-gradient(90deg, var(--c-accent), #ffd700); }
+.gene-4 { width: 80%; background: linear-gradient(90deg, var(--c-innov), #00b8d4); }
+.gene-3 { width: 60%; background: linear-gradient(90deg, var(--c-policy), #7c3dff); }
+.gene-2 { width: 40%; background: linear-gradient(90deg, var(--muted), #555); }
+
+/* ==================== Policy Timeline ==================== */
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before { content: ''; position: absolute; left: 10px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--c-policy), var(--c-innov), var(--c-tcm)); }
+.tl-item { position: relative; margin-bottom: 24px; }
+.tl-item::before { content: ''; position: absolute; left: -28px; top: 6px; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--c-policy); background: var(--bg); }
+.tl-item .tl-date { font-family: 'GeistMono', monospace; font-size: 12px; color: var(--c-accent); margin-bottom: 4px; }
+.tl-item .tl-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.tl-item .tl-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+/* ==================== Risk Note ==================== */
+.risk-note { padding: 20px 24px; margin-top: 40px; font-size: 13px; color: var(--muted); line-height: 1.8; border-left: 3px solid var(--c-accent); }
+
+/* ==================== Footer ==================== */
+.footer { margin-top: 60px; text-align: center; color: var(--muted); font-size: 12px; font-family: 'GeistMono', monospace; letter-spacing: 1px; }
+
+/* ==================== Responsive ==================== */
+@media (max-width: 768px) {
+  .header h1 { font-size: 28px; }
+  .summary-grid { grid-template-columns: 1fr 1fr; }
+  .stock-card { padding: 16px 20px; }
+  .data-table { font-size: 12px; }
+  .data-table th, .data-table td { padding: 8px 10px; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-canvas">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+</div>
+<div class="bg-grid"></div>
+
+<div class="container">
+
+  <!-- ==================== Header ==================== -->
+  <div class="header">
+    <div class="label">INNOVATIVE DRUG × TCM · LIMIT-UP GENE ATLAS</div>
+    <h1>创新药 + 中药 · 涨停基因图谱</h1>
+    <div class="sub">
+      聚焦 A 股创新药与中药两大板块，以"历史涨停次数 / 连板率 / 次日红盘率 / 股性活跃度"为核心筛选维度，<br>
+      结合 2026 年政策催化（基药目录、医保国谈、商保创新药目录、BD 出海）梳理龙头标的清单。
+    </div>
+    <div class="meta">
+      <span>2026-08-31</span>
+      <span>2 大板块 / 30+ 标的</span>
+      <span>涨停基因 5 级评估</span>
+      <span>数据截至 8 月 30 日收盘</span>
+    </div>
+  </div>
+
+  <!-- ==================== Summary ==================== -->
+  <div class="summary-grid">
+    <div class="glass scard innov">
+      <div class="icon">💊</div>
+      <div class="title">创新药板块</div>
+      <div class="desc">8 月百花医药 7 连板领涨</div>
+      <div class="val">★★★★★</div>
+    </div>
+    <div class="glass scard tcm">
+      <div class="icon">🌿</div>
+      <div class="title">中药板块</div>
+      <div class="desc">片仔癀时隔 2 年涨停</div>
+      <div class="val">★★★★</div>
+    </div>
+    <div class="glass scard cro">
+      <div class="icon">🔬</div>
+      <div class="title">CXO / CRO</div>
+      <div class="desc">药明康德超预期财报涨停</div>
+      <div class="val">★★★★</div>
+    </div>
+    <div class="glass scard policy">
+      <div class="icon">📋</div>
+      <div class="title">政策催化</div>
+      <div class="desc">基药目录 + 医保国谈 + BD</div>
+      <div class="val">★★★★★</div>
+    </div>
+  </div>
+
+  <!-- ==================== Section 1: 创新药涨停基因分级 ==================== -->
+  <div class="section">
+    <div class="section-title">
+      <span class="num">01</span>
+      <h2>创新药 · 涨停基因分级</h2>
+      <div class="line"></div>
+    </div>
+
+    <!-- Tier 1 -->
+    <div style="margin-bottom: 32px;">
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+        <span class="tier-badge tier-1">TIER 1 · 妖股级</span>
+        <span style="color: var(--muted); font-size: 13px;">历史涨停次数 ≥ 4 次 / 连板率突出 / 次日红盘率 100%</span>
+      </div>
+      <div class="stock-grid">
+
+        <!-- 百花医药 -->
+        <div class="glass stock-card">
+          <div class="top-row">
+            <div class="name-block">
+              <span class="name">百花医药</span>
+              <span class="code">600721 · SH</span>
+            </div>
+            <span class="tier-badge tier-1">TIER 1</span>
+          </div>
+          <div class="tag-row">
+            <span class="tag t-innov">创新药</span>
+            <span class="tag t-cro">CXO</span>
+            <span class="tag">仿制药</span>
+            <span class="tag t-hot">7 连板</span>
+            <span class="tag t-hot">国资入主</span>
+          </div>
+          <div class="metrics">
+            <div class="metric"><div class="mlabel">近期连板</div><div class="mval up">7 板</div></div>
+            <div class="metric"><div class="mlabel">8月涨幅</div><div class="mval up">+96%</div></div>
+            <div class="metric"><div class="mlabel">流通市值</div><div class="mval">59 亿</div></div>
+            <div class="metric"><div class="mlabel">龙虎榜</div><div class="mval">5 次/周</div></div>
+          </div>
+          <div class="logic">
+            <strong>涨停基因核心：</strong>近 9 个交易日 7 次涨停，8 月累计大涨 96%，创 9 年新高。流通市值仅 59 亿，筹码轻盈，短线弹性极高。<br>
+            <strong>驱动逻辑：</strong>① 金华市国资委 6 月完成股份过户正式入主，信用背书 + 产业协同预期；② 主营覆盖药物工艺开发、临床试验、注册申报全流程 CRO 服务，深度绑定创新药产业链；③ 市值小 + 筹码结构好，板块情绪升温下短线弹性突出。<br>
+            <span class="highlight">涨停基因评估：★★★★★（妖股级 · 板块情绪龙头）</span>
+          </div>
+        </div>
+
+        <!-- 哈药股份 -->
+        <div class="glass stock-card">
+          <div class="top-row">
+            <div class="name-block">
+              <span class="name">哈药股份</span>
+              <span class="code">600664 · SH</span>
+            </div>
+            <span class="tier-badge tier-1">TIER 1</span>
+          </div>
+          <div class="tag-row">
+            <span class="tag t-innov">创新药</span>
+            <span class="tag t-tcm">OTC 中成药</span>
+            <span class="tag">保健品</span>
+            <span class="tag t-hot">8 天 6 板</span>
+            <span class="tag">业绩拐点</span>
+          </div>
+          <div class="metrics">
+            <div class="metric"><div class="mlabel">历史涨停</div><div class="mval up">29 次</div></div>
+            <div class="metric"><div class="mlabel">最高连板</div><div class="mval up">6 连板</div></div>
+            <div class="metric"><div class="mlabel">龙虎榜</div><div class="mval">33 次</div></div>
+            <div class="metric"><div class="mlabel">累计净买入</div><div class="mval up">3.82 亿</div></div>
+          </div>
+          <div class="logic">
+            <strong>涨停基因核心：</strong>2020 年以来累计涨停 29 次，最高 6 连板，龙虎榜上榜 33 次，累计净买入 3.82 亿元——是创新药板块历史涨停基因最强的标的之一。<br>
+            <strong>驱动逻辑：</strong>① 中报业绩大幅预增，渠道改革 + OTC 老产品动销回暖；② 低价老牌国企药企，盘子相对更大，适合大资金进出；③ 本轮 8 天 6 板累计涨幅近 91%，业绩拐点 + 重磅医药政策 + 低价低位 + 资金抱团四重利好共振。<br>
+            <span class="highlight">涨停基因评估：★★★★★（老牌妖股 · 业绩 + 题材双驱动）</span>
+          </div>
+        </div>
+
+        <!-- 舒泰神 -->
+        <div class="glass stock-card">
+          <div class="top-row">
+            <div class="name-block">
+              <span class="name">舒泰神</span>
+              <span class="code">300204 · SZ</span>
+            </div>
+            <span class="tier-badge tier-1">TIER 1</span>
+          </div>
+          <div class="tag-row">
+            <span class="tag t-innov">创新药</span>
+            <span class="tag">20cm 创业板</span>
+            <span class="tag t-hot">妖股</span>
+            <span class="tag">BD 出海</span>
+          </div>
+          <div class="metrics">
+            <div class="metric"><div class="mlabel">涨停次数</div><div class="mval up">2 次</div></div>
+            <div class="metric"><div class="mlabel">次日红盘率</div><div class="mval up">100%</div></div>
+            <div class="metric"><div class="mlabel">首板炸板率</div><div class="mval">33.3%</div></div>
+            <div class="metric"><div class="mlabel">3月涨停</div><div class="mval up">20%</div></div>
+          </div>
+          <div class="logic">
+            <strong>涨停基因核心：</strong>创业板 20cm 标的，历史涨停活跃度极高。3 月 27 日以 20% 涨停收盘，成交额突破 14 亿，换手率 12.28%。政策、行业、基本面、管线、BD、资金六重因素共振。<br>
+            <strong>驱动逻辑：</strong>① 2026 年政府工作报告首次将"生物医药"列为"新兴支柱产业"；② 管线持续推进 + BD 合作预期；③ 创业板 20cm 弹性 + 小市值，游资偏好标的。<br>
+            <span class="highlight">涨停基因评估：★★★★★（20cm 妖股 · 政策 + 管线共振）</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Tier 2 -->
+    <div style="margin-bottom: 32px;">
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+        <span class="tier-badge tier-2">TIER 2 · 活跃级</span>
+        <span style="color: var(--muted); font-size: 13px;">涨停 2-3 次 / 连续涨停 / 板块联动性强</span>
+      </div>
+      <div class="stock-grid">
+
+        <!-- 陇神戎发 -->
+        <div class="glass stock-card">
+          <div class="top-row">
+            <div class="name-block">
+              <span class="name">陇神戎发</span>
+              <span class="code">300534 · SZ</span>
+            </div>
+            <span class="tier-badge tier-2">TIER 2</span>
+          </div>
+          <div class="tag-row">
+            <span class="tag t-innov">创新药</span>
+            <span class="tag t-tcm">中药</span>
+            <span class="tag">国企改革</span>
+            <span class="tag t-hot">20cm</span>
+            <span class="tag t-hot">7 日 +80%</span>
+          </div>
+          <div class="metrics">
+            <div class="metric"><div class="mlabel">涨停次数</div><div class="mval up">4 次</div></div>
+            <div class="metric"><div class="mlabel">溢价 5% 数</div><div class="mval up">3 次</div></div>
+            <div class="metric"><div class="mlabel">次日红盘率</div><div class="mval up">100%</div></div>
+            <div class="metric"><div class="mlabel">首板红盘率</div><div class="mval up">100%</div></div>
+          </div>
+          <div class="logic">
+            <strong>涨停基因核心：</strong>涨停 4 次，溢价 5% 以上 3 次，次日红盘率 100%，首板红盘率 100%，首板炸板率 0%——涨停基因数据极为优秀。7 个交易日累计暴涨 80%，20cm 涨停。<br>
+            <strong>驱动逻辑：</strong>① 主打产品元胡止痛滴丸为国家中药二级保护品种；② 创新药 + 中药 + 国企改革三重标签；③ 创业板 20cm 弹性 + 西北药企稀缺标的。<br>
+            <span class="highlight">涨停基因评估：★★★★（20cm 活跃 · 三重题材共振）</span>
+          </div>
+        </div>
+
+        <!-- 迪哲医药 -->
+        <div class="glass stock-card">
+          <div class="top-row">
+            <div class="name-block">
+              <span class="name">迪哲医药-U</span>
+              <span class="code">688192 · SH</span>
+            </div>
+            <span class="tier-badge tier-2">TIER 2</span>
+          </div>
+          <div class="tag-row">
+            <span class="tag t-innov">创新药</span>
+            <span class="tag">科创板 20cm</span>
+            <span class="tag t-hot">2 连板</span>
+            <span class="tag">阿斯利康 BD</span>
+          </div>
+          <div class="metrics">
+            <div class="metric"><div class="mlabel">连板</div><div class="mval up">2 板</div></div>
+            <div class="metric"><div class="mlabel">7月涨幅</div><div class="mval up">+69.3%</div></div>
+            <div class="metric"><div class="mlabel">合作方</div><div class="mval">阿斯利康</div></div>
+            <div class="metric"><div class="mlabel">标的</div><div class="mval">舒沃哲</div></div>
+          </div>
+          <div class="logic">
+            <strong>涨停基因核心：</strong>科创板 20cm 标的，7 月连续 2 日 20cm 涨停，7 月累计涨幅 69.3%。<br>
+            <strong>驱动逻辑：</strong>与阿斯利康签署许可协议，授予其全球范围内独家开发、商业化舒沃哲®的权利——BD 出海重磅催化。<br>
+            <span class="highlight">涨停基因评估：★★★★（20cm · BD 催化型）</span>
+          </div>
+        </div>
+
+        <!-- 开开实业 -->
+        <div class="glass stock-card">
+          <div class="top-row">
+            <div class="name-block">
+              <span class="name">开开实业</span>
+              <span class="code">600272 · SH</span>
+            </div>
+            <span class="tier-badge tier-2">TIER 2</span>
+          </div>
+          <div class="tag-row">
+            <span class="tag">医药商业</span>
+            <span class="tag t-tcm">大健康</span>
+            <span class="tag t-hot">7 日 6 涨停</span>
+            <span class="tag">游资</span>
+          </div>
+          <div class="metrics">
+            <div class="metric"><div class="mlabel">近期涨停</div><div class="mval up">6 次</div></div>
+            <div class="metric"><div class="mlabel">8月涨幅</div><div class="mval up">+68%</div></div>
+            <div class="metric"><div class="mlabel">总市值</div><div class="mval">47.67 亿</div></div>
+            <div class="metric"><div class="mlabel">连板</div><div class="mval up">2 连板</div></div>
+          </div>
+          <div class="logic">
+            <strong>涨停基因核心：</strong>7 日 6 涨停，8 月大涨 68%，创年内新高。小市值 + 游资偏好。<br>
+            <strong>驱动逻辑：</strong>医药商业 + 大健康转型 + 游资炒作，与百花医药形成板块联动。<br>
+            <span class="highlight">涨停基因评估：★★★★（游资连板 · 板块联动）</span>
+          </div>
+        </div>
+
+        <!-- 誉衡药业 -->
+        <div class="glass stock-card">
+          <div class="top-row">
+            <div class="name-block">
+              <span class="name">誉衡药业</span>
+              <span class="code">002437 · SZ</span>
+            </div>
+            <span class="tier-badge tier-2">TIER 2</span>
+          </div>
+          <div class="tag-row">
+            <span class="tag t-innov">化学制药</span>
+            <span class="tag">创新转型</span>
+            <span class="tag t-hot">6 日 4 涨停</span>
+          </div>
+          <div class="metrics">
+            <div class="metric"><div class="mlabel">近期涨停</div><div class="mval up">4 次</div></div>
+            <div class="metric"><div class="mlabel">涨停价</div><div class="mval">4.73 元</div></div>
+            <div class="metric"><div class="mlabel">总市值</div><div class="mval">105 亿</div></div>
+            <div class="metric"><div class="mlabel">成交额</div><div class="mval">19.2 亿</div></div>
+          </div>
+          <div class="logic">
+            <strong>涨停基因核心：</strong>6 日 4 涨停，化学制药 + 创新转型 + 资金博弈三重驱动。<br>
+            <span class="highlight">涨停基因评估：★★★★（低价活跃 · 转型预期）</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Tier 3 -->
+    <div style="margin-bottom: 32px;">
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+        <span class="tier-badge tier-3">TIER 3 · 龙头中军</span>
+        <span style="color: var(--muted); font-size: 13px;">大市值龙头 / 基本面驱动 / 涨停频率低但涨幅大</span>
+      </div>
+      <div class="stock-grid">
+
+        <!-- 药明康德 -->
+        <div class="glass stock-card">
+          <div class="top-row">
+            <div class="name-block">
+              <span class="name">药明康德</span>
+              <span class="code">603259 · SH</span>
+            </div>
+            <span class="tier-badge tier-3">TIER 3</span>
+          </div>
+          <div class="tag-row">
+            <span class="tag t-cro">CRDMO 龙头</span>
+            <span class="tag t-innov">创新药</span>
+            <span class="tag t-hot">涨停</span>
+            <span class="tag">10 亿回购</span>
+          </div>
+          <div class="metrics">
+            <div class="metric"><div class="mlabel">Q1 营收</div><div class="mval up">124.4 亿</div></div>
+            <div class="metric"><div class="mlabel">同比</div><div class="mval up">+28.8%</div></div>
+            <div class="metric"><div class="mlabel">在手订单</div><div class="mval up">664 亿</div></div>
+            <div class="metric"><div class="mlabel">全年指引</div><div class="mval up">+35-39%</div></div>
+          </div>
+          <div class="logic">
+            <strong>涨停基因核心：</strong>CXO 绝对龙头，8 月财报超预期后直奔涨停，封单一度超 10 万手。Q1 营收 124.4 亿（+28.8%），在手订单 664.3 亿（+25.2%），全年指引从 513-530 亿上调至 585-605 亿。<br>
+            <strong>驱动逻辑：</strong>业绩超预期 + 订单饱满 + 回购计划 + 全球 CRDMO 龙头地位。<br>
+            <span class="highlight">涨停基因评估：★★★（龙头中军 · 基本面驱动涨停）</span>
+          </div>
+        </div>
+
+        <!-- 恒瑞医药 -->
+        <div class="glass stock-card">
+          <div class="top-row">
+            <div class="name-block">
+              <span class="name">恒瑞医药</span>
+              <span class="code">600276 · SH</span>
+            </div>
+            <span class="tier-badge tier-3">TIER 3</span>
+          </div>
+          <div class="tag-row">
+            <span class="tag t-innov">创新药中军</span>
+            <span class="tag">GLP-1</span>
+            <span class="tag">ADC</span>
+            <span class="tag t-hot">大涨 8.1%</span>
+          </div>
+          <div class="metrics">
+            <div class="metric"><div class="mlabel">6月涨幅</div><div class="mval up">+8.1%</div></div>
+            <div class="metric"><div class="mlabel">市值</div><div class="mval">3400+ 亿</div></div>
+            <div class="metric"><div class="mlabel">管线</div><div class="mval">GLP-1</div></div>
+            <div class="metric"><div class="mlabel">BD</div><div class="mval">Kailera</div></div>
+          </div>
+          <div class="logic">
+            <strong>涨停基因核心：</strong>A 股创新药绝对中军，板块压舱石，多次涨停。6 月 29 日大涨 8.1% 带动全板块。<br>
+            <strong>驱动逻辑：</strong>① 口服 GLP-1 受体激动剂 HRS-7535 中国 III 期积极顶线结果；② HRS9531（GLP-1/GIP）许可给美国 Kailera；③ ADC、双抗管线密集推进。<br>
+            <span class="highlight">涨停基因评估：★★★（中军压舱石 · 管线催化型）</span>
+          </div>
+        </div>
+
+        <!-- 太极集团 -->
+        <div class="glass stock-card">
+          <div class="top-row">
+            <div class="name-block">
+              <span class="name">太极集团</span>
+              <span class="code">600129 · SH</span>
+            </div>
+            <span class="tier-badge tier-3">TIER 3</span>
+          </div>
+          <div class="tag-row">
+            <span class="tag t-tcm">中药</span>
+            <span class="tag t-innov">创新药</span>
+            <span class="tag t-hot">涨停</span>
+            <span class="tag">药品获批</span>
+          </div>
+          <div class="metrics">
+            <div class="metric"><div class="mlabel">涨停价</div><div class="mval">16.94 元</div></div>
+            <div class="metric"><div class="mlabel">总市值</div><div class="mval">93.41 亿</div></div>
+            <div class="metric"><div class="mlabel">成交额</div><div class="mval">5.69 亿</div></div>
+            <div class="metric"><div class="mlabel">临床</div><div class="mval">III / IIb</div></div>
+          </div>
+          <div class="logic">
+            <strong>涨停基因核心：</strong>中药 + 创新药双标签，8 月 20 日涨停。核心创新药管线分别处于 III 期、IIb 期。<br>
+            <strong>驱动逻辑：</strong>药品获批 + 创新药临床推进 + 资产盘活。<br>
+            <span class="highlight">涨停基因评估：★★★（中药创新双标签 · 管线推进型）</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Section 2: 中药涨停基因分级 ==================== -->
+  <div class="section">
+    <div class="section-title">
+      <span class="num">02</span>
+      <h2>中药 · 涨停基因分级</h2>
+      <div class="line"></div>
+    </div>
+
+    <!-- Tier 1 -->
+    <div style="margin-bottom: 32px;">
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+        <span class="tier-badge tier-1">TIER 1 · 活跃级</span>
+        <span style="color: var(--muted); font-size: 13px;">20cm 涨停 / 连续涨停 / 板块领涨</span>
+      </div>
+      <div class="stock-grid">
+
+        <!-- 陇神戎发（中药视角） -->
+        <div class="glass stock-card">
+          <div class="top-row">
+            <div class="name-block">
+              <span class="name">陇神戎发</span>
+              <span class="code">300534 · SZ</span>
+            </div>
+            <span class="tier-badge tier-1">TIER 1</span>
+          </div>
+          <div class="tag-row">
+            <span class="tag t-tcm">中药二级保护</span>
+            <span class="tag">20cm</span>
+            <span class="tag t-hot">7 日 +80%</span>
+            <span class="tag">国企改革</span>
+          </div>
+          <div class="metrics">
+            <div class="metric"><div class="mlabel">涨停次数</div><div class="mval up">4 次</div></div>
+            <div class="metric"><div class="mlabel">次日红盘率</div><div class="mval up">100%</div></div>
+            <div class="metric"><div class="mlabel">首板炸板率</div><div class="mval down">0%</div></div>
+            <div class="metric"><div class="mlabel">2 月涨幅</div><div class="mval up">+100%</div></div>
+          </div>
+          <div class="logic">
+            <strong>涨停基因核心：</strong>中药板块 20cm 涨停基因最强标的。涨停 4 次，次日红盘率 100%，首板炸板率 0%。7 月 7 个交易日暴涨 80%，不到两个月股价翻倍。<br>
+            <strong>驱动逻辑：</strong>① 元胡止痛滴丸为国家中药二级保护品种；② 创新药 + 中药 + 国企改革三重标签；③ 创业板 20cm + 西北药企稀缺性。<br>
+            <span class="highlight">涨停基因评估：★★★★★（中药 20cm 龙头 · 涨停数据最优）</span>
+          </div>
+        </div>
+
+        <!-- 盘龙药业 -->
+        <div class="glass stock-card">
+          <div class="top-row">
+            <div class="name-block">
+              <span class="name">盘龙药业</span>
+              <span class="code">002864 · SZ</span>
+            </div>
+            <span class="tier-badge tier-1">TIER 1</span>
+          </div>
+          <div class="tag-row">
+            <span class="tag t-tcm">独家品种</span>
+            <span class="tag t-hot">基药目录</span>
+            <span class="tag">医保甲类</span>
+          </div>
+          <div class="metrics">
+            <div class="metric"><div class="mlabel">核心品种</div><div class="mval">盘龙七片</div></div>
+            <div class="metric"><div class="mlabel">政策</div><div class="mval up">基药+甲类</div></div>
+            <div class="metric"><div class="mlabel">渠道</div><div class="mval">三大渠道</div></div>
+            <div class="metric"><div class="mlabel">最新价</div><div class="mval">22.42</div></div>
+          </div>
+          <div class="logic">
+            <strong>涨停基因核心：</strong>盘龙七片为独家品种，新增纳入 2026 版基药目录，叠加医保甲类——"基药 + 医保甲类"双重政策优势。<br>
+            <strong>驱动逻辑：</strong>打通院内公立市场、基层医疗市场、院外零售市场三大渠道，2026 下半年核心工作是政策落地承接、渠道补齐、终端铺货。<br>
+            <span class="highlight">涨停基因评估：★★★★（独家品种 · 双重政策催化）</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Tier 2 -->
+    <div style="margin-bottom: 32px;">
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+        <span class="tier-badge tier-2">TIER 2 · 老字号龙头</span>
+        <span style="color: var(--muted); font-size: 13px;">品牌壁垒深 / 涨停频率低但信号意义强</span>
+      </div>
+      <div class="stock-grid">
+
+        <!-- 片仔癀 -->
+        <div class="glass stock-card">
+          <div class="top-row">
+            <div class="name-block">
+              <span class="name">片仔癀</span>
+              <span class="code">600436 · SH</span>
+            </div>
+            <span class="tier-badge tier-2">TIER 2</span>
+          </div>
+          <div class="tag-row">
+            <span class="tag t-tcm">药茅</span>
+            <span class="tag">绝密品种</span>
+            <span class="tag t-hot">时隔 2 年涨停</span>
+          </div>
+          <div class="metrics">
+            <div class="metric"><div class="mlabel">涨停次数</div><div class="mval up">1 次(2年)</div></div>
+            <div class="metric"><div class="mlabel">次日红盘率</div><div class="mval up">100%</div></div>
+            <div class="metric"><div class="mlabel">涨停价</div><div class="mval">141.15</div></div>
+            <div class="metric"><div class="mlabel">总市值</div><div class="mval">852 亿</div></div>
+          </div>
+          <div class="logic">
+            <strong>涨停基因核心：</strong>7 月 16 日涨停——时隔近 2 年首个涨停（上次为 2024 年 9 月 30 日）。涨停信号意义极强，代表中药板块政策催化达到临界点。次日红盘率 100%。<br>
+            <strong>驱动逻辑：</strong>① 国务院批复《中医药振兴发展"十五五"规划》；② 新版基药目录落地；③ 绝密品种壁垒 + 天然牛黄价格回落预期。<br>
+            <span class="highlight">涨停基因评估：★★★★（信号龙头 · 涨停即板块见底信号）</span>
+          </div>
+        </div>
+
+        <!-- 同仁堂 -->
+        <div class="glass stock-card">
+          <div class="top-row">
+            <div class="name-block">
+              <span class="name">同仁堂</span>
+              <span class="code">600085 · SH</span>
+            </div>
+            <span class="tier-badge tier-2">TIER 2</span>
+          </div>
+          <div class="tag-row">
+            <span class="tag t-tcm">百年老字号</span>
+            <span class="tag">出海标杆</span>
+            <span class="tag">安宫牛黄丸</span>
+          </div>
+          <div class="metrics">
+            <div class="metric"><div class="mlabel">安宫市占</div><div class="mval">~50%</div></div>
+            <div class="metric"><div class="mlabel">年销</div><div class="mval">30 亿+</div></div>
+            <div class="metric"><div class="mlabel">资质</div><div class="mval">双天然</div></div>
+            <div class="metric"><div class="mlabel">2026E 净利</div><div class="mval up">+15%</div></div>
+          </div>
+          <div class="logic">
+            <strong>涨停基因核心：</strong>百年老字号，安宫牛黄丸市占率约 50%，年销 30 亿+。拥有天然麝香 + 天然牛黄双天然资质，品牌护城河极深。中医药出海标杆，海外门店覆盖东南亚、欧美。<br>
+            <span class="highlight">涨停基因评估：★★★（品牌龙头 · 政策受益跟涨型）</span>
+          </div>
+        </div>
+
+        <!-- 广誉远 -->
+        <div class="glass stock-card">
+          <div class="top-row">
+            <div class="name-block">
+              <span class="name">广誉远</span>
+              <span class="code">600771 · SH</span>
+            </div>
+            <span class="tier-badge tier-2">TIER 2</span>
+          </div>
+          <div class="tag-row">
+            <span class="tag t-tcm">老字号</span>
+            <span class="tag">国资入主</span>
+            <span class="tag">安宫牛黄丸</span>
+            <span class="tag">品牌重估</span>
+          </div>
+          <div class="metrics">
+            <div class="metric"><div class="mlabel">核心品种</div><div class="mval">安宫牛黄丸</div></div>
+            <div class="metric"><div class="mlabel">实控人</div><div class="mval">山西国资</div></div>
+            <div class="metric"><div class="mlabel">战略</div><div class="mval">全产业链</div></div>
+            <div class="metric"><div class="mlabel">历史活跃</div><div class="mval up">较高</div></div>
+          </div>
+          <div class="logic">
+            <strong>涨停基因核心：</strong>山西国资入主赋能，核心品种安宫牛黄丸品牌重估，全产业链高品质中药战略落地。历史股性活跃，中药板块行情中常作为弹性标的。<br>
+            <span class="highlight">涨停基因评估：★★★（国资 + 品牌重估 · 弹性标的）</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Tier 3 -->
+    <div style="margin-bottom: 32px;">
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+        <span class="tier-badge tier-3">TIER 3 · 政策受益</span>
+        <span style="color: var(--muted); font-size: 13px;">基药目录受益 / 跟涨型</span>
+      </div>
+      <div class="stock-grid">
+
+        <!-- 方盛制药 -->
+        <div class="glass stock-card">
+          <div class="top-row">
+            <div class="name-block">
+              <span class="name">方盛制药</span>
+              <span class="code">603998 · SH</span>
+            </div>
+            <span class="tier-badge tier-3">TIER 3</span>
+          </div>
+          <div class="tag-row">
+            <span class="tag t-tcm">中药</span>
+            <span class="tag t-hot">基药目录</span>
+            <span class="tag">创新药在研</span>
+          </div>
+          <div class="logic">
+            <strong>驱动逻辑：</strong>118 个规格入 2026 版基药目录，创新药在研，化学制药全产业链。基药目录落地的直接受益标的。<br>
+            <span class="highlight">涨停基因评估：★★★（基药受益 · 中军型）</span>
+          </div>
+        </div>
+
+        <!-- 其他中药标的汇总 -->
+        <div class="glass stock-card">
+          <div class="top-row">
+            <div class="name-block">
+              <span class="name">其他活跃中药标的</span>
+            </div>
+            <span class="tier-badge tier-3">TIER 3</span>
+          </div>
+          <div class="logic" style="margin-top: 8px;">
+            <strong>云南白药 (000538)：</strong>百年老字号，核心品种云南白药胶囊、气雾剂独家垄断，大健康业务持续拓展。<br>
+            <strong>益佰制药 (600594)：</strong>7 月涨停，中药板块联动活跃标的。<br>
+            <strong>上海凯宝 (300039)：</strong>7 月涨 14%，中药板块 20cm 弹性标的。<br>
+            <strong>天目药业：</strong>7 月 10cm 涨停，小市值活跃。<br>
+            <strong>九芝堂 (000989)：</strong>7 月涨超 8%，老字号跟涨。<br>
+            <strong>大唐药业 (836695)：</strong>北交所标的，7 月涨超 7%。<br>
+            <strong>以岭药业 (002603)：</strong>7 月涨超 6%，连花清瘟品牌。<br>
+            <strong>新光药业 / 生物谷 / 粤万年青 / 寿仙谷：</strong>7 月跟涨梯队。
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Section 3: 涨停基因数据总表 ==================== -->
+  <div class="section">
+    <div class="section-title">
+      <span class="num">03</span>
+      <h2>涨停基因数据总表</h2>
+      <div class="line"></div>
+    </div>
+    <div class="glass" style="padding: 20px 24px; overflow-x: auto;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>标的</th>
+            <th>代码</th>
+            <th>板块</th>
+            <th>历史涨停</th>
+            <th>连板峰值</th>
+            <th>次日红盘率</th>
+            <th>涨停基因</th>
+            <th>核心标签</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="nm">百花医药</span></td>
+            <td><span class="cd">600721</span></td>
+            <td>创新药/CXO</td>
+            <td>7次(近9日)</td>
+            <td>7 连板</td>
+            <td>—</td>
+            <td><span class="gene-bar gene-5"></span> ★★★★★</td>
+            <td>国资入主 · CRO · 7连板</td>
+          </tr>
+          <tr>
+            <td><span class="nm">哈药股份</span></td>
+            <td><span class="cd">600664</span></td>
+            <td>创新药/OTC</td>
+            <td>29 次</td>
+            <td>6 连板</td>
+            <td>—</td>
+            <td><span class="gene-bar gene-5"></span> ★★★★★</td>
+            <td>29次涨停 · 业绩拐点</td>
+          </tr>
+          <tr>
+            <td><span class="nm">舒泰神</span></td>
+            <td><span class="cd">300204</span></td>
+            <td>创新药</td>
+            <td>2 次</td>
+            <td>—</td>
+            <td>100%</td>
+            <td><span class="gene-bar gene-5"></span> ★★★★★</td>
+            <td>20cm 妖股 · 六重共振</td>
+          </tr>
+          <tr>
+            <td><span class="nm">陇神戎发</span></td>
+            <td><span class="cd">300534</span></td>
+            <td>中药/创新药</td>
+            <td>4 次</td>
+            <td>—</td>
+            <td>100%</td>
+            <td><span class="gene-bar gene-4"></span> ★★★★</td>
+            <td>20cm · 7日+80% · 炸板率0</td>
+          </tr>
+          <tr>
+            <td><span class="nm">迪哲医药-U</span></td>
+            <td><span class="cd">688192</span></td>
+            <td>创新药</td>
+            <td>2 次</td>
+            <td>2 连板</td>
+            <td>—</td>
+            <td><span class="gene-bar gene-4"></span> ★★★★</td>
+            <td>20cm · 阿斯利康BD</td>
+          </tr>
+          <tr>
+            <td><span class="nm">开开实业</span></td>
+            <td><span class="cd">600272</span></td>
+            <td>医药商业</td>
+            <td>6 次(近7日)</td>
+            <td>2 连板</td>
+            <td>—</td>
+            <td><span class="gene-bar gene-4"></span> ★★★★</td>
+            <td>游资连板 · 大健康转型</td>
+          </tr>
+          <tr>
+            <td><span class="nm">誉衡药业</span></td>
+            <td><span class="cd">002437</span></td>
+            <td>化学制药</td>
+            <td>4 次(近6日)</td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="gene-bar gene-4"></span> ★★★★</td>
+            <td>低价活跃 · 创新转型</td>
+          </tr>
+          <tr>
+            <td><span class="nm">盘龙药业</span></td>
+            <td><span class="cd">002864</span></td>
+            <td>中药</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="gene-bar gene-4"></span> ★★★★</td>
+            <td>独家品种 · 基药+甲类</td>
+          </tr>
+          <tr>
+            <td><span class="nm">片仔癀</span></td>
+            <td><span class="cd">600436</span></td>
+            <td>中药</td>
+            <td>1 次(2年)</td>
+            <td>—</td>
+            <td>100%</td>
+            <td><span class="gene-bar gene-3"></span> ★★★</td>
+            <td>药茅 · 信号龙头</td>
+          </tr>
+          <tr>
+            <td><span class="nm">药明康德</span></td>
+            <td><span class="cd">603259</span></td>
+            <td>CXO</td>
+            <td>涨停</td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="gene-bar gene-3"></span> ★★★</td>
+            <td>CRDMO龙头 · 超预期财报</td>
+          </tr>
+          <tr>
+            <td><span class="nm">恒瑞医药</span></td>
+            <td><span class="cd">600276</span></td>
+            <td>创新药</td>
+            <td>多次</td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="gene-bar gene-3"></span> ★★★</td>
+            <td>中军 · GLP-1管线</td>
+          </tr>
+          <tr>
+            <td><span class="nm">太极集团</span></td>
+            <td><span class="cd">600129</span></td>
+            <td>中药/创新药</td>
+            <td>涨停</td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="gene-bar gene-3"></span> ★★★</td>
+            <td>药品获批 · 创新药临床</td>
+          </tr>
+          <tr>
+            <td><span class="nm">同仁堂</span></td>
+            <td><span class="cd">600085</span></td>
+            <td>中药</td>
+            <td>跟涨</td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="gene-bar gene-3"></span> ★★★</td>
+            <td>百年老字号 · 出海标杆</td>
+          </tr>
+          <tr>
+            <td><span class="nm">广誉远</span></td>
+            <td><span class="cd">600771</span></td>
+            <td>中药</td>
+            <td>历史活跃</td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="gene-bar gene-3"></span> ★★★</td>
+            <td>国资入主 · 品牌重估</td>
+          </tr>
+          <tr>
+            <td><span class="nm">方盛制药</span></td>
+            <td><span class="cd">603998</span></td>
+            <td>中药</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="gene-bar gene-2"></span> ★★</td>
+            <td>118规格入基药</td>
+          </tr>
+          <tr>
+            <td><span class="nm">荣昌生物</span></td>
+            <td><span class="cd">688331</span></td>
+            <td>创新药/ADC</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="gene-bar gene-3"></span> ★★★</td>
+            <td>ADC+自免 · 业绩爆发</td>
+          </tr>
+          <tr>
+            <td><span class="nm">凯莱英</span></td>
+            <td><span class="cd">002821</span></td>
+            <td>CXO</td>
+            <td>涨停</td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="gene-bar gene-3"></span> ★★★</td>
+            <td>CMO龙头 · mRNA疫苗</td>
+          </tr>
+          <tr>
+            <td><span class="nm">热景生物</span></td>
+            <td><span class="cd">688439</span></td>
+            <td>创新药</td>
+            <td>20cm</td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="gene-bar gene-4"></span> ★★★★</td>
+            <td>20cm · 心梗急救抗体药</td>
+          </tr>
+          <tr>
+            <td><span class="nm">广生堂</span></td>
+            <td><span class="cd">300436</span></td>
+            <td>创新药</td>
+            <td>20cm</td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="gene-bar gene-4"></span> ★★★★</td>
+            <td>20cm · 创新药活跃</td>
+          </tr>
+          <tr>
+            <td><span class="nm">三生国健</span></td>
+            <td><span class="cd">688336</span></td>
+            <td>创新药</td>
+            <td>20cm</td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="gene-bar gene-4"></span> ★★★★</td>
+            <td>20cm · 抗体药物</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ==================== Section 4: 政策催化 ==================== -->
+  <div class="section">
+    <div class="section-title">
+      <span class="num">04</span>
+      <h2>政策催化时间线</h2>
+      <div class="line"></div>
+    </div>
+    <div class="glass" style="padding: 28px 32px;">
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-date">2026-01 · 全国药品监督管理工作会议</div>
+          <div class="tl-title">"提前介入、一企一策、全程指导、研审联动"</div>
+          <div class="tl-desc">落实对重点品种实行创新药审评审批绿色通道，加速创新药落地。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2026-03 · 政府工作报告</div>
+          <div class="tl-title">首次将"生物医药"列为"新兴支柱产业"</div>
+          <div class="tl-desc">相较往年"培育壮大新兴产业"的提法，政策层级明显上移，标志着生物医药已从单纯产业升级为国家战略级新兴支柱。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2026-05 · 国家医保局</div>
+          <div class="tl-title">2026 年药品目录调整工作方案 + 创新药预申报机制</div>
+          <div class="tl-desc">首次设立预申报机制，为创新药进入目录提供弹性窗口。6 月创新药目录初审通过率达 92%。医保与商保"双目录"首次联动，拓展创新药支付空间。中成药因说明书"尚不明确"面临重点调出。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2026-05 · 国家药监局</div>
+          <div class="tl-title">药品试验数据保护实施办法</div>
+          <div class="tl-desc">对全球未上市的创新药和改良型新药给予数据保护，进一步激励真创新。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2026-06 · 国家医保局初审</div>
+          <div class="tl-title">创新药板块全面爆发（6 月 29 日）</div>
+          <div class="tl-desc">三生国健、广生堂、舒泰神 20cm 涨停，恒瑞医药大涨 8.1%，凯莱英涨停。创新药指数收涨 7.53% 居万得热门概念指数涨幅榜首位。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2026-07 · 国务院批复</div>
+          <div class="tl-title">《中医药振兴发展"十五五"规划》+ 新版基药目录</div>
+          <div class="tl-desc">片仔癀时隔近 2 年涨停。盘龙七片等独家品种新增纳入基药目录，叠加医保甲类形成双重政策优势。陇神戎发 7 个交易日暴涨 80%。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2026-07-08 月 · BD 出海潮</div>
+          <div class="tl-title">创新药 BD 交易总金额 1063 亿美元</div>
+          <div class="tl-desc">迪哲医药与阿斯利康签署舒沃哲®全球许可；恒瑞医药 GLP-1 管线许可给美国 Kailera；信达生物 GLP-1 双线推进。1-7 月创新药 BD 交易总金额达 1063 亿美元创新高。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2026-08 · 财报季 + mRNA 催化</div>
+          <div class="tl-title">药明康德超预期 + 莫德纳/默沙东 mRNA 疫苗三期成功</div>
+          <div class="tl-desc">药明康德 Q1 营收 124.4 亿（+28.8%），全年指引上调，直奔涨停。百花医药 7 连板领涨，哈药股份 8 天 6 板，凯莱英涨停。莫德纳 & 默沙东宣布全球首个 mRNA 癌症疫苗三期成功，催化 CXO + 创新药全板块。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Section 5: 操作策略 ==================== -->
+  <div class="section">
+    <div class="section-title">
+      <span class="num">05</span>
+      <h2>涨停基因 × 操作策略矩阵</h2>
+      <div class="line"></div>
+    </div>
+    <div class="glass" style="padding: 24px 28px;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>涨停基因等级</th>
+            <th>特征</th>
+            <th>代表标的</th>
+            <th>操作建议</th>
+            <th>风险等级</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tier-badge tier-1">TIER 1 · 妖股级</span></td>
+            <td>连板 / 20cm / 游资主导</td>
+            <td>百花医药、哈药股份、舒泰神、陇神戎发</td>
+            <td>情绪龙头战法 · 首板/二板介入 · 严格止损</td>
+            <td style="color:#ef5350;font-weight:700;">极高</td>
+          </tr>
+          <tr>
+            <td><span class="tier-badge tier-2">TIER 2 · 活跃级</span></td>
+            <td>连续涨停 / 板块联动</td>
+            <td>迪哲医药、开开实业、誉衡药业、盘龙药业</td>
+            <td>板块联动战法 · 龙头分歧日低吸</td>
+            <td style="color:#ff9500;font-weight:700;">高</td>
+          </tr>
+          <tr>
+            <td><span class="tier-badge tier-3">TIER 3 · 龙头中军</span></td>
+            <td>大市值 / 基本面驱动 / 涨停少但涨幅大</td>
+            <td>药明康德、恒瑞医药、片仔癀、同仁堂</td>
+            <td>趋势持有 · 回踩均线加仓 · 中线配置</td>
+            <td style="color:#26a69a;font-weight:700;">中</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="risk-note glass" style="margin-top: 24px;">
+      <strong>风险提示：</strong>
+      ① TIER 1 妖股级标的波动极大，连板后回调风险极高，百花医药 7 连板期间换手率 96.25%（9 天筹码换了将近一遍），龙虎榜显示"作手新一"已获利离场，接力资金为"开源西安太华路"——典型的击鼓传花格局。<br>
+      ② 政策催化已部分兑现（片仔癀涨停、基药目录落地），后续需关注政策落地节奏与业绩验证。<br>
+      ③ 中成药面临医保"最严清退"风险（说明书"尚不明确"品种可能被调出），需规避无独家品种、无创新管线的纯中药标的。<br>
+      ④ 创新药 BD 出海是长期逻辑，短期股价已反映部分预期，需关注管线临床进展与商业化兑现节奏。<br>
+      ⑤ 本报告基于公开信息整理，涨停基因数据来自复盘网、连板网、打板客等第三方平台，不构成投资建议。
+    </div>
+  </div>
+
+  <!-- ==================== Footer ==================== -->
+  <div class="footer">
+    INNOVATIVE DRUG × TCM · LIMIT-UP GENE ATLAS · 2026-08-31<br>
+    DATA SOURCE: STCN / EASTMONEY / XUEQIU / FUPANWANG / LIANBAN / DABANKE
+  </div>
+
+</div>
+</body>
+</html>

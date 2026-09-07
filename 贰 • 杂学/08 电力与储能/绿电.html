@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新闻联播"绿色产业"六条线·技术与标的深度对照</title>
+<style>
+:root {
+  --bg: #0a0e14;
+  --card-bg: #131820;
+  --card-border: #1e2a3a;
+  --accent: #2dd4bf;
+  --accent-glow: rgba(45,212,191,0.15);
+  --accent2: #38bdf8;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  --green: #4ade80;
+  --yellow: #fbbf24;
+  --red: #f87171;
+  --orange: #fb923c;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans CJK SC', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+  line-height: 1.7;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+h1 {
+  font-size: 28px;
+  text-align: center;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+  font-weight: 800;
+}
+.subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+.section {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: linear-gradient(90deg, rgba(45,212,191,0.08), transparent);
+  border-bottom: 1px solid var(--card-border);
+}
+.section-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--bg);
+  flex-shrink: 0;
+}
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+}
+.section-subtitle {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+.section-body { padding: 20px; }
+.tech-line {
+  background: rgba(45,212,191,0.05);
+  border-left: 3px solid var(--accent);
+  padding: 12px 16px;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.tech-line strong { color: var(--accent); }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+th {
+  background: rgba(45,212,191,0.08);
+  color: var(--accent);
+  font-weight: 600;
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--card-border);
+  white-space: nowrap;
+}
+td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(30,42,58,0.5);
+  vertical-align: top;
+}
+tr:hover td { background: rgba(45,212,191,0.03); }
+.stock-name { color: var(--accent2); font-weight: 600; }
+.stock-code { color: var(--text-dim); font-size: 12px; }
+.tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-right: 4px;
+}
+.tag-dragon { background: rgba(251,191,36,0.15); color: var(--yellow); }
+.tag-core { background: rgba(74,222,128,0.15); color: var(--green); }
+ tag-follow { background: rgba(148,163,184,0.15); color: var(--text-muted); }
+.tag-risk { background: rgba(248,113,113,0.15); color: var(--red); }
+.tag-new { background: rgba(56,189,248,0.15); color: var(--accent2); }
+.note {
+  background: rgba(251,191,36,0.06);
+  border: 1px solid rgba(251,191,36,0.15);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--yellow);
+}
+.note strong { color: var(--orange); }
+.flow-diagram {
+  background: rgba(45,212,191,0.05);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  font-family: monospace;
+  font-size: 13px;
+  line-height: 1.8;
+  overflow-x: auto;
+  white-space: pre;
+}
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+.summary-card {
+  background: rgba(30,42,58,0.5);
+  border-radius: 8px;
+  padding: 14px;
+  border: 1px solid var(--card-border);
+}
+.summary-card-title {
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.summary-card-body {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.footer {
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 12px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid var(--card-border);
+}
+@media (max-width: 768px) {
+  body { padding: 10px; }
+  h1 { font-size: 22px; }
+  table { font-size: 12px; }
+  th, td { padding: 8px; }
+}
+</style>
+</head>
+<body>
+
+<h1>新闻联播"绿色产业"六条线 · 技术脉络与A股标的对照</h1>
+<p class="subtitle">基于2026年8月30日新闻联播"绿色产业"专题，逐条拆解技术构成、核心壁垒与龙头标的</p>
+
+<!-- Section 1 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <div>
+      <div class="section-title">绿电直连</div>
+      <div class="section-subtitle">清洁能源经专用线路直送算力中心 · 推动算力产业就地消纳新能源</div>
+    </div>
+  </div>
+  <div class="section-body">
+    <div class="tech-line">
+      <strong>技术链路：</strong>新能源电站（风光）→ 专用输电线路（特高压/柔直）→ 算力中心变配电 → 直流直供 → 就地消纳
+    </div>
+    <div class="flow-diagram">风光基地 ─→ 专用线路 ─→ 换流阀/变压器 ─→ 算力中心配电 ─→ 800V直流直供GPU
+                    ↑                    ↑                        ↑
+               就地消纳（不外送）    柔直/特高压设备         直流电源/UPS</div>
+    <table>
+      <thead>
+        <tr>
+          <th>标的</th><th>代码</th><th>核心角色</th><th>技术壁垒</th><th>确定性</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="stock-name">许继电气</span><br><span class="stock-code">000400</span></td>
+          <td>—</td>
+          <td>算力中心直流直供设备 + 特高压换流阀</td>
+          <td>换流阀市占37-40%、直流控保>45%；乌兰察布数据中心算电协同标杆项目落地；郑州数据中心三期已交付</td>
+          <td><span class="tag tag-dragon">最强</span> 已有项目落地</td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">国电南瑞</span><br><span class="stock-code">600406</span></td>
+          <td>—</td>
+          <td>电网二次设备 + 智能调度 + 特高压控保</td>
+          <td>电网自动化市占>70%；特高压控保设备占全国过半；在手订单超620亿，算电协同相关占四成；参与算电协同标准制定</td>
+          <td><span class="tag tag-dragon">最强</span> 订单可见</td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">特变电工</span><br><span class="stock-code">600089</span></td>
+          <td>—</td>
+          <td>变压器 + 输电线路设备</td>
+          <td>变压器龙头，特高压变压器份额领先；"西电东送"新增8000万千瓦核心受益</td>
+          <td><span class="tag tag-core">高</span></td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">三峡能源</span><br><span class="stock-code">600905</span></td>
+          <td>—</td>
+          <td>风光储一体化运营商</td>
+          <td>宁夏绿电直供+液冷智算中心；深度绑定华为、阿里等算力巨头；2026年计划新增并网500万千瓦</td>
+          <td><span class="tag tag-core">高</span> 运营端</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>关键点：</strong>"绿电直连"的物理载体是"专用线路+直流供电设备"，许继电气是A股最纯正的直流直供标的。国电南瑞是调度大脑，负责"智能匹配"。两者构成"硬件+软件"双核心。</div>
+  </div>
+</div>
+
+<!-- Section 2 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <div>
+      <div class="section-title">算电协同</div>
+      <div class="section-subtitle">智能调度平台匹配风光发电波动 · 配套储能可在毫秒级补能</div>
+    </div>
+  </div>
+  <div class="section-body">
+    <div class="tech-line">
+      <strong>技术链路：</strong>风光发电波动 → 智能调度平台实时匹配 → 配套储能毫秒级补能 → 保障算力中心供电稳定。核心三层：超级电容/飞轮（毫秒级）→ 锂电池（秒-分钟级）→ 电网调度（分钟级以上）
+    </div>
+    <div class="flow-diagram">风光波动 ─→ [调度平台] ─→ 储能补能
+                              │                │
+                         预判负荷          三层混合响应：
+                                              ① 超级电容（毫秒）→ 瞬时功率
+                                              ② 锂电池（秒-分）→ 短时调节
+                                              ③ 电网调度（分钟+）→ 长时匹配</div>
+    <table>
+      <thead>
+        <tr>
+          <th>标的</th><th>代码</th><th>核心角色</th><th>技术壁垒</th><th>确定性</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="stock-name">国电南瑞</span><br><span class="stock-code">600406</span></td>
+          <td>—</td>
+          <td>智能调度平台（"神经中枢"）</td>
+          <td>"瑞腾智算调度平台"实现算力负荷与新能源发电精准匹配；AI电力大模型打通数据壁垒；市占>75%；深度参与国家级标准制定</td>
+          <td><span class="tag tag-dragon">最强</span> 规则制定者</td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">江海股份</span><br><span class="stock-code">002484</span></td>
+          <td>—</td>
+          <td>超级电容（毫秒级补能核心）</td>
+          <td>国内超级电容龙头；EDLC+LIC双技术；已进入AI服务器电源供应链；H1营收+54%、毛利率+15.89pct；50亿扩产项目已启动</td>
+          <td><span class="tag tag-core">高</span> 毫秒级唯一方案</td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">阳光电源</span><br><span class="stock-code">300274</span></td>
+          <td>—</td>
+          <td>储能逆变器（PCS）+ 构网型技术</td>
+          <td>全球储能逆变器龙头；干细胞电网技术（构网型）；阳光氢能中标采煤沉陷区制氢项目；算电协同全链条布局</td>
+          <td><span class="tag tag-dragon">最强</span> 全链条</td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">海博思创</span><br><span class="stock-code">688411</span></td>
+          <td>—</td>
+          <td>储能系统集成</td>
+          <td>储能系统集成商，与国电南瑞、协鑫能科共建"绿电+储能+调度+算力"协同格局</td>
+          <td><span class="tag tag-core">中</span></td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">协鑫能科</span><br><span class="stock-code">002015</span></td>
+          <td>—</td>
+          <td>虚拟电厂运营</td>
+          <td>虚拟电厂运营方，聚合分布式储能和灵活负荷，参与算电协同调度</td>
+          <td><span class="tag tag-core">中</span> 新业态</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>关键点：</strong>"毫秒级补能"只有超级电容能做到——这就是江海股份在这条线上的稀缺价值。国电南瑞是"大脑"（调度平台），阳光电源是"肌肉"（PCS+储能），江海股份是"神经末梢"（毫秒级响应）。三者构成算电协同的完整技术闭环。</div>
+  </div>
+</div>
+
+<!-- Section 3 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <div>
+      <div class="section-title">矿区转型</div>
+      <div class="section-subtitle">采煤沉陷区建设光伏并修复生态 · 绿氢项目为矿区重卡提供清洁动力</div>
+    </div>
+  </div>
+  <div class="section-body">
+    <div class="tech-line">
+      <strong>技术链路：</strong>采煤沉陷区 → 铺设光伏板（板上发电+板下生态修复）→ 绿电制氢 → 为矿区重卡提供氢燃料电池动力
+    </div>
+    <div class="flow-diagram">采煤沉陷区 ─→ 光伏板铺设 ─→ 绿电产出
+                                │                    │
+                           生态修复           ┌───────┴───────┐
+                                              ↓               ↓
+                                         电解水制氢      就地消纳/外送
+                                              ↓
+                                         氢燃料重卡
+                                (鄂尔多斯伊金霍洛旗示范)</div>
+    <table>
+      <thead>
+        <tr>
+          <th>标的</th><th>代码</th><th>核心角色</th><th>技术壁垒</th><th>确定性</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="stock-name">阳光电源</span><br><span class="stock-code">300274</span></td>
+          <td>—</td>
+          <td>电解槽设备（制氢核心）</td>
+          <td>旗下阳光氢能中标中煤平朔集团采煤沉陷区60万千瓦离网式制氢项目；国内首个采煤沉陷区离网制氢标杆</td>
+          <td><span class="tag tag-dragon">最强</span> 标杆项目</td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">隆基绿能</span><br><span class="stock-code">601012</span></td>
+          <td>—</td>
+          <td>光伏组件（矿区铺设）</td>
+          <td>组件全球第一；BC电池技术领先；分布式+集中式双线；沉陷区光伏铺设核心供应商</td>
+          <td><span class="tag tag-core">高</span></td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">美锦能源</span><br><span class="stock-code">000723</span></td>
+          <td>—</td>
+          <td>氢能全产业链（制-储-运-加-用）</td>
+          <td>全国布局9大产业园，20余家头部企业；青岛、嘉兴飞达氢能整车制造；"煤-焦-气-化-氢"全链闭环；山西氢能链主企业</td>
+          <td><span class="tag tag-risk">中低</span> H1亏5.99亿，传统主业拖累</td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">三峡能源</span><br><span class="stock-code">600905</span></td>
+          <td>—</td>
+          <td>风光储一体化运营</td>
+          <td>围绕绿电直连、算电协同、绿色氢氨醇等新业态开展专题研究；2026年新增并网500万千瓦</td>
+          <td><span class="tag tag-core">中</span> 运营端</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>关键点：</strong>新闻里提到的鄂尔多斯伊金霍洛旗就是实景案例——"板上发电、板下修复+绿氢重卡"。阳光氢能拿下首个沉陷区离网制氢标杆项目，是最直接的受益标的。美锦能源是氢能重卡端的核心标的，但财务压力大。</div>
+  </div>
+</div>
+
+<!-- Section 4 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <div>
+      <div class="section-title">产业集群</div>
+      <div class="section-subtitle">煤电低碳改造与煤化工绿氢耦合发展 · 60多家新能源装备企业相继落地</div>
+    </div>
+  </div>
+  <div class="section-body">
+    <div class="tech-line">
+      <strong>技术链路：</strong>煤电+熔盐储能（低谷蓄热+高峰放热）→ 煤化工+绿氢掺烧（降碳改造）→ 新能源装备制造集群（产业聚集）
+    </div>
+    <div class="flow-diagram">传统煤电 ──→ 低碳改造路径 ──┬→ 熔盐储换热岛（时空转移：低谷蓄热→高峰放热）
+                                   ├→ 绿氢掺烧（50%掺烧+100%纯氢燃烧）
+                                   └→ 风光火储深度耦合
+                                         ↓
+                               新能源装备产业集群（60+企业落地）</div>
+    <table>
+      <thead>
+        <tr>
+          <th>标的</th><th>代码</th><th>核心角色</th><th>技术壁垒</th><th>确定性</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="stock-name">中国能建</span><br><span class="stock-code">601868</span></td>
+          <td>—</td>
+          <td>能源基建全产业链央企龙头</td>
+          <td>全产业链一体化服务；氢能战略核心赛道；"青氢一号"自主品牌；风光氢氨醇一体化项目开发；能源电力工程建设龙头</td>
+          <td><span class="tag tag-dragon">最强</span> 央企总包</td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">东方电气</span><br><span class="stock-code">600875</span></td>
+          <td>—</td>
+          <td>煤电熔盐储换热岛 + 绿氢掺烧</td>
+          <td>熔盐储换热岛集成系统（山东鲁...项目已落地）；600MW绿氢掺烧示范项目主供（300-1000MW全覆盖）；国能验证+安全系统自研；技术唯一性高</td>
+          <td><span class="tag tag-dragon">最强</span> 技术唯一</td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">华电新能</span><br><span class="stock-code">600930</span></td>
+          <td>—</td>
+          <td>风电+光伏发电运营</td>
+          <td>中国华电旗下风力发电、太阳能发电主要运营方；海上+陆上全覆盖；超低风速风机核心技术；沙戈荒基地主供</td>
+          <td><span class="tag tag-core">高</span> 运营端</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>关键点：</strong>煤电低碳改造的核心技术是"熔盐储能+绿氢掺烧"。东方电气在两个方向都有核心技术壁垒——熔盐储换热岛已落地，绿氢掺烧是国内唯一660MW示范项目主供。中国能建是工程总包龙头，氢能战略级别布局。</div>
+  </div>
+</div>
+
+<!-- Section 5 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <div>
+      <div class="section-title">年度建设</div>
+      <div class="section-subtitle">今年规划新建绿色矿山50座 · 建设绿色工厂90家</div>
+    </div>
+  </div>
+  <div class="section-body">
+    <div class="tech-line">
+      <strong>技术链路：</strong>绿色矿山 = 智能无人开采 + 绿色开采技术（井下控水防水、综合减沉）+ 生态治理；绿色工厂 = 电动化装备 + 绿能供电 + 检测认证
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>标的</th><th>代码</th><th>核心角色</th><th>技术壁垒</th><th>确定性</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="stock-name">天地科技</span><br><span class="stock-code">600582</span></td>
+          <td>—</td>
+          <td>绿色矿山技术 + 智能开采</td>
+          <td>煤矿开采与支护技术领域主导品牌；井下控水防水技术+综合减沉技术；智能化无人开采示范矿井；矿区生态治理和绿色开采</td>
+          <td><span class="tag tag-dragon">最强</span> 矿山技术龙头</td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">浙江鼎力</span><br><span class="stock-code">603338</span></td>
+          <td>—</td>
+          <td>电动化高空作业平台（绿色工厂装备）</td>
+          <td>全系列产品率先完成电动化；"未来工厂"自动化水平行业领先；六期新能源高空平台项目推进；3年质保业内首创</td>
+          <td><span class="tag tag-core">高</span></td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">中信重工</span><br><span class="stock-code">601608</span></td>
+          <td>—</td>
+          <td>矿山重型装备 + 新能源装备 + 机器人</td>
+          <td>GM280-160高压辊磨机等创规格记录装备；突破150MW光伏集成、垂直轴风机、自清洁光伏玻璃；"中信微"操作系统+智能控制器+机器人</td>
+          <td><span class="tag tag-core">中</span> 新能源装备波动大</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>关键点：</strong>"绿色矿山"的核心不是采矿业本身，而是用技术让采矿变"绿"——天地科技是绿色矿山技术的绝对龙头。"绿色工厂"建设带动的是电动化装备需求，浙江鼎力的电动化高空平台是一个典型案例。</div>
+  </div>
+</div>
+
+<!-- Section 6 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <div>
+      <div class="section-title">装机目标</div>
+      <div class="section-subtitle">"十五五"每年新增新能源装机3000万千瓦以上 · 到2030年总装机达到3.25亿千瓦</div>
+    </div>
+  </div>
+  <div class="section-body">
+    <div class="tech-line">
+      <strong>技术链路：</strong>每年新增30GW → 风机/组件制造 → 配套储能（10-20%配储比=3-6GW/年）→ 特高压外送 → 2030年累计325GW
+    </div>
+    <div class="flow-diagram">每年+30GW ─→ ┌ 风电整机 ──────→ 金风/明阳
+                    │ 光伏组件 ──────→ 隆基/晶科/天合
+                    │ 配套储能3-6GW ─→ 阳光电源/宁德时代
+                    │ 海缆/电缆 ────→ 东方电缆/亨通/中天
+                    │ 运营商 ────────→ 三峡能源/华电新能
+                    └ 特高压外送 ───→ 国电南瑞/许继/特变
+                    
+            2030年累计325GW → 意味着配套储能32.5-65GW需求空间</div>
+    <table>
+      <thead>
+        <tr>
+          <th>标的</th><th>代码</th><th>核心角色</th><th>技术壁垒</th><th>确定性</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="stock-name">金风科技</span><br><span class="stock-code">002202</span></td>
+          <td>—</td>
+          <td>风电整机国内第一</td>
+          <td>H1营收337亿（+18%）、净利+24.67%；风机国内份额第一；海陆双线；三北基地主供；"两海战略"深化</td>
+          <td><span class="tag tag-dragon">最强</span> 风电龙头</td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">隆基绿能</span><br><span class="stock-code">601012</span></td>
+          <td>—</td>
+          <td>光伏组件全球第一</td>
+          <td>BC电池技术领先；分布式+集中式双线；从粗放装机转向"提质+强制配储"受益</td>
+          <td><span class="tag tag-core">高</span></td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">明阳智能</span><br><span class="stock-code">601615</span></td>
+          <td>—</td>
+          <td>海上风机龙头</td>
+          <td>广东、福建海风基地核心受益；深远海风电规模化开发配套柔直送出</td>
+          <td><span class="tag tag-core">高</span></td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">阳光电源</span><br><span class="stock-code">300274</span></td>
+          <td>—</td>
+          <td>储能逆变器龙头</td>
+          <td>全球储能逆变器龙头；构网型PCS技术；强制配储政策直接受益</td>
+          <td><span class="tag tag-dragon">最强</span> 储能链核心</td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">三峡能源</span><br><span class="stock-code">600905</span></td>
+          <td>—</td>
+          <td>风光运营龙头</td>
+          <td>2026年计划新增并网500万千瓦；围绕绿电直连、算电协同、绿色氢氨醇等新业态布局</td>
+          <td><span class="tag tag-core">高</span> 运营端</td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">华电新能</span><br><span class="stock-code">600930</span></td>
+          <td>—</td>
+          <td>风光发电运营</td>
+          <td>中国华电旗下风/光运营主体；沙戈荒基地主供；超低风速风机技术</td>
+          <td><span class="tag tag-core">高</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>关键点：</strong>每年新增30GW意味着持续性的设备需求。按10-20%配储比例，每年新增储能需求3-6GW，到2030年累计32.5-65GW——这是储能赛道最硬的长期增量逻辑。</div>
+  </div>
+</div>
+
+<!-- Summary -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num" style="background:linear-gradient(135deg,#fbbf24,#fb923c);">★</div>
+    <div>
+      <div class="section-title">六条线核心标的汇总</div>
+      <div class="section-subtitle">跨线重复出现的标的 = 最强确定性</div>
+    </div>
+  </div>
+  <div class="section-body">
+    <table>
+      <thead>
+        <tr>
+          <th>标的</th><th>代码</th><th>覆盖线数</th><th>涉及板块</th><th>角色定位</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="stock-name">阳光电源</span></td><td>300274</td>
+          <td><span class="tag tag-dragon">4条</span></td>
+          <td>②③④⑥</td>
+          <td>储能逆变器龙头+制氢设备+构网型技术，六条线中覆盖最广</td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">国电南瑞</span></td><td>600406</td>
+          <td><span class="tag tag-dragon">2条</span></td>
+          <td>①②</td>
+          <td>电网调度"大脑"，算电协同规则制定者，订单最确定</td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">许继电气</span></td><td>000400</td>
+          <td><span class="tag tag-dragon">2条</span></td>
+          <td>①②</td>
+          <td>直流直供设备龙头，算力中心供电硬件核心</td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">江海股份</span></td><td>002484</td>
+          <td><span class="tag tag-dragon">1条</span></td>
+          <td>②</td>
+          <td>"毫秒级补能"唯一方案，超级电容龙头+AI服务器供应链</td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">东方电气</span></td><td>600875</td>
+          <td><span class="tag tag-dragon">1条</span></td>
+          <td>④</td>
+          <td>煤电低碳改造技术唯一性（熔盐储能+绿氢掺烧）</td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">中国能建</span></td><td>601868</td>
+          <td><span class="tag tag-core">1条</span></td>
+          <td>④</td>
+          <td>能源基建全产业链央企总包龙头</td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">隆基绿能</span></td><td>601012</td>
+          <td><span class="tag tag-core">2条</span></td>
+          <td>③⑥</td>
+          <td>光伏组件全球第一，矿区铺设+装机目标双受益</td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">金风科技</span></td><td>002202</td>
+          <td><span class="tag tag-core">1条</span></td>
+          <td>⑥</td>
+          <td>风电整机国内第一，三北基地主供</td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">三峡能源</span></td><td>600905</td>
+          <td><span class="tag tag-core">3条</span></td>
+          <td>①③⑥</td>
+          <td>风光储一体化运营商，绿电直连+矿区+装机三线受益</td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">天地科技</span></td><td>600582</td>
+          <td><span class="tag tag-core">1条</span></td>
+          <td>⑤</td>
+          <td>绿色矿山技术绝对龙头</td>
+        </tr>
+        <tr>
+          <td><span class="stock-name">美锦能源</span></td><td>000723</td>
+          <td><span class="tag tag-risk">1条</span></td>
+          <td>③</td>
+          <td>氢能全产业链链主，但H1亏损5.99亿，财务压力大</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>核心发现：</strong>阳光电源横跨4条线（算电协同/矿区制氢/煤电改造/装机配储），是六条线中覆盖最广、确定性最强的标的。国电南瑞和许继电气各覆盖2条，构成"软件+硬件"双核心。江海股份虽然只覆盖1条线，但"毫秒级补能"这个技术需求只有它能满足，稀缺性极高。</div>
+    
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="summary-card-title">第一梯队（多线覆盖+高确定性）</div>
+        <div class="summary-card-body">阳光电源(300274)、国电南瑞(600406)、许继电气(000400)</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-card-title">第二梯队（单线龙头+技术壁垒）</div>
+        <div class="summary-card-body">江海股份(002484)、东方电气(600875)、中国能建(601868)、天地科技(600582)</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-card-title">第三梯队（设备/运营端）</div>
+        <div class="summary-card-body">隆基绿能(601012)、金风科技(002202)、明阳智能(601615)、三峡能源(600905)、华电新能(600930)、浙江鼎力(603338)</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-card-title">高风险/需观察</div>
+        <div class="summary-card-body">美锦能源(000723)——氢能链主但亏损严重，财务压力大</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  数据来源：新闻联播2026.8.30"绿色产业"专题 + 公开研报/财报/公告<br>
+  报告日期：2026年8月30日 · 仅供研究参考，不构成投资建议
+</div>
+
+</body>
+</html>
