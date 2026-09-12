@@ -670,8 +670,14 @@ def process_one(stem: str, url: str, force: bool = False) -> dict:
         "advice": extract_advice(text),
         "risk": extract_risk(text),
     }
-    backfill_note(stem, ext)
-    ext["ok"] = True
+    ok = backfill_note(stem, ext)
+    # 抽取成功即删除本地缓存 PDF，避免 _pdf_cache 无限累积占用磁盘。
+    if ok and cache_pdf.exists():
+        try:
+            cache_pdf.unlink()
+        except OSError:
+            pass
+    ext["ok"] = ok
     return ext
 
 def process_cached(limit: int = 0, dry_run: bool = False) -> dict:

@@ -30,3 +30,5 @@ TaskNotes/
 
 # obsidian local config (per-device, never push — would override other machines' settings)
 .obsidian/
+*.pdf
+*.pdf
