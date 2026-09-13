@@ -26,10 +26,14 @@ REAL = VAULT / "肆 • 机构观点"
 # ---------- 直接从当前研报笔记 frontmatter 重建元数据（不依赖陈旧的 _meta.json） ----------
 def _scan_meta():
     meta = {}
-    for p in REAL.glob("研报_*.md"):
+    for p in REAL.glob("*.md"):
+        if p.name.startswith(("00-", "README", "WIKI", "_", "概念卡片")):
+            continue
         txt = p.read_text(encoding="utf-8", errors="ignore")
         m = re.match(r"^---\n(.*?)\n---\n", txt, re.S)
         if not m:
+            continue
+        if "研报" not in m.group(1):
             continue
         d = {}
         for line in m.group(1).splitlines():

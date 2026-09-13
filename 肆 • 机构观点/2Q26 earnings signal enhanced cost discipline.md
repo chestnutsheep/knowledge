@@ -1,0 +1,33 @@
+---
+
+tags: [机构观点, 研报, "概念/个股中报业绩"]
+org: "招银国际"
+declareDate: "2026-08-31"
+title: "2Q26 earnings signal enhanced cost discipline"
+concept: "个股中报业绩"
+rating: "买入"
+industry: "乘用车"
+object: "比亚迪(002594)"
+analyst: "Ji SHI,Wenjing Dou,Austin Liang"
+source: "东方财富研报中心"
+pdfUrl: "https://pdf.dfcfw.com/pdf/H3_AP202608311828758243_1.pdf"
+pdfAvailable: true
+status: evergreen
+updated: 2026-08-31
+---
+
+
+# 2Q26 earnings signal enhanced cost discipline
+
+> [!note] 来源
+> 招银国际《2Q26 earnings signal enhanced cost discipline》
+> 发布日期：2026-08-31 ｜ 数据来源：东方财富研报中心｜ 标的：比亚迪(002594)｜ 评级：买入｜ 行业：乘用车｜ 分析师：Ji SHI,Wenjing Dou,Austin Liang
+> 原文 PDF：https://pdf.dfcfw.com/pdf/H3_AP202608311828758243_1.pdf
+
+## 知识库交叉引用
+
+- 概念归类：[[概念卡片/个股中报业绩]]
+- 逆检索到的知识库板块：
+  - [[零 • 导览/知识库总览]]
+---
+*本文档由机构研报采集器自动生成（2026-09-02 16:32）｜源：东方财富研报中心*

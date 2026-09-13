@@ -18,10 +18,10 @@
   - 字段: title, orgName, declareDate, abstract (无 url)；作为摘要补充/交叉验证
 
 设计要点：
-  - 增量更新：已存在的研报笔记按 (orgName, date, title) 跳过。
-  - 独立笔记：每篇研报落成「机构观点/机构_日期_标题前18字.md」，含 PDF 链接。
+  - 增量更新：已存在的研报笔记按 (orgName, date, title) 跳过（读 frontmatter，不依赖文件名）。
+  - 独立笔记：每篇研报落成「机构观点/<研报标题>.md」（文件名即研报本身的名字），含 PDF 链接。
   - timeline 导航页：肆 • 机构观点/00-研报时间线.md，按日期倒序、机构分组。
-  - 去重键：笔记文件名 stem（最稳定）。
+  - 去重键：(机构, 日期, 标题) 内容归一（读 frontmatter）；重命名文件不影响去重。
 
 环境变量：
   JRJ_API_KEY       金融界 API Key (可选，启用补充源)
@@ -208,10 +208,15 @@ def classify(industry: str, title: str) -> str:
     return "个股中报业绩"
 
 
-def note_id(declaredate: str, seq: int) -> str:
-    """稳定的短文件名 ID：研报_YYYYMMDD_NNN.md（不塞标题）。"""
-    d = (declaredate or "")[:10].replace("-", "")
-    return f"研报_{d}_{seq:03d}"
+def note_id(declaredate: str, title: str, seq: int) -> str:
+    """文件名 = 研报标题（用户约定：文件以研报本身的名字命名）。
+    采集器给标题包了前后 '_'，这里统一剥掉；同日同标题碰撞则加 (n) 消歧。"""
+    base = safe_name(title or "未命名研报", 120).strip().strip("_").strip()
+    if not base:
+        base = "未命名研报"
+    if seq <= 1:
+        return base
+    return f"{base} ({seq})"
 
 
 def dedup_key(org: str, declaredate: str, title: str) -> str:
@@ -380,12 +385,13 @@ def write_report_note(r: dict, seq: int = 1) -> str:
         if om and dm and tm and dedup_key(om.group(1), dm.group(1), tm.group(1)) == dk:
             return None  # 已存在，增量跳过
 
-    nid = note_id(r.get("declareDate", ""), seq)
+    nid = note_id(r.get("declareDate", ""), title, 1)
     fpath = REPORTS_DIR / f"{nid}.md"
-    # 防极端碰撞：同日同序号若已占，顺延
+    # 防极端碰撞：同标题若已占，加 (n) 顺延
+    _disamb = 1
     while fpath.exists():
-        seq += 1
-        nid = note_id(r.get("declareDate", ""), seq)
+        _disamb += 1
+        nid = note_id(r.get("declareDate", ""), title, _disamb)
         fpath = REPORTS_DIR / f"{nid}.md"
 
     object_field = f"{stock}({stock_code})" if stock else ""
@@ -579,7 +585,7 @@ def main():
             print(f"[INFO] 金融界补充 {len(jrj)} 篇")
             items = items + jrj
 
-    # 写独立笔记（增量）；记录实际写入的短 ID（note_rel 形如 肆 • 机构观点/研报_YYYYMMDD_NNN.md）
+    # 写独立笔记（增量）；记录实际写入的相对路径（note_rel 形如 肆 • 机构观点/<研报标题>.md）
     new_count = 0
     written_rels = set()
     for r in items:

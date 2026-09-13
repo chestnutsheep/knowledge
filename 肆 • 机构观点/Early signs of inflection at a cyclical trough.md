@@ -1,0 +1,36 @@
+---
+
+tags: [机构观点, 研报, "概念/半导体/先进封装"]
+org: "招银国际"
+declareDate: "2026-08-25"
+title: "Early signs of inflection at a cyclical trough"
+concept: "半导体/先进封装"
+rating: "买入"
+industry: "半导体"
+object: "豪威集团(603501)"
+analyst: "Kevin Zhang,Aaron GUO"
+source: "东方财富研报中心"
+pdfUrl: "https://pdf.dfcfw.com/pdf/H3_AP202608251828402193_1.pdf"
+pdfAvailable: true
+status: evergreen
+updated: 2026-08-25
+---
+
+
+# Early signs of inflection at a cyclical trough
+
+> [!note] 来源
+> 招银国际《Early signs of inflection at a cyclical trough》
+> 发布日期：2026-08-25 ｜ 数据来源：东方财富研报中心｜ 标的：豪威集团(603501)｜ 评级：买入｜ 行业：半导体｜ 分析师：Kevin Zhang,Aaron GUO
+> 原文 PDF：https://pdf.dfcfw.com/pdf/H3_AP202608251828402193_1.pdf
+
+## 知识库交叉引用
+
+- 概念归类：[[概念卡片/半导体·先进封装]]
+- 逆检索到的知识库板块：
+  - [[贰 • 杂学/07 半导体/先进封装/先进封装与Chiplet]]
+  - [[贰 • 杂学/07 半导体/半导体设备/半导体设备产业链全景]]
+  - [[贰 • 杂学/07 半导体/光通信/光模块产业链全景]]
+  - [[贰 • 杂学/07 半导体/半导体材料/封装与载板/TGV玻璃基板]]
+---
+*本文档由机构研报采集器自动生成（2026-08-29 14:46）｜源：东方财富研报中心*

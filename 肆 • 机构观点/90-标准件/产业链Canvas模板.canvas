@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    {"id":"raw","type":"text","text":"上游原材料\n[[原材料概念卡]]","x":-480,"y":0,"width":240,"height":80,"color":"1"},
+    {"id":"func","type":"text","text":"功能材料\n[[功能材料概念卡]]","x":-160,"y":0,"width":240,"height":80,"color":"2"},
+    {"id":"comp","type":"text","text":"下游组件 / 应用\n[[组件概念卡]]","x":160,"y":0,"width":240,"height":80,"color":"3"},
+    {"id":"app","type":"text","text":"终端场景\n[[场景概念卡]]","x":480,"y":0,"width":240,"height":80,"color":"4"},
+    {"id":"rep","type":"text","text":"关联研报\n- [[研报标题1]]\n- [[研报标题2]]","x":-160,"y":200,"width":260,"height":160,"color":"6"}
+  ],
+  "edges": [
+    {"id":"e1","fromNode":"raw","fromSide":"right","toNode":"func","toSide":"left"},
+    {"id":"e2","fromNode":"func","fromSide":"right","toNode":"comp","toSide":"left"},
+    {"id":"e3","fromNode":"comp","fromSide":"right","toNode":"app","toSide":"left"},
+    {"id":"e4","fromNode":"rep","fromSide":"top","toNode":"comp","toSide":"bottom"}
+  ],
+  "version": 1
+}
